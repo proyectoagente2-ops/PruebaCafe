@@ -1,0 +1,413 @@
+/* =============================================================
+📌 Prompt para tu agente (solo diseño, colores y CSS)
+⚠️ Importante: 
+- No modifiques la lógica ni los elementos funcionales (carrito de compras, botón de WhatsApp, etc.).
+- Solo realiza cambios visuales (colores, fuentes, estilos, animaciones, fondos).
+- Mantén la estructura y el texto original.
+- Aplica únicamente en el CSS/SCSS, no toques HTML ni JS.
+
+============================================================= */
+
+/* =============================================================
+🔹 FASE 1: Variables y Configuración Base
+- Definición de variables de color, fuentes y breakpoints
+- Reset general de márgenes, paddings y box-sizing
+============================================================= */
+
+
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --coffee-dark: #2C1810;
+            --coffee-medium: #5D3A1A;
+            --coffee-light: #8B5A3C;
+            --warm-gold: #C9881A;
+            --rich-gold: #E4A429;
+            --cream: #F7F3ED;
+            --warm-white: #FEFBF6;
+            --earth-brown: #7A4B2A;
+            --soft-beige: #EDE5DA;
+            --accent-orange: #D2691E;
+        }
+        
+        
+/* =============================================================
+🔹 FASE 2: Estilos Globales y Layout
+- Body, tipografías, contenedores generales
+- Header, navegación, logo, carrito
+============================================================= */
+
+body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--coffee-dark);
+            background-color: var(--warm-white);
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--cream) 0%, var(--soft-beige) 100%);
+            padding: 1.3rem 0;
+            box-shadow: 0 2px 15px rgba(44, 24, 16, 0.08);
+            position: relative;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.9rem;
+            font-weight: 700;
+            color: var(--coffee-dark);
+            text-decoration: none;
+            letter-spacing: 0.8px;
+            transition: color 0.3s ease;
+        }
+        
+        .logo:hover {
+            color: var(--warm-gold);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2.2rem;
+        }
+        
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--coffee-medium);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            position: relative;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--warm-gold);
+            background-color: rgba(201, 136, 26, 0.1);
+        }
+        
+        .cart-icon {
+            color: var(--coffee-medium);
+            font-size: 1.4rem;
+            transition: all 0.3s ease;
+            padding: 0.6rem;
+            border-radius: 8px;
+        }
+        
+        .cart-icon:hover {
+            color: var(--warm-gold);
+            background-color: rgba(201, 136, 26, 0.1);
+            transform: scale(1.05);
+        }
+        
+        
+/* =============================================================
+🔹 FASE 3: Componentes Visuales
+- Hero section
+- Botones (primarios, secundarios, CTA)
+- Elementos flotantes decorativos
+============================================================= */
+
+/* Hero Section */
+        .hero {
+            min-height: 88vh;
+            background: linear-gradient(
+                135deg,
+                rgba(44, 24, 16, 0.85) 0%,
+                rgba(93, 58, 26, 0.75) 50%,
+                rgba(122, 75, 42, 0.8) 100%
+            );
+            background-size: 350px 350px;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(
+                ellipse at center,
+                rgba(201, 136, 26, 0.1) 0%,
+                transparent 60%
+            );
+            pointer-events: none;
+        }
+        
+        .hero-content {
+            max-width: 750px;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .location-badge {
+            background: linear-gradient(135deg, var(--warm-gold), var(--accent-orange));
+            color: var(--warm-white);
+            padding: 0.75rem 1.8rem;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 2.2rem;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(201, 136, 26, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3.2rem, 8vw, 5.8rem);
+            font-weight: 700;
+            color: var(--warm-white);
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+        }
+        
+        .hero h1 .highlight {
+            color: var(--rich-gold);
+            position: relative;
+        }
+        
+        .hero h1 .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--rich-gold), transparent);
+            border-radius: 2px;
+            opacity: 0.6;
+        }
+        
+        .hero-description {
+            font-size: 1.25rem;
+            color: var(--soft-beige);
+            margin-bottom: 2.8rem;
+            line-height: 1.7;
+            font-weight: 400;
+            max-width: 580px;
+            margin-left: auto;
+            margin-right: auto;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .cta-btn {
+            padding: 1.1rem 2.2rem;
+            border-radius: 12px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .cta-btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--warm-gold), var(--rich-gold));
+            color: var(--warm-white);
+            box-shadow: 0 6px 20px rgba(201, 136, 26, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(201, 136, 26, 0.4);
+            background: linear-gradient(135deg, var(--rich-gold), var(--warm-gold));
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--warm-white);
+            border: 2px solid var(--soft-beige);
+            backdrop-filter: blur(10px);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--soft-beige);
+            color: var(--coffee-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(237, 229, 218, 0.3);
+        }
+        
+        .cta-btn i {
+            font-size: 1.1rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .cta-btn:hover i {
+            transform: scale(1.1);
+        }
+        
+        /* Search Button */
+        .search-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--warm-gold), var(--earth-brown));
+            border: none;
+            border-radius: 50%;
+            color: var(--warm-white);
+            font-size: 1.3rem;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(201, 136, 26, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .search-btn:hover {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 8px 25px rgba(201, 136, 26, 0.4);
+        }
+        
+        /* Decorative Elements - More Subtle */
+        .floating-element {
+            position: absolute;
+            opacity: 0.15;
+            pointer-events: none;
+            color: var(--rich-gold);
+        }
+        
+        .floating-element.coffee-1 {
+            top: 15%;
+            left: 8%;
+            font-size: 2rem;
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .floating-element.coffee-2 {
+            top: 65%;
+            right: 12%;
+            font-size: 1.5rem;
+            animation: float 10s ease-in-out infinite reverse;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(2deg); }
+        }
+        
+        
+/* =============================================================
+🔹 FASE 4: Animaciones y Responsividad
+- Keyframes y transiciones
+- Media queries para móviles y tablets
+============================================================= */
+
+/* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .hero-content {
+                padding: 0 1.2rem;
+            }
+            
+            .location-badge {
+                font-size: 0.9rem;
+                padding: 0.65rem 1.5rem;
+            }
+            
+            .hero-description {
+                font-size: 1.15rem;
+                margin-bottom: 2.2rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 1.2rem;
+            }
+            
+            .cta-btn {
+                padding: 1rem 2rem;
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
+            }
+        }
+        
+        /* Load Animation */
+        .hero-content > * {
+            opacity: 0;
+            animation: slideInUp 1s ease forwards;
+        }
+        
+        .location-badge { animation-delay: 0.3s; }
+        .hero h1 { animation-delay: 0.5s; }
+        .hero-description { animation-delay: 0.7s; }
+        .cta-buttons { animation-delay: 0.9s; }
+        
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Scroll Header Effect */
+        .header.scrolled {
+            background: rgba(247, 243, 237, 0.95) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(44, 24, 16, 0.12);
+        }
+    
