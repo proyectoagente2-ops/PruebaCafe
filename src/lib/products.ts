@@ -131,7 +131,10 @@ export const coffeeProducts: Product[] = [
     roastLevel: 'light',
     origin: 'Pueblo Bello, Cesar',
     notes: ['Floral', 'Té verde', 'Limón'],
-    inStock: true
+    inStock: true,
+    weight: '500g',
+    processingMethod: 'Lavado',
+    altitude: '1,800 msnm'
   },
   {
     id: '10',
@@ -143,7 +146,10 @@ export const coffeeProducts: Product[] = [
     roastLevel: 'dark',
     origin: 'Pueblo Bello, Cesar',
     notes: ['Chocolate amargo', 'Ahumado', 'Especias'],
-    inStock: true
+    inStock: true,
+    weight: '500g',
+    processingMethod: 'Lavado',
+    altitude: '1,700 msnm'
   },
   {
     id: '11',
@@ -155,7 +161,10 @@ export const coffeeProducts: Product[] = [
     roastLevel: 'medium',
     origin: 'Pueblo Bello, Cesar',
     notes: ['Vainilla', 'Almendra', 'Dulce'],
-    inStock: true
+    inStock: true,
+    weight: '500g',
+    processingMethod: 'Lavado',
+    altitude: '1,800 msnm'
   },
   {
     id: '12',
@@ -167,7 +176,10 @@ export const coffeeProducts: Product[] = [
     roastLevel: 'light',
     origin: 'Pueblo Bello, Cesar',
     notes: ['Jazmín', 'Bergamota', 'Mango'],
-    inStock: true
+    inStock: true,
+    weight: '250g',
+    processingMethod: 'Natural',
+    altitude: '1,900 msnm'
   }
 ];
 
@@ -179,7 +191,10 @@ export const tourismExperiences: Product[] = [
     price: 50000,
     image: 'https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=400&h=400&fit=crop',
     category: 'experience',
-    inStock: true
+    inStock: true,
+    duration: '3 horas',
+    included: ['Recorrido guiado', 'Degustación de café', 'Refrigerio'],
+    location: 'Finca El Paraíso, Pueblo Bello'
   },
   {
     id: 'tour-2',
@@ -188,7 +203,10 @@ export const tourismExperiences: Product[] = [
     price: 80000,
     image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=400&fit=crop',
     category: 'experience',
-    inStock: true
+    inStock: true,
+    duration: '4 horas',
+    included: ['Manual de barismo', 'Kit de preparación', 'Certificado'],
+    location: 'Centro de Experiencias, Pueblo Bello'
   },
   {
     id: 'tour-3',
@@ -197,7 +215,10 @@ export const tourismExperiences: Product[] = [
     price: 120000,
     image: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&h=400&fit=crop',
     category: 'experience',
-    inStock: true
+    inStock: true,
+    duration: '3 horas',
+    included: ['Cena 5 tiempos', 'Maridaje con café', 'Transporte'],
+    location: 'Finca El Paraíso, Pueblo Bello'
   },
   {
     id: 'tour-4',
@@ -206,7 +227,10 @@ export const tourismExperiences: Product[] = [
     price: 200000,
     image: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=400&h=400&fit=crop',
     category: 'experience',
-    inStock: true
+    inStock: true,
+    duration: '24 horas',
+    included: ['Alojamiento', 'Desayuno tradicional', 'Tour de la finca', 'Cena de bienvenida'],
+    location: 'Casa Rural El Paraíso, Pueblo Bello'
   }
 ];
 

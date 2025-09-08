@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { Badge } from '@/components/ui/badge';
+import { useNavigate } from 'react-router-dom';
 import { Separator } from '@/components/ui/separator';
 import { Minus, Plus, Trash2, ShoppingBag } from 'lucide-react';
 import { useCart } from '@/lib/store';
@@ -15,6 +16,7 @@ interface CartSidebarProps {
 }
 
 export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
+  const navigate = useNavigate();
   const { items, updateQuantity, removeFromCart, getTotalPrice, getTotalItems } = useCart();
 
   const formatPrice = (price: number) => {
@@ -80,7 +82,13 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Button onClick={onClose} className="bg-amber-600 hover:bg-amber-700">
+                            <Button 
+                onClick={() => {
+                  onClose();
+                  navigate('/#products');
+                }} 
+                className="bg-amber-600 hover:bg-amber-700"
+              >
                 Explorar Productos
               </Button>
             </motion.div>
@@ -104,36 +112,27 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
               </motion.div>
               Tu Carrito
             </div>
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={getTotalItems()}
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0, opacity: 0 }}
-                transition={{ type: "spring", stiffness: 500, damping: 30 }}
-              >
-                <Badge className="bg-amber-600 text-white">
-                  {getTotalItems()} items
-                </Badge>
-              </motion.div>
-            </AnimatePresence>
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ type: "spring", stiffness: 500, damping: 30 }}
+            >
+              <Badge className="bg-amber-600 text-white">
+                {getTotalItems()} items
+              </Badge>
+            </motion.div>
           </SheetTitle>
         </SheetHeader>
 
         <div className="mt-8 flex flex-col gap-6 h-[calc(100vh-280px)] overflow-y-auto pb-6">
-          <AnimatePresence mode="sync" initial={false}>
+          <AnimatePresence>
             {items.map((item, index) => (
               <motion.div
                 key={item.product.id}
-                layout
-                initial={{ opacity: 0, x: -20, scale: 0.8 }}
-                animate={{ opacity: 1, x: 0, scale: 1 }}
-                exit={{ opacity: 0, x: 20, scale: 0.8 }}
-                transition={{ 
-                  duration: 0.3,
-                  delay: index * 0.05,
-                  ease: "easeOut"
-                }}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 20 }}
+                transition={{ delay: index * 0.1 }}
                 className="flex gap-4"
               >
                 <motion.div
@@ -210,18 +209,14 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
             className="flex items-center justify-between"
           >
             <span className="text-amber-900 font-medium">Subtotal</span>
-            <AnimatePresence mode="wait">
-              <motion.span
-                key={getTotalPrice()}
-                initial={{ opacity: 0, scale: 0.8, y: 20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.8, y: -20 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-                className="text-lg font-bold text-amber-900"
-              >
-                {formatPrice(getTotalPrice())}
-              </motion.span>
-            </AnimatePresence>
+            <motion.span
+              key={getTotalPrice()}
+              initial={{ scale: 1.2 }}
+              animate={{ scale: 1 }}
+              className="text-lg font-bold text-amber-900"
+            >
+              {formatPrice(getTotalPrice())}
+            </motion.span>
           </motion.div>
 
           <div className="flex gap-4">

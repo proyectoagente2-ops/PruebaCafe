@@ -12,6 +12,10 @@ export interface Product {
   weight?: string;
   processingMethod?: 'Lavado' | 'Honey' | 'Natural' | 'Varios';
   altitude?: string;
+  // Campos adicionales para experiencias
+  duration?: string;
+  included?: string[];
+  location?: string;
 }
 
 export interface CartItem {

@@ -7,6 +7,7 @@ import { ShoppingCart, MapPin, Star } from 'lucide-react';
 import { Product } from '@/lib/types';
 import { useCart } from '@/lib/store';
 import { ExperienceReservationDialog } from './ExperienceReservationDialog';
+import { motion } from 'framer-motion';
 
 interface ProductCardProps {
   product: Product;
@@ -48,14 +49,22 @@ export default function ProductCard({ product }: ProductCardProps) {
   };
 
   return (
-    <Card className="group hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 bg-gradient-to-b from-white to-amber-50/50 border-amber-100">
-      <CardHeader className="p-0">
-        <div className="relative overflow-hidden rounded-t-lg">
-          <img
-            src={product.image}
-            alt={product.name}
-            className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
-          />
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      whileHover={{ y: -8, transition: { duration: 0.3 } }}
+    >
+      <Card className="group hover:shadow-xl transition-all duration-300 bg-gradient-to-b from-white to-amber-50/50 border-amber-100">
+        <CardHeader className="p-0">
+          <div className="relative overflow-hidden rounded-t-lg">
+            <motion.img
+              src={product.image}
+              alt={product.name}
+              className="w-full h-48 object-cover"
+              whileHover={{ scale: 1.1 }}
+              transition={{ duration: 0.5 }}
+            />
           <div className="absolute top-2 left-2 flex flex-col gap-2">
             {product.roastLevel && (
               <Badge className={`${getRoastLevelColor(product.roastLevel)} font-medium`}>
@@ -152,5 +161,6 @@ export default function ProductCard({ product }: ProductCardProps) {
         )}
       </CardFooter>
     </Card>
+    </motion.div>
   );
 }

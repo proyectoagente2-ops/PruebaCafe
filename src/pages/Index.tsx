@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -14,10 +15,20 @@ export default function HomePage() {
   const featuredProducts = coffeeProducts.slice(0, 3);
   const featuredExperiences = tourismExperiences.slice(0, 2);
 
+  React.useEffect(() => {
+    // Manejar el scroll cuando cambie el hash de la URL
+    if (window.location.hash) {
+      setTimeout(() => {
+        const element = document.querySelector(window.location.hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100); // Pequeño retraso para asegurar que el DOM está listo
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white">
-      <Header />
-      
       {/* Hero Section */}
       <section id="home" className="relative min-h-[88vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-[#2C1810]/85 via-[#5D3A1A]/75 to-[#7A4B2A]/80"></div>
@@ -57,7 +68,7 @@ export default function HomePage() {
             <Button 
               size="lg" 
               className="bg-[#EDE5DA] text-[#2C1810] px-9 py-4 min-w-[200px] text-[1.05rem] font-semibold rounded-xl border-2 border-[#EDE5DA] transition-all duration-400 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#EDE5DA]/30"
-              onClick={() => document.getElementById('tourism')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => document.getElementById('experiencias')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <MapPin className="mr-2 h-5 w-5" />
               Visitar Finca
@@ -111,7 +122,7 @@ export default function HomePage() {
       </section>
 
       {/* Featured Products */}
-      <section id="products" className="py-20 bg-gradient-to-b from-amber-50 to-white">
+      <section id="productos" className="py-20 bg-gradient-to-b from-amber-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-amber-900 mb-4">Nuestros Cafés Especiales</h2>
@@ -129,7 +140,7 @@ export default function HomePage() {
       </section>
 
       {/* Tourism Section */}
-      <section id="tourism" className="py-20 bg-white">
+      <section id="experiencias" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-amber-900 mb-4">Experiencias en la Finca</h2>
@@ -159,7 +170,7 @@ export default function HomePage() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 bg-gradient-to-b from-amber-50 to-white">
+      <section id="nosotros" className="py-20 bg-amber-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -207,7 +218,7 @@ export default function HomePage() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 bg-white">
+      <section id="contacto" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-amber-900 mb-4">Contáctanos</h2>
