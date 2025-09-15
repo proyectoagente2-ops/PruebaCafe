@@ -16,7 +16,7 @@ export default function Header() {
 
   const navigation = [
     { name: 'Inicio', href: '#home' },
-    { name: 'Productos', href: '#products' },
+    { name: 'Café', href: '/cafe' },
     { name: 'Turismo', href: '#tourism' },
     { name: 'Nosotros', href: '#about' },
     { name: 'Contacto', href: '#contact' },

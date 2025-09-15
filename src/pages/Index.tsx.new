@@ -1,0 +1,531 @@
+'use client';'use client';'use client';
+
+
+
+import React from 'react';
+
+import { useLocation } from 'react-router-dom';
+
+import { Button } from '@/components/ui/button';import React from 'react';import React from 'react';
+
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+
+import { Badge } from '@/components/ui/badge';import { useLocation } from 'react-router-dom';import { useLocation } from 'react-router-dom';
+
+import { Coffee, MapPin, Users, Award, Leaf, Heart, Star, ArrowRight, MessageCircle } from 'lucide-react';
+
+import Header from '@/components/Header';import { Button } from '@/components/ui/button';import { Button } from '@/components/ui/button';
+
+import ProductCard from '@/components/ProductCard';
+
+import WhatsAppButton from '@/components/WhatsAppButton';import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+
+import { coffeeProducts } from '@/lib/products';
+
+import { tourismExperiences } from '@/lib/experiences';import { Badge } from '@/components/ui/badge';import { Badge } from '@/components/ui/badge';
+
+import { ExperienceReservationDialog } from '@/components/ExperienceReservationDialog';
+
+import { Coffee, MapPin, Users, Award, Leaf, Heart, Star, ArrowRight, MessageCircle } from 'lucide-react';import { Coffee, MapPin, Users, Award, Leaf, Heart, Star, ArrowRight, MessageCircle } from 'lucide-react';
+
+export default function HomePage() {
+
+  const featuredProducts = coffeeProducts;import Header from '@/components/Header';import Header from '@/components/Header';
+
+  const featuredExperiences = tourismExperiences;
+
+  const location = useLocation();import ProductCard from '@/components/ProductCard';import ProductCard from '@/components/ProductCard';
+
+
+
+  // Resto del código igual...import WhatsAppButton from '@/components/WhatsAppButton';import WhatsAppButton from '@/components/WhatsAppButton';
+
+import { coffeeProducts } from '@/lib/products';import { coffeeProducts } from '@/lib/products';
+
+import { ExperienceReservationDialog } from '@/components/ExperienceReservationDialog';import { ExperienceReservationDialog } from '@/components/ExperienceReservationDialog';
+
+
+
+// Datos de experiencias locales// Datos de experiencias locales
+
+const localExperiences = [const localExperiences = [
+
+  {  {
+
+    id: 'exp-1',    id: 'exp-1',
+
+    name: 'Tour de la Finca + Degustación',    name: 'Tour de la Finca + Degustación',
+
+    description: 'Conoce nuestro proceso de cultivo y producción, seguido de una degustación de nuestros mejores cafés.',    description: 'Conoce nuestro proceso de cultivo y producción, seguido de una degustación de nuestros mejores cafés.',
+
+    price: 45000,    price: 45000,
+
+    image: 'https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=600&h=400&fit=crop',    image: 'https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=600&h=400&fit=crop',
+
+    category: 'experience',    category: 'experience',
+
+    duration: '3 horas',    duration: '3 horas',
+
+    included: ['Recorrido guiado', 'Degustación de café', 'Snacks locales'],    included: ['Recorrido guiado', 'Degustación de café', 'Snacks locales'],
+
+    location: 'Finca Café Felicidad',    location: 'Finca Café Felicidad',
+
+    capacity: '10 personas',    capacity: '10 personas',
+
+    inStock: true    inStock: true
+
+  },  },
+
+  {  {
+
+    id: 'exp-2',    id: 'exp-2',
+
+    name: 'Experiencia de Conexión y Bienestar',    name: 'Experiencia de Conexión y Bienestar',
+
+    description: 'Una jornada de conexión espiritual y bienestar en nuestro entorno natural.',    description: 'Una jornada de conexión espiritual y bienestar en nuestro entorno natural.',
+
+    price: 85000,    price: 85000,
+
+    image: 'https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=600&h=400&fit=crop',    image: 'https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=600&h=400&fit=crop',
+
+    category: 'experience',    category: 'experience',
+
+    duration: '6 horas',    duration: '6 horas',
+
+    included: ['Charla espiritual', 'Almuerzo orgánico', 'Ritual de sanación'],    included: ['Charla espiritual', 'Almuerzo orgánico', 'Ritual de sanación'],
+
+    location: 'Finca Café Felicidad',    location: 'Finca Café Felicidad',
+
+    capacity: '8 personas',    capacity: '8 personas',
+
+    inStock: true    inStock: true
+
+  }  }
+
+];];
+
+
+
+export default function HomePage() {export default function HomePage() {
+
+  const featuredProducts = coffeeProducts;  const featuredProducts = coffeeProducts;
+
+  const location = useLocation();  const location = useLocation();
+
+
+
+  // Efecto para manejar el scroll automático  // Efecto para manejar el scroll automático
+
+  React.useEffect(() => {  React.useEffect(() => {
+
+    const handleScroll = (targetId: string) => {    const handleScroll = (targetId: string) => {
+
+      const element = document.getElementById(targetId);      const element = document.getElementById(targetId);
+
+      if (element) {      if (element) {
+
+        element.scrollIntoView({        element.scrollIntoView({
+
+          behavior: 'smooth',          behavior: 'smooth',
+
+          block: 'start'          block: 'start'
+
+        });        });
+
+      }      }
+
+    };    };
+
+
+
+    // Priorizar el estado de navegación sobre el hash de la URL    // Priorizar el estado de navegación sobre el hash de la URL
+
+    if (location.state?.scrollTo) {    if (location.state?.scrollTo) {
+
+      handleScroll(location.state.scrollTo);      handleScroll(location.state.scrollTo);
+
+      // Limpiar el estado después de usarlo      // Limpiar el estado después de usarlo
+
+      window.history.replaceState({}, document.title);      window.history.replaceState({}, document.title);
+
+    } else if (window.location.hash) {    } else if (window.location.hash) {
+
+      // Si no hay estado pero hay hash en la URL      // Si no hay estado pero hay hash en la URL
+
+      const targetId = window.location.hash.replace('#', '');      const targetId = window.location.hash.replace('#', '');
+
+      handleScroll(targetId);      handleScroll(targetId);
+
+    }    }
+
+  }, [location]);  }, [location]);
+
+
+
+  return (  return (
+
+    <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white">    <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white">
+
+      {/* Hero Section */}      {/* Hero Section */}
+
+      <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">      <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
+
+        <div className="absolute inset-0 bg-gradient-to-br from-[#2C1810]/85 via-[#5D3A1A]/75 to-[#7A4B2A]/80"></div>        {/* ... (resto del código del hero section permanece igual) ... */}
+
+        <div       </section>
+
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+
+          style={{      {/* Features Section permanece igual */}
+
+            backgroundImage: 'url(https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=1920&h=1080&fit=crop)',      
+
+            backgroundSize: 'cover'      {/* Featured Products */}
+
+          }}      <section id="productos" className="py-20 bg-gradient-to-b from-amber-50 to-white">
+
+        ></div>        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                  <div className="text-center mb-16">
+
+        <div className="absolute inset-0 bg-radial-gradient from-[#C9881A]/10 to-transparent"></div>            <h2 className="text-4xl font-bold text-amber-900 mb-4">Nuestros Cafés Especiales</h2>
+
+                    <p className="text-xl text-amber-700 max-w-2xl mx-auto">
+
+        <div className="relative z-20 text-center max-w-[750px] mx-auto px-8 animate-fadeIn flex flex-col items-center justify-center">              Cada variedad cuenta con características únicas que reflejan el terroir de nuestras montañas
+
+          <h1 className="font-playfair text-[clamp(4rem,10vw,7rem)] font-bold text-[#FEFBF6] mb-6 leading-tight animate-slideUp shadow-text" style={{ animationDelay: '0.3s' }}>            </p>
+
+            CAFÉ          </div>
+
+            <span className="block text-[#E4A429] relative highlight">          
+
+              FELICIDAD          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+
+              <span className="absolute bottom-[-4px] left-0 right-0 h-[3px] bg-gradient-to-r from-transparent via-[#E4A429] to-transparent opacity-60 rounded"></span>            {featuredProducts.map((product) => (
+
+            </span>              <ProductCard key={product.id} product={product} />
+
+          </h1>            ))}
+
+                    </div>
+
+          <p className="text-[1.4rem] text-[#EDE5DA] mb-8 leading-[1.7] max-w-[580px] mx-auto animate-slideUp shadow-text-sm" style={{ animationDelay: '0.5s' }}>        </div>
+
+            Descubre el sabor auténtico del café colombiano artesanal.       </section>
+
+            Cada grano cuenta una historia de tradición, pasión y excelencia.
+
+          </p>      {/* Tourism Section */}
+
+                <section id="experiencias" className="py-20 bg-white">
+
+          <div className="flex flex-wrap justify-center gap-6 animate-slideUp -mt-4" style={{ animationDelay: '0.9s' }}>        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <Button           <div className="text-center mb-16">
+
+              size="lg"             <h2 className="text-4xl font-bold text-amber-900 mb-4">Experiencias en la Finca</h2>
+
+              className="bg-gradient-to-r from-[#C9881A] to-[#E4A429] hover:from-[#E4A429] hover:to-[#C9881A] text-[#FEFBF6] px-9 py-4 min-w-[200px] text-[1.05rem] font-semibold rounded-xl shadow-lg shadow-[#C9881A]/30 border border-white/20 transition-all duration-400 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[#C9881A]/40 group overflow-hidden relative"            <p className="text-xl text-amber-700 max-w-2xl mx-auto">
+
+              onClick={() => document.getElementById('productos')?.scrollIntoView({ behavior: 'smooth' })}              Vive la magia del café desde su origen. Conoce nuestro proceso y disfruta del turismo rural auténtico
+
+            >            </p>
+
+              <Coffee className="mr-2 h-5 w-5" />          </div>
+
+              Explorar Cafés          
+
+            </Button>          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+
+                        {localExperiences.map((experience) => (
+
+            <Button               <ProductCard key={experience.id} product={experience} />
+
+              size="lg"             ))}
+
+              className="bg-[#EDE5DA] text-[#2C1810] px-9 py-4 min-w-[200px] text-[1.05rem] font-semibold rounded-xl border-2 border-[#EDE5DA] transition-all duration-400 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#EDE5DA]/30"          </div>
+
+              onClick={() => document.getElementById('experiencias')?.scrollIntoView({ behavior: 'smooth' })}          
+
+            >          <div className="text-center">
+
+              <MapPin className="mr-2 h-5 w-5" />            <ExperienceReservationDialog>
+
+              Visitar Finca              <Button 
+
+            </Button>                size="lg"
+
+          </div>                variant="outline"
+
+        </div>                className="bg-amber-600 text-white hover:bg-amber-700 border-none"
+
+      </section>              >
+
+                📅 Reservar Experiencia
+
+      {/* Features Section */}              </Button>
+
+      <section className="py-20 bg-white">            </ExperienceReservationDialog>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">          </div>
+
+          <div className="text-center mb-16">        </div>
+
+            <h2 className="text-4xl font-bold text-amber-900 mb-4">¿Por qué elegir Café Felicidad?</h2>      </section>
+
+            <p className="text-xl text-amber-700 max-w-2xl mx-auto">
+
+              Más que café, una experiencia que conecta tradición, calidad y sostenibilidad      {/* About Section permanece igual */}
+
+            </p>      {/* Contact Section permanece igual */}
+
+          </div>      {/* Footer permanece igual */}
+
+          
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">      {/* Floating WhatsApp Button */}
+
+            <Card className="text-center border-amber-100 hover:shadow-lg transition-shadow">      <WhatsAppButton isFloating={true} />
+
+              <CardHeader>    </div>
+
+                <Award className="h-12 w-12 text-amber-600 mx-auto mb-4" />  );
+
+                <CardTitle className="text-amber-900">Calidad Premium</CardTitle>}
+
+              </CardHeader>
+              <CardContent>
+                <p className="text-amber-700">Granos seleccionados a mano y tostados artesanalmente para garantizar la máxima calidad en cada taza.</p>
+              </CardContent>
+            </Card>
+            
+            <Card className="text-center border-amber-100 hover:shadow-lg transition-shadow">
+              <CardHeader>
+                <Leaf className="h-12 w-12 text-green-600 mx-auto mb-4" />
+                <CardTitle className="text-amber-900">100% Sostenible</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-amber-700">Cultivo orgánico que respeta el medio ambiente y apoya a las comunidades locales de Pueblo Bello.</p>
+              </CardContent>
+            </Card>
+            
+            <Card className="text-center border-amber-100 hover:shadow-lg transition-shadow">
+              <CardHeader>
+                <Heart className="h-12 w-12 text-red-500 mx-auto mb-4" />
+                <CardTitle className="text-amber-900">Tradición Familiar</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-amber-700">Tres generaciones dedicadas al cultivo del café, transmitiendo conocimiento y pasión de padres a hijos.</p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Products */}
+      <section id="productos" className="py-20 bg-gradient-to-b from-amber-50 to-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-amber-900 mb-4">Nuestros Cafés Especiales</h2>
+            <p className="text-xl text-amber-700 max-w-2xl mx-auto">
+              Cada variedad cuenta con características únicas que reflejan el terroir de nuestras montañas
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            {featuredProducts.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Tourism Section */}
+      <section id="experiencias" className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-amber-900 mb-4">Experiencias en la Finca</h2>
+            <p className="text-xl text-amber-700 max-w-2xl mx-auto">
+              Vive la magia del café desde su origen. Conoce nuestro proceso y disfruta del turismo rural auténtico
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            {localExperiences.map((experience) => (
+              <ProductCard key={experience.id} product={experience} />
+            ))}
+          </div>
+          
+          <div className="text-center">
+            <ExperienceReservationDialog>
+              <Button 
+                size="lg"
+                variant="outline"
+                className="bg-amber-600 text-white hover:bg-amber-700 border-none"
+              >
+                📅 Reservar Experiencia
+              </Button>
+            </ExperienceReservationDialog>
+          </div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="nosotros" className="py-20 bg-amber-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-4xl font-bold text-amber-900 mb-6">Nuestra Historia</h2>
+              <p className="text-lg text-amber-700 mb-6 leading-relaxed">
+                En las montañas de Pueblo Bello, Cesar, nuestra familia ha cultivado café durante tres generaciones. 
+                Lo que comenzó como un pequeño cultivo familiar se ha convertido en una finca que produce algunos 
+                de los mejores cafés de especialidad de Colombia.
+              </p>
+              <p className="text-lg text-amber-700 mb-8 leading-relaxed">
+                Cada grano es cuidadosamente seleccionado, procesado y tostado siguiendo métodos tradicionales 
+                que respetan tanto el medio ambiente como las comunidades locales. Nuestro compromiso es ofrecer 
+                no solo un café excepcional, sino también una experiencia que conecte a nuestros clientes con 
+                la rica cultura cafetera colombiana.
+              </p>
+              
+              <div className="grid grid-cols-2 gap-6">
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-amber-600 mb-2">1800m</div>
+                  <div className="text-amber-700">Altura sobre el mar</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-amber-600 mb-2">50+</div>
+                  <div className="text-amber-700">Años de experiencia</div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="relative">
+              <img
+                src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=600&h=400&fit=crop"
+                alt="Finca Café Felicidad"
+                className="rounded-lg shadow-xl"
+              />
+              <div className="absolute -bottom-6 -left-6 bg-white p-4 rounded-lg shadow-lg border border-amber-100">
+                <div className="flex items-center space-x-2">
+                  <Star className="h-5 w-5 fill-amber-400 text-amber-400" />
+                  <span className="font-semibold text-amber-900">Café Premium</span>
+                </div>
+                <p className="text-sm text-amber-700">Certificado orgánico</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contacto" className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-amber-900 mb-4">Contáctanos</h2>
+            <p className="text-xl text-amber-700 max-w-2xl mx-auto">
+              ¿Tienes preguntas sobre nuestros cafés o experiencias? Estamos aquí para ayudarte
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <Card className="text-center border-amber-100">
+              <CardHeader>
+                <MapPin className="h-8 w-8 text-amber-600 mx-auto mb-2" />
+                <CardTitle className="text-amber-900">Ubicación</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-amber-700">
+                  Finca Café Felicidad<br />
+                  Pueblo Bello, Cesar<br />
+                  Colombia
+                </p>
+              </CardContent>
+            </Card>
+            
+            <Card className="text-center border-amber-100">
+              <CardHeader>
+                <MessageCircle className="h-8 w-8 text-green-600 mx-auto mb-2" />
+                <CardTitle className="text-amber-900">WhatsApp</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-amber-700">
+                  +57 300 123 4567<br />
+                  Atención personalizada<br />
+                  Lun - Dom: 7am - 7pm
+                </p>
+              </CardContent>
+            </Card>
+            
+            <Card className="text-center border-amber-100">
+              <CardHeader>
+                <Users className="h-8 w-8 text-blue-600 mx-auto mb-2" />
+                <CardTitle className="text-amber-900">Redes Sociales</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-amber-700">
+                  @CafeFelicidad<br />
+                  Síguenos para novedades<br />
+                  y contenido exclusivo
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-amber-900 text-white py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+              <div className="flex items-center space-x-2 mb-4">
+                <Coffee className="h-8 w-8 text-amber-300" />
+                <span className="text-2xl font-bold">CAFÉ FELICIDAD</span>
+              </div>
+              <p className="text-amber-200">
+                Café artesanal colombiano desde las montañas de Pueblo Bello, Cesar.
+              </p>
+            </div>
+            
+            <div>
+              <h4 className="font-semibold mb-4">Productos</h4>
+              <ul className="space-y-2 text-amber-200">
+                <li>Café con Ayu</li>
+                <li>Café Lavado</li>
+                <li>Café Tradicional</li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 className="font-semibold mb-4">Experiencias</h4>
+              <ul className="space-y-2 text-amber-200">
+                <li>Tour de la Finca</li>
+                <li>Conexión y Bienestar</li>
+                <li>Degustación de Café</li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 className="font-semibold mb-4">Contacto</h4>
+              <ul className="space-y-2 text-amber-200">
+                <li>Pueblo Bello, Cesar</li>
+                <li>+57 300 123 4567</li>
+                <li>@CafeFelicidad</li>
+                <li>Lun - Dom: 7am - 7pm</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div className="border-t border-amber-800 mt-8 pt-8 text-center text-amber-200">
+            <p>&copy; 2024 Café Felicidad. Todos los derechos reservados.</p>
+          </div>
+        </div>
+      </footer>
+
+      {/* Floating WhatsApp Button */}
+      <WhatsAppButton isFloating={true} />
+    </div>
+  );
+}

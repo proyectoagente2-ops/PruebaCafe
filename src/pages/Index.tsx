@@ -1,331 +1,312 @@
 'use client';
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Coffee, MapPin, Users, Award, Leaf, Heart, Star, ArrowRight, MessageCircle } from 'lucide-react';
-import Header from '@/components/Header';
-import ProductCard from '@/components/ProductCard';
+import { Coffee, MapPin, Users, Leaf, Heart, Star, ArrowRight, MessageCircle } from 'lucide-react';
 import WhatsAppButton from '@/components/WhatsAppButton';
-import { coffeeProducts, tourismExperiences } from '@/lib/products';
-import { ExperienceReservationDialog } from '@/components/ExperienceReservationDialog';
+import { coffeeProducts } from '@/lib/products';
+import '@/lib/animations.css';
 
 export default function HomePage() {
-  const featuredProducts = coffeeProducts.slice(0, 3);
-  const featuredExperiences = tourismExperiences.slice(0, 2);
-
-  React.useEffect(() => {
-    // Manejar el scroll cuando cambie el hash de la URL
-    if (window.location.hash) {
-      setTimeout(() => {
-        const element = document.querySelector(window.location.hash);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 100); // Pequeño retraso para asegurar que el DOM está listo
-    }
-  }, []);
+  const featuredCoffees = coffeeProducts.slice(0, 3);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white">
       {/* Hero Section */}
-      <section id="home" className="relative min-h-[88vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#2C1810]/85 via-[#5D3A1A]/75 to-[#7A4B2A]/80"></div>
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-[length:350px_350px]"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: 'url(https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=1920&h=1080&fit=crop)'
+            backgroundImage: 'url(https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=1920&h=1080&fit=crop)',
+            backgroundSize: 'cover'
           }}
         ></div>
+
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-transparent"></div>
         
-        <div className="absolute inset-0 bg-radial-gradient from-[#C9881A]/10 to-transparent"></div>
-        
-        <div className="relative z-20 text-center max-w-[750px] mx-auto px-8 animate-fadeIn flex flex-col items-center justify-center min-h-[calc(88vh-8rem)] -mt-20">
-          <h1 className="font-playfair text-[clamp(4rem,10vw,7rem)] font-bold text-[#FEFBF6] mb-6 leading-tight animate-slideUp shadow-text" style={{ animationDelay: '0.3s' }}>
+        <div className="relative z-20 text-center max-w-[750px] mx-auto px-8 animate-fadeIn flex flex-col items-center justify-center">
+          <h1 className="font-playfair text-[clamp(3rem,8vw,5rem)] font-bold text-[#FEFBF6] mb-6 leading-tight animate-slideUp delay-300 shadow-text">
             CAFÉ
             <span className="block text-[#E4A429] relative highlight">
-              FELICIDAD
+              FELICIDÁ
               <span className="absolute bottom-[-4px] left-0 right-0 h-[3px] bg-gradient-to-r from-transparent via-[#E4A429] to-transparent opacity-60 rounded"></span>
             </span>
           </h1>
-          
-          <p className="text-[1.4rem] text-[#EDE5DA] mb-8 leading-[1.7] max-w-[580px] mx-auto animate-slideUp shadow-text-sm" style={{ animationDelay: '0.5s' }}>
-            Descubre el sabor auténtico del café colombiano artesanal. 
+
+          <p className="text-[1.4rem] text-[#EDE5DA] mb-8 leading-[1.7] max-w-[580px] mx-auto animate-slideUp delay-500 shadow-text-sm">
+            Descubre el sabor auténtico del café colombiano artesanal.
             Cada grano cuenta una historia de tradición, pasión y excelencia.
           </p>
-          
-          <div className="flex flex-wrap justify-center gap-6 animate-slideUp -mt-4" style={{ animationDelay: '0.9s' }}>
+
+          <div className="flex flex-wrap justify-center gap-6 animate-slideUp delay-700 -mt-4">
             <Button 
-              size="lg" 
-              className="bg-gradient-to-r from-[#C9881A] to-[#E4A429] hover:from-[#E4A429] hover:to-[#C9881A] text-[#FEFBF6] px-9 py-4 min-w-[200px] text-[1.05rem] font-semibold rounded-xl shadow-lg shadow-[#C9881A]/30 border border-white/20 transition-all duration-400 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[#C9881A]/40 group overflow-hidden relative"
-              onClick={() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })}
+              size="lg"
+              className="bg-gradient-to-r from-[#C9881A] to-[#E4A429] hover:from-[#E4A429] hover:to-[#C9881A] text-[#FEFBF6] px-9 py-4 min-w-[200px] text-[1.05rem] font-semibold rounded-xl shadow-lg shadow-[#C9881A]/30 border border-white/20 transition-all duration-400 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[#C9881A]/40"
+              asChild
             >
-              <Coffee className="mr-2 h-5 w-5" />
-              Explorar Cafés
+              <Link to="/cafe">
+                <Coffee className="mr-2 h-5 w-5" />
+                Explorar Cafés
+              </Link>
             </Button>
-            
+
             <Button 
-              size="lg" 
+              size="lg"
               className="bg-[#EDE5DA] text-[#2C1810] px-9 py-4 min-w-[200px] text-[1.05rem] font-semibold rounded-xl border-2 border-[#EDE5DA] transition-all duration-400 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#EDE5DA]/30"
-              onClick={() => document.getElementById('experiencias')?.scrollIntoView({ behavior: 'smooth' })}
+              asChild
             >
-              <MapPin className="mr-2 h-5 w-5" />
-              Visitar Finca
+              <Link to="/como-llegar">
+                <MapPin className="mr-2 h-5 w-5" />
+                Visitar Finca
+              </Link>
             </Button>
           </div>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-amber-900 mb-4">¿Por qué elegir Café Felicidad?</h2>
-            <p className="text-xl text-amber-700 max-w-2xl mx-auto">
-              Más que café, una experiencia que conecta tradición, calidad y sostenibilidad
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="text-center border-amber-100 hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <Award className="h-12 w-12 text-amber-600 mx-auto mb-4" />
-                <CardTitle className="text-amber-900">Calidad Premium</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-amber-700">Granos seleccionados a mano y tostados artesanalmente para garantizar la máxima calidad en cada taza.</p>
-              </CardContent>
-            </Card>
-            
-            <Card className="text-center border-amber-100 hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <Leaf className="h-12 w-12 text-green-600 mx-auto mb-4" />
-                <CardTitle className="text-amber-900">100% Sostenible</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-amber-700">Cultivo orgánico que respeta el medio ambiente y apoya a las comunidades locales de Pueblo Bello.</p>
-              </CardContent>
-            </Card>
-            
-            <Card className="text-center border-amber-100 hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <Heart className="h-12 w-12 text-red-500 mx-auto mb-4" />
-                <CardTitle className="text-amber-900">Tradición Familiar</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-amber-700">Tres generaciones dedicadas al cultivo del café, transmitiendo conocimiento y pasión de padres a hijos.</p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Products */}
-      <section id="productos" className="py-20 bg-gradient-to-b from-amber-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-amber-900 mb-4">Nuestros Cafés Especiales</h2>
-            <p className="text-xl text-amber-700 max-w-2xl mx-auto">
-              Cada variedad cuenta con características únicas que reflejan el terroir de nuestras montañas
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mb-12">
-            {coffeeProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Tourism Section */}
-      <section id="experiencias" className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-amber-900 mb-4">Experiencias en la Finca</h2>
-            <p className="text-xl text-amber-700 max-w-2xl mx-auto">
-              Vive la magia del café desde su origen. Conoce nuestro proceso y disfruta del turismo rural auténtico
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-            {featuredExperiences.map((experience) => (
-              <ProductCard key={experience.id} product={experience} />
-            ))}
-          </div>
-          
-          <div className="text-center">
-            <ExperienceReservationDialog>
-              <Button 
-                size="lg"
-                variant="outline"
-                className="bg-amber-600 text-white hover:bg-amber-700 border-none"
-              >
-                📅 Reservar Experiencia
-              </Button>
-            </ExperienceReservationDialog>
-          </div>
-        </div>
-      </section>
-
-      {/* About Section */}
-      <section id="nosotros" className="py-20 bg-amber-100">
+      {/* Por qué visitarnos Section */}
+      <section className="py-24 bg-cream overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-4xl font-bold text-amber-900 mb-6">Nuestra Historia</h2>
-              <p className="text-lg text-amber-700 mb-6 leading-relaxed">
-                En las montañas de Pueblo Bello, Cesar, nuestra familia ha cultivado café durante tres generaciones. 
-                Lo que comenzó como un pequeño cultivo familiar se ha convertido en una finca que produce algunos 
-                de los mejores cafés de especialidad de Colombia.
-              </p>
-              <p className="text-lg text-amber-700 mb-8 leading-relaxed">
-                Cada grano es cuidadosamente seleccionado, procesado y tostado siguiendo métodos tradicionales 
-                que respetan tanto el medio ambiente como las comunidades locales. Nuestro compromiso es ofrecer 
-                no solo un café excepcional, sino también una experiencia que conecte a nuestros clientes con 
-                la rica cultura cafetera colombiana.
-              </p>
-              
-              <div className="grid grid-cols-2 gap-6">
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-amber-600 mb-2">1800m</div>
-                  <div className="text-amber-700">Altura sobre el mar</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-amber-600 mb-2">50+</div>
-                  <div className="text-amber-700">Años de experiencia</div>
-                </div>
+            <div className="space-y-8">
+              <h2 className="text-4xl font-bold text-amber-900 leading-tight">
+                Un espacio de conexión con la naturaleza y el espíritu
+              </h2>
+              <div className="prose prose-lg text-coffee-dark">
+                <p>
+                  En Café Felicidá, fusionamos la tradición ancestral del café con la espiritualidad de la Sierra Nevada. 
+                  Cada visita es una oportunidad para reconectarte con la naturaleza, mientras descubres los secretos de 
+                  nuestro café artesanal y la sabiduría de nuestra tierra.
+                </p>
+                <p>
+                  Nuestro espacio es más que una finca cafetera; es un santuario donde la paz de las montañas se 
+                  encuentra con el aroma del café recién tostado, creando una experiencia única de bienestar y conexión.
+                </p>
               </div>
             </div>
-            
-            <div className="relative">
+            <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-xl">
               <img
-                src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=600&h=400&fit=crop"
-                alt="Finca Café Felicidad"
-                className="rounded-lg shadow-xl"
+                src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=800&h=1000&fit=crop"
+                alt="Montañas de la Sierra Nevada"
+                className="absolute inset-0 w-full h-full object-cover"
               />
-              <div className="absolute -bottom-6 -left-6 bg-white p-4 rounded-lg shadow-lg border border-amber-100">
-                <div className="flex items-center space-x-2">
-                  <Star className="h-5 w-5 fill-amber-400 text-amber-400" />
-                  <span className="font-semibold text-amber-900">Café Premium</span>
-                </div>
-                <p className="text-sm text-amber-700">Certificado orgánico</p>
-              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section id="contacto" className="py-20 bg-white">
+      {/* Servicios Destacados */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-amber-900 mb-16">
+            Experiencias que transforman
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              {
+                title: "Bienestar & Espiritualidad",
+                description: "Reconecta con tu ser interior a través de rituales ancestrales y prácticas de sanación.",
+                icon: Heart,
+              },
+              {
+                title: "Turismo Consciente",
+                description: "Explora la Sierra Nevada y nuestra finca de manera sostenible y respetuosa.",
+                icon: Leaf,
+              },
+              {
+                title: "Glamping & Estadía",
+                description: "Vive una experiencia única de alojamiento en medio de la naturaleza.",
+                icon: Star,
+              },
+              {
+                title: "Uso del espacio",
+                description: "Espacio ideal para retiros, talleres y eventos grupales en conexión con la naturaleza.",
+                icon: Users,
+              },
+            ].map((service, idx) => (
+              <Card key={idx} className="relative group hover:shadow-lg transition-all duration-300">
+                <CardHeader>
+                  <div className="h-12 w-12 rounded-lg bg-amber-100 flex items-center justify-center mb-4">
+                    <service.icon className="h-6 w-6 text-amber-700" />
+                  </div>
+                  <CardTitle className="text-xl font-bold text-amber-900">{service.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-coffee-dark mb-6">{service.description}</p>
+                  <Button 
+                    variant="ghost" 
+                    className="text-amber-700 hover:text-amber-900 p-0 h-auto font-medium"
+                    onClick={() => {
+                      // Aquí iría la lógica para abrir WhatsApp con el mensaje predefinido
+                    }}
+                  >
+                    <MessageCircle className="h-4 w-4 mr-2" />
+                    Consultar
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Nuestros Cafés */}
+      <section className="py-24 bg-amber-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-amber-900 mb-4">Contáctanos</h2>
-            <p className="text-xl text-amber-700 max-w-2xl mx-auto">
-              ¿Tienes preguntas sobre nuestros cafés o experiencias? Estamos aquí para ayudarte
+            <h2 className="text-3xl md:text-4xl font-bold text-amber-900 mb-4">
+              Nuestros Cafés
+            </h2>
+            <p className="text-coffee-dark text-lg max-w-2xl mx-auto">
+              Descubre nuestra selección de cafés artesanales, cultivados con amor y tostados a la perfección.
             </p>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="text-center border-amber-100">
-              <CardHeader>
-                <MapPin className="h-8 w-8 text-amber-600 mx-auto mb-2" />
-                <CardTitle className="text-amber-900">Ubicación</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-amber-700">
-                  Finca Café Felicidad<br />
-                  Pueblo Bello, Cesar<br />
-                  Colombia
-                </p>
-              </CardContent>
-            </Card>
-            
-            <Card className="text-center border-amber-100">
-              <CardHeader>
-                <MessageCircle className="h-8 w-8 text-green-600 mx-auto mb-2" />
-                <CardTitle className="text-amber-900">WhatsApp</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-amber-700">
-                  +57 300 123 4567<br />
-                  Atención personalizada<br />
-                  Lun - Dom: 7am - 7pm
-                </p>
-              </CardContent>
-            </Card>
-            
-            <Card className="text-center border-amber-100">
-              <CardHeader>
-                <Users className="h-8 w-8 text-blue-600 mx-auto mb-2" />
-                <CardTitle className="text-amber-900">Redes Sociales</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-amber-700">
-                  @CafeFelicidad<br />
-                  Síguenos para novedades<br />
-                  y contenido exclusivo
-                </p>
-              </CardContent>
-            </Card>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            {featuredCoffees.map((coffee) => (
+              <Card key={coffee.id} className="group hover:shadow-lg transition-all duration-300">
+                <CardContent className="p-6">
+                  <div className="aspect-square rounded-lg overflow-hidden mb-6">
+                    <img
+                      src={coffee.image}
+                      alt={coffee.name}
+                      className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                  <h3 className="text-xl font-bold text-amber-900 mb-2">{coffee.name}</h3>
+                  <Badge variant="secondary" className="bg-amber-100 text-amber-700 mb-4">
+                    ${coffee.price.toLocaleString()}
+                  </Badge>
+                </CardContent>
+              </Card>
+            ))}
           </div>
+
+          <div className="text-center">
+            <Button 
+              size="lg"
+              className="bg-amber-900 text-white hover:bg-amber-800"
+              asChild
+            >
+              <Link to="/cafe">
+                Ver todos los cafés
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Mochilas Section */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-xl order-2 lg:order-1">
+              <img
+                src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=800&h=1000&fit=crop"
+                alt="Mochilas artesanales"
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+            </div>
+            <div className="space-y-8 order-1 lg:order-2">
+              <h2 className="text-4xl font-bold text-amber-900 leading-tight">
+                Mochilas con pensamiento
+              </h2>
+              <div className="prose prose-lg text-coffee-dark">
+                <p>
+                  Cada mochila es una obra de arte que lleva consigo la sabiduría ancestral de nuestros artesanos.
+                  Tejidas con dedicación y amor, estas piezas únicas representan la conexión entre la tradición
+                  y la modernidad.
+                </p>
+              </div>
+              <Button 
+                size="lg"
+                className="bg-amber-900 text-white hover:bg-amber-800"
+              >
+                Encargar mochila
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Global */}
+      <section className="py-32 bg-gradient-to-br from-amber-900 to-amber-800 text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('path-to-pattern.png')] opacity-10"></div>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <h2 className="text-4xl md:text-5xl font-bold mb-8">
+            Vive la experiencia completa en Café Felicidá
+          </h2>
+          <p className="text-xl text-amber-100 mb-12 max-w-2xl mx-auto">
+            Descubre un espacio donde la tradición del café se une con la espiritualidad
+            y la conexión con la naturaleza.
+          </p>
+          <Button 
+            size="lg"
+            className="bg-white text-amber-900 hover:bg-amber-50"
+            asChild
+          >
+            <Link to="/servicios">
+              Explorar servicios
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-amber-900 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <footer className="bg-[#2C1810] text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
             <div>
-              <div className="flex items-center space-x-2 mb-4">
-                <Coffee className="h-8 w-8 text-amber-300" />
-                <span className="text-2xl font-bold">CAFÉ FELICIDAD</span>
-              </div>
-              <p className="text-amber-200">
-                Café artesanal colombiano desde las montañas de Pueblo Bello, Cesar.
+              <h3 className="text-xl font-bold mb-4">Café Felicidá</h3>
+              <p className="text-amber-200/80">
+                Tradición, espiritualidad y café de alta calidad en la Sierra Nevada.
               </p>
             </div>
-            
             <div>
-              <h4 className="font-semibold mb-4">Productos</h4>
-              <ul className="space-y-2 text-amber-200">
-                <li>Café Arábica Premium</li>
-                <li>Blend Especial</li>
-                <li>Café Orgánico</li>
-                <li>Edición Limitada</li>
+              <h3 className="text-xl font-bold mb-4">Síguenos</h3>
+              <div className="flex space-x-4">
+                {/* Añadir iconos de redes sociales aquí */}
+              </div>
+            </div>
+            <div>
+              <h3 className="text-xl font-bold mb-4">Legal</h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link to="/politica-cultural" className="text-amber-200/80 hover:text-amber-200">
+                    Política cultural
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/aviso-legal" className="text-amber-200/80 hover:text-amber-200">
+                    Aviso legal
+                  </Link>
+                </li>
               </ul>
             </div>
-            
             <div>
-              <h4 className="font-semibold mb-4">Experiencias</h4>
-              <ul className="space-y-2 text-amber-200">
-                <li>Tour de la Finca</li>
-                <li>Taller de Barismo</li>
-                <li>Cena en la Finca</li>
-                <li>Hospedaje Rural</li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold mb-4">Contacto</h4>
-              <ul className="space-y-2 text-amber-200">
-                <li>Pueblo Bello, Cesar</li>
-                <li>+57 300 123 4567</li>
-                <li>@CafeFelicidad</li>
-                <li>Lun - Dom: 7am - 7pm</li>
-              </ul>
+              <h3 className="text-xl font-bold mb-4">Contacto</h3>
+              <p className="text-amber-200/80">
+                Sierra Nevada de Santa Marta<br />
+                Pueblo Bello, Cesar<br />
+                Colombia
+              </p>
             </div>
           </div>
-          
-          <div className="border-t border-amber-800 mt-8 pt-8 text-center text-amber-200">
-            <p>&copy; 2024 Café Felicidad. Todos los derechos reservados. Hecho con ❤️ en Colombia.</p>
+          <div className="border-t border-amber-200/10 mt-12 pt-8 text-center text-amber-200/60">
+            <p>&copy; {new Date().getFullYear()} Café Felicidá. Todos los derechos reservados.</p>
           </div>
         </div>
       </footer>
 
-      {/* Floating WhatsApp Button */}
-      <WhatsAppButton isFloating={true} />
+      {/* WhatsApp Button */}
+      <WhatsAppButton isFloating />
     </div>
   );
 }

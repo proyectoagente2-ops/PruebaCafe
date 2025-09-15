@@ -85,7 +85,7 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                             <Button 
                 onClick={() => {
                   onClose();
-                  navigate('/#products');
+                  navigate('/cafe');
                 }} 
                 className="bg-amber-600 hover:bg-amber-700"
               >

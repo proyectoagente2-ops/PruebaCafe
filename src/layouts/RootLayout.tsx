@@ -14,7 +14,9 @@ export default function RootLayout() {
         <TooltipProvider>
           <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white">
             <Header />
-            <Outlet />
+            <main>
+              <Outlet />
+            </main>
             <Toaster />
           </div>
         </TooltipProvider>

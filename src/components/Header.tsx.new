@@ -1,0 +1,296 @@
+'use client';'use client';
+
+
+
+import React, { useState } from 'react';import React, { useState } from 'react';
+
+import { Link, useLocation } from 'react-router-dom';import { Link, useLocation } from 'react-router-dom';
+
+import { Button } from '@/components/ui/button';import { Button } from '@/components/ui/button';
+
+import { Badge } from '@/components/ui/badge';import { Badge } from '@/components/ui/badge';
+
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+
+import { Menu, ShoppingCart } from 'lucide-react';import { Menu, ShoppingCart } from 'lucide-react';
+
+import { useCart } from '@/lib/store';import { useCart } from '@/lib/store';
+
+import CartSidebar from './CartSidebar';import CartSidebar from './CartSidebar';
+
+import { motion, AnimatePresence } from 'framer-motion';import { motion, AnimatePresence } from 'framer-motion';
+
+import { IMAGES, ROUTES } from '@/lib/constants';import { IMAGES, ROUTES } from '@/lib/constants';
+
+
+
+type NavigationItem = {type NavigationItem = {
+
+  name: string;  name: string;
+
+  href: string;  href: string;
+
+};};
+
+
+
+const navigation: NavigationItem[] = [const navigation: NavigationItem[] = [
+
+  { name: 'Inicio', href: ROUTES.HOME },  { name: 'Inicio', href: ROUTES.HOME },
+
+  { name: 'Servicios', href: ROUTES.SERVICIOS },  { name: 'Servicios', href: ROUTES.SERVICIOS },
+
+  { name: 'Café', href: ROUTES.CAFE },  { name: 'Café', href: ROUTES.CAFE },
+
+  { name: 'Mochilas', href: ROUTES.MOCHILAS },  { name: 'Mochilas', href: ROUTES.MOCHILAS },
+
+  { name: 'Contacto', href: ROUTES.CONTACTO },  { name: 'Cómo llegar', href: ROUTES.COMO_LLEGAR },
+
+];  { name: 'Contacto', href: ROUTES.CONTACTO },
+
+];
+
+export default function Header() {
+
+  const [isMenuOpen, setIsMenuOpen] = useState(false);export default function Header() {
+
+  const [isCartOpen, setIsCartOpen] = useState(false);  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const { getTotalItems } = useCart();  const [isCartOpen, setIsCartOpen] = useState(false);
+
+  const location = useLocation();  const { getTotalItems } = useCart();
+
+  const location = useLocation();
+
+  // Scroll to top on navigation
+
+  React.useEffect(() => {  // Scroll to top on navigation
+
+    window.scrollTo(0, 0);  React.useEffect(() => {
+
+  }, [location.pathname]);    window.scrollTo(0, 0);
+
+  }, [location.pathname]);
+
+  return (
+
+    <header className="fixed top-0 left-0 right-0 z-50 bg-amber-950/90 backdrop-blur-md border-b border-amber-900/20">  return (
+
+      <nav className="container mx-auto h-16 md:h-20">    <header className="fixed top-0 left-0 right-0 z-50 bg-amber-950/90 backdrop-blur-md">
+
+        <div className="flex items-center justify-between h-full px-4 md:px-6">      <div className="h-16 md:h-20">
+
+          {/* Logo */}        <div className="container mx-auto px-4 h-full">
+
+          <div className="flex-shrink-0">          <div className="flex items-center h-full">
+
+            <Link            {/* Left: logo */}
+
+              to={ROUTES.HOME}            <div className="flex-1 flex items-center">
+
+              className="block transition-opacity hover:opacity-90 -m-2 p-2"              <Link
+
+            >                to={ROUTES.HOME}
+
+              <img                 className="cursor-pointer transition-opacity hover:opacity-90 py-1"
+
+                src={IMAGES.LOGO}              >
+
+                alt="CAFÉ FELICIDAD"                 <div className="p-2">
+
+                className="h-10 md:h-12 w-auto"                  <img 
+
+              />                    src={IMAGES.LOGO}
+
+            </Link>                    alt="CAFÉ FELICIDAD" 
+
+          </div>                    className="h-10 md:h-12 w-auto object-contain"
+
+                  />
+
+          {/* Desktop Navigation */}                </div>
+
+          <div className="hidden md:flex flex-1 justify-center max-w-2xl mx-auto px-8">              </Link>
+
+            <nav className="flex items-center justify-center space-x-8">            </div>
+
+              {navigation.map((item) => (
+
+                <Link            {/* Center: navigation (desktop) */}
+
+                  key={item.name}            <div className="hidden md:flex flex-1 justify-center">
+
+                  to={item.href}              <nav className="flex items-center gap-8">
+
+                  className={`                {navigation.map((item) => (
+
+                    relative py-2 text-sm font-medium tracking-wide                  <Link
+
+                    transition-colors duration-200                    key={item.name}
+
+                    ${location.pathname === item.href                     to={item.href}
+
+                      ? 'text-amber-200'                     className={`text-white hover:text-amber-200 transition-colors ${
+
+                      : 'text-white hover:text-amber-200'                      location.pathname === item.href ? 'font-medium text-amber-200' : ''
+
+                    }                    }`}
+
+                  `}                  >
+
+                >                    {item.name}
+
+                  {item.name}                  </Link>
+
+                  {location.pathname === item.href && (                ))}
+
+                    <motion.div               </nav>
+
+                      layoutId="underline"            </div>
+
+                      className="absolute left-0 right-0 bottom-0 h-0.5 bg-amber-200"
+
+                      initial={false}            {/* Right: cart button */}
+
+                    />            <div className="flex-1 flex items-center justify-end gap-4">
+
+                  )}              <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
+
+                </Link>                <SheetTrigger asChild>
+
+              ))}                  <button className="relative text-white hover:text-amber-200 transition-colors">
+
+            </nav>                    <ShoppingCart className="h-6 w-6" />
+
+          </div>                    <AnimatePresence>
+
+                      {getTotalItems() > 0 && (
+
+          {/* Cart and Mobile Menu */}                        <motion.div
+
+          <div className="flex items-center space-x-4">                          initial={{ scale: 0 }}
+
+            {/* Cart Button */}                          animate={{ scale: 1 }}
+
+            <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>                          exit={{ scale: 0 }}
+
+              <SheetTrigger asChild>                          className="absolute -top-2 -right-2"
+
+                <Button                        >
+
+                  variant="ghost"                          <Badge 
+
+                  size="icon"                            variant="default" 
+
+                  className="relative text-white hover:text-amber-200 transition-colors"                            className="h-5 w-5 p-0 flex items-center justify-center rounded-full bg-amber-600"
+
+                >                          >
+
+                  <ShoppingCart className="h-6 w-6" />                            {getTotalItems()}
+
+                  <AnimatePresence>                          </Badge>
+
+                    {getTotalItems() > 0 && (                        </motion.div>
+
+                      <motion.div                      )}
+
+                        initial={{ scale: 0 }}                    </AnimatePresence>
+
+                        animate={{ scale: 1 }}                  </button>
+
+                        exit={{ scale: 0 }}                </SheetTrigger>
+
+                        className="absolute -top-2 -right-2"                <SheetContent side="right" className="w-[90vw] sm:w-[540px]">
+
+                      >                  <CartSidebar onClose={() => setIsCartOpen(false)} />
+
+                        <Badge                 </SheetContent>
+
+                          variant="default"               </Sheet>
+
+                          className="h-5 w-5 p-0 flex items-center justify-center rounded-full bg-amber-600"
+
+                        >              {/* Mobile Menu Button */}
+
+                          {getTotalItems()}              <button 
+
+                        </Badge>                className="md:hidden text-white hover:text-amber-200 transition-colors" 
+
+                      </motion.div>                onClick={() => setIsMenuOpen(true)}
+
+                    )}              >
+
+                  </AnimatePresence>                <Menu className="h-6 w-6" />
+
+                </Button>              </button>
+
+              </SheetTrigger>            </div>
+
+              <SheetContent className="w-[90vw] sm:w-[540px]">          </div>
+
+                <CartSidebar onClose={() => setIsCartOpen(false)} />        </div>
+
+              </SheetContent>      </div>
+
+            </Sheet>
+
+      {/* Mobile Menu */}
+
+            {/* Mobile Menu Button */}      <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
+
+            <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>        <SheetContent side="right" className="w-[80vw]">
+
+              <SheetTrigger asChild>          <nav className="flex flex-col gap-4 mt-8">
+
+                <Button             {navigation.map((item) => (
+
+                  variant="ghost"              <Link
+
+                  size="icon"                key={item.name}
+
+                  className="md:hidden text-white hover:text-amber-200 transition-colors"                to={item.href}
+
+                >                onClick={() => setIsMenuOpen(false)}
+
+                  <Menu className="h-6 w-6" />                className="text-lg text-amber-900 hover:text-amber-700 transition-colors"
+
+                  <span className="sr-only">Abrir menú</span>              >
+
+                </Button>                {item.name}
+
+              </SheetTrigger>              </Link>
+
+              <SheetContent side="right" className="w-[80vw] sm:w-[400px]">            ))}
+
+                <nav className="flex flex-col mt-8">          </nav>
+
+                  {navigation.map((item) => (        </SheetContent>
+
+                    <Link      </Sheet>
+
+                      key={item.name}    </header>
+
+                      to={item.href}  );
+
+                      onClick={() => setIsMenuOpen(false)}}
+
+                      className={`
+                        py-3 px-4 text-lg font-medium transition-colors
+                        ${location.pathname === item.href
+                          ? 'text-amber-600 bg-amber-50'
+                          : 'text-amber-900 hover:bg-amber-50'
+                        }
+                      `}
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                </nav>
+              </SheetContent>
+            </Sheet>
+          </div>
+        </div>
+      </nav>
+    </header>
+  );
+}

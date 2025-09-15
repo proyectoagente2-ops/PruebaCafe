@@ -9,7 +9,7 @@ import { Menu, ShoppingCart } from 'lucide-react';
 import { useCart } from '@/lib/store';
 import CartSidebar from './CartSidebar';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ROUTES } from '@/lib/constants';
+import { IMAGES, ROUTES } from '@/lib/constants';
 
 type NavigationItem = {
   name: string;
@@ -35,44 +35,30 @@ export default function Header() {
   }, [location.pathname]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50">
-      <div className="absolute inset-0 bg-[##f0b938] shadow-sm" />
-      
-      <nav className="container relative mx-auto">
-        <div className="flex items-center justify-between h-20 px-6 lg:px-8">
-          <div className="flex-shrink-0">
-            <Link
-              to={ROUTES.HOME}
-              className="block transition-opacity hover:opacity-90"
-            >
-              <img 
-                src="/images/LaFelicidA_transparente_ALPHA_2x.png"
-                alt="CAFÉ FELICIDÁ" 
-                className="h-24 w-auto object-contain py-1"
-              />
+    <header className="fixed top-0 left-0 right-0 z-50 bg-amber-950/90 backdrop-blur-md">
+      <nav className="container mx-auto">
+        <div className="flex items-center justify-between h-24 px-6 lg:px-8">
+          <div className="flex-shrink-0 -ml-3">
+            <Link to={ROUTES.HOME} className="block transition-opacity hover:opacity-90">
+              <img src={IMAGES.LOGO} alt="CAFÉ FELICIDAD" className="h-16 w-auto" />
             </Link>
           </div>
 
-          <div className="hidden md:flex flex-1 justify-center max-w-3xl mx-auto">
+          <div className="hidden md:flex flex-1 justify-center max-w-3xl mx-auto px-12">
             <nav className="flex items-center justify-center">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   to={item.href}
-                  className={`
-                    relative px-5 py-2 mx-2 text-[15px] font-medium
-                    transition-all duration-300
-                    ${location.pathname === item.href 
-                      ? 'text-[#FFD65A]' 
-                      : 'text-[#5C3B28] hover:text-[#FFD65A]'
-                    }
-                  `}
+                  className={`relative px-6 py-2 text-[15px] font-medium tracking-wide transition-colors duration-200 ${
+                    location.pathname === item.href ? 'text-amber-200' : 'text-white/90 hover:text-amber-200'
+                  }`}
                 >
                   {item.name}
                   {location.pathname === item.href && (
                     <motion.div 
                       layoutId="underline"
-                      className="absolute left-3 right-3 -bottom-1 h-0.5 bg-[#FFD65A]"
+                      className="absolute left-3 right-3 bottom-0 h-0.5 bg-amber-200"
                       initial={false}
                     />
                   )}
@@ -81,15 +67,11 @@ export default function Header() {
             </nav>
           </div>
 
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-6 mr-2">
             <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
               <SheetTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="relative w-10 h-10 text-[#5C3B28] hover:text-[#FFD65A] transition-colors"
-                >
-                  <ShoppingCart className="h-5 w-5" />
+                <Button variant="ghost" size="icon" className="relative w-12 h-12 text-white hover:text-amber-200 transition-colors">
+                  <ShoppingCart className="h-6 w-6" />
                   <AnimatePresence>
                     {getTotalItems() > 0 && (
                       <motion.div
@@ -98,10 +80,7 @@ export default function Header() {
                         exit={{ scale: 0 }}
                         className="absolute -top-1 -right-1"
                       >
-                        <Badge 
-                          variant="default" 
-                          className="h-4 w-4 p-0 flex items-center justify-center rounded-full bg-amber-500 text-[10px]"
-                        >
+                        <Badge variant="default" className="h-5 w-5 p-0 flex items-center justify-center rounded-full bg-amber-600">
                           {getTotalItems()}
                         </Badge>
                       </motion.div>
@@ -110,7 +89,7 @@ export default function Header() {
                 </Button>
               </SheetTrigger>
               <SheetContent className="w-[90vw] sm:w-[540px]">
-                <CartSidebar isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+                <CartSidebar onClose={() => setIsCartOpen(false)} />
               </SheetContent>
             </Sheet>
 
@@ -119,9 +98,9 @@ export default function Header() {
                 <Button 
                   variant="ghost"
                   size="icon"
-                  className="md:hidden w-10 h-10 text-white hover:text-amber-200 transition-colors"
+                  className="md:hidden w-12 h-12 text-white hover:text-amber-200 transition-colors"
                 >
-                  <Menu className="h-5 w-5" />
+                  <Menu className="h-6 w-6" />
                   <span className="sr-only">Abrir menú</span>
                 </Button>
               </SheetTrigger>
@@ -132,13 +111,9 @@ export default function Header() {
                       key={item.name}
                       to={item.href}
                       onClick={() => setIsMenuOpen(false)}
-                      className={`
-                        py-3 px-6 text-base font-medium transition-colors
-                        ${location.pathname === item.href
-                          ? 'text-amber-600 bg-amber-50'
-                          : 'text-amber-900 hover:bg-amber-50/80'
-                        }
-                      `}
+                      className={`py-4 px-6 text-lg font-medium tracking-wide transition-colors ${
+                        location.pathname === item.href ? 'text-amber-600 bg-amber-50' : 'text-amber-900 hover:bg-amber-50/80'
+                      }`}
                     >
                       {item.name}
                     </Link>

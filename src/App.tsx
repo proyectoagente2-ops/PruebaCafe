@@ -2,7 +2,8 @@ import { Toaster } from '@/components/ui/sonner';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { CartProvider } from '@/lib/store';
-import Index from '@/pages/Index';
+import { RouterProvider } from 'react-router-dom';
+import { router } from './routes';
 
 const queryClient = new QueryClient();
 
@@ -11,7 +12,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <CartProvider>
         <TooltipProvider>
-          <Index />
+          <RouterProvider router={router} />
           <Toaster />
         </TooltipProvider>
       </CartProvider>

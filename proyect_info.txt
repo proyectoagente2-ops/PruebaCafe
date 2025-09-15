@@ -1,0 +1,162 @@
+Contexto del Proyecto — Café Felicidá
+1. Identidad del Proyecto
+
+Café Felicidá es una finca ubicada en Pueblo Bello, Cesar (Colombia), que combina:
+
+Producción y venta de café orgánico de origen.
+
+Artesanías únicas llamadas “Mochilas con Pensamiento”.
+
+Experiencias turísticas y espirituales de conexión con la naturaleza y la cultura local.
+
+La marca refleja:
+
+Valores: espiritualidad, tradición, naturaleza, cercanía humana.
+
+Estilo visual: cálido, artesanal (paleta de colores: sepia + amarillo).
+
+Lenguaje: sencillo, cercano, honesto.
+
+2. Productos actuales
+
+Inventario real (único y oficial):
+
+Tres cafés en presentación de 250 g:
+
+Café con Ayu (Edición especial)
+
+Fermentación especial, aroma envolvente.
+
+Café Lavado (Edición especial)
+
+Perfil limpio y equilibrado, claridad en taza.
+
+Café Tradicional (Edición especial)
+
+Clásico y balanceado.
+
+Mochilas con Pensamiento
+
+Piezas tejidas de forma personalizada según la intención del cliente.
+
+El cliente define frase, símbolo o colores → el tejido lo plasma en una pieza única.
+
+3. Servicios turísticos y espirituales
+
+Experiencias disponibles (reservas por WhatsApp):
+
+Bienestar & Espiritualidad
+
+Charlas psicológicas, retiros espirituales, oraciones.
+
+Rituales de sanación con mamos (previa coordinación y respeto cultural).
+
+Turismo consciente
+
+Caminatas suaves, recorridos ecológicos, observación de aves.
+
+Mini tour del café en la finca.
+
+Estadía & Glamping
+
+Espacios de hospedaje sencillo y en contacto con la naturaleza.
+
+Uso del espacio para grupos
+
+Colegios, organizaciones o familias pueden reservar el espacio para campamentos o convivencias.
+
+4. Canales de venta y contacto
+
+WhatsApp: canal principal de compra y reservas.
+
+Carrito en web: se mantiene para simular un mini-ecommerce y permitir a los usuarios explorar productos y armar pedidos, aunque la confirmación final se hace por WhatsApp.
+
+Redes sociales: apoyo visual (Instagram, etc.).
+
+5. Estructura del sitio web
+
+Rutas principales:
+
+/ Inicio
+
+/servicios Servicios
+
+/cafe Café (mini-ecommerce de los 3 cafés)
+
+/mochilas Mochilas con pensamiento (encargos personalizados)
+
+/como-llegar Cómo llegar (mapa + video + guía)
+
+/contacto Contacto (WhatsApp, redes, FAQ)
+
+🛒 Carrito → conectado al CartSidebar
+
+6. UX y CTAs
+
+Cada producto/servicio debe tener dos opciones:
+
+Botón Agregar al carrito (usa CartSidebar).
+
+Botón Comprar/Reservar por WhatsApp (link wa.me con mensaje prellenado).
+
+Cross-selling contextual:
+
+En cafés → sugerir visitar la finca (Servicios).
+
+En mochilas → sugerir acompañar con café.
+
+En servicios → sugerir llevar café de recuerdo.
+
+7. Estilo y marca
+
+Colores: sepia (#704214) y amarillo cálido (#FFD65A).
+
+Tipografía: clara y legible, estilo artesanal/moderno.
+
+Tono de voz: humano, espiritual, respetuoso.
+
+Microcopy en CTAs:
+
+Comprar por WhatsApp
+
+Encargar por WhatsApp
+
+Reservar experiencia
+
+Armar mi visita
+
+8. Funcionalidades clave del sitio
+
+Mini-ecommerce en /cafe (basado en lo que hoy existe en /productos).
+
+Mini-ecommerce en /mochilas y /como-llegar → con estructura similar, adaptada a cada caso.
+
+Botón de WhatsApp flotante en todo el sitio.
+
+Carrito lateral (CartSidebar) siempre disponible.
+
+Proceso del café: timeline visual con fotos del cultivo, fermentación, secado y tueste.
+
+Cómo llegar: video guía + mapa de Google embebido.
+
+9. Reglas de negocio
+
+Presentaciones de café: solo 250 g (no variantes).
+
+Mochilas: siempre personalizadas (no stock).
+
+Servicios: se reservan por grupo/fecha, no como producto unitario.
+
+WhatsApp es obligatorio en todos los CTAs (incluso si se usa carrito).
+
+10. Próximos pasos
+
+Refactorizar /productos → /cafe con solo los 3 cafés reales.
+
+Crear /mochilas y /servicios como mini-ecommerce.
+
+Configurar WhatsApp prellenado en todos los botones.
+
+Agregar cross-selling en fichas.
+
+Pulir estilo con paleta definida y microcopy coherente

@@ -23,7 +23,7 @@ export default function WhatsAppButton({ isFloating = false }: WhatsAppButtonPro
   const generateWhatsAppMessage = () => {
     if (items.length === 0) {
       return encodeURIComponent(
-        '¡Hola CAFÉ FELICIDAD! 🌱☕\n\n' +
+        '¡Hola CAFÉ FELICIDÁ! 🌱☕\n\n' +
         'Me gustaría obtener más información sobre:\n\n' +
         '- Sus variedades de café ☕\n' +
         '- Precios y presentaciones disponibles 💰\n' +
@@ -33,7 +33,7 @@ export default function WhatsAppButton({ isFloating = false }: WhatsAppButtonPro
       );
     }
 
-    let message = '¡Hola CAFÉ FELICIDAD! 🌱☕\n\n';
+    let message = '¡Hola CAFÉ FELICIDÁ! 🌱☕\n\n';
     message += 'Me gustaría hacer el siguiente pedido:\n\n';
     
     items.forEach((item, index) => {
