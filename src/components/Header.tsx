@@ -36,7 +36,7 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
-      <div className="absolute inset-0 bg-[##f0b938] shadow-sm" />
+      <div className="absolute inset-0 bg-[#fffcef] shadow-sm" />
       
       <nav className="container relative mx-auto">
         <div className="flex items-center justify-between h-20 px-6 lg:px-8">

@@ -1,0 +1,386 @@
+'use client';
+
+import React from 'react';
+import { Button } from '@/components/ui/button';
+import { motion } from 'framer-motion';
+import { Card } from '@/components/ui/card';
+import { ArrowRight, Calendar, Users, Compass, Heart, MessageCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import CrossSelling from '@/components/CrossSelling';
+import { services } from '@/lib/services';
+
+// Define icons for each service
+const serviceIcons = {
+  glamping: <Calendar className="h-5 w-5" />,
+  'day-visits': <Compass className="h-5 w-5" />,
+  spiritual: <Heart className="h-5 w-5" />,
+  groups: <Users className="h-5 w-5" />,
+};
+
+// Services are imported from @/lib/services
+
+const bookingSteps = [
+  {
+    title: 'Elige tu experiencia',
+    description: 'Explora nuestros servicios y encuentra el que más te interese'
+  },
+  {
+    title: 'Escríbenos a WhatsApp',
+    description: 'Contáctanos para consultar disponibilidad y detalles'
+  },
+  {
+    title: 'Confirmamos fechas y detalles',
+    description: 'Coordinaremos todo para que tu experiencia sea perfecta'
+  }
+];
+
+export default function ServicesPage() {
+  return (
+    <div className="min-h-screen bg-[#fffcef]">
+      {/* Hero Section */}
+      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-fixed bg-no-repeat"
+          style={{ backgroundImage: 'url(/images/coffee-beans-bg.jpg)' }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70" />
+        </div>
+        
+        {/* Decorative elements */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.1 }}
+          transition={{ duration: 1.5 }}
+          className="absolute inset-0 bg-[url('/images/CAFÉS/Café con Ayu (Edición especial).jpg')] bg-center bg-no-repeat bg-cover filter blur-xl"
+        />
+
+        <div className="relative container mx-auto px-6 py-20 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="inline-block mb-6 rounded-full bg-amber-500/20 backdrop-blur-sm px-6 py-2 text-amber-200"
+          >
+            Bienvenido a nuestra finca
+          </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-4xl md:text-5xl lg:text-7xl font-bold mb-8 text-white"
+          >
+            Vive experiencias únicas en la{' '}
+            <span className="text-amber-400">Sierra Nevada</span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="text-xl md:text-2xl mb-12 max-w-3xl mx-auto text-gray-200 leading-relaxed"
+          >
+            Conecta con la tierra, la cultura y el espíritu en un espacio pensado 
+            para descansar, aprender y compartir.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+          >
+            <Button
+              onClick={() => {
+                window.open(`https://wa.me/+573012345678?text=${encodeURIComponent("¡Hola! Me gustaría obtener más información sobre las experiencias en Café Felicidá.")}`, '_blank');
+              }}
+              className="bg-[#FFD65A] text-[#5C3B28] hover:bg-amber-400 px-8 py-6 text-lg"
+            >
+              <MessageCircle className="mr-2 h-5 w-5" />
+              Reservar experiencia
+            </Button>
+            <Button
+              variant="outline"
+              className="border-white/30 text-white hover:bg-white/10 px-8 py-6 text-lg backdrop-blur-sm"
+              onClick={() => {
+                const servicesSection = document.getElementById('services');
+                servicesSection?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              Explorar servicios
+            </Button>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Services Grid */}
+      <section className="py-20 container mx-auto px-6">
+        <h2 className="text-3xl md:text-4xl font-bold text-[#4B3C32] text-center mb-12">
+          Nuestros Servicios
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {services.map((service) => (
+            <Link 
+              key={service.id} 
+              to={`/servicios/${service.id}`}
+              className="block"
+            >
+              <Card className="overflow-hidden group hover:shadow-xl transition-all duration-300 border-transparent hover:border-[#db9b24]">
+                <div className="aspect-w-16 aspect-h-9 relative">
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </div>
+                <div className="p-6">
+                  <h3 className="text-2xl font-semibold text-[#4B3C32] group-hover:text-[#db9b24] transition-colors mb-3">
+                    {service.title}
+                  </h3>
+                  <p className="text-gray-600 mb-6 line-clamp-2">{service.description}</p>
+                  
+                  <div className="flex items-center justify-between">
+                    <span className="text-[#db9b24] font-medium">Ver más detalles</span>
+                    <ArrowRight className="h-5 w-5 text-[#db9b24] transform group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </div>
+              </Card>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* Cross-selling Section */}
+      <CrossSelling
+        currentProduct={{
+          id: 'services',
+          name: 'Servicios turísticos',
+          description: 'Experiencias únicas en la Sierra Nevada',
+          price: 0,
+          image: '/images/services/hero-bg.jpg',
+          capacity: 'N/A',
+          category: 'experience',
+          inStock: true,
+          duration: 'Variable',
+          location: 'Sierra Nevada de Santa Marta'
+        }}
+        currentType="experience"
+      />
+
+      {/* How to Book Section */}
+      <section className="py-16 bg-amber-50">
+        <div className="container mx-auto px-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#5C3B28] text-center mb-12">
+            Cómo reservar
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {bookingSteps.map((step, index) => (
+              <div key={index} className="text-center">
+                <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4 text-amber-700">
+                  {index + 1}
+                </div>
+                <h3 className="text-xl font-semibold text-[#5C3B28] mb-3">
+                  {step.title}
+                </h3>
+                <p className="text-gray-600">{step.description}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-12 text-center">
+            <Button
+              onClick={() => {
+                window.open(`https://wa.me/+573012345678?text=${encodeURIComponent("¡Hola! Me gustaría obtener información sobre las experiencias disponibles.")}`, '_blank');
+              }}
+              className="bg-[#FFD65A] text-[#5C3B28] hover:bg-amber-400"
+            >
+              <MessageCircle className="mr-2 h-4 w-4" />
+              Reservar por WhatsApp
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Gallery Section */}
+      <section className="py-24 bg-[#FBF7F4]">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="text-amber-600 font-medium mb-4"
+            >
+              GALERÍA
+            </motion.p>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-3xl md:text-4xl font-bold text-[#5C3B28] mb-4"
+            >
+              Momentos especiales en nuestra finca
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="text-gray-600 max-w-2xl mx-auto"
+            >
+              Cada imagen cuenta una historia de conexión, aprendizaje y experiencias únicas
+            </motion.p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {[
+              {
+                image: '/images/services/glamping.jpg',
+                title: 'Glamping en la montaña',
+                category: 'Alojamiento'
+              },
+              {
+                image: '/images/services/coffee-experience.jpg',
+                title: 'Experiencia del café',
+                category: 'Tour'
+              },
+              {
+                image: '/images/services/spiritual-ceremony.jpg',
+                title: 'Ceremonia tradicional',
+                category: 'Experiencias'
+              },
+              {
+                image: '/images/CAFÉS/Café con Ayu (Edición especial).jpg',
+                title: 'Café con Ayu',
+                category: 'Productos'
+              },
+              {
+                image: '/images/services/meditation.jpg',
+                title: 'Espacio de meditación',
+                category: 'Bienestar'
+              },
+              {
+                image: '/images/services/group-activities.jpg',
+                title: 'Actividades grupales',
+                category: 'Grupos'
+              },
+              {
+                image: '/images/services/outdoor-activities.jpg',
+                title: 'Aventuras al aire libre',
+                category: 'Actividades'
+              },
+              {
+                image: '/images/CAFÉS/Café Tradicional (Edición especial).jpg',
+                title: 'Nuestro café especial',
+                category: 'Productos'
+              }
+            ].map((item, index) => (
+              <motion.div
+                key={index}
+                className="group aspect-w-1 aspect-h-1 overflow-hidden rounded-xl relative cursor-pointer"
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+                    <p className="text-sm text-amber-300 mb-1">{item.category}</p>
+                    <h3 className="text-lg font-semibold">{item.title}</h3>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Testimonials */}
+          <div className="mt-32">
+            <div className="text-center mb-16">
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                className="text-amber-600 font-medium mb-4"
+              >
+                TESTIMONIOS
+              </motion.p>
+              <motion.h3
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="text-2xl md:text-4xl font-bold text-[#5C3B28] mb-4"
+              >
+                Lo que dicen nuestros visitantes
+              </motion.h3>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="text-gray-600 max-w-2xl mx-auto"
+              >
+                Descubre las experiencias de quienes ya han vivido la magia de nuestra finca
+              </motion.p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+              {[
+                {
+                  name: "María C.",
+                  location: "Bogotá",
+                  text: "Una experiencia única que conecta con la naturaleza y la cultura. El glamping es hermoso y el café delicioso. Definitivamente volveré con mi familia.",
+                  image: "/images/CAFÉS/Café con Ayu (Edición especial).jpg"
+                },
+                {
+                  name: "Juan D.",
+                  location: "Medellín",
+                  text: "El recorrido por la finca fue muy educativo. Aprendimos mucho sobre el café y la cultura local. Los guías son muy conocedores y amables.",
+                  image: "/images/CAFÉS/Café Tradicional (Edición especial).jpg"
+                },
+                {
+                  name: "Andrea M.",
+                  location: "Barranquilla",
+                  text: "Las ceremonias espirituales son muy especiales. Un lugar mágico para reconectar con uno mismo y con la naturaleza. Una experiencia transformadora.",
+                  image: "/images/CAFÉS/Café Lavado (Edición especial).jpg"
+                },
+              ].map((testimonial, index) => (
+                <motion.div
+                  key={index}
+                  className="bg-white rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.2 }}
+                >
+                  <div className="aspect-w-16 aspect-h-9">
+                    <img
+                      src={testimonial.image}
+                      alt={`Experiencia de ${testimonial.name}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="p-8">
+                    <div className="flex items-center mb-4">
+                      <div className="h-10 w-10 rounded-full bg-amber-100 flex items-center justify-center text-amber-700 font-bold text-xl">
+                        {testimonial.name[0]}
+                      </div>
+                      <div className="ml-4">
+                        <p className="font-semibold text-[#5C3B28]">{testimonial.name}</p>
+                        <p className="text-sm text-gray-500">{testimonial.location}</p>
+                      </div>
+                    </div>
+                    <p className="text-gray-600 italic leading-relaxed">"{testimonial.text}"</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}

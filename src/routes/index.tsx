@@ -7,6 +7,8 @@ import Nosotros from '@/pages/Nosotros';
 import Contacto from '@/pages/Contacto';
 import NotFound from '@/pages/NotFound';
 import ProductDetailPage from '@/pages/ProductDetailPage';
+import ServicesPage from '@/pages/ServicesPage';
+import ServiceDetailPage from '@/pages/ServiceDetailPage';
 
 // Mapeo de hashes antiguos a nuevas rutas
 const HASH_REDIRECTS = {
@@ -41,6 +43,14 @@ export const router = createBrowserRouter([
       {
         path: 'cafe/:id',
         element: <ProductDetailPage />
+      },
+      {
+        path: 'servicios',
+        element: <ServicesPage />
+      },
+      {
+        path: 'servicios/:id',
+        element: <ServiceDetailPage />
       },
       {
         path: 'turismo',

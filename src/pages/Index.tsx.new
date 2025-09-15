@@ -1,60 +1,72 @@
-'use client';'use client';'use client';
-
-
+'use client';
 
 import React from 'react';
-
-import { useLocation } from 'react-router-dom';
-
-import { Button } from '@/components/ui/button';import React from 'react';import React from 'react';
-
+import { Link, useLocation } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Coffee, MapPin, Users, Award, Leaf, Heart, Star, ArrowRight, MessageCircle } from 'lucide-react';
+import Header from '@/components/Header';
+import ProductCard from '@/components/ProductCard';
+import WhatsAppButton from '@/components/WhatsAppButton';
+import { coffeeProducts } from '@/lib/products';
+import { ExperienceReservationDialog } from '@/components/ExperienceReservationDialog';
 
-import { Badge } from '@/components/ui/badge';import { useLocation } from 'react-router-dom';import { useLocation } from 'react-router-dom';
+// Local experiences data
+const localExperiences = [
+  {
+    id: 'exp-1',
+    name: 'Tour de la Finca + Degustación',
+    description: 'Conoce nuestro proceso de cultivo y producción, seguido de una degustación de nuestros mejores cafés.',
+    price: 45000,
+    image: '/images/services/coffee-experience.jpg',
+    category: 'experience',
+    duration: '3 horas',
+    included: ['Recorrido guiado', 'Degustación de café', 'Snacks locales'],
+    location: 'Finca Café Felicidad',
+    capacity: '10 personas',
+    inStock: true
+  },
+  {
+    id: 'exp-2',
+    name: 'Experiencia de Conexión y Bienestar',
+    description: 'Una jornada de conexión espiritual y bienestar en nuestro entorno natural.',
+    price: 85000,
+    image: '/images/services/spiritual-ceremony.jpg',
+    category: 'experience',
+    duration: '6 horas',
+    included: ['Charla espiritual', 'Almuerzo orgánico', 'Ritual de sanación'],
+    location: 'Finca Café Felicidad',
+    capacity: '8 personas',
+    inStock: true
+  }
+];
+
+export default function HomePage() {
+  const featuredCoffees = coffeeProducts.slice(0, 3);
+  const location = useLocation();
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 
 import { Coffee, MapPin, Users, Award, Leaf, Heart, Star, ArrowRight, MessageCircle } from 'lucide-react';
-
-import Header from '@/components/Header';import { Button } from '@/components/ui/button';import { Button } from '@/components/ui/button';
-
+import Header from '@/components/Header';
 import ProductCard from '@/components/ProductCard';
-
-import WhatsAppButton from '@/components/WhatsAppButton';import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-
+import WhatsAppButton from '@/components/WhatsAppButton';
 import { coffeeProducts } from '@/lib/products';
-
-import { tourismExperiences } from '@/lib/experiences';import { Badge } from '@/components/ui/badge';import { Badge } from '@/components/ui/badge';
+import { tourismExperiences } from '@/lib/experiences';
 
 import { ExperienceReservationDialog } from '@/components/ExperienceReservationDialog';
 
 import { Coffee, MapPin, Users, Award, Leaf, Heart, Star, ArrowRight, MessageCircle } from 'lucide-react';import { Coffee, MapPin, Users, Award, Leaf, Heart, Star, ArrowRight, MessageCircle } from 'lucide-react';
 
-export default function HomePage() {
+import { ExperienceReservationDialog } from '@/components/ExperienceReservationDialog';
 
-  const featuredProducts = coffeeProducts;import Header from '@/components/Header';import Header from '@/components/Header';
+// Datos de experiencias locales
+const localExperiences = [
 
-  const featuredExperiences = tourismExperiences;
-
-  const location = useLocation();import ProductCard from '@/components/ProductCard';import ProductCard from '@/components/ProductCard';
-
-
-
-  // Resto del código igual...import WhatsAppButton from '@/components/WhatsAppButton';import WhatsAppButton from '@/components/WhatsAppButton';
-
-import { coffeeProducts } from '@/lib/products';import { coffeeProducts } from '@/lib/products';
-
-import { ExperienceReservationDialog } from '@/components/ExperienceReservationDialog';import { ExperienceReservationDialog } from '@/components/ExperienceReservationDialog';
-
-
-
-// Datos de experiencias locales// Datos de experiencias locales
-
-const localExperiences = [const localExperiences = [
-
-  {  {
-
-    id: 'exp-1',    id: 'exp-1',
-
-    name: 'Tour de la Finca + Degustación',    name: 'Tour de la Finca + Degustación',
+  {
+    id: 'exp-1',
+    name: 'Tour de la Finca + Degustación',
 
     description: 'Conoce nuestro proceso de cultivo y producción, seguido de una degustación de nuestros mejores cafés.',    description: 'Conoce nuestro proceso de cultivo y producción, seguido de una degustación de nuestros mejores cafés.',
 
@@ -76,11 +88,9 @@ const localExperiences = [const localExperiences = [
 
   },  },
 
-  {  {
-
-    id: 'exp-2',    id: 'exp-2',
-
-    name: 'Experiencia de Conexión y Bienestar',    name: 'Experiencia de Conexión y Bienestar',
+  {
+    id: 'exp-2',
+    name: 'Experiencia de Conexión y Bienestar',
 
     description: 'Una jornada de conexión espiritual y bienestar en nuestro entorno natural.',    description: 'Una jornada de conexión espiritual y bienestar en nuestro entorno natural.',
 
