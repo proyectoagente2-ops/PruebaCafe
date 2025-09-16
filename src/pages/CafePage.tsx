@@ -270,40 +270,6 @@ export default function CafePage() {
         </div>
       </section>
 
-      {/* Products Grid */}
-      <section className="py-32 bg-[#F5E9E0]">
-        <div className="container mx-auto px-4 max-w-7xl">
-          <div className="text-center mb-20">
-            <Badge className="bg-[#7B2E2E] text-[#FAF7F4] mb-6 px-4 py-1 text-sm uppercase tracking-wider">
-              Nuestros Cafés
-            </Badge>
-            <h2 className="text-4xl md:text-5xl font-bold text-[#5C4033] mb-8">
-              Ediciones Especiales
-            </h2>
-            <p className="text-xl text-[#5C4033]/80 max-w-2xl mx-auto leading-relaxed">
-              Descubre nuestra selección de cafés especiales, cada uno con su 
-              propia personalidad y carácter único.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            {coffeeProducts.map((product) => (
-              <motion.div
-                key={product.id}
-                onHoverStart={() => setHoveredProduct(product.id)}
-                onHoverEnd={() => setHoveredProduct(null)}
-                className="h-full"
-              >
-                <ProductCard 
-                  product={product}
-                  isHovered={hoveredProduct === product.id}
-                />
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Quality Banner */}
       <section className="bg-[#2A1810] py-40 relative overflow-hidden">
         <motion.div
