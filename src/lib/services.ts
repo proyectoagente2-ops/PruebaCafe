@@ -1,18 +1,5 @@
-import type { JSX } from 'react';
-
-export interface Service {
-  id: string;
-  title: string;
-  description: string;
-  longDescription?: string;
-  image: string;
-  secondaryImage?: string;
-  icon: JSX.Element;
-  cta: string;
-  highlights?: string[];
-}
-
 import { Calendar, Users, Compass, Heart } from 'lucide-react';
+import type { Service } from './types';
 
 export const services = [
   {

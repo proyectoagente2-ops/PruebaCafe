@@ -18,14 +18,14 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          className="absolute inset-0 bg-cover bg-center bg-fixed bg-no-repeat"
           style={{
-            backgroundImage: 'url(https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=1920&h=1080&fit=crop)',
+            backgroundImage: 'url(/images/Inicio/nano-banana-2025-09-16T02-58-06.png)',
             backgroundSize: 'cover'
           }}
         ></div>
 
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-transparent"></div>
         
         <div className="relative z-20 text-center max-w-[750px] mx-auto px-8 animate-fadeIn flex flex-col items-center justify-center">
           <h1 className="font-playfair text-[clamp(3rem,8vw,5rem)] font-bold text-[#FEFBF6] mb-6 leading-tight animate-slideUp delay-300 shadow-text">
@@ -89,7 +89,7 @@ export default function HomePage() {
             </div>
             <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-xl">
               <img
-                src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=800&h=1000&fit=crop"
+                src="/images/Inicio/finca_banana.png"
                 alt="Montañas de la Sierra Nevada"
                 className="absolute inset-0 w-full h-full object-cover"
               />
@@ -207,7 +207,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-xl order-2 lg:order-1">
               <img
-                src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=800&h=1000&fit=crop"
+                src="/images/Mochilas/MOCHILA3.png"
                 alt="Mochilas artesanales"
                 className="absolute inset-0 w-full h-full object-cover"
               />

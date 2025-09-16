@@ -1,0 +1,10 @@
+/* Estilos específicos para el header en páginas de detalle de servicios */
+.service-detail-header {
+  background-color: #fffcef;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.service-detail-header nav {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}

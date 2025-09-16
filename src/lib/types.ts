@@ -1,3 +1,5 @@
+import type { JSX } from 'react';
+
 export interface Product {
   capacity: string;
   id: string;
@@ -32,4 +34,29 @@ export interface CartContextType {
   clearCart: () => void;
   getTotalPrice: () => number;
   getTotalItems: () => number;
+}
+
+export interface Service {
+  id: string;
+  title: string;
+  description: string;
+  longDescription?: string;
+  image: string;
+  secondaryImage?: string;
+  images?: string[];
+  icon?: JSX.Element;
+  cta?: string;
+  highlights?: string[];
+  features?: {
+    duration?: string;
+    groupSize?: string;
+    difficulty?: string;
+    location?: string;
+  };
+  included?: string[];
+  price?: {
+    from: number;
+    to?: number;
+    perPerson?: boolean;
+  };
 }

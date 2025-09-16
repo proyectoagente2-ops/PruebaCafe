@@ -10,6 +10,7 @@ import { useCart } from '@/lib/store';
 import CartSidebar from './CartSidebar';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ROUTES } from '@/lib/constants';
+import '@/styles/header.css';
 
 type NavigationItem = {
   name: string;
@@ -29,14 +30,19 @@ export default function Header() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const { getTotalItems } = useCart();
   const location = useLocation();
+  const isServiceDetailPage = location.pathname.startsWith('/servicios/') && location.pathname !== '/servicios';
 
   React.useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50">
-      <div className="absolute inset-0 bg-[#fffcef] shadow-sm" />
+    <header className={`fixed top-0 left-0 right-0 z-50 ${isServiceDetailPage ? 'service-detail-header' : ''}`}>
+      <div className={`absolute inset-0 ${
+        isServiceDetailPage 
+          ? 'bg-[#fffcef] shadow-md' 
+          : 'bg-[#fffcef] shadow-sm'
+      }`} />
       
       <nav className="container relative mx-auto">
         <div className="flex items-center justify-between h-20 px-6 lg:px-8">
