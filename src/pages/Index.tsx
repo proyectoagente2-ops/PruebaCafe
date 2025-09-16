@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -65,6 +66,23 @@ export default function HomePage() {
             </Button>
           </div>
         </div>
+
+{/* Scroll Indicator */}
+<motion.div 
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ delay: 1 }}
+  className="absolute bottom-6 left-[50.7%] transform -translate-x-1/2"
+>
+  <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center items-start p-2">
+    <motion.div
+      animate={{ y: [0, 8, 0] }}
+      transition={{ duration: 1.5, repeat: Infinity }}
+      className="w-1 h-1 bg-white rounded-full"
+    />
+  </div>
+</motion.div>
+
       </section>
 
       {/* Por qué visitarnos Section */}
@@ -305,8 +323,8 @@ export default function HomePage() {
         </div>
       </footer>
 
-      {/* WhatsApp Button */}
-      <WhatsAppButton isFloating />
-    </div>
+        {/* WhatsApp Button */}
+        <WhatsAppButton isFloating />
+      </div>
   );
 }

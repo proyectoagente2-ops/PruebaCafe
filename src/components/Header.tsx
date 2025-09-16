@@ -11,6 +11,7 @@ import CartSidebar from './CartSidebar';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ROUTES } from '@/lib/constants';
 import '@/styles/header.css';
+import LazyImage from './LazyImage';
 
 type NavigationItem = {
   name: string;
@@ -28,7 +29,7 @@ const navigation: NavigationItem[] = [
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const { getTotalItems } = useCart();
+  const cart = useCart();
   const location = useLocation();
   const isServiceDetailPage = location.pathname.startsWith('/servicios/') && location.pathname !== '/servicios';
 
@@ -51,10 +52,11 @@ export default function Header() {
               to={ROUTES.HOME}
               className="block transition-opacity hover:opacity-90"
             >
-              <img 
+              <LazyImage 
                 src="/images/LaFelicidA_transparente_ALPHA_2x.png"
                 alt="CAFÉ FELICIDÁ" 
                 className="h-24 w-auto object-contain py-1"
+                priority
               />
             </Link>
           </div>
@@ -97,18 +99,23 @@ export default function Header() {
                 >
                   <ShoppingCart className="h-5 w-5" />
                   <AnimatePresence>
-                    {getTotalItems() > 0 && (
+                    {cart.items.length > 0 && (
                       <motion.div
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
                         exit={{ scale: 0 }}
-                        className="absolute -top-1 -right-1"
+                        className="absolute -top-2 -right-2"
                       >
                         <Badge 
                           variant="default" 
-                          className="h-4 w-4 p-0 flex items-center justify-center rounded-full bg-amber-500 text-[10px]"
+                          className="px-2 py-1 rounded-full bg-amber-500 text-[10px] whitespace-nowrap"
                         >
-                          {getTotalItems()}
+                          {cart.items.filter(i => i.type === 'product').length > 0 && 
+                            `${cart.items.filter(i => i.type === 'product').length}P`}
+                          {cart.items.filter(i => i.type === 'product').length > 0 && 
+                           cart.items.filter(i => i.type === 'service').length > 0 && ' • '}
+                          {cart.items.filter(i => i.type === 'service').length > 0 && 
+                            `${cart.items.filter(i => i.type === 'service').length}S`}
                         </Badge>
                       </motion.div>
                     )}

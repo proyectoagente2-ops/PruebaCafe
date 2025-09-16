@@ -1,26 +1,24 @@
 import { Outlet } from 'react-router-dom';
-import { Toaster } from '@/components/ui/sonner';
-import { TooltipProvider } from '@/components/ui/tooltip';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { CartProvider } from '@/lib/store';
 import Header from '@/components/Header';
-
-const queryClient = new QueryClient();
+import WhatsAppButton from '@/components/WhatsAppButton';
+import CartSidebar from '@/components/CartSidebar';
+import CartIndicator from '@/components/CartIndicator';
+import { NotificationContainer } from '../components/Notification';
+import { useState } from 'react';
 
 export default function RootLayout() {
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
   return (
-    <QueryClientProvider client={queryClient}>
-      <CartProvider>
-        <TooltipProvider>
-          <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white">
-            <Header />
-            <main>
-              <Outlet />
-            </main>
-            <Toaster />
-          </div>
-        </TooltipProvider>
-      </CartProvider>
-    </QueryClientProvider>
+    <>
+      <Header />
+      <main>
+        <Outlet />
+      </main>
+      <WhatsAppButton />
+      <CartIndicator onClick={() => setIsCartOpen(true)} />
+      <CartSidebar isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+      <NotificationContainer />
+    </>
   );
-}
+  }

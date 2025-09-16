@@ -1,8 +1,15 @@
-import { createRoot } from 'react-dom/client';
-import { RouterProvider } from 'react-router-dom';
-import { router } from './routes';
-import './index.css';
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import { registerServiceWorker } from './lib/serviceWorker'
+import { AppProviders } from './components/app-providers'
+import { StrictMode } from 'react'
 
-createRoot(document.getElementById('root')!).render(
-  <RouterProvider router={router} />
-);
+// Registrar el Service Worker
+registerServiceWorker()
+
+const root = createRoot(document.getElementById('root')!)
+root.render(
+  <StrictMode>
+    <AppProviders />
+  </StrictMode>
+)

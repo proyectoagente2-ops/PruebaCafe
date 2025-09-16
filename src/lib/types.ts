@@ -22,8 +22,18 @@ export interface Product {
 }
 
 export interface CartItem {
-  product: Product;
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  image: string;
+  type: 'product' | 'service';
   quantity: number;
+  // Campos opcionales específicos
+  weight?: string;
+  date?: string;
+  time?: string;
+  participants?: number;
 }
 
 export interface CartContextType {
@@ -34,6 +44,10 @@ export interface CartContextType {
   clearCart: () => void;
   getTotalPrice: () => number;
   getTotalItems: () => number;
+  toggleCart: () => void;
+  showCartToast?: (item: CartItem, isUpdate?: boolean) => void;
+  isCartOpen: boolean;
+  setIsCartOpen: (isOpen: boolean) => void;
 }
 
 export interface Service {

@@ -1,33 +1,57 @@
 'use client';
 
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { coffeeProducts } from '@/lib/products';
-import { Coffee, Leaf, Mountain, ThermometerSun } from 'lucide-react';
+import { Coffee, Leaf, Mountain, ThermometerSun, Award, Scale, Heart, Droplet } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import ProductCard from '@/components/ProductCard';
+import LazyImage from '@/components/LazyImage';
+
+const coffeeAttributes = [
+  {
+    icon: Award,
+    title: "Prestigio",
+    description: "Reconocido entre los mejores cafés especiales de Colombia"
+  },
+  {
+    icon: Scale,
+    title: "Balance Perfecto",
+    description: "Armonía entre acidez, cuerpo y dulzura natural"
+  },
+  {
+    icon: Heart,
+    title: "Cultivo con Amor",
+    description: "Cosechado a mano por familias cafeteras locales"
+  },
+  {
+    icon: Droplet,
+    title: "Perfil Único",
+    description: "Notas de chocolate, caramelo y frutas tropicales"
+  }
+];
 
 const processSteps = [
   {
     icon: Mountain,
     title: "Origen Sierra Nevada",
-    description: "Cultivado a más de 1.500 metros sobre el nivel del mar"
+    description: "Cultivado a más de 1.500 metros sobre el nivel del mar en suelos volcánicos"
   },
   {
     icon: Leaf,
     title: "Cultivo Sostenible",
-    description: "Prácticas agrícolas respetuosas con el medio ambiente"
+    description: "Prácticas agrícolas ancestrales en armonía con la naturaleza"
   },
   {
     icon: Coffee,
     title: "Tostado Artesanal",
-    description: "Proceso controlado para resaltar notas únicas"
+    description: "Proceso meticuloso que resalta las notas únicas de cada grano"
   },
   {
     icon: ThermometerSun,
     title: "Control de Calidad",
-    description: "Estrictos estándares en cada etapa del proceso"
+    description: "Rigurosos estándares que garantizan una experiencia excepcional"
   }
 ];
 
@@ -37,36 +61,66 @@ export default function CafePage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/images/coffee-beans-bg.jpg')] bg-cover bg-center bg-fixed opacity-90" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/80" />
+      <section className="relative h-screen flex items-center justify-center overflow-hidden bg-[#2A1810]">
+        <motion.div
+          initial={{ opacity: 0, scale: 1.1 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
+          className="absolute inset-0"
+        >
+          <div className="absolute inset-0 bg-[#2A1810] mix-blend-multiply opacity-40" />
+          <LazyImage
+            src="/images/CAFÉS/CAFE_FONDO.png"
+            alt="Granos de café premium"
+            className="w-full h-full object-cover object-center"
+            priority
+          />
+        </motion.div>
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.3 }}
+          className="absolute inset-0 bg-gradient-to-b from-[#2A1810]/95 via-[#2A1810]/85 to-[#2A1810]/90"
+        />
         
-        <div className="relative container mx-auto px-4 text-center text-white">
+        <div className="relative container mx-auto px-4 text-center text-[#FAF7F4]">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
+            className="max-w-5xl mx-auto"
           >
-            <Badge className="bg-yellow-400/20 text-yellow-300 border-none mb-6 px-4 py-1 text-sm uppercase tracking-wider">
-              Edición Especial
+            <Badge className="bg-[#C49B66] text-[#2A1810] border-none mb-6 px-4 py-1.5 text-sm uppercase tracking-wider font-medium">
+              Colección Premium
             </Badge>
             
-            <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold mb-8 tracking-tight">
-              Nuestros cafés de{' '}
-              <span className="text-yellow-400">origen</span>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 tracking-tight">
+              El Arte del{' '}
+              <span className="text-[#C49B66] italic">Café</span>{' '}
+              <br className="hidden md:block" />
+              de Origen
             </h1>
             
-            <p className="text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto font-light leading-relaxed mb-14">
-              Tres ediciones especiales cultivadas con dedicación en las alturas 
-              de Pueblo Bello, Cesar. Un viaje sensorial único.
+            <p className="text-lg md:text-xl text-[#FAF7F4]/90 max-w-2xl mx-auto font-light leading-relaxed mb-12 tracking-wide">
+              Descubre la exquisitez de nuestros cafés cultivados en las alturas 
+              sagradas de la Sierra Nevada. Una experiencia sensorial única.
             </p>
 
-            <Button 
-              size="lg"
-              className="bg-yellow-400 text-gray-900 hover:bg-yellow-300 px-10 py-7 text-lg font-medium rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
-            >
-              Explorar Colección
-            </Button>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Button 
+                size="lg"
+                className="bg-[#C49B66] text-[#2A1810] hover:bg-[#D4B68C] px-8 py-6 text-base font-semibold rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-xl tracking-wide"
+              >
+                Descubrir Colección
+              </Button>
+              <Button
+                variant="outline"
+                size="lg"
+                className="border-2 border-[#FAF7F4]/30 text-[#FAF7F4] hover:bg-[#FAF7F4]/10 px-8 py-6 text-base font-medium rounded-full transition-all duration-300"
+              >
+                Proceso de Cultivo
+              </Button>
+            </div>
           </motion.div>
 
           {/* Scroll Indicator */}
@@ -74,7 +128,7 @@ export default function CafePage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1 }}
-            className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+            className="absolute bottom-16 left-1/2 transform -translate-x-1/2"
           >
             <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center items-start p-2">
               <motion.div
@@ -87,57 +141,146 @@ export default function CafePage() {
         </div>
       </section>
 
-      {/* Process Section */}
-      <section className="py-32 bg-[#2C1810] relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/images/coffee-beans-bg.jpg')] bg-cover bg-center opacity-5" />
+      {/* Products Grid */}
+      <section className="py-32 bg-[#F5E9E0]">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="text-center mb-20">
-            <Badge className="bg-yellow-400/20 text-yellow-300 border-none mb-6 px-4 py-1 text-sm uppercase tracking-wider">
-              Nuestro Proceso
+            <Badge className="bg-[#7B2E2E] text-[#FAF7F4] mb-6 px-4 py-1 text-sm uppercase tracking-wider">
+              Nuestros Cafés
             </Badge>
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">
-              Del cafetal a tu taza
+            <h2 className="text-4xl md:text-5xl font-bold text-[#5C4033] mb-8">
+              Ediciones Especiales
             </h2>
-            <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
-              Cada paso en nuestro proceso está cuidadosamente diseñado para brindarte 
-              la mejor experiencia en cada taza.
+            <p className="text-xl text-[#5C4033]/80 max-w-2xl mx-auto leading-relaxed">
+              Descubre nuestra selección de cafés especiales, cada uno con su 
+              propia personalidad y carácter único.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {processSteps.map((step, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            {coffeeProducts.map((product) => (
               <motion.div
-                key={step.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white/5 backdrop-blur-sm p-8 rounded-2xl text-center group hover:bg-white/10 transition-all duration-300 border border-white/10"
+                key={product.id}
+                onHoverStart={() => setHoveredProduct(product.id)}
+                onHoverEnd={() => setHoveredProduct(null)}
+                className="h-full"
               >
-                <div className="w-20 h-20 mx-auto mb-8 rounded-full bg-yellow-400/20 flex items-center justify-center group-hover:bg-yellow-400/30 transition-all duration-300">
-                  {React.createElement(step.icon, {
-                    size: 36,
-                    className: "text-yellow-400"
-                  })}
-                </div>
-                <h3 className="text-2xl font-semibold text-white mb-4">{step.title}</h3>
-                <p className="text-gray-400 leading-relaxed">{step.description}</p>
+                <ProductCard 
+                  product={product}
+                  isHovered={hoveredProduct === product.id}
+                />
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Products Grid */}
-      <section className="py-32 bg-gray-50">
+      {/* Attributes Section */}
+      <section className="py-24 bg-[#FAF7F4]">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+            {coffeeAttributes.map((attribute, index) => (
+              <motion.div
+                key={attribute.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="text-center"
+              >
+                <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-[#2A1810] flex items-center justify-center">
+                  {React.createElement(attribute.icon, {
+                    size: 28,
+                    className: "text-[#C49B66]"
+                  })}
+                </div>
+                <h3 className="text-xl font-semibold text-[#2A1810] mb-3">{attribute.title}</h3>
+                <p className="text-[#2A1810]/70">{attribute.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Process Section */}
+      <section className="py-32 bg-[#2A1810] relative overflow-hidden">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 0.05 }}
+          transition={{ duration: 0.5 }}
+          className="absolute inset-0"
+        >
+          <LazyImage
+            src="/images/coffee-beans-bg.jpg"
+            alt="Proceso del café"
+            className="w-full h-full object-cover object-center"
+          />
+        </motion.div>
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="text-center mb-20">
-            <Badge className="bg-yellow-400 text-yellow-900 mb-6 px-4 py-1 text-sm uppercase tracking-wider">
+            <Badge className="bg-[#C49B66] text-[#2A1810] border-none mb-6 px-6 py-2 text-sm uppercase tracking-wider font-semibold">
+              Nuestro Proceso
+            </Badge>
+            <h2 className="text-5xl md:text-6xl font-bold text-[#FAF7F4] mb-8 tracking-tight">
+              Del cafetal a{' '}
+              <span className="text-[#C49B66] italic">tu taza</span>
+            </h2>
+            <p className="text-xl text-[#FAF7F4]/80 max-w-3xl mx-auto leading-relaxed tracking-wide">
+              Cada etapa de nuestro proceso artesanal está meticulosamente diseñada 
+              para preservar y realzar los sabores únicos de nuestro café de origen.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+            {processSteps.map((step, index) => (
+              <motion.div
+                key={step.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="bg-[#FAF7F4]/5 backdrop-blur-sm p-10 rounded-3xl text-center group hover:bg-[#FAF7F4]/10 transition-all duration-500 border border-[#FAF7F4]/10"
+              >
+                <div className="relative">
+                  <div className="w-24 h-24 mx-auto mb-8 rounded-full bg-[#C49B66] flex items-center justify-center transform group-hover:scale-110 transition-all duration-500">
+                    {React.createElement(step.icon, {
+                      size: 40,
+                      className: "text-[#2A1810]"
+                    })}
+                  </div>
+                  <div className="absolute -inset-1 bg-[#C49B66]/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                </div>
+                <h3 className="text-2xl font-semibold text-[#FAF7F4] mb-4">{step.title}</h3>
+                <p className="text-[#FAF7F4]/80 leading-relaxed tracking-wide">{step.description}</p>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className="mt-16 text-center"
+          >
+            <Button
+              size="lg"
+              className="bg-[#C49B66] text-[#2A1810] hover:bg-[#D4B68C] px-12 py-8 text-lg font-semibold rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-xl tracking-wide"
+            >
+              Conoce Más del Proceso
+            </Button>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Products Grid */}
+      <section className="py-32 bg-[#F5E9E0]">
+        <div className="container mx-auto px-4 max-w-7xl">
+          <div className="text-center mb-20">
+            <Badge className="bg-[#7B2E2E] text-[#FAF7F4] mb-6 px-4 py-1 text-sm uppercase tracking-wider">
               Nuestros Cafés
             </Badge>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8">
+            <h2 className="text-4xl md:text-5xl font-bold text-[#5C4033] mb-8">
               Ediciones Especiales
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-xl text-[#5C4033]/80 max-w-2xl mx-auto leading-relaxed">
               Descubre nuestra selección de cafés especiales, cada uno con su 
               propia personalidad y carácter único.
             </p>
@@ -162,25 +305,60 @@ export default function CafePage() {
       </section>
 
       {/* Quality Banner */}
-      <section className="bg-gradient-to-br from-yellow-400 via-yellow-500 to-yellow-600 py-32 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/images/coffee-beans-bg.jpg')] bg-cover bg-center mix-blend-multiply opacity-20" />
+      <section className="bg-[#2A1810] py-40 relative overflow-hidden">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 0.15 }}
+          transition={{ duration: 0.5 }}
+          className="absolute inset-0 mix-blend-multiply"
+        >
+          <LazyImage
+            src="/images/coffee-beans-bg.jpg"
+            alt="Granos de café premium"
+            className="w-full h-full object-cover object-center scale-110"
+          />
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+          className="absolute inset-0 bg-gradient-to-b from-[#2A1810]/95 via-[#2A1810]/85 to-[#2A1810]/95"
+        />
         <div className="container mx-auto px-4 relative max-w-7xl">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-5xl md:text-6xl font-bold text-white mb-10 leading-tight">
-              Compromiso con la calidad
-            </h2>
-            <p className="text-xl text-white/95 mb-14 leading-relaxed max-w-3xl mx-auto">
-              Nos enorgullece ofrecer café de la más alta calidad, cultivado de manera 
-              sostenible y procesado con dedicación artesanal. Cada taza representa 
-              nuestro compromiso con la excelencia.
-            </p>
-            <Button 
-              variant="secondary"
-              size="lg"
-              className="bg-white text-gray-900 hover:bg-white/95 px-10 py-7 text-lg font-medium rounded-full hover:shadow-lg transform hover:scale-105 transition-all duration-300"
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
             >
-              Conoce nuestra historia
-            </Button>
+              <Badge className="bg-[#C49B66] text-[#2A1810] border-none mb-8 px-6 py-2 text-sm uppercase tracking-wider font-semibold">
+                Nuestro Compromiso
+              </Badge>
+              <h2 className="text-6xl md:text-7xl font-bold text-[#FAF7F4] mb-10 leading-tight tracking-tight">
+                La Excelencia en{' '}
+                <span className="text-[#C49B66] italic">Cada Detalle</span>
+              </h2>
+              <p className="text-xl text-[#FAF7F4]/80 mb-16 leading-relaxed max-w-3xl mx-auto tracking-wide">
+                Desde la selección de los mejores granos hasta el proceso final de tostado, 
+                cada paso está impregnado de nuestra pasión por la excelencia. Un compromiso 
+                que se refleja en cada taza de nuestro café.
+              </p>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+                <Button 
+                  size="lg"
+                  className="bg-[#C49B66] text-[#2A1810] hover:bg-[#D4B68C] px-12 py-8 text-lg font-semibold rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-xl tracking-wide"
+                >
+                  Descubre Nuestra Historia
+                </Button>
+                <Button 
+                  variant="outline"
+                  size="lg"
+                  className="border-2 border-[#FAF7F4]/30 text-[#FAF7F4] hover:bg-[#FAF7F4]/10 px-12 py-8 text-lg font-medium rounded-full transition-all duration-300"
+                >
+                  Ver Certificaciones
+                </Button>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>

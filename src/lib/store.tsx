@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useReducer, useEffect } from 'react';
+import React, { createContext, useContext, useReducer, useEffect, useMemo, useCallback, useState } from 'react';
 import { Product, CartItem, CartContextType } from './types';
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -66,31 +66,41 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem('cafe-felicidad-cart', JSON.stringify(items));
   }, [items]);
 
-  const addToCart = (product: Product) => {
+  const addToCart = useCallback((product: Product) => {
     dispatch({ type: 'ADD_TO_CART', product });
-  };
+  }, []);
 
-  const removeFromCart = (productId: string) => {
+  const removeFromCart = useCallback((productId: string) => {
     dispatch({ type: 'REMOVE_FROM_CART', productId });
-  };
+  }, []);
 
-  const updateQuantity = (productId: string, quantity: number) => {
+  const updateQuantity = useCallback((productId: string, quantity: number) => {
     dispatch({ type: 'UPDATE_QUANTITY', productId, quantity });
-  };
+  }, []);
 
-  const clearCart = () => {
+  const clearCart = useCallback(() => {
     dispatch({ type: 'CLEAR_CART' });
-  };
+  }, []);
 
-  const getTotalPrice = () => {
+  const getTotalPrice = useCallback(() => {
     return items.reduce((total, item) => total + (item.product.price * item.quantity), 0);
-  };
+  }, [items]);
 
-  const getTotalItems = () => {
+  const getTotalItems = useCallback(() => {
     return items.reduce((total, item) => total + item.quantity, 0);
-  };
+  }, [items]);
 
-  const value: CartContextType = {
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
+  const toggleCart = useCallback(() => {
+    setIsCartOpen(prev => !prev);
+  }, []);
+
+  const showCartToast = useCallback((item: CartItem, isUpdate?: boolean) => {
+    // La implementación específica del toast se maneja en el componente de toast
+  }, []);
+
+  const value = useMemo<CartContextType>(() => ({
     items,
     addToCart,
     removeFromCart,
@@ -98,7 +108,11 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     clearCart,
     getTotalPrice,
     getTotalItems,
-  };
+    toggleCart,
+    showCartToast,
+    isCartOpen,
+    setIsCartOpen
+  }), [items, addToCart, removeFromCart, updateQuantity, clearCart, getTotalPrice, getTotalItems, toggleCart, showCartToast, isCartOpen]);
 
   return (
     <CartContext.Provider value={value}>

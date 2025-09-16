@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Product } from '@/lib/types';
 import { Link } from 'react-router-dom';
+import LazyImage from './LazyImage';
 
 interface ProductCardProps {
   product: Product;
@@ -24,10 +25,10 @@ export default function ProductCard({ product, isHovered = false }: ProductCardP
       <Card className={`overflow-hidden h-full flex flex-col bg-white border-0 shadow-sm transition-all duration-300 ${isHovered ? 'shadow-lg' : 'shadow-sm'}`}>
         <div className="relative aspect-square overflow-hidden bg-[#f8f8f8]">
           <div className={`absolute inset-0 transition-colors duration-300 ${isHovered ? 'bg-black/0' : 'bg-black/5'}`} />
-          <img
+                    <LazyImage
             src={product.image}
             alt={product.name}
-            className={`w-full h-full object-cover transition-transform duration-500 ${isHovered ? 'scale-105' : 'scale-100'}`}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
         </div>
         <CardContent className="p-6">

@@ -26,12 +26,16 @@ const CrossSelling = ({ currentProduct, currentType, compact = false }: CrossSel
       minimumFractionDigits: 0,
     }).format(price);
   };
-  const prepareItemForCart = (product: Product): Omit<CartItem, 'quantity'> => {
-    return {
-      ...product,
-      type: product.category === 'experience' ? 'service' as const : 'product' as const
-    };
-  };
+
+  const prepareItemForCart = (product: Product): Omit<CartItem, 'quantity'> => ({
+    id: product.id,
+    name: product.name,
+    description: product.description,
+    price: product.price,
+    image: product.image,
+    type: product.category === 'experience' ? 'service' : 'product',
+    weight: product.weight,
+  });
 
   const getRelatedProducts = () => {
     // Productos del mismo tipo que no estén en el carrito
@@ -129,7 +133,7 @@ const CrossSelling = ({ currentProduct, currentType, compact = false }: CrossSel
                 <p className="text-amber-600">{formatPrice(product.price)}</p>
               </div>
             </Link>
-              <Button
+            <Button
               variant="secondary"
               size="sm"
               className="absolute bottom-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity"
@@ -142,6 +146,6 @@ const CrossSelling = ({ currentProduct, currentType, compact = false }: CrossSel
       </div>
     </div>
   );
-};
+}
 
 export default CrossSelling;
