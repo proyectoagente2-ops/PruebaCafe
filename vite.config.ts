@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { compression } from 'vite-plugin-compression2';
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
+import sharp from 'sharp';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
@@ -12,6 +13,11 @@ export default defineConfig(({ mode }) => ({
     }),
     compression(), // Comprimir assets
     ViteImageOptimizer({
+      test: /\.(jpe?g|png|gif|tiff|webp|svg|avif)$/i,
+      exclude: undefined,
+      include: undefined,
+      includePublic: true,
+      logStats: true,
       png: {
         quality: 80
       },
@@ -24,12 +30,14 @@ export default defineConfig(({ mode }) => ({
       tiff: {
         quality: 80
       },
-      gif: {
-        colors: 64
-      },
+      gif: {},
       webp: {
         lossless: true
-      }
+      },
+      avif: {
+        lossless: true
+      },
+      cache: false
     })
   ],
   resolve: {
