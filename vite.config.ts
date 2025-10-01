@@ -7,7 +7,6 @@ import { compression } from 'vite-plugin-compression2';
 export default defineConfig(({ mode }) => ({
   plugins: [
     react({
-      jsxRuntime: 'automatic',
       jsxImportSource: 'react',
     }),
     compression(), // Comprimir assets
@@ -19,8 +18,18 @@ export default defineConfig(({ mode }) => ({
   },
   server: {
     port: 3000,
-    host: true,
-    strictPort: true,
+    host: '0.0.0.0',
+    strictPort: false,
+    hmr: {
+      clientPort: 3000,
+      port: 3000,
+    },
+    watch: {
+      usePolling: true,
+    },
+    headers: {
+      'Cache-Control': 'public, max-age=31536000',
+    },
   },
 
   build: {
@@ -40,26 +49,6 @@ export default defineConfig(({ mode }) => ({
         drop_console: mode === 'production',
         drop_debugger: mode === 'production',
       },
-    },
-  },
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
-    },
-  },
-  server: {
-    port: 3000,
-    host: '0.0.0.0',
-    strictPort: false,
-    hmr: {
-      clientPort: 3000,
-      port: 3000,
-    },
-    watch: {
-      usePolling: true,
-    },
-    headers: {
-      'Cache-Control': 'public, max-age=31536000',
     },
   },
 }));
