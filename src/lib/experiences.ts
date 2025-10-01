@@ -10,7 +10,7 @@ export const tourismExperiences: Product[] = [
     category: 'experience',
     duration: '3 horas',
     included: ['Recorrido guiado', 'Degustación de café', 'Snacks locales'],
-    location: 'Finca Café Felicidá',
+    location: 'Finca La Felicidá',
     capacity: '10 personas',
     inStock: true
   },
@@ -23,7 +23,7 @@ export const tourismExperiences: Product[] = [
     category: 'experience',
     duration: '6 horas',
     included: ['Charla espiritual', 'Almuerzo orgánico', 'Ritual de sanación'],
-    location: 'Finca Café Felicidá',
+    location: 'Finca La Felicidá',
     capacity: '8 personas',
     inStock: true
   }

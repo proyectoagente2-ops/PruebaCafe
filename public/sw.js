@@ -1,10 +1,9 @@
-// Service Worker para Café Felicidá
+// Service Worker para La Felicidá
 const CACHE_NAME = 'cafe-felicida-cache-v1';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
-  '/manifest.json',
-  '/favicon.ico',
+  '/src/index.css',
   '/images/LaFelicidA_transparente_ALPHA_2x.png',
   '/images/coffee-beans-bg.jpg',
 ];
@@ -20,7 +19,22 @@ const CACHE_STRATEGIES = {
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(STATIC_ASSETS);
+      return Promise.all(
+        STATIC_ASSETS.map(url => {
+          return fetch(url)
+            .then(response => {
+              if (!response.ok) {
+                throw new Error(`Failed to fetch ${url}`);
+              }
+              return cache.put(url, response);
+            })
+            .catch(error => {
+              console.error(`Failed to cache ${url}:`, error);
+              // Continue even if one file fails
+              return Promise.resolve();
+            });
+        })
+      );
     })
   );
 });

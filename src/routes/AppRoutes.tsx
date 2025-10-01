@@ -44,6 +44,14 @@ export default function AppRoutes() {
           }
         />
         <Route
+          path="/servicios/:id"
+          element={
+            <Suspense fallback={<PageLoader />}>
+              <ServiceDetailPage />
+            </Suspense>
+          }
+        />
+        <Route
           path="/cafe"
           element={
             <Suspense fallback={<PageLoader />}>

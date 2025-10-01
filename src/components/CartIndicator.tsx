@@ -4,7 +4,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ShoppingBag } from 'lucide-react';
 import { useCart } from '@/lib/store';
-import type { CartItem } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 
 interface CartIndicatorProps {
@@ -13,7 +12,7 @@ interface CartIndicatorProps {
 
 export default function CartIndicator({ onClick }: CartIndicatorProps) {
   const cart = useCart();
-  const itemCount = cart.getTotalItems();
+  const itemCount = cart.getItemCount?.() || 0;
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('es-CO', {
@@ -43,7 +42,7 @@ export default function CartIndicator({ onClick }: CartIndicatorProps) {
       </div>
       {itemCount > 0 && (
         <span className="ml-3 hidden sm:inline-block font-medium">
-          {formatPrice(cart.getTotalPrice())}
+                    {formatPrice(cart.total)}
         </span>
       )}
     </Button>

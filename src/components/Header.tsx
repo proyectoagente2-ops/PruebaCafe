@@ -1,12 +1,15 @@
-'use client';
-
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+
+const AnimatePresenceWrapper = ({ children }: { children: React.ReactNode }) => {
+  return AnimatePresence({ children, mode: "wait" });
+};
 import { Badge } from '@/components/ui/badge';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Menu, ShoppingCart } from 'lucide-react';
 import { useCart } from '@/lib/store';
+import type { CartItem } from '@/lib/store';
 import CartSidebar from './CartSidebar';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ROUTES } from '@/lib/constants';
@@ -54,7 +57,7 @@ export default function Header() {
             >
               <LazyImage 
                 src="/images/LaFelicidA_transparente_ALPHA_2x.png"
-                alt="CAFÉ FELICIDÁ" 
+                alt="LA FELICIDÁ" 
                 className="h-24 w-auto object-contain py-1"
                 priority
               />
@@ -98,7 +101,7 @@ export default function Header() {
                   className="relative w-10 h-10 text-[#5C3B28] hover:text-[#FFD65A] transition-colors"
                 >
                   <ShoppingCart className="h-5 w-5" />
-                  <AnimatePresence>
+                  <AnimatePresenceWrapper>
                     {cart.items.length > 0 && (
                       <motion.div
                         initial={{ scale: 0 }}
@@ -110,16 +113,16 @@ export default function Header() {
                           variant="default" 
                           className="px-2 py-1 rounded-full bg-amber-500 text-[10px] whitespace-nowrap"
                         >
-                          {cart.items.filter(i => i.type === 'product').length > 0 && 
-                            `${cart.items.filter(i => i.type === 'product').length}P`}
-                          {cart.items.filter(i => i.type === 'product').length > 0 && 
-                           cart.items.filter(i => i.type === 'service').length > 0 && ' • '}
-                          {cart.items.filter(i => i.type === 'service').length > 0 && 
-                            `${cart.items.filter(i => i.type === 'service').length}S`}
+                          {cart.items.filter((item: CartItem) => item.type === 'product').length > 0 && 
+                            `${cart.items.filter((item: CartItem) => item.type === 'product').length}P`}
+                          {cart.items.filter((item: CartItem) => item.type === 'product').length > 0 && 
+                           cart.items.filter((item: CartItem) => item.type === 'service').length > 0 && ' • '}
+                          {cart.items.filter((item: CartItem) => item.type === 'service').length > 0 && 
+                            `${cart.items.filter((item: CartItem) => item.type === 'service').length}S`}
                         </Badge>
                       </motion.div>
                     )}
-                  </AnimatePresence>
+                  </AnimatePresenceWrapper>
                 </Button>
               </SheetTrigger>
               <SheetContent className="w-[90vw] sm:w-[540px]">

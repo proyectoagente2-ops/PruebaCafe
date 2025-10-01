@@ -30,7 +30,7 @@ export default function HomePage() {
         
         <div className="relative z-20 text-center max-w-[750px] mx-auto px-8 animate-fadeIn flex flex-col items-center justify-center">
           <h1 className="font-playfair text-[clamp(3rem,8vw,5rem)] font-bold text-[#FEFBF6] mb-6 leading-tight animate-slideUp delay-300 shadow-text">
-            CAFÉ
+            LA
             <span className="block text-[#E4A429] relative highlight">
               FELICIDÁ
               <span className="absolute bottom-[-4px] left-0 right-0 h-[3px] bg-gradient-to-r from-transparent via-[#E4A429] to-transparent opacity-60 rounded"></span>
@@ -38,8 +38,8 @@ export default function HomePage() {
           </h1>
 
           <p className="text-[1.4rem] text-[#EDE5DA] mb-8 leading-[1.7] max-w-[580px] mx-auto animate-slideUp delay-500 shadow-text-sm">
-            Descubre el sabor auténtico del café colombiano artesanal.
-            Cada grano cuenta una historia de tradición, pasión y excelencia.
+            Descubre la magia de nuestra finca en la Sierra Nevada.
+            Un espacio donde la tradición, la pasión y la excelencia se encuentran.
           </p>
 
           <div className="flex flex-wrap justify-center gap-6 animate-slideUp delay-700 -mt-4">
@@ -50,7 +50,7 @@ export default function HomePage() {
             >
               <Link to="/cafe">
                 <Coffee className="mr-2 h-5 w-5" />
-                Explorar Cafés
+                Nuestros Productos
               </Link>
             </Button>
 
@@ -95,13 +95,13 @@ export default function HomePage() {
               </h2>
               <div className="prose prose-lg text-coffee-dark">
                 <p>
-                  En Café Felicidá, fusionamos la tradición ancestral del café con la espiritualidad de la Sierra Nevada. 
+                  En La Felicidá, fusionamos las tradiciones ancestrales con la espiritualidad de la Sierra Nevada. 
                   Cada visita es una oportunidad para reconectarte con la naturaleza, mientras descubres los secretos de 
-                  nuestro café artesanal y la sabiduría de nuestra tierra.
+                  nuestra sabiduría ancestral y el encanto de nuestra tierra.
                 </p>
                 <p>
-                  Nuestro espacio es más que una finca cafetera; es un santuario donde la paz de las montañas se 
-                  encuentra con el aroma del café recién tostado, creando una experiencia única de bienestar y conexión.
+                  Nuestro espacio es más que una finca; es un santuario donde la paz de las montañas se 
+                  encuentra con la energía de la naturaleza, creando una experiencia única de bienestar y conexión.
                 </p>
               </div>
             </div>
@@ -172,15 +172,15 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Nuestros Cafés */}
+      {/* Nuestros Productos */}
       <section className="py-24 bg-amber-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-amber-900 mb-4">
-              Nuestros Cafés
+              Nuestros Productos
             </h2>
             <p className="text-coffee-dark text-lg max-w-2xl mx-auto">
-              Descubre nuestra selección de cafés artesanales, cultivados con amor y tostados a la perfección.
+              Descubre nuestra selección de productos artesanales, elaborados con amor y dedicación.
             </p>
           </div>
 
@@ -211,7 +211,7 @@ export default function HomePage() {
               asChild
             >
               <Link to="/cafe">
-                Ver todos los cafés
+                Ver todos los productos
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
@@ -255,13 +255,13 @@ export default function HomePage() {
 
       {/* CTA Global */}
       <section className="py-32 bg-gradient-to-br from-amber-900 to-amber-800 text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('path-to-pattern.png')] opacity-10"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/10 to-transparent opacity-20"></div>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <h2 className="text-4xl md:text-5xl font-bold mb-8">
-            Vive la experiencia completa en Café Felicidá
+            Vive la experiencia completa en La Felicidá
           </h2>
           <p className="text-xl text-amber-100 mb-12 max-w-2xl mx-auto">
-            Descubre un espacio donde la tradición del café se une con la espiritualidad
+            Descubre un espacio donde la tradición se une con la espiritualidad
             y la conexión con la naturaleza.
           </p>
           <Button 
@@ -282,9 +282,9 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
             <div>
-              <h3 className="text-xl font-bold mb-4">Café Felicidá</h3>
+              <h3 className="text-xl font-bold mb-4">La Felicidá</h3>
               <p className="text-amber-200/80">
-                Tradición, espiritualidad y café de alta calidad en la Sierra Nevada.
+                Tradición, espiritualidad y conexión con la naturaleza en la Sierra Nevada.
               </p>
             </div>
             <div>
@@ -318,7 +318,7 @@ export default function HomePage() {
             </div>
           </div>
           <div className="border-t border-amber-200/10 mt-12 pt-8 text-center text-amber-200/60">
-            <p>&copy; {new Date().getFullYear()} Café Felicidá. Todos los derechos reservados.</p>
+            <p>&copy; {new Date().getFullYear()} La Felicidá. Todos los derechos reservados.</p>
           </div>
         </div>
       </footer>

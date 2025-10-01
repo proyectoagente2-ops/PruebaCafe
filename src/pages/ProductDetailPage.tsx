@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
@@ -34,7 +34,7 @@ export default function ProductDetailPage() {
     {
       icon: Coffee,
       title: "Perfil de Sabor",
-      description: product.notes.join(", ")
+      description: product.notes?.join(", ") ?? ""
     },
     {
       icon: Mountain,
@@ -69,9 +69,6 @@ export default function ProductDetailPage() {
   };
 
   // Encontrar productos relacionados (excluyendo el actual)
-  const relatedProducts = coffeeProducts
-    .filter(p => p.id !== product.id)
-    .slice(0, 2);
 
   return (
     <div className="min-h-screen bg-[#FAF7F4]">
@@ -240,7 +237,7 @@ export default function ProductDetailPage() {
               >
                 <Button 
                   className="w-full bg-gradient-to-r from-[#2A1810] to-[#1A0F0A] text-white h-[60px] rounded-xl text-lg font-medium relative overflow-hidden transition-all duration-300 shadow-lg shadow-[#2A1810]/10 hover:shadow-xl hover:shadow-[#2A1810]/20 group" 
-                  onClick={() => addToCart(product)}
+                  onClick={() => addToCart({ ...product, type: 'product' })}
                   disabled={!product.inStock}
                 >
                   <span className="relative z-10 flex items-center gap-2">

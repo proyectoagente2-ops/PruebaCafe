@@ -10,7 +10,7 @@ import ProductCard from '@/components/ProductCard';
 
 export default function TurismoPage() {
   useEffect(() => {
-    document.title = 'Turismo - Café Felicidá';
+    document.title = 'Turismo - La Felicidá';
     window.scrollTo(0, 0);
   }, []);
 

@@ -1,6 +1,12 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
+
+import { motion, AnimatePresence } from 'framer-motion';
+
+const AnimatePresenceWrapper = ({ children }: { children: React.ReactNode }) => {
+  return <AnimatePresence mode="popLayout">{children}</AnimatePresence>;
+};
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { Badge } from '@/components/ui/badge';
 import { useNavigate } from 'react-router-dom';
@@ -8,7 +14,6 @@ import { Separator } from '@/components/ui/separator';
 import { Minus, Plus, Trash2, ShoppingBag } from 'lucide-react';
 import { useCart } from '@/lib/store';
 import WhatsAppButton from './WhatsAppButton';
-import { motion, AnimatePresence } from 'framer-motion';
 
 interface CartSidebarProps {
   isOpen: boolean;
@@ -17,7 +22,7 @@ interface CartSidebarProps {
 
 export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
   const navigate = useNavigate();
-  const { items, updateQuantity, removeFromCart, getTotalPrice, getTotalItems } = useCart();
+  const { items, updateQuantity, removeFromCart, subtotal, getItemCount } = useCart();
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('es-CO', {
@@ -118,17 +123,17 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
               transition={{ type: "spring", stiffness: 500, damping: 30 }}
             >
               <Badge className="bg-amber-600 text-white">
-                {getTotalItems()} items
+                {getItemCount()} items
               </Badge>
             </motion.div>
           </SheetTitle>
         </SheetHeader>
 
         <div className="mt-8 flex flex-col gap-6 h-[calc(100vh-280px)] overflow-y-auto pb-6">
-          <AnimatePresence>
+          <AnimatePresenceWrapper>
             {items.map((item, index) => (
               <motion.div
-                key={item.product.id}
+                key={item.id}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 20 }}
@@ -139,7 +144,7 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                   whileHover={{ scale: 1.05 }}
                   className="relative aspect-square h-24 overflow-hidden rounded-lg"
                 >
-                  <img src={item.product.image} alt={item.product.name} className="object-cover w-full h-full" />
+                  <img src={item.image} alt={item.name} className="object-cover w-full h-full" />
                 </motion.div>
                 
                 <div className="flex flex-col flex-1">
@@ -148,10 +153,10 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                     animate={{ opacity: 1 }}
                     transition={{ delay: index * 0.1 + 0.2 }}
                   >
-                    <h3 className="font-medium text-amber-900">{item.product.name}</h3>
-                    <p className="text-sm text-amber-600 line-clamp-1">{item.product.description}</p>
+                    <h3 className="font-medium text-amber-900">{item.name}</h3>
+                    <p className="text-sm text-amber-600 line-clamp-1">{item.type}</p>
                     <div className="text-amber-900 font-semibold mt-1">
-                      {formatPrice(item.product.price * item.quantity)}
+                      {formatPrice(item.price * item.quantity)}
                     </div>
                   </motion.div>
                   
@@ -162,7 +167,7 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                           size="icon"
                           variant="outline"
                           className="h-8 w-8 border-amber-200"
-                          onClick={() => updateQuantity(item.product.id, Math.max(1, item.quantity - 1))}
+                          onClick={() => updateQuantity(item.id, Math.max(1, item.quantity - 1))}
                         >
                           <Minus className="h-4 w-4 text-amber-600" />
                         </Button>
@@ -173,7 +178,7 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                           size="icon"
                           variant="outline"
                           className="h-8 w-8 border-amber-200"
-                          onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
+                          onClick={() => updateQuantity(item.id, item.quantity + 1)}
                         >
                           <Plus className="h-4 w-4 text-amber-600" />
                         </Button>
@@ -188,7 +193,7 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                         size="icon"
                         variant="outline"
                         className="h-8 w-8 border-red-200"
-                        onClick={() => removeFromCart(item.product.id)}
+                        onClick={() => removeFromCart(item.id)}
                       >
                         <Trash2 className="h-4 w-4 text-red-600" />
                       </Button>
@@ -197,7 +202,7 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                 </div>
               </motion.div>
             ))}
-          </AnimatePresence>
+          </AnimatePresenceWrapper>
         </div>
 
         <div className="space-y-4">
@@ -210,12 +215,12 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
           >
             <span className="text-amber-900 font-medium">Subtotal</span>
             <motion.span
-              key={getTotalPrice()}
+              key={subtotal}
               initial={{ scale: 1.2 }}
               animate={{ scale: 1 }}
               className="text-lg font-bold text-amber-900"
             >
-              {formatPrice(getTotalPrice())}
+              {formatPrice(subtotal)}
             </motion.span>
           </motion.div>
 

@@ -10,7 +10,7 @@ interface WhatsAppButtonProps {
 }
 
 export default function WhatsAppButton({ isFloating = false }: WhatsAppButtonProps) {
-  const { items, getTotalPrice, clearCart } = useCart();
+  const { items, total, clearCart } = useCart();
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('es-CO', {
@@ -23,7 +23,7 @@ export default function WhatsAppButton({ isFloating = false }: WhatsAppButtonPro
   const generateWhatsAppMessage = () => {
     if (items.length === 0) {
       return encodeURIComponent(
-        '¡Hola CAFÉ FELICIDÁ! 🌱☕\n\n' +
+        '¡Hola La Felicidá! 🌱✨\n\n' +
         'Me gustaría obtener más información sobre:\n\n' +
         '- Sus variedades de café ☕\n' +
         '- Precios y presentaciones disponibles 💰\n' +
@@ -33,17 +33,17 @@ export default function WhatsAppButton({ isFloating = false }: WhatsAppButtonPro
       );
     }
 
-    let message = '¡Hola CAFÉ FELICIDÁ! 🌱☕\n\n';
+    let message = '¡Hola La Felicidá! 🌱✨\n\n';
     message += 'Me gustaría hacer el siguiente pedido:\n\n';
     
     items.forEach((item, index) => {
-      message += `${index + 1}. ${item.product.name}\n`;
+      message += `${index + 1}. ${item.name}\n`;
       message += `   Cantidad: ${item.quantity}\n`;
-      message += `   Precio unitario: ${formatPrice(item.product.price)}\n`;
-      message += `   Subtotal: ${formatPrice(item.product.price * item.quantity)}\n\n`;
+      message += `   Precio unitario: ${formatPrice(item.price)}\n`;
+      message += `   Subtotal: ${formatPrice(item.price * item.quantity)}\n\n`;
     });
 
-    message += `💰 TOTAL: ${formatPrice(getTotalPrice())}\n\n`;
+    message += `💰 TOTAL: ${formatPrice(total)}\n\n`;
     message += 'Por favor confirma la disponibilidad y el proceso de entrega. ¡Gracias! 🙏';
 
     return encodeURIComponent(message);

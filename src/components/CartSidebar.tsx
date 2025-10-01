@@ -4,9 +4,9 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { Minus, Plus, Trash2, ShoppingBag, Calendar, Users } from 'lucide-react';
+import { Minus, Plus, Trash2, ShoppingBag } from 'lucide-react';
 import { useCart } from '@/lib/store';
-import { useNotificationStore } from '@/lib/notificationStore';
+import type { CartItem } from '@/lib/store';
 import WhatsAppButton from './WhatsAppButton';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -27,8 +27,8 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
   };
   
   // Agrupar items por tipo
-  const products = cart.items.filter(item => item.type === 'product');
-  const services = cart.items.filter(item => item.type === 'service');
+  const products = cart.items.filter((item: CartItem) => item.type === 'product');
+  const services = cart.items.filter((item: CartItem) => item.type === 'service');
 
   if (cart.items.length === 0) {
     return (

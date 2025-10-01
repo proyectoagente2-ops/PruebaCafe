@@ -2,9 +2,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useNotificationStore } from '../lib/notificationStore';
 import { useEffect } from 'react';
 
+const AnimatePresenceWrapper = ({ children }: { children: React.ReactNode }) => {
+  return AnimatePresence({ children, mode: "popLayout" });
+};
+
 export const NotificationContainer = () => {
-  const notifications = useNotificationStore((state) => state.notifications);
-  const removeNotification = useNotificationStore((state) => state.removeNotification);
+  const store = useNotificationStore();
+  const notifications = store.notifications;
+  const removeNotification = store.removeNotification;
 
   // Auto-eliminar notificaciones después de 3 segundos
   useEffect(() => {
@@ -19,7 +24,7 @@ export const NotificationContainer = () => {
 
   return (
     <div className="fixed bottom-4 right-4 z-50">
-      <AnimatePresence>
+      <AnimatePresenceWrapper>
         {notifications.map((notification) => (
           <motion.div
             key={notification.id}
@@ -42,7 +47,7 @@ export const NotificationContainer = () => {
             </div>
           </motion.div>
         ))}
-      </AnimatePresence>
+      </AnimatePresenceWrapper>
     </div>
   );
 };

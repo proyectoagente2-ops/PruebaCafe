@@ -4,6 +4,7 @@ import WhatsAppButton from '@/components/WhatsAppButton';
 import CartSidebar from '@/components/CartSidebar';
 import CartIndicator from '@/components/CartIndicator';
 import { NotificationContainer } from '../components/Notification';
+import { Toaster } from '@/components/ui/sonner';
 import { useState } from 'react';
 
 export default function RootLayout() {
@@ -19,6 +20,7 @@ export default function RootLayout() {
       <CartIndicator onClick={() => setIsCartOpen(true)} />
       <CartSidebar isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
       <NotificationContainer />
+      <Toaster />
     </>
   );
-  }
+}

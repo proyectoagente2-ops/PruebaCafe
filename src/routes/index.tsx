@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, RouteObject } from 'react-router-dom';
 import RootLayout from '@/layouts/RootLayout';
 import Index from '@/pages/Index';
 import CafePage from '@/pages/CafePage';
@@ -11,17 +11,16 @@ import ServicesPage from '@/pages/ServicesPage';
 import ServiceDetailPage from '@/pages/ServiceDetailPage';
 
 // Mapeo de hashes antiguos a nuevas rutas
-const HASH_REDIRECTS = {
+const HASH_REDIRECTS: { [key: string]: string } = {
   'tourism': '/turismo',
   'about': '/nosotros',
   'contact': '/contacto'
 };
 
-export const router = createBrowserRouter([
+const routes: RouteObject[] = [
   {
     path: '/',
     element: <RootLayout />,
-    errorElement: <NotFound />,
     children: [
       {
         index: true,
@@ -41,18 +40,6 @@ export const router = createBrowserRouter([
         element: <CafePage />
       },
       {
-        path: 'cafe/:id',
-        element: <ProductDetailPage />
-      },
-      {
-        path: 'servicios',
-        element: <ServicesPage />
-      },
-      {
-        path: 'servicios/:id',
-        element: <ServiceDetailPage />
-      },
-      {
         path: 'turismo',
         element: <Turismo />
       },
@@ -65,9 +52,28 @@ export const router = createBrowserRouter([
         element: <Contacto />
       },
       {
+        path: 'productos/:productId',
+        element: <ProductDetailPage />
+      },
+      {
+        path: 'servicios',
+        children: [
+          {
+            index: true,
+            element: <ServicesPage />
+          },
+          {
+            path: ':id',
+            element: <ServiceDetailPage />
+          }
+        ]
+      },
+      {
         path: '*',
         element: <NotFound />
       }
     ]
   }
-]);
+];
+
+export const router = createBrowserRouter(routes);

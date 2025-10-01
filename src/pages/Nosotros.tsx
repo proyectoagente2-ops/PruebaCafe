@@ -6,7 +6,7 @@ import { Coffee, Leaf, Heart, Award } from 'lucide-react';
 
 export default function NosotrosPage() {
   useEffect(() => {
-    document.title = 'Nosotros - Café Felicidá';
+    document.title = 'Nosotros - La Felicidá';
     window.scrollTo(0, 0);
   }, []);
 
@@ -65,7 +65,7 @@ export default function NosotrosPage() {
             <div className="relative">
               <img
                 src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=600&h=400&fit=crop"
-                alt="Finca Café Felicidá"
+                alt="Finca La Felicidá"
                 className="rounded-lg shadow-xl"
               />
             </div>

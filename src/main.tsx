@@ -1,15 +1,23 @@
 import { createRoot } from 'react-dom/client'
+import React from 'react'
 import './index.css'
-import { registerServiceWorker } from './lib/serviceWorker'
-import { AppProviders } from './components/app-providers'
-import { StrictMode } from 'react'
+import { registerServiceWorker } from '@/lib/serviceWorker'
+import { AppProviders } from '@/components/app-providers'
 
-// Registrar el Service Worker
-registerServiceWorker()
+const rootElement = document.getElementById('root')
+if (!rootElement) {
+  throw new Error('No se encontró el elemento root')
+}
 
-const root = createRoot(document.getElementById('root')!)
-root.render(
-  <StrictMode>
+// Crear el root y renderizar la aplicación
+const element = (
+  <React.StrictMode>
     <AppProviders />
-  </StrictMode>
-)
+  </React.StrictMode>
+) as React.ReactElement
+
+const root = createRoot(rootElement)
+root.render(element)
+
+// Registrar el Service Worker después de que la app esté montada
+registerServiceWorker()

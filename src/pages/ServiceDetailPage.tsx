@@ -15,10 +15,36 @@ import CrossSelling from '@/components/CrossSelling';
 import { services } from '@/lib/services';
 
 export default function ServiceDetailPage() {
-  const { id } = useParams();
+  const params = useParams();
+  const id = params.id || params.serviceId;
+  console.log('Service ID:', id); // Para debugging
   const service = services.find(s => s.id === id);
   const [selectedImage, setSelectedImage] = useState(0);
-  const currentImage = selectedImage === 0 ? service?.image : service?.secondaryImage;
+  
+  // Debugging
+  console.log('Available services:', services);
+  console.log('Current service:', service);
+
+  // Si el servicio no existe, mostrar mensaje de error
+  if (!service) {
+    return (
+      <div className="min-h-screen bg-[#F5ECE5] pt-24 flex flex-col items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-3xl font-bold text-[#4B3C32] mb-4">
+            Servicio no encontrado
+          </h1>
+          <Link to="/servicios" className="inline-flex items-center">
+            <Button variant="link" className="text-[#db9b24] hover:text-[#f0b938] flex items-center gap-2">
+              <ArrowLeft className="w-4 h-4" />
+              Volver a servicios
+            </Button>
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  const currentImage = selectedImage === 0 ? service.image : service.secondaryImage;
 
   const faqs = [
     {
@@ -169,7 +195,7 @@ export default function ServiceDetailPage() {
                   size="lg"
                   className="bg-amber-400 text-[#4B3C32] hover:bg-amber-500 px-8 py-6 text-lg font-medium rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-amber-400/25"
                   onClick={() => {
-                    window.open(`https://wa.me/+573012345678?text=${encodeURIComponent(`¡Hola! Me interesa saber más sobre el servicio de ${service.title} en Café Felicidá.`)}`, '_blank');
+                    window.open(`https://wa.me/+573012345678?text=${encodeURIComponent(`¡Hola! Me interesa saber más sobre el servicio de ${service.title} en La Felicidá.`)}`, '_blank');
                   }}
                 >
                   <MessageCircle className="mr-2 h-5 w-5" />
@@ -286,7 +312,7 @@ export default function ServiceDetailPage() {
                   <Button 
                     className="w-full bg-amber-400 text-[#4B3C32] hover:bg-amber-500 mb-4"
                     onClick={() => {
-                      window.open(`https://wa.me/+573113678555?text=${encodeURIComponent(`¡Hola! Me interesa reservar el servicio de ${service.title} en Café Felicidá.`)}`, '_blank');
+                      window.open(`https://wa.me/+573113678555?text=${encodeURIComponent(`¡Hola! Me interesa reservar el servicio de ${service.title} en La Felicidá.`)}`, '_blank');
                     }}
                   >
                     <MessageCircle className="mr-2 h-4 w-4" />

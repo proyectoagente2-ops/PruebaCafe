@@ -135,7 +135,7 @@ export default function ServicesPage() {
           >
             <Button
               onClick={() => {
-                window.open(`https://wa.me/+573012345678?text=${encodeURIComponent("¡Hola! Me gustaría obtener más información sobre las experiencias en Café Felicidá.")}`, '_blank');
+                window.open(`https://wa.me/+573012345678?text=${encodeURIComponent("¡Hola! Me gustaría obtener más información sobre las experiencias en La Felicidá.")}`, '_blank');
               }}
               className="bg-amber-400 text-[#4B3C32] hover:bg-amber-500 px-8 py-6 text-lg font-medium rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-amber-400/25"
             >
@@ -191,7 +191,7 @@ export default function ServicesPage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
             {/* Glamping Card */}
-            <Link to="/servicios/glamping" className="block">
+            <Link to={`/servicios/${services[0].id}`} className="block">
               <Card className="overflow-hidden group hover:shadow-2xl transition-all duration-300 border-transparent hover:border-[#db9b24] h-full bg-white">
                 <div className="aspect-w-16 aspect-h-9 relative">
                   <img
