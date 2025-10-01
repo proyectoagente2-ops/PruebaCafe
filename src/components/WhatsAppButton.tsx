@@ -68,7 +68,7 @@ export default function WhatsAppButton({ isFloating = false }: WhatsAppButtonPro
         className={cn(
           "fixed bottom-6 right-6 h-16 w-16 rounded-full shadow-lg z-50 p-0",
           "bg-green-500 hover:bg-green-600 transform transition-all duration-300",
-          "animate-pulse-slow hover:animate-none"
+          "floating-action-button"
         )}
       >
         <div className="relative">

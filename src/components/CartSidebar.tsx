@@ -4,12 +4,19 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { Minus, Plus, Trash2, ShoppingBag } from 'lucide-react';
+import { 
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { Minus, Plus, Trash2, ShoppingBag, ChevronDown, Coffee, ShoppingBag as BagIcon, Compass } from 'lucide-react';
 import { useCart } from '@/lib/store';
 import type { CartItem } from '@/lib/store';
 import WhatsAppButton from './WhatsAppButton';
 import OptimizedImage from './OptimizedImage';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 interface CartSidebarProps {
   isOpen: boolean;
@@ -18,6 +25,7 @@ interface CartSidebarProps {
 
 export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
   const cart = useCart();
+  const navigate = useNavigate();
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('es-CO', {
@@ -86,9 +94,52 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Button onClick={onClose} className="bg-amber-600 hover:bg-amber-700">
-                Explorar Productos
-              </Button>
+              <DropdownMenu modal={false}>
+                <DropdownMenuTrigger asChild>
+                  <Button className="bg-amber-600 hover:bg-amber-700 w-full">
+                    <span>Explorar Productos</span>
+                    <ChevronDown className="ml-2 h-4 w-4" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-48 bg-white dark:bg-gray-800">
+                  <DropdownMenuItem asChild>
+                    <button
+                      onClick={() => {
+                        onClose();
+                        navigate('/cafe');
+                      }}
+                      className="w-full flex items-center px-2 py-1.5 text-sm cursor-pointer hover:bg-amber-50 dark:hover:bg-amber-900"
+                    >
+                      <Coffee className="mr-2 h-4 w-4" />
+                      <span>Ver Cafés</span>
+                    </button>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <button
+                      onClick={() => {
+                        onClose();
+                        navigate('/productos');
+                      }}
+                      className="w-full flex items-center px-2 py-1.5 text-sm cursor-pointer hover:bg-amber-50 dark:hover:bg-amber-900"
+                    >
+                      <BagIcon className="mr-2 h-4 w-4" />
+                      <span>Ver Mochilas</span>
+                    </button>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <button
+                      onClick={() => {
+                        onClose();
+                        navigate('/servicios');
+                      }}
+                      className="w-full flex items-center px-2 py-1.5 text-sm cursor-pointer hover:bg-amber-50 dark:hover:bg-amber-900"
+                    >
+                      <Compass className="mr-2 h-4 w-4" />
+                      <span>Ver Servicios</span>
+                    </button>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </motion.div>
           </motion.div>
         </SheetContent>

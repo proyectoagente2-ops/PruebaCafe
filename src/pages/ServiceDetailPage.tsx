@@ -195,7 +195,7 @@ export default function ServiceDetailPage() {
                   size="lg"
                   className="bg-amber-400 text-[#4B3C32] hover:bg-amber-500 px-8 py-6 text-lg font-medium rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-amber-400/25"
                   onClick={() => {
-                    window.open(`https://wa.me/+573012345678?text=${encodeURIComponent(`¡Hola! Me interesa saber más sobre el servicio de ${service.title} en La Felicidá.`)}`, '_blank');
+                    window.open(`https://api.whatsapp.com/send?phone=573113678555&text=${encodeURIComponent(`¡Hola! Me interesa saber más sobre el servicio de ${service.title} en La Felicidá.`)}`, '_blank');
                   }}
                 >
                   <MessageCircle className="mr-2 h-5 w-5" />

@@ -317,6 +317,52 @@
   }
 
   /* Responsive Design */
+  /* Botones flotantes */
+  .fixed-buttons {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem;
+    z-index: 50;
+    pointer-events: none;
+  }
+
+  .fixed-buttons > * {
+    pointer-events: auto;
+  }
+
+  /* Animación suave de rebote */
+  @keyframes floatingBounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+
+  /* Animación de pulso suave */
+  @keyframes gentlePulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+  }
+
+  /* Clase para elementos flotantes animados */
+  .floating-action-button {
+    animation: floatingBounce 3s ease-in-out infinite;
+    transition: all 0.3s ease;
+  }
+
+  .floating-action-button:hover {
+    animation: gentlePulse 0.5s ease-in-out;
+    transform: scale(1.1);
+  }
+
   @media (max-width: 768px) {
     .nav-menu {
       display: none;

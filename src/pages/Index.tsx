@@ -60,10 +60,10 @@ export default function HomePage() {
               className="bg-[#EDE5DA] text-[#2C1810] px-9 py-4 min-w-[200px] text-[1.05rem] font-semibold rounded-xl border-2 border-[#EDE5DA] transition-all duration-400 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#EDE5DA]/30"
               asChild
             >
-              <Link to="/como-llegar">
+              <a href="https://www.google.com/maps/place/La+FelicidÁ/@10.4196944,-73.5925806,18z/data=!4m6!3m5!1s0x8ef54faec8800807:0x7617c8fc237ed190!8m2!3d10.419428!4d-73.5923419!16s%2Fg%2F11p0f4qhnv?entry=ttu" target="_blank" rel="noopener noreferrer">
                 <MapPin className="mr-2 h-5 w-5" />
                 Visitar Finca
-              </Link>
+              </a>
             </Button>
           </div>
         </div>

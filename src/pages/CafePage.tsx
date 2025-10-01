@@ -68,7 +68,6 @@ export default function CafePage() {
           transition={{ duration: 1.2, ease: "easeOut" }}
           className="absolute inset-0"
         >
-          <div className="absolute inset-0 bg-[#2A1810] mix-blend-multiply opacity-40" />
           <OptimizedImage
             src="/images/CAFÉS/CAFE_FONDO.png"
             alt="Granos de café premium"
@@ -80,7 +79,7 @@ export default function CafePage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.3 }}
-          className="absolute inset-0 bg-gradient-to-b from-[#2A1810]/95 via-[#2A1810]/85 to-[#2A1810]/90"
+          className="absolute inset-0 bg-gradient-to-t from-[#2A1810]/30 via-transparent to-[#2A1810]/20"
         />
         
         <div className="relative container mx-auto px-4 text-center text-[#FAF7F4]">
@@ -90,18 +89,18 @@ export default function CafePage() {
             transition={{ duration: 0.6 }}
             className="max-w-5xl mx-auto"
           >
-            <Badge className="bg-[#C49B66] text-[#2A1810] border-none mb-6 px-4 py-1.5 text-sm uppercase tracking-wider font-medium">
+            <Badge className="bg-[#C49B66] text-[#2A1810] border-none mb-6 px-4 py-1.5 text-sm uppercase tracking-wider font-medium shadow-lg">
               Colección Premium
             </Badge>
             
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 tracking-tight">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 tracking-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.3)]">
               El Arte del{' '}
-              <span className="text-[#C49B66] italic">Café</span>{' '}
+              <span className="text-[#C49B66] italic drop-shadow-[0_2px_10px_rgba(0,0,0,0.3)]">Café</span>{' '}
               <br className="hidden md:block" />
               de Origen
             </h1>
             
-            <p className="text-lg md:text-xl text-[#FAF7F4]/90 max-w-2xl mx-auto font-light leading-relaxed mb-12 tracking-wide">
+            <p className="text-lg md:text-xl text-[#FAF7F4] max-w-2xl mx-auto font-medium leading-relaxed mb-12 tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">
               Descubre la exquisitez de nuestros cafés cultivados en las alturas 
               sagradas de la Sierra Nevada. Una experiencia sensorial única.
             </p>
@@ -109,14 +108,14 @@ export default function CafePage() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button 
                 size="lg"
-                className="bg-[#C49B66] text-[#2A1810] hover:bg-[#D4B68C] px-8 py-6 text-base font-semibold rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-xl tracking-wide"
+                className="bg-[#C49B66] text-[#2A1810] hover:bg-[#D4B68C] px-8 py-6 text-base font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl tracking-wide"
               >
                 Descubrir Colección
               </Button>
               <Button
                 variant="outline"
                 size="lg"
-                className="border-2 border-[#FAF7F4]/30 text-[#FAF7F4] hover:bg-[#FAF7F4]/10 px-8 py-6 text-base font-medium rounded-full transition-all duration-300"
+                className="bg-black/20 backdrop-blur-sm border-2 border-[#FAF7F4] text-[#FAF7F4] hover:bg-black/30 px-8 py-6 text-base font-medium rounded-full transition-all duration-300 shadow-xl hover:shadow-2xl"
               >
                 Proceso de Cultivo
               </Button>

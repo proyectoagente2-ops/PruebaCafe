@@ -25,7 +25,7 @@ export default function CartIndicator({ onClick }: CartIndicatorProps) {
   return (
     <Button
       variant="ghost"
-      className="fixed bottom-6 right-6 sm:bottom-8 sm:right-8 bg-[#2A1810] text-white shadow-lg hover:bg-[#1A0F0A] transition-all duration-300 rounded-full p-4 sm:p-6"
+      className="fixed bottom-6 left-6 sm:bottom-8 sm:left-8 bg-[#2A1810] text-white shadow-lg hover:bg-[#1A0F0A] transition-all duration-300 rounded-full p-4 sm:p-6 z-50 floating-action-button"
       onClick={onClick}
     >
       <div className="relative">

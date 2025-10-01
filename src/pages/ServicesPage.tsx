@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import CrossSelling from '@/components/CrossSelling';
 import { services } from '@/lib/services';
 import OptimizedImage from '@/components/OptimizedImage';
+import WhatsAppButton from '@/components/WhatsAppButton';
 import { Product } from '@/lib/types';
 
 // Define icons for each service
@@ -42,8 +43,9 @@ function ServicesPage() {
 
   // Memoize handlers to prevent re-renders
   const handleWhatsAppClick = useCallback(() => {
+    const message = "¡Hola! Me gustaría obtener más información sobre las experiencias en La Felicidá.";
     window.open(
-      `https://wa.me/+573012345678?text=${encodeURIComponent("¡Hola! Me gustaría obtener más información sobre las experiencias en La Felicidá.")}`,
+      `https://api.whatsapp.com/send?phone=573113678555&text=${encodeURIComponent(message)}`,
       '_blank'
     );
   }, []);
@@ -56,7 +58,7 @@ function ServicesPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative min-h-[92vh] flex items-center justify-center overflow-hidden">
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">
         {/* Background Pattern */}
         <div className="absolute inset-0 bg-[#4B3C32] opacity-5">
           <div className="absolute inset-0" style={{ 
@@ -70,7 +72,7 @@ function ServicesPage() {
           <OptimizedImage
             src="/images/services/fondo servicios.png"
             alt="Fondo de servicios"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-center"
             priority
           />
         </div>
@@ -155,10 +157,13 @@ function ServicesPage() {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-20 bg-white">
-        <div className="container mx-auto px-6">
+      <section id="services" className="py-24 bg-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <span className="inline-block px-4 py-1.5 bg-amber-50 rounded-full text-amber-600 text-sm font-medium tracking-wide mb-4">
+              Experiencias únicas
+            </span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
               Nuestros Servicios
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -167,35 +172,48 @@ function ServicesPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {services.map((service) => (
               <Link
                 key={service.id}
                 to={`/servicios/${service.id}`}
                 className="group"
               >
-                <Card className="relative overflow-hidden h-[400px] transition-transform duration-300 transform hover:scale-[1.02]">
-                  <div className="absolute inset-0">
+                <Card className="overflow-hidden bg-white transition-all duration-300 hover:shadow-xl hover:shadow-amber-100/50 hover:-translate-y-1">
+                  {/* Contenedor de imagen con altura fija */}
+                  <div className="relative h-48 sm:h-56 lg:h-64 overflow-hidden">
                     <OptimizedImage
                       src={service.image}
                       alt={service.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-black/0" />
                   </div>
-                  <div className="relative h-full p-8 flex flex-col justify-end">
+                  {/* Contenido debajo de la imagen */}
+                  <div className="p-6">
                     <div className="flex items-center gap-2 mb-3">
-                      {serviceIcons[service.id as keyof typeof serviceIcons]}
-                      <span className="text-white/80 text-sm uppercase tracking-wider">
+                      <div className="p-2 bg-amber-50 rounded-full">
+                        {serviceIcons[service.id as keyof typeof serviceIcons]}
+                      </div>
+                      <span className="text-amber-700 text-sm font-medium uppercase tracking-wider">
                         {service.id}
                       </span>
                     </div>
-                    <h3 className="text-2xl font-bold text-white mb-2">
+                    <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-amber-600 transition-colors">
                       {service.title}
                     </h3>
-                    <p className="text-white/80">
+                    <p className="text-gray-600 text-sm line-clamp-3">
                       {service.description}
                     </p>
+                    {/* Botón fantasma que aparece en hover */}
+                    <div className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <Button 
+                        variant="ghost" 
+                        className="w-full justify-center text-amber-600 hover:text-amber-700 hover:bg-amber-50"
+                      >
+                        Ver más detalles
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
+                    </div>
                   </div>
                 </Card>
               </Link>

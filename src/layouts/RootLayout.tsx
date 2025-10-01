@@ -16,8 +16,13 @@ export default function RootLayout() {
       <main>
         <Outlet />
       </main>
-      <WhatsAppButton />
-      <CartIndicator onClick={() => setIsCartOpen(true)} />
+      {/* Botones flotantes siempre visibles */}
+      <div className="fixed-buttons">
+        <WhatsAppButton isFloating={true} />
+        <CartIndicator onClick={() => setIsCartOpen(true)} />
+      </div>
+
+      {/* Componentes adicionales */}
       <CartSidebar isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
       <NotificationContainer />
       <Toaster />
