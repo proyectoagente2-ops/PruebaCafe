@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Menu, ShoppingCart } from 'lucide-react';
+import OptimizedImage from './OptimizedImage';
 
 const AnimatePresenceWrapper = ({ children }: { children: React.ReactNode }) => {
   return AnimatePresence({ children, mode: "wait" });
 };
-import { Badge } from '@/components/ui/badge';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, ShoppingCart } from 'lucide-react';
 import { useCart } from '@/lib/store';
 import type { CartItem } from '@/lib/store';
 import CartSidebar from './CartSidebar';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ROUTES } from '@/lib/constants';
 import '@/styles/header.css';
-import LazyImage from './LazyImage';
 
 type NavigationItem = {
   name: string;
@@ -55,7 +55,7 @@ export default function Header() {
               to={ROUTES.HOME}
               className="block transition-opacity hover:opacity-90"
             >
-              <LazyImage 
+              <OptimizedImage 
                 src="/images/LaFelicidA_transparente_ALPHA_2x.png"
                 alt="LA FELICIDÁ" 
                 className="h-24 w-auto object-contain py-1"

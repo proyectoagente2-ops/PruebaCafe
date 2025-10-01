@@ -8,6 +8,7 @@ import { Minus, Plus, Trash2, ShoppingBag } from 'lucide-react';
 import { useCart } from '@/lib/store';
 import type { CartItem } from '@/lib/store';
 import WhatsAppButton from './WhatsAppButton';
+import OptimizedImage from './OptimizedImage';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface CartSidebarProps {
@@ -149,7 +150,7 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                   whileHover={{ scale: 1.05 }}
                   className="relative aspect-square h-24 overflow-hidden rounded-lg"
                 >
-                  <img src={item.image} alt={item.name} className="object-cover w-full h-full" />
+                  <OptimizedImage src={item.image} alt={item.name} className="object-cover w-full h-full" blur={false} />
                 </motion.div>
                 
                 <div className="flex flex-col flex-1">

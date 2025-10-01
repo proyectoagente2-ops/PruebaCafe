@@ -4,6 +4,7 @@ import React from 'react';
 import { toast } from '@/components/ui/use-toast';
 import { CartItem } from '@/lib/store';
 import { motion } from 'framer-motion';
+import OptimizedImage from '@/components/OptimizedImage';
 
 export const showCartNotification = (item: CartItem, isUpdate: boolean = false) => {
   toast({
@@ -64,7 +65,7 @@ export const showCartNotification = (item: CartItem, isUpdate: boolean = false) 
               delay: 0.3
             }}
           >
-            <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+            <OptimizedImage src={item.image} alt={item.name} className="w-full h-full object-cover" blur={false} />
           </motion.div>
           <div>
             <motion.div 
