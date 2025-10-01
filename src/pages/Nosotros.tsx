@@ -3,6 +3,7 @@
 import React, { useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Coffee, Leaf, Heart, Award } from 'lucide-react';
+import OptimizedImage from '@/components/OptimizedImage';
 
 export default function NosotrosPage() {
   useEffect(() => {
@@ -15,13 +16,14 @@ export default function NosotrosPage() {
       {/* Hero Section */}
       <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-[#2C1810]/85 via-[#5D3A1A]/75 to-[#7A4B2A]/80"></div>
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: 'url(https://images.unsplash.com/photo-1511537190424-bbbab1dc3fc4?w=1920&h=1080&fit=crop)',
-            backgroundSize: 'cover'
-          }}
-        ></div>
+        <div className="absolute inset-0">
+          <OptimizedImage
+            src="/images/about-bg.jpg"
+            alt="Fondo de nuestro café"
+            className="w-full h-full object-cover"
+            priority
+          />
+        </div>
         
         <div className="relative z-20 text-center max-w-[750px] mx-auto px-8">
           <h1 className="text-5xl font-bold text-white mb-6">Nuestra Historia</h1>
@@ -63,10 +65,11 @@ export default function NosotrosPage() {
             </div>
             
             <div className="relative">
-              <img
-                src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=600&h=400&fit=crop"
+              <OptimizedImage
+                src="/images/about-farm.jpg"
                 alt="Finca La Felicidá"
                 className="rounded-lg shadow-xl"
+                blur={false}
               />
             </div>
           </div>

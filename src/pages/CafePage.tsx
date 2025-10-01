@@ -7,7 +7,7 @@ import { Coffee, Leaf, Mountain, ThermometerSun, Award, Scale, Heart, Droplet } 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import ProductCard from '@/components/ProductCard';
-import LazyImage from '@/components/LazyImage';
+import OptimizedImage from '@/components/OptimizedImage';
 
 const coffeeAttributes = [
   {
@@ -69,7 +69,7 @@ export default function CafePage() {
           className="absolute inset-0"
         >
           <div className="absolute inset-0 bg-[#2A1810] mix-blend-multiply opacity-40" />
-          <LazyImage
+          <OptimizedImage
             src="/images/CAFÉS/CAFE_FONDO.png"
             alt="Granos de café premium"
             className="w-full h-full object-cover object-center"
@@ -209,7 +209,7 @@ export default function CafePage() {
           transition={{ duration: 0.5 }}
           className="absolute inset-0"
         >
-          <LazyImage
+          <OptimizedImage
             src="/images/coffee-beans-bg.jpg"
             alt="Proceso del café"
             className="w-full h-full object-cover object-center"
@@ -278,7 +278,7 @@ export default function CafePage() {
           transition={{ duration: 0.5 }}
           className="absolute inset-0 mix-blend-multiply"
         >
-          <LazyImage
+          <OptimizedImage
             src="/images/coffee-beans-bg.jpg"
             alt="Granos de café premium"
             className="w-full h-full object-cover object-center scale-110"

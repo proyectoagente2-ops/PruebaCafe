@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNotificationStore } from '../lib/notificationStore';
 import { useEffect } from 'react';
+import OptimizedImage from './OptimizedImage';
 
 const AnimatePresenceWrapper = ({ children }: { children: React.ReactNode }) => {
   return AnimatePresence({ children, mode: "popLayout" });
@@ -35,10 +36,11 @@ export const NotificationContainer = () => {
             onClick={() => removeNotification(notification.id)}
           >
             {notification.image && (
-              <img
+              <OptimizedImage
                 src={notification.image}
-                alt=""
+                alt="Notification image"
                 className="w-12 h-12 object-cover rounded"
+                blur={false}
               />
             )}
             <div>

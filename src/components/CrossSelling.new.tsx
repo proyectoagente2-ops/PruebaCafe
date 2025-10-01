@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { Button } from './ui/button';
 import { Coffee, Map, Backpack, Plus, ArrowRight } from 'lucide-react';
 import { Product, CartItem } from '@/lib/types';
-import LazyImage from './LazyImage';
+import OptimizedImage from './OptimizedImage';
 import { motion } from 'framer-motion';
 import { useCart } from '@/lib/store';
 import { coffeeProducts } from '@/lib/products';
@@ -81,10 +81,11 @@ const CrossSelling = ({ currentProduct, currentType, compact = false }: CrossSel
             className="flex items-center gap-3 p-2 bg-white rounded-lg"
           >
             <div className="w-12 h-12 relative rounded-md overflow-hidden">
-              <LazyImage 
+              <OptimizedImage 
                 src={product.image} 
                 alt={product.name}
                 className="w-full h-full object-cover"
+                blur={false}
               />
             </div>
             <div className="flex-1 min-w-0">
@@ -122,10 +123,11 @@ const CrossSelling = ({ currentProduct, currentType, compact = false }: CrossSel
           >
             <Link to={`/productos/${product.id}`} className="block">
               <div className="aspect-square relative rounded-lg overflow-hidden">
-                <LazyImage
+                <OptimizedImage
                   src={product.image}
                   alt={product.name}
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  blur={false}
                 />
               </div>
               <div className="mt-3">

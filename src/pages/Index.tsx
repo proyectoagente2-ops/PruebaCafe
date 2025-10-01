@@ -9,6 +9,7 @@ import { Coffee, MapPin, Users, Leaf, Heart, Star, ArrowRight, MessageCircle } f
 import WhatsAppButton from '@/components/WhatsAppButton';
 import { coffeeProducts } from '@/lib/products';
 import '@/lib/animations.css';
+import OptimizedImage from '@/components/OptimizedImage';
 
 export default function HomePage() {
   const featuredCoffees = coffeeProducts.slice(0, 3);
@@ -17,13 +18,14 @@ export default function HomePage() {
     <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white">
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-fixed bg-no-repeat"
-          style={{
-            backgroundImage: 'url(/images/Inicio/nano-banana-2025-09-16T02-58-06.png)',
-            backgroundSize: 'cover'
-          }}
-        ></div>
+        <div className="absolute inset-0">
+          <OptimizedImage
+            src="/images/Inicio/nano-banana-2025-09-16T02-58-06.png"
+            alt="Fondo de la Sierra Nevada"
+            className="w-full h-full object-cover object-center"
+            priority
+          />
+        </div>
 
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-transparent"></div>
         
@@ -105,10 +107,11 @@ export default function HomePage() {
               </div>
             </div>
             <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-xl">
-              <img
+              <OptimizedImage
                 src="/images/Inicio/finca_banana.png"
                 alt="Montañas de la Sierra Nevada"
                 className="absolute inset-0 w-full h-full object-cover"
+                blur={false}
               />
             </div>
           </div>
@@ -223,10 +226,11 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-xl order-2 lg:order-1">
-              <img
+              <OptimizedImage
                 src="/images/Mochilas/MOCHILA3.png"
                 alt="Mochilas artesanales"
                 className="absolute inset-0 w-full h-full object-cover"
+                blur={false}
               />
             </div>
             <div className="space-y-8 order-1 lg:order-2">

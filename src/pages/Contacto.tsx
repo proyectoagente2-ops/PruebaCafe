@@ -6,6 +6,7 @@ import { MapPin, Phone, Mail, MessageCircle, Send, Check } from 'lucide-react';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import OptimizedImage from '@/components/OptimizedImage';
 
 const testimonios = [
   {
@@ -354,10 +355,11 @@ export default function ContactoPage() {
                         transition={{ type: "spring", stiffness: 300 }}
                         className="w-16 h-16 rounded-full overflow-hidden ring-4 ring-amber-500 ring-offset-4 ring-offset-white shadow-xl"
                       >
-                        <img
+                        <OptimizedImage
                           src={testimonio.imagen}
                           alt={testimonio.nombre}
                           className="w-full h-full object-cover"
+                          blur={false}
                         />
                       </motion.div>
                     </div>
