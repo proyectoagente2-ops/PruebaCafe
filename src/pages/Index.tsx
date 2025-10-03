@@ -257,71 +257,229 @@ export default function HomePage() {
       </section>
 
       {/* CTA Global */}
-      <section className="py-32 bg-gradient-to-br from-amber-900 to-amber-800 text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/10 to-transparent opacity-20"></div>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <h2 className="text-4xl md:text-5xl font-bold mb-8">
-            Vive la experiencia completa en La Felicidá
-          </h2>
-          <p className="text-xl text-amber-100 mb-12 max-w-2xl mx-auto">
-            Descubre un espacio donde la tradición se une con la espiritualidad
-            y la conexión con la naturaleza.
-          </p>
-          <Button 
-            size="lg"
-            className="bg-white text-amber-900 hover:bg-amber-50"
-            asChild
+      <section className="py-32 relative overflow-hidden">
+        {/* Imagen de fondo con overlay */}
+        <div className="absolute inset-0">
+          <OptimizedImage
+            src="/images/Inicio/finca_banana.png"
+            alt="Finca La Felicidá"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#2A1810]/50 via-[#C49B66]/40 to-[#1A0F0A]/50"></div>
+        </div>
+
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
           >
-            <Link to="/servicios">
-              Explorar servicios
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
+            <h2 className="text-4xl md:text-5xl font-bold mb-8 text-white">
+              Vive la experiencia completa en La Felicidá
+            </h2>
+            <p className="text-xl text-amber-100 mb-12 max-w-2xl mx-auto">
+              Descubre un espacio donde la tradición se une con la espiritualidad
+              y la conexión con la naturaleza.
+            </p>
+            <Button 
+              size="lg"
+              className="bg-white text-amber-900 hover:bg-amber-50 hover:scale-105 transform transition-all duration-300"
+              asChild
+            >
+              <Link to="/servicios">
+                Explorar servicios
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          </motion.div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-[#2C1810] text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+      <footer className="relative overflow-hidden">
+        {/* Fondo base con gradientes */}
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-gradient-to-b from-[#362419] via-[#2C1810] to-[#1A0F0A]"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-[#C49B66]/20 via-transparent to-[#8B4513]/20"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#DEB887]/5 via-transparent to-transparent"></div>
+          {/* Efecto de textura sutil */}
+          <div className="absolute inset-0 opacity-5" style={{ 
+            backgroundImage: 'url("data:image/svg+xml,%3Csvg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%239C92AC" fill-opacity="0.2"%3E%3Cpolygon points="0 0 20 0 10 10"/%3E%3C/g%3E%3C/svg%3E")',
+            backgroundSize: '8px 8px'
+          }}></div>
+        </div>
+        {/* Patrón de fondo sutil */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#C49B66]/5 to-transparent opacity-30"></div>
+        
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          {/* Logo y descripción principal */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="mb-16 text-center"
+          >
+            <Link to="/" className="inline-block group">
+              <img
+                src="/images/LaFelicidA_transparente_ALPHA_2x.png"
+                alt="La Felicidá"
+                className="h-24 mb-6 mx-auto transform transition-transform duration-300 group-hover:scale-105"
+              />
+            </Link>
+            <p className="text-[#E4A429] max-w-2xl mx-auto text-lg font-medium">
+              Un espacio sagrado donde la tradición, la espiritualidad y la naturaleza 
+              convergen para crear experiencias únicas en la Sierra Nevada.
+            </p>
+          </motion.div>
+
+          {/* Grid de información */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+            {/* Sección de navegación */}
             <div>
-              <h3 className="text-xl font-bold mb-4">La Felicidá</h3>
-              <p className="text-amber-200/80">
-                Tradición, espiritualidad y conexión con la naturaleza en la Sierra Nevada.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-xl font-bold mb-4">Síguenos</h3>
-              <div className="flex space-x-4">
-                {/* Añadir iconos de redes sociales aquí */}
-              </div>
-            </div>
-            <div>
-              <h3 className="text-xl font-bold mb-4">Legal</h3>
-              <ul className="space-y-2">
+              <h3 className="text-xl font-bold mb-6 text-[#E4A429]">Explora</h3>
+              <ul className="space-y-3">
                 <li>
-                  <Link to="/politica-cultural" className="text-amber-200/80 hover:text-amber-200">
-                    Política cultural
+                  <Link to="/cafe" className="text-amber-200/80 hover:text-amber-200 transition-colors duration-200 flex items-center gap-2">
+                    <Coffee className="w-4 h-4" />
+                    Nuestros Cafés
                   </Link>
                 </li>
                 <li>
-                  <Link to="/aviso-legal" className="text-amber-200/80 hover:text-amber-200">
-                    Aviso legal
+                  <Link to="/servicios" className="text-amber-200/80 hover:text-amber-200 transition-colors duration-200 flex items-center gap-2">
+                    <Star className="w-4 h-4" />
+                    Servicios
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/nosotros" className="text-amber-200/80 hover:text-amber-200 transition-colors duration-200 flex items-center gap-2">
+                    <Heart className="w-4 h-4" />
+                    Sobre Nosotros
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/contacto" className="text-amber-200/80 hover:text-amber-200 transition-colors duration-200 flex items-center gap-2">
+                    <MessageCircle className="w-4 h-4" />
+                    Contacto
                   </Link>
                 </li>
               </ul>
             </div>
+
+            {/* Sección de redes sociales */}
             <div>
-              <h3 className="text-xl font-bold mb-4">Contacto</h3>
-              <p className="text-amber-200/80">
-                Sierra Nevada de Santa Marta<br />
-                Pueblo Bello, Cesar<br />
-                Colombia
-              </p>
+              <h3 className="text-xl font-bold mb-6 text-[#E4A429]">Síguenos</h3>
+              <div className="flex flex-col space-y-3">
+                <a 
+                  href="https://www.instagram.com/lafelicida.co/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-amber-200/80 hover:text-amber-200 transition-colors duration-200 flex items-center gap-2"
+                >
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                  </svg>
+                  Instagram
+                </a>
+                <a 
+                  href="https://www.facebook.com/lafelicida.co" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-amber-200/80 hover:text-amber-200 transition-colors duration-200 flex items-center gap-2"
+                >
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+                  </svg>
+                  Facebook
+                </a>
+                <a 
+                  href="https://wa.me/+573113678555" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-amber-200/80 hover:text-amber-200 transition-colors duration-200 flex items-center gap-2"
+                >
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/>
+                  </svg>
+                  WhatsApp
+                </a>
+              </div>
+            </div>
+
+            {/* Sección de horarios */}
+            <div>
+              <h3 className="text-xl font-bold mb-6 text-[#E4A429]">Horarios</h3>
+              <div className="space-y-3 text-amber-200/80">
+                <p className="flex justify-between">
+                  <span>Lun - Vie:</span>
+                  <span>8:00 AM - 6:00 PM</span>
+                </p>
+                <p className="flex justify-between">
+                  <span>Sábados:</span>
+                  <span>9:00 AM - 5:00 PM</span>
+                </p>
+                <p className="flex justify-between">
+                  <span>Domingos:</span>
+                  <span>10:00 AM - 4:00 PM</span>
+                </p>
+                <div className="pt-3">
+                  <p className="text-[#E4A429] font-medium">Visitas con cita previa</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Sección de contacto */}
+            <div>
+              <h3 className="text-xl font-bold mb-6 text-[#E4A429]">Ubicación</h3>
+              <div className="space-y-4">
+                <p className="text-amber-200/80">
+                  Sierra Nevada de Santa Marta<br />
+                  Pueblo Bello, Cesar<br />
+                  Colombia
+                </p>
+                <div className="pt-2">
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    className="border-amber-200/20 text-amber-200/80 hover:bg-amber-200/10 hover:text-amber-200"
+                    asChild
+                  >
+                    <a 
+                      href="https://www.google.com/maps/place/La+FelicidÁ/@10.4196944,-73.5925806,18z" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2"
+                    >
+                      <MapPin className="w-4 h-4" />
+                      Ver en Google Maps
+                    </a>
+                  </Button>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="border-t border-amber-200/10 mt-12 pt-8 text-center text-amber-200/60">
-            <p>&copy; {new Date().getFullYear()} La Felicidá. Todos los derechos reservados.</p>
+
+          {/* Enlaces legales y copyright */}
+          <div className="border-t border-amber-200/10 pt-8">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+              <div className="flex flex-wrap justify-center md:justify-start gap-4 text-sm text-amber-200/60">
+                <Link to="/politica-cultural" className="hover:text-amber-200 transition-colors duration-200">
+                  Política cultural
+                </Link>
+                <span className="text-amber-200/20">|</span>
+                <Link to="/aviso-legal" className="hover:text-amber-200 transition-colors duration-200">
+                  Aviso legal
+                </Link>
+                <span className="text-amber-200/20">|</span>
+                <Link to="/privacidad" className="hover:text-amber-200 transition-colors duration-200">
+                  Política de privacidad
+                </Link>
+              </div>
+              <p className="text-sm text-amber-200/60">
+                &copy; {new Date().getFullYear()} La Felicidá. Todos los derechos reservados.
+              </p>
+            </div>
           </div>
         </div>
       </footer>
