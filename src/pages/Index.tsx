@@ -30,9 +30,9 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-transparent"></div>
         
         <div className="relative z-20 text-center max-w-[750px] mx-auto px-8 animate-fadeIn flex flex-col items-center justify-center">
-          <h1 className="font-playfair text-[clamp(3rem,8vw,5rem)] font-bold text-[#FEFBF6] mb-6 leading-tight animate-slideUp delay-300 shadow-text">
-            LA
-            <span className="block text-[#E4A429] relative highlight">
+          <h1 className="font-playfair text-[clamp(2.5rem,6vw,4.5rem)] font-bold text-[#FEFBF6] mb-6 leading-none flex items-center justify-center gap-2 whitespace-nowrap animate-slideUp delay-300 shadow-text">
+            <span>LA</span>
+            <span className="text-[#E4A429] relative highlight">
               FELICIDÁ
               <span className="absolute bottom-[-4px] left-0 right-0 h-[3px] bg-gradient-to-r from-transparent via-[#E4A429] to-transparent opacity-60 rounded"></span>
             </span>
