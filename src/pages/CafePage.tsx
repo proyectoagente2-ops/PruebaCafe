@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { coffeeProducts } from '@/lib/products';
 import { Coffee, Leaf, Mountain, ThermometerSun, Award, Scale, Heart, Droplet } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
@@ -144,11 +144,11 @@ export default function CafePage() {
       <section className="py-32 bg-[#F5E9E0]">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="text-center mb-20">
-            <Badge className="bg-[#7B2E2E] text-[#FAF7F4] mb-6 px-4 py-1 text-sm uppercase tracking-wider">
+            <Badge className="bg-[#a84040] text-[#FAF7F4] mb-6 px-4 py-1 text-sm uppercase tracking-wider">
               Nuestros Cafés
             </Badge>
             <h2 className="text-4xl md:text-5xl font-bold text-[#5C4033] mb-8">
-              Ediciones Especiales
+            Ediciones <span className="!text-[#7b2e2e] italic">Especiales</span>
             </h2>
             <p className="text-xl text-[#5C4033]/80 max-w-2xl mx-auto leading-relaxed">
               Descubre nuestra selección de cafés especiales, cada uno con su 

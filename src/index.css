@@ -531,3 +531,8 @@
     color: hsl(var(--foreground));
   }
 }
+@layer base {
+  h1 {
+    @apply text-4xl md:text-6xl font-bold text-center text-[#5C3B28];
+  }
+}

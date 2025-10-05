@@ -8,3 +8,29 @@
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
 }
+/* Fondo del overlay más suave para ambos (carrito y menú) */
+[data-state="open"] > .fixed.inset-0 {
+  background-color: rgba(0, 0, 0, 0.20) !important;
+  transition: background-color 0.3s ease;
+}
+
+/* Fondo del contenido del carrito */
+.sheet-content[data-state="open"][data-side="right"] {
+  background-color: #fffcef !important; /* Color cálido del carrito */
+  color: #5C3B28; /* Marrón del texto */
+}
+
+/* Fondo del contenido del menú hamburguesa (igual que el carrito) */
+.sheet-content[data-state="open"][data-side="left"],
+.sheet-content[data-state="open"][data-side="right"]:has(nav) {
+  background-color: #fffcef !important;
+  color: #5C3B28;
+}
+
+/* Evita que se aplique doble overlay oscuro */
+.sheet-overlay {
+  background-color: rgba(0, 0, 0, 0.15) !important;
+}
+.menu-button {
+  background-color: transparent !important;
+}
