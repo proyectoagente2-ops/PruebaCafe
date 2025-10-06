@@ -37,23 +37,35 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
   
   // Agrupar items por tipo
   const products = cart.items.filter((item: CartItem) => item.type === 'product');
+  // @ts-ignore
   const services = cart.items.filter((item: CartItem) => item.type === 'service');
 
   if (cart.items.length === 0) {
     return (
       <Sheet open={isOpen} onOpenChange={onClose}>
         <SheetContent className="w-[95vw] max-w-[540px] sm:w-[540px] bg-gradient-to-b from-amber-50 to-white">
-          <SheetHeader>
-            <SheetTitle className="text-amber-900 flex items-center">
-              <motion.div
-                animate={{ rotate: [0, -10, 10, 0] }}
-                transition={{ duration: 1, repeat: Infinity, repeatDelay: 2 }}
-              >
-                <ShoppingBag className="h-5 w-5 mr-2" />
-              </motion.div>
-              Tu Carrito
-            </SheetTitle>
-          </SheetHeader>
+         <SheetHeader className="mt-2">
+  <div className="flex items-center justify-between">
+    {/* Izquierda: Título e ícono */}
+    <SheetTitle className="text-amber-900 flex items-center gap-2">
+      <motion.div
+        animate={{ rotate: [0, -10, 10, 0] }}
+        transition={{ duration: 1, repeat: Infinity, repeatDelay: 2 }}
+      >
+        <ShoppingBag className="h-5 w-5" />
+      </motion.div>
+      <span>Tu Carrito</span>
+    </SheetTitle>
+
+    {/* Derecha: Logo */}
+    <img
+      src="/images/LaFelicidA_transparente_ALPHA_2x.png"
+      alt="Logo La FelicidA"
+      className="h-20 object-contain"
+    />
+  </div>
+</SheetHeader>
+
           
           <motion.div 
             initial={{ opacity: 0, y: 20 }}

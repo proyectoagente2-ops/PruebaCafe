@@ -119,6 +119,7 @@ export default function Header() {
                   size="icon"
                   className="relative w-10 h-10 text-[#5C3B28] hover:text-[#FFD65A] transition-colors shadow-none"
                 >
+                  
                   <ShoppingCart className="h-5 w-5" />
                   <AnimatePresence>
                     {cart.items.length > 0 && (
@@ -128,6 +129,7 @@ export default function Header() {
                         exit={{ scale: 1 }}
                         className="absolute -top-2 -right-2"
                       >
+                        
                         <Badge 
                           variant="default" 
                           className="px-2 py-1 rounded-full bg-amber-500 text-[10px] whitespace-nowrap"

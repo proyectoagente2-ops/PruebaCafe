@@ -13,7 +13,7 @@ const ProductDetailPage = React.lazy(() => import('@/pages/ProductDetailPage'));
 const ServiceDetailPage = React.lazy(() => import('@/pages/ServiceDetailPage'));
 const Turismo = React.lazy(() => import('@/pages/Turismo'));
 const Nosotros = React.lazy(() => import('@/pages/Nosotros'));
-const sobre nosotros = React.lazy(() => import('@/pages/Contacto'));
+const Contacto = React.lazy(() => import('@/pages/Contacto'));
 const NotFound = React.lazy(() => import('@/pages/NotFound'));
 
 // Loading fallback component

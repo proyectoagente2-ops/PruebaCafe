@@ -68,21 +68,21 @@ export default function HomePage() {
           </div>
         </div>
 
-{/* Scroll Indicator */}
-<motion.div 
-  initial={{ opacity: 0 }}
-  animate={{ opacity: 1 }}
-  transition={{ delay: 1 }}
-  className="absolute bottom-6 left-[50.7%] transform -translate-x-1/2"
->
-  <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center items-start p-2">
-    <motion.div
-      animate={{ y: [0, 8, 0] }}
-      transition={{ duration: 1.5, repeat: Infinity }}
-      className="w-1 h-1 bg-white rounded-full"
-    />
-  </div>
-</motion.div>
+        {/* Scroll Indicator */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1 }}
+          className="absolute bottom-6 left-[50.7%] transform -translate-x-1/2"
+        >
+          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center items-start p-2">
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+              className="w-1 h-1 bg-white rounded-full"
+            />
+          </div>
+        </motion.div>
 
       </section>
 
@@ -95,12 +95,12 @@ export default function HomePage() {
                 Un espacio de conexión con la naturaleza y el espíritu
               </h2>
               <div className="prose prose-lg text-coffee-dark">
-                <p>
+                <p className="!text-[#3B2F2F] !opacity-100 leading-relaxed">
                   En La Felicidá, fusionamos las tradiciones ancestrales con la espiritualidad de la Sierra Nevada. 
                   Cada visita es una oportunidad para reconectarte con la naturaleza, mientras descubres los secretos de 
                   nuestra sabiduría ancestral y el encanto de nuestra tierra.
                 </p>
-                <p>
+                <p className="!text-[#3B2F2F] !opacity-100 leading-relaxed">
                   Nuestro espacio es más que una finca; es un santuario donde la paz de las montañas se 
                   encuentra con la energía de la naturaleza, creando una experiencia única de bienestar y conexión.
                 </p>
@@ -148,7 +148,8 @@ export default function HomePage() {
                 icon: Users,
               },
             ].map((service, idx) => (
-              <Card key={idx} className="relative group hover:shadow-lg transition-all duration-300">
+              <Card key={idx} className="relative group shadow-md hover:scale-105 hover:shadow-lg outline-4 transition-all duration-300 border-0">
+
                 <CardHeader>
                   <div className="h-12 w-12 rounded-lg bg-amber-100 flex items-center justify-center mb-4">
                     <service.icon className="h-6 w-6 text-amber-700" />
@@ -156,13 +157,13 @@ export default function HomePage() {
                   <CardTitle className="text-xl font-bold text-amber-900">{service.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-coffee-dark mb-6">{service.description}</p>
+                  {/* >>> PÁRRAFO FORZADO A SER VISIBLE <<< */}
+                  <p className="mb-6 leading-relaxed !text-[#3B2F2F] !opacity-100">
+                    {service.description}
+                  </p>
                   <Button 
                     variant="ghost" 
                     className="text-amber-700 hover:text-amber-900 p-0 h-auto font-medium"
-                    onClick={() => {
-                      // Aquí iría la lógica para abrir WhatsApp con el mensaje predefinido
-                    }}
                   >
                     <MessageCircle className="h-4 w-4 mr-2" />
                     Consultar
@@ -181,14 +182,15 @@ export default function HomePage() {
             <h2 className="text-3xl md:text-4xl font-bold text-amber-900 mb-4">
               Nuestros Productos
             </h2>
-            <p className="text-coffee-dark text-lg max-w-2xl mx-auto">
-              Descubre nuestra selección de productos artesanales, elaborados con amor y dedicación.
-            </p>
+           <p className="text-lg max-w-2xl mx-auto !text-[#3B2F2F] !opacity-100 leading-relaxed">
+  Descubre nuestra selección de productos artesanales, elaborados con amor y dedicación.
+</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
             {featuredCoffees.map((coffee) => (
-              <Card key={coffee.id} className="group hover:shadow-lg transition-all duration-300">
+              <Card key={coffee.id} className="relative group shadow-md hover:scale-105 hover:shadow-lg outline-4 transition-all duration-300 border-0">
+
                 <CardContent className="p-6">
                   <div className="aspect-square rounded-lg overflow-hidden mb-6">
                     <img
@@ -231,30 +233,40 @@ export default function HomePage() {
                 alt="Mochilas artesanales"
                 className="absolute inset-0 w-full h-full object-cover"
                 blur={false}
-              />
+              /><OptimizedImage
+  src="/images/Mochilas/FONDOINICIOPAG.png"
+  alt="Fondo de inicio página"
+  className="absolute inset-0 w-full h-full object-cover"
+  blur={false}
+/>
+
             </div>
             <div className="space-y-8 order-1 lg:order-2">
               <h2 className="text-4xl font-bold text-amber-900 leading-tight">
                 Mochilas con pensamiento
               </h2>
               <div className="prose prose-lg text-coffee-dark">
-                <p>
+                <p className="!text-[#3B2F2F] !opacity-100 leading-relaxed">
                   Cada mochila es una obra de arte que lleva consigo la sabiduría ancestral de nuestros artesanos.
                   Tejidas con dedicación y amor, estas piezas únicas representan la conexión entre la tradición
                   y la modernidad.
                 </p>
               </div>
-              <Button 
-                size="lg"
-                className="bg-amber-900 text-white hover:bg-amber-800"
-              >
-                Encargar mochila
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
+              {/* >>> un poco más de separación con el botón <<< */}
+              <Link to="/mochilas" className="mt-3 inline-block">
+                <Button
+                  size="lg"
+                  className="bg-amber-900 text-white hover:bg-amber-800 flex items-center"
+                >
+                  Encargar mochila
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
       </section>
+
 
       {/* CTA Global */}
       <section className="py-32 relative overflow-hidden">
@@ -400,7 +412,7 @@ export default function HomePage() {
                   className="text-amber-200/80 hover:text-amber-200 transition-colors duration-200 flex items-center gap-2"
                 >
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/>
+                    <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.40.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/>
                   </svg>
                   WhatsApp
                 </a>
@@ -472,7 +484,7 @@ export default function HomePage() {
                   Aviso legal
                 </Link>
                 <span className="text-amber-200/20">|</span>
-                <Link to="/privacidad" className="hover:text-amber-200 transition-colors duration-200">
+                <Link to="/privacidad" className="hover:text-amber-200 transition-colors duración-200">
                   Política de privacidad
                 </Link>
               </div>
@@ -484,8 +496,8 @@ export default function HomePage() {
         </div>
       </footer>
 
-        {/* WhatsApp Button */}
-        <WhatsAppButton isFloating />
-      </div>
+      {/* WhatsApp Button */}
+      <WhatsAppButton isFloating />
+    </div>
   );
 }

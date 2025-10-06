@@ -93,12 +93,13 @@ export default function CafePage() {
               Colección Premium
             </Badge>
             
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 tracking-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.3)]">
-              El Arte del{' '}
-              <span className="text-[#C49B66] italic drop-shadow-[0_2px_10px_rgba(0,0,0,0.3)]">Café</span>{' '}
-              <br className="hidden md:block" />
-              de Origen
-            </h1>
+           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8 tracking-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.3)]">
+               <span className="text-white">El Arte del </span>
+               <span className="text-[#C49B66] italic drop-shadow-[0_2px_10px_rgba(0,0,0,0.3)]">Café</span>{' '}
+               <br className="hidden md:block" />
+               <span className="text-white">de Origen</span>
+          </h1>
+
             
             <p className="text-lg md:text-xl text-[#FAF7F4] max-w-2xl mx-auto font-medium leading-relaxed mb-12 tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">
               Descubre la exquisitez de nuestros cafés cultivados en las alturas 

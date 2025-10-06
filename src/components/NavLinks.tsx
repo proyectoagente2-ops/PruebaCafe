@@ -15,7 +15,7 @@ export default function NavLinks({ itemClassName = '', className = '', onItemCli
     { name: 'Café', href: '/cafe' },
     { name: 'Turismo', href: isHomePage ? '#tourism' : '/#tourism' },
     { name: 'Nosotros', href: isHomePage ? '#about' : '/#about' },
-    { name: 'sobre nosotros', href: isHomePage ? '#contact' : '/#contact' },
+    { name: 'Contacto', href: isHomePage ? '#contact' : '/#contact' },
   ];
 
   return (

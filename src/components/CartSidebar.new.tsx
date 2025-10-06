@@ -73,7 +73,7 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
               transition={{ delay: 0.4 }}
               className="text-lg font-semibold text-amber-900 mb-2"
             >
-              Tu carrito está vacío
+              Tu carrito está vacio
             </motion.h3>
             <motion.p
               initial={{ opacity: 0 }}

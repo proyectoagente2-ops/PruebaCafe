@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import  { useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { MapPin, Users, Coffee } from 'lucide-react';

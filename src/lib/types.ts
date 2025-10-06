@@ -1,4 +1,4 @@
-import type { JSX } from 'react';
+import type { } from 'react';
 
 export interface Product {
   capacity: string;
