@@ -34,7 +34,7 @@ const mochilaProducts = [
     id: 'mochila-especial',
     name: 'Mochila Especial',
     description: 'Mochila con diseños exclusivos y acabados premium.',
-    image: '/images/Mochilas/MOCHILA01.png',
+    image: '/images/Mochilas/MOCHILAVERDE.png',
     features: ['Diseño exclusivo', 'Materiales premium', 'Tamaño grande']
   },
   {
