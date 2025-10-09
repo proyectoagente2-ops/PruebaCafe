@@ -22,7 +22,7 @@ export default function HomePage() {
           <OptimizedImage
             src="/images/Inicio/nano-banana-2025-09-16T02-58-06.png"
             alt="Fondo de la Sierra Nevada"
-            className="w-full h-full object-cover object-center"
+            className="w-full h-full object-cover object-center "
             priority
           />
         </div>
@@ -108,7 +108,7 @@ export default function HomePage() {
             </div>
             <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-xl">
               <OptimizedImage
-                src="/images/Inicio/finca_banana.png"
+                src="/images/Inicio/FINCAPRESENTACION.png"
                 alt="Montañas de la Sierra Nevada"
                 className="absolute inset-0 w-full h-full object-cover"
                 blur={false}

@@ -300,11 +300,11 @@ function ServicesPage() {
               Saborea la esencia de la Sierra Nevada en cada taza de nuestro café de origen,
               cultivado con amor y tradición en nuestra finca.
             </p>
-            <Button 
-              size="lg"
-              className="bg-white text-amber-900 hover:bg-amber-50 hover:scale-105 transform transition-all duration-300"
-              asChild
-            >
+              <Button 
+                size="lg"
+                className="text-amber-900 bg-white hover:text-white hover:bg-[#722F37] hover:scale-105 transform transition-all duration-300"
+                asChild
+              >
               <Link to="/cafe">
                 Explorar nuestros cafés
                 <Coffee className="ml-2 h-5 w-5" />
@@ -333,7 +333,7 @@ function ServicesPage() {
 
       {/* Espaciador */}
       <div className="h-16"></div>
-
+        
       {/* Footer */}
       <footer className="relative overflow-hidden">
         {/* Fondo base con gradientes */}
@@ -493,7 +493,7 @@ function ServicesPage() {
           </div>
 
           {/* Enlaces legales y copyright */}
-          <div className="border-t border-amber-200/10 pt-8">
+          <div className="border-t border-amber-200/10 pt-10">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               <div className="flex flex-wrap justify-center md:justify-start gap-4 text-sm text-amber-200/60">
                 <Link to="/politica-cultural" className="hover:text-amber-200 transition-colors duration-200">

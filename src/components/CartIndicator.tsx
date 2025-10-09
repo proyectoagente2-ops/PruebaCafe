@@ -1,7 +1,6 @@
 
 'use client';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars;
-import React from 'react';
+
 import { motion } from 'framer-motion';
 import { ShoppingBag } from 'lucide-react';
 import { useCart } from '@/lib/store';

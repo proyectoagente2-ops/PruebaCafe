@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, ShoppingCart, X, Home, Coffee, Backpack, Phone, Sparkles } from 'lucide-react';
+import { Menu, ShoppingCart, X, Home, Coffee, Backpack, Phone, Sparkles, Heart } from 'lucide-react';
 import OptimizedImage from './OptimizedImage';
 import { useCart } from '@/lib/store';
 import type { CartItem } from '@/lib/store';
@@ -158,9 +158,8 @@ export default function Header() {
                   <Button
                   variant="ghost"
                   size="icon"
-                  className="md:hidden w-10 h-10 bg-transparent text-[#5C3B28] hover:text-[#FFD65A] transition-colors shadow-none !shadow-none border-none !bg-transparent"
-             style={{ boxShadow: "none", backgroundColor: "transparent" }}
-             onClick={() => setIsMenuOpen((s) => !s)}
+                  className="md:hidden w-10 h-10 bg-transparent text-[#5C3B28] hover:text-[#FFD65A] transition-colors border-none"
+                  onClick={() => setIsMenuOpen((s) => !s)}
 >
                     {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
                   </Button>
@@ -205,6 +204,26 @@ export default function Header() {
                       </Link>
                     </motion.div>
                   ))}
+                  
+                  <motion.div
+                    initial={{ opacity: 0, x: 30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.2 }}
+                  >
+                    <Link
+                      to="/nosotros"
+                      onClick={() => setIsMenuOpen(false)}
+                      className={`flex items-center py-3 px-6 mx-4 mb-1 rounded-xl 
+                        text-[15px] font-medium transition-all duration-300
+                        ${location.pathname === '/nosotros'
+                          ? 'bg-[#FFD65A]/70 text-[#5C3B28]'
+                          : 'text-[#5C3B28] hover:bg-[#FFD65A]/30'
+                        }`}
+                    >
+                      <Heart className="w-4 h-4 mr-2" />
+                      Sobre Nosotros
+                    </Link>
+                  </motion.div>
                 </motion.div>
               </SheetContent>
             </Sheet>

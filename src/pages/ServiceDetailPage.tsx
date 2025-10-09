@@ -11,7 +11,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import CrossSelling from '@/components/CrossSelling';
 import { services } from '@/lib/services';
 
 export default function ServiceDetailPage() {

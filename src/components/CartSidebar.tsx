@@ -37,8 +37,6 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
   
   // Agrupar items por tipo
   const products = cart.items.filter((item: CartItem) => item.type === 'product');
-  // @ts-ignore
-  const services = cart.items.filter((item: CartItem) => item.type === 'service');
 
   if (cart.items.length === 0) {
     return (

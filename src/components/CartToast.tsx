@@ -1,11 +1,10 @@
 'use client';
 
-import React from 'react';
 import { motion } from 'framer-motion';
+import { useCart } from '@/lib/store';
+import { Button } from '@/components/ui/button';
 import { CheckCircle } from 'lucide-react';
 import type { CartItem } from '@/lib/store';
-import { useCart } from '@/lib/store';
-import { Button } from './ui/button';
 
 interface CartToastProps {
   product: CartItem;

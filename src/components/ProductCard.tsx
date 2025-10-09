@@ -21,7 +21,7 @@ export default function ProductCard({ product, isHovered = false }: ProductCardP
   };
 
   return (
-    <Link to={`/cafe/${product.id}`} className="block group">
+    <Link to={`/products/${product.id}`} className="block group">
       <Card className={`overflow-hidden h-full flex flex-col bg-white border-0 shadow-sm transition-all duration-300 ${isHovered ? 'shadow-lg' : 'shadow-sm'}`}>
         <div className="relative aspect-square overflow-hidden bg-[#f8f8f8]">
           <div className={`absolute inset-0 transition-colors duration-300 ${isHovered ? 'bg-black/0' : 'bg-black/5'}`} />
@@ -39,7 +39,7 @@ export default function ProductCard({ product, isHovered = false }: ProductCardP
             {formatPrice(product.price)}
           </p>
           <Button 
-            className="w-full bg-transparent border-amber-800/20 text-amber-900 hover:bg-amber-50 hover:border-amber-800/30 transition-all duration-300"
+            className="w-full bg-transparent border-amber-800/20 text-amber-900 hover:bg-[#7b2e2e] hover:text-white hover:border-[#7b2e2e] transition-all duration-300"
             variant="outline"
           >
             Ver detalles

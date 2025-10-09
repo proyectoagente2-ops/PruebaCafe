@@ -24,24 +24,45 @@ import WhatsAppButton from '@/components/WhatsAppButton';
 // Datos de muestra para las mochilas
 const mochilaProducts = [
   {
-    id: 'mochila-tradicional',
+    id: 'mochila-tradicional-1',
     name: 'Mochila Tradicional',
     description: 'Mochila artesanal tejida a mano con patrones tradicionales.',
     image: '/images/Mochilas/MOCHILAAZUL.png',
     features: ['Tejido tradicional', 'Diseños ancestrales', 'Tamaño mediano']
   },
   {
-    id: 'mochila-especial',
+    id: 'mochila-especial-1',
     name: 'Mochila Especial',
     description: 'Mochila con diseños exclusivos y acabados premium.',
     image: '/images/Mochilas/MOCHILAVERDE.png',
     features: ['Diseño exclusivo', 'Materiales premium', 'Tamaño grande']
   },
   {
-    id: 'mochila-moderna',
+    id: 'mochila-moderna-1',
     name: 'Mochila Moderna',
     description: 'Fusión de diseños contemporáneos con técnicas tradicionales.',
     image: '/images/Mochilas/MOCHILAROJA.png',
+    features: ['Estilo moderno', 'Colores vibrantes', 'Tamaño personalizado']
+  },
+  {
+    id: 'mochila-tradicional-2',
+    name: 'Mochila Tradicional',
+    description: 'Mochila artesanal tejida a mano con patrones tradicionales.',
+    image: '/images/Mochilas/MOCHILABLANCA.png',
+    features: ['Tejido tradicional', 'Diseños ancestrales', 'Tamaño mediano']
+  },
+  {
+    id: 'mochila-especial-2',
+    name: 'Mochila Especial',
+    description: 'Mochila con diseños exclusivos y acabados premium.',
+    image: '/images/Mochilas/MOCHILAGRIS1.png',
+    features: ['Diseño exclusivo', 'Materiales premium', 'Tamaño grande']
+  },
+  {
+    id: 'mochila-moderna-2',
+    name: 'Mochila Moderna',
+    description: 'Fusión de diseños contemporáneos con técnicas tradicionales.',
+    image: '/images/Mochilas/MOCHILAROJACONVERDE.png',
     features: ['Estilo moderno', 'Colores vibrantes', 'Tamaño personalizado']
   }
 ];
@@ -80,12 +101,12 @@ export default function MochilasPage() {
 
   return ( 
 
-    
+
     <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white">
-      
+
       {/* Hero Section */}
 
-      
+
       <section className="relative h-screen flex items-center justify-center overflow-hidden ">
         <div className="absolute inset-0">
           <OptimizedImage
@@ -94,18 +115,18 @@ export default function MochilasPage() {
             className="w-full h-full object-cover object-center"
             priority
           />
-          
+
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-transparent"></div>
         </div>
-        
+
         <div className="relative z-20 text-center max-w-[750px] mx-auto px-8 animate-fadeIn">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="inline-block mb-8"
-          
+
           >
-            
+
             <span className="px-6 py-2 rounded-full border border-amber-400/30 text-amber-300 text-sm tracking-wider uppercase bg-black/20 backdrop-blur-sm">
               Artesanía Ancestral
             </span>
@@ -163,18 +184,42 @@ export default function MochilasPage() {
           </div>
         </motion.div>
       </section>
-<div className="flex h-3   w-full shadow-inner shadow-black/20">
-  
-  <div className="bg-[#D9C3A5]" style={{ width: "23%" }}></div>
+<div className="flex h-3 w-full shadow-inner shadow-black/20">
+  <div 
+    className="transition-all duration-300 hover:brightness-125 hover:shadow-lg hover:-translate-y-0.5 hover:z-10 cursor-pointer"
+    style={{ 
+      width: "23%", 
+      background: "linear-gradient(to right, #D9C3A5, #E5D1B8)",
+      transformOrigin: "center"
+    }}
+  ></div>
 
- 
-  <div className="bg-[#4C7A47]" style={{ width: "26%" }}></div>
+  <div 
+    className="transition-all duration-300 hover:brightness-125 hover:shadow-lg hover:-translate-y-0.5 hover:z-10 cursor-pointer"
+    style={{ 
+      width: "26%", 
+      background: "linear-gradient(to right, #4C7A47, #5B9356)",
+      transformOrigin: "center"
+    }}
+  ></div>
 
- 
-  <div className="bg-[#B2433E]" style={{ width: "25%" }}></div>
+  <div 
+    className="transition-all duration-300 hover:brightness-125 hover:shadow-lg hover:-translate-y-0.5 hover:z-10 cursor-pointer"
+    style={{ 
+      width: "25%", 
+      background: "linear-gradient(to right, #B2433E, #C54E48)",
+      transformOrigin: "center"
+    }}
+  ></div>
 
-  
-  <div className="bg-[#2C5F8A]" style={{ width: "26%" }}></div>
+  <div 
+    className="transition-all duration-300 hover:brightness-125 hover:shadow-lg hover:-translate-y-0.5 hover:z-10 cursor-pointer"
+    style={{ 
+      width: "26%", 
+      background: "linear-gradient(to right, #2C5F8A, #3670A5)",
+      transformOrigin: "center"
+    }}
+  ></div>
 </div>
 
 
@@ -196,7 +241,7 @@ export default function MochilasPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {mochilaProducts.map((mochila) => (
               <Card key={mochila.id} className="group hover:shadow-xl transition-all duration-300 border-none">
                 <div className="aspect-square relative overflow-hidden rounded-t-lg">
@@ -294,18 +339,42 @@ export default function MochilasPage() {
           </motion.div>
         </div>
       </section>
-<div className="flex h-3   w-full shadow-inner shadow-black/20">
-  
-  <div className="bg-[#D9C3A5]" style={{ width: "23%" }}></div>
+<div className="flex h-3 w-full shadow-inner shadow-black/20">
+  <div 
+    className="transition-all duration-300 hover:brightness-125 hover:shadow-lg hover:-translate-y-0.5 hover:z-10 cursor-pointer"
+    style={{ 
+      width: "23%", 
+      background: "linear-gradient(to right, #D9C3A5, #E5D1B8)",
+      transformOrigin: "center"
+    }}
+  ></div>
 
- 
-  <div className="bg-[#4C7A47]" style={{ width: "26%" }}></div>
+  <div 
+    className="transition-all duration-300 hover:brightness-125 hover:shadow-lg hover:-translate-y-0.5 hover:z-10 cursor-pointer"
+    style={{ 
+      width: "26%", 
+      background: "linear-gradient(to right, #4C7A47, #5B9356)",
+      transformOrigin: "center"
+    }}
+  ></div>
 
- 
-  <div className="bg-[#B2433E]" style={{ width: "25%" }}></div>
+  <div 
+    className="transition-all duration-300 hover:brightness-125 hover:shadow-lg hover:-translate-y-0.5 hover:z-10 cursor-pointer"
+    style={{ 
+      width: "25%", 
+      background: "linear-gradient(to right, #B2433E, #C54E48)",
+      transformOrigin: "center"
+    }}
+  ></div>
 
-  
-  <div className="bg-[#2C5F8A]" style={{ width: "26%" }}></div>
+  <div 
+    className="transition-all duration-300 hover:brightness-125 hover:shadow-lg hover:-translate-y-0.5 hover:z-10 cursor-pointer"
+    style={{ 
+      width: "26%", 
+      background: "linear-gradient(to right, #2C5F8A, #3670A5)",
+      transformOrigin: "center"
+    }}
+  ></div>
 </div>
 
 
@@ -326,7 +395,7 @@ export default function MochilasPage() {
         </div>
         {/* Patrón de fondo sutil */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#C49B66]/5 to-transparent opacity-30"></div>
-        
+
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           {/* Logo y descripción principal */}
           <motion.div 

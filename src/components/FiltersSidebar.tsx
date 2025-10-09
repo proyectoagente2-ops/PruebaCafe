@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -12,9 +11,6 @@ import { Slider } from '@/components/ui/slider';
 import { Badge } from '@/components/ui/badge';
 import {
   Search,
-  Coffee,
-  Filter,
-  SortAsc,
   XCircle,
   Check,
   Sliders,
