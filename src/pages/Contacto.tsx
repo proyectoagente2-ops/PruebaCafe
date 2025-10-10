@@ -442,12 +442,9 @@ export default function ContactoPage() {
               Contáctanos directamente por WhatsApp para una respuesta rápida
               a tus consultas sobre nuestros productos o servicios.
             </p>
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <WhatsAppButton />
-            </motion.div>
+            <p className="text-lg text-amber-700 italic">
+              Usa nuestro asistente virtual haciendo clic en el ícono de chat en la esquina inferior derecha
+            </p>
           </motion.div>
         </motion.div>
       </section>
