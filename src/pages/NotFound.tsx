@@ -19,7 +19,7 @@ import {
   MapPin
 } from 'lucide-react';
 import OptimizedImage from '@/components/OptimizedImage';
-import WhatsAppButton from '@/components/WhatsAppButton';
+
 
 // Datos de muestra para las mochilas
 const mochilaProducts = [
@@ -562,8 +562,7 @@ export default function MochilasPage() {
         </div>
       </footer>
 
-      {/* WhatsApp Button */}
-      <WhatsAppButton isFloating />
+     
     </div>
   );
 }

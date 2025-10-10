@@ -21,7 +21,7 @@ import { Link } from 'react-router-dom';
 import CrossSelling from '@/components/CrossSelling';
 import { services } from '@/lib/services';
 import OptimizedImage from '@/components/OptimizedImage';
-import WhatsAppButton from '@/components/WhatsAppButton';
+
 
 // Define icons for each service
 const serviceIcons = {
@@ -516,8 +516,7 @@ function ServicesPage() {
         </div>
       </footer>
 
-      {/* WhatsApp Button */}
-      <WhatsAppButton isFloating />
+      
     </div>
   );
 }

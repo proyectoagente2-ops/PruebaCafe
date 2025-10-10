@@ -296,7 +296,7 @@ export default function HomePage() {export default function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">      {/* Floating WhatsApp Button */}
 
-            <Card className="text-center border-amber-100 hover:shadow-lg transition-shadow">      <WhatsAppButton isFloating={true} />
+            <Card className="text-center border-amber-100 hover:shadow-lg transition-shadow">      {/* Chat AI component will be added here */}
 
               <CardHeader>    </div>
 
@@ -534,8 +534,7 @@ export default function HomePage() {export default function HomePage() {
         </div>
       </footer>
 
-      {/* Floating WhatsApp Button */}
-      <WhatsAppButton isFloating={true} />
+      {/* Chat AI component will be added here */}
     </div>
   );
 }

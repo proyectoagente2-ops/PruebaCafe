@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Coffee, MapPin, Users, Leaf, Heart, Star, ArrowRight, MessageCircle } from 'lucide-react';
-import WhatsAppButton from '@/components/WhatsAppButton';
 import { coffeeProducts } from '@/lib/products';
 import '@/lib/animations.css';
 import OptimizedImage from '@/components/OptimizedImage';
@@ -497,7 +496,6 @@ export default function HomePage() {
       </footer>
 
       {/* WhatsApp Button */}
-      <WhatsAppButton isFloating />
     </div>
   );
 }

@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import { Separator } from '@/components/ui/separator';
 import { Minus, Plus, Trash2, ShoppingBag } from 'lucide-react';
 import { useCart } from '@/lib/store';
-import WhatsAppButton from './WhatsAppButton';
+
 
 interface CartSidebarProps {
   isOpen: boolean;
@@ -243,7 +243,7 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
               whileTap={{ scale: 0.98 }}
               className="flex-1"
             >
-              <WhatsAppButton />
+              {/* Chat AI will be added here */}
             </motion.div>
           </div>
         </div>
