@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import Header from '@/components/Header';
-import WhatsAppButton from '@/components/WhatsAppButton';
+
 import CartSidebar from '@/components/CartSidebar';
 import CartIndicator from '@/components/CartIndicator';
 import { NotificationContainer } from '../components/Notification';
@@ -19,9 +19,7 @@ export default function RootLayout() {
       </main>
       {/* Botones flotantes siempre visibles */}
       <div className="fixed-buttons">
-        <div className="fixed bottom-4 left-4 z-40">
-          <WhatsAppButton isFloating={true} />
-        </div>
+
         <CartIndicator onClick={() => setIsCartOpen(true)} />
       </div>
 

@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { MapPin, Phone, Mail, MessageCircle, Send, Check } from 'lucide-react';
-import WhatsAppButton from '@/components/WhatsAppButton';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import OptimizedImage from '@/components/OptimizedImage';
