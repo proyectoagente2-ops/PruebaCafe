@@ -12,23 +12,23 @@ const testimonios = [
   {
     id: 1,
     nombre: "María González",
-    cargo: "Cliente Frecuente",
-    mensaje: "La mejor experiencia que he tenido. El servicio al visitante es excepcional.",
-    imagen: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop"
+    cargo: "Amante del Café",
+    mensaje: "Un espacio acogedor con el mejor café de la región. ¡Increíble experiencia!",
+    imagen: "/images/testimonios/maria.jpg"
   },
   {
     id: 2,
     nombre: "Carlos Ramírez",
-    cargo: "Dueño de Cafetería",
-    mensaje: "La calidad del servicio y la atención son insuperables. Altamente recomendado.",
-    imagen: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop"
+    cargo: "Cliente Frecuente",
+    mensaje: "La calidad y el servicio son excepcionales. Me siento como en casa.",
+    imagen: "/images/testimonios/carlos.jpg"
   },
   {
     id: 3,
     nombre: "Ana Valencia",
     cargo: "Barista Profesional",
-    mensaje: "Un lugar con historia y encanto único. La experiencia es extraordinaria.",
-    imagen: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop"
+    mensaje: "Un lugar que respeta y entiende la verdadera cultura del café.",
+    imagen: "/images/testimonios/ana.jpg"
   }
 ];
 
@@ -70,36 +70,44 @@ export default function ContactoPage() {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-amber-50 via-white to-amber-50/30 pt-20">
-      {/* Hero Section con Parallax */}
-      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
+        <main className="min-h-screen bg-[#1A0F0A] text-white pt-20 overflow-hidden">
+      {/* Hero Section con Efecto Parallax Mejorado */}
+      <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-          className="absolute inset-0 bg-gradient-to-br from-[#2C1810]/90 via-[#5D3A1A]/80 to-[#7A4B2A]/85 backdrop-blur-sm"
-        ></motion.div>
+          transition={{ duration: 1.2 }}
+          className="absolute inset-0 bg-gradient-to-br from-[#1A0F0A]/95 via-transparent to-[#1A0F0A]/90 backdrop-blur-sm z-10"
+        />
         <motion.div 
-          initial={{ scale: 1.1 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 1.5 }}
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
-          style={{
-            backgroundImage: 'url(https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1920&h=1080&fit=crop)',
-            backgroundSize: 'cover',
-            filter: 'brightness(0.9) contrast(1.1)'
+          initial={{ scale: 1.1, y: 0 }}
+          animate={{ scale: [1.1, 1], y: ["0%", "-2%"] }}
+          transition={{ 
+            scale: { duration: 2, ease: "easeOut" },
+            y: { duration: 20, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }
           }}
-        ></motion.div>
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: 'url(/images/Inicio/cafe-granos-tostados.jpg)',
+            backgroundSize: 'cover',
+            filter: 'brightness(0.4) contrast(1.2) saturate(1.1)'
+          }}
+        />
         
         <motion.div 
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="relative z-20 text-center max-w-[850px] mx-auto px-8"
+          className="relative z-20 text-center max-w-[1000px] mx-auto px-8"
         >
-          <h1 className="text-6xl md:text-7xl font-bold text-white mb-6 tracking-tight drop-shadow-lg">
+          <motion.h1 
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6 }}
+            className="text-6xl md:text-7xl font-bold mb-6 tracking-tight drop-shadow-lg bg-clip-text text-transparent bg-gradient-to-r from-amber-100 to-amber-50"
+          >
             Contáctanos
-          </h1>
+          </motion.h1>
           <p className="text-xl md:text-2xl text-white/95 mb-8 leading-relaxed max-w-2xl mx-auto drop-shadow">
             Estamos aquí para responder tus preguntas y ayudarte a descubrir
             La Felicidá, tu experiencia artesanal en Colombia.
@@ -416,7 +424,7 @@ export default function ContactoPage() {
               </svg>
             </motion.a>
           </motion.div>
-
+          {/* WhatsApp Contact */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

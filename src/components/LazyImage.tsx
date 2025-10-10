@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 interface LazyImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   src: string;
@@ -12,37 +12,64 @@ interface LazyImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
 
 export default function LazyImage({ src, alt, className = '', priority = false, ...props }: LazyImageProps) {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [currentSrc, setCurrentSrc] = useState<string>('');
   const imageRef = useRef<HTMLImageElement>(null);
-  const isInView = useInView(imageRef, { once: true, margin: "50px 0px" });
-  
+  const observerRef = useRef<IntersectionObserver | null>(null);
+
   useEffect(() => {
-    if (isInView && imageRef.current) {
-      const img = imageRef.current;
-      if (img.complete) {
-        setIsLoaded(true);
-      }
+    if (priority) {
+      setCurrentSrc(src);
+      return;
     }
-  }, [isInView]);
+
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (entry.isIntersecting) {
+          setCurrentSrc(src);
+          if (observerRef.current && imageRef.current) {
+            observerRef.current.unobserve(imageRef.current);
+          }
+        }
+      },
+      {
+        root: null,
+        rootMargin: '50px',
+        threshold: 0.1
+      }
+    );
+
+    if (imageRef.current) {
+      observerRef.current.observe(imageRef.current);
+    }
+
+    return () => {
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+      }
+    };
+  }, [src, priority]);
+
+  const handleLoad = () => {
+    setIsLoaded(true);
+  };
 
   return (
     <motion.div
-      initial={{ opacity: 0, filter: 'blur(10px)' }}
-      animate={isLoaded ? { opacity: 1, filter: 'blur(0px)' } : {}}
-      transition={{ duration: 0.5 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: isLoaded ? 1 : 0 }}
+      transition={{ duration: 0.3 }}
       className="relative w-full h-full"
     >
+      <div className={`absolute inset-0 bg-gray-200 ${isLoaded ? 'opacity-0' : 'animate-pulse'} transition-opacity duration-300`} />
       <img
         ref={imageRef}
-        src={priority ? src : (isInView ? src : '')}
+        src={currentSrc}
         alt={alt}
-        loading={priority ? 'eager' : 'lazy'}
-        onLoad={() => setIsLoaded(true)}
-        className={`${className} ${!isLoaded && !priority ? 'opacity-0' : 'opacity-100'} transition-opacity duration-500`}
+        onLoad={handleLoad}
+        className={`${className} transition-opacity duration-300`}
         {...props}
       />
-      {!isLoaded && (
-        <div className="absolute inset-0 bg-gray-200 animate-pulse" />
-      )}
     </motion.div>
   );
 }

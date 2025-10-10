@@ -1,20 +1,30 @@
 import type { } from 'react';
 
 export interface Product {
-  capacity: string;
   id: string;
   name: string;
   description: string;
   price: number;
   image: string;
-  category: 'coffee' | 'experience';
+  category: 'coffee' | 'experience' | 'backpack';
+  // Campos para café
   roastLevel?: 'light' | 'light-medium' | 'medium' | 'medium-dark' | 'dark' | 'varied';
   origin?: string;
   notes?: string[];
-  inStock: boolean;
-  weight?: string;
   processingMethod?: 'Lavado' | 'Honey' | 'Natural' | 'Varios';
   altitude?: string;
+  // Campos para mochilas
+  material?: string;
+  capacity?: string;
+  recommendedUse?: string;
+  dimensions?: string;
+  waterproof?: boolean;
+  color?: string;
+  // Campos comunes
+  inStock: boolean;
+  weight?: string;
+  isSpecialEdition?: boolean;
+  type?: 'product' | 'service';
   // Campos adicionales para experiencias
   duration?: string;
   included?: string[];

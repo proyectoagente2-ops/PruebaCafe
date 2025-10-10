@@ -12,6 +12,8 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product, isHovered = false }: ProductCardProps) {
+  console.log('ProductCard - product:', product);
+  
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('es-CO', {
       style: 'currency',
@@ -21,7 +23,10 @@ export default function ProductCard({ product, isHovered = false }: ProductCardP
   };
 
   return (
-    <Link to={`/products/${product.id}`} className="block group">
+    <Link 
+      to={`/productos/${product.id}`}
+      className="block group"
+      onClick={() => console.log('Navigating to product:', product.id)}>
       <Card className={`overflow-hidden h-full flex flex-col bg-white border-0 shadow-sm transition-all duration-300 ${isHovered ? 'shadow-lg' : 'shadow-sm'}`}>
         <div className="relative aspect-square overflow-hidden bg-[#f8f8f8]">
           <div className={`absolute inset-0 transition-colors duration-300 ${isHovered ? 'bg-black/0' : 'bg-black/5'}`} />

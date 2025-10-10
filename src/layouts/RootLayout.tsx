@@ -6,6 +6,7 @@ import CartIndicator from '@/components/CartIndicator';
 import { NotificationContainer } from '../components/Notification';
 import { Toaster } from '@/components/ui/sonner';
 import { useState } from 'react';
+import { Chat } from '@/components/Chat';
 
 export default function RootLayout() {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -18,7 +19,9 @@ export default function RootLayout() {
       </main>
       {/* Botones flotantes siempre visibles */}
       <div className="fixed-buttons">
-        <WhatsAppButton isFloating={true} />
+        <div className="fixed bottom-4 left-4 z-40">
+          <WhatsAppButton isFloating={true} />
+        </div>
         <CartIndicator onClick={() => setIsCartOpen(true)} />
       </div>
 
@@ -26,6 +29,11 @@ export default function RootLayout() {
       <CartSidebar isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
       <NotificationContainer />
       <Toaster />
+      
+      {/* Chat de IA con z-index alto para asegurar visibilidad */}
+      <div className="z-50">
+        <Chat />
+      </div>
     </>
   );
 }

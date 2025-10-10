@@ -3,12 +3,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from './ui/button';
-import { Coffee, Map, Backpack, Plus, ArrowRight } from 'lucide-react';
+import { Coffee, Map, Plus, Scale } from 'lucide-react';
 import { Product, CartItem } from '@/lib/types';
 import LazyImage from './LazyImage';
 import { motion } from 'framer-motion';
 import { useCart } from '@/lib/store';
-import { coffeeProducts } from '@/lib/products';
+import { allProducts } from '@/lib/products';
 
 interface CrossSellingProps {
   currentProduct: Product;
@@ -18,7 +18,27 @@ interface CrossSellingProps {
 
 const CrossSelling = ({ currentProduct, currentType, compact = false }: CrossSellingProps) => {
   const cart = useCart();
-  
+  const [recommendations, setRecommendations] = React.useState<Product[]>([]);
+  const [hoveredProduct, setHoveredProduct] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    if (!currentProduct || !allProducts) return;
+
+    // Filtrar productos relacionados
+    const filteredProducts = allProducts.filter(product => 
+      product.id !== currentProduct.id && // Excluir producto actual
+      product.category === currentProduct.category // Misma categoría
+    );
+
+    // Ordenar aleatoriamente para variar las recomendaciones
+    const shuffled = [...filteredProducts].sort(() => Math.random() - 0.5);
+    
+    // Tomar solo 2 o 3 productos
+    const selected = shuffled.slice(0, compact ? 2 : 3);
+    
+    setRecommendations(selected);
+  }, [currentProduct, compact]);
+
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('es-CO', {
       style: 'currency',
@@ -26,117 +46,133 @@ const CrossSelling = ({ currentProduct, currentType, compact = false }: CrossSel
       minimumFractionDigits: 0,
     }).format(price);
   };
-  const prepareItemForCart = (product: Product): Omit<CartItem, 'quantity'> => {
-    return {
+
+  const handleAddToCart = (product: Product) => {
+    cart.addToCart({
       ...product,
       type: product.category === 'experience' ? 'service' as const : 'product' as const
-    };
+    });
   };
 
-  const getRelatedProducts = () => {
-    // Productos del mismo tipo que no estén en el carrito
-    const sameTypeProducts = coffeeProducts
-      .filter(p => 
-        p.category === currentProduct.category && 
-        p.id !== currentProduct.id &&
-        !cart.items.some(item => item.id === p.id)
-      )
-      .slice(0, compact ? 2 : 3);
-
-    // Si no hay suficientes productos del mismo tipo, agregar otros tipos
-    if (sameTypeProducts.length < (compact ? 2 : 3)) {
-      const otherProducts = coffeeProducts
-        .filter(p => 
-          p.category !== currentProduct.category &&
-          !cart.items.some(item => item.id === p.id)
-        )
-        .slice(0, (compact ? 2 : 3) - sameTypeProducts.length);
-      
-      return [...sameTypeProducts, ...otherProducts];
-    }
-
-    return sameTypeProducts;
-  };
-
-  const recommendations = getRelatedProducts();
-
-  if (recommendations.length === 0) return null;
-
-  return compact ? (
-    <div className="mt-4 p-4 bg-amber-50/50 rounded-lg">
-      <h4 className="text-sm font-medium text-amber-900 mb-3">
-        También te puede interesar
-      </h4>
-      
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        {recommendations.map((product) => (
-          <motion.div
-            key={product.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="flex items-center gap-3 p-2 bg-white rounded-lg"
-          >
-            <div className="w-12 h-12 relative rounded-md overflow-hidden">
-              <LazyImage 
-                src={product.image} 
-                alt={product.name}
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-amber-900 truncate">
-                {product.name}
-              </p>
-              <p className="text-xs text-amber-600">
-                {formatPrice(product.price)}
-              </p>
-            </div>
-            <Button
-              size="icon"
-              variant="ghost"
-              className="h-8 w-8 flex-shrink-0"
-              onClick={() => cart.addToCart(prepareItemForCart(product))}
-            >
-              <Plus className="h-4 w-4" />
-            </Button>
-          </motion.div>
-        ))}
+  if (recommendations.length === 0) {
+    return (
+      <div className="text-center p-6 bg-amber-50/50 rounded-lg">
+        <p className="text-amber-800">No hay productos relacionados disponibles en este momento.</p>
       </div>
-    </div>
-  ) : (
-    <div className="mt-8">
-      <h3 className="text-lg font-semibold text-amber-900 mb-4">
-        Productos relacionados
-      </h3>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {recommendations.map((product) => (
+    );
+  }
+
+  return (
+    <div className="w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {recommendations.map((product, index) => (
           <motion.div
             key={product.id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="group relative"
+            transition={{ delay: index * 0.1 }}
+            className="group relative bg-gradient-to-b from-white to-amber-50/30 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-amber-100/50"
           >
             <Link to={`/productos/${product.id}`} className="block">
-              <div className="aspect-square relative rounded-lg overflow-hidden">
-                <LazyImage
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                />
+              <div className="relative">
+                {/* Badge de recomendación */}
+                <div className="absolute top-2 left-2 z-10">
+                  <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-800">
+                    Recomendado
+                  </span>
+                </div>
+                
+                {/* Imagen del producto */}
+                <div className="aspect-square relative rounded-t-xl overflow-hidden bg-gradient-to-br from-amber-50 to-white p-4">
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(255,255,255,0.8),transparent_70%)]"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-amber-100/20 to-transparent z-[1]"></div>
+                  <motion.div
+                    initial={{ scale: 1 }}
+                    whileHover={{ scale: 1.05, rotate: -1 }}
+                    transition={{ duration: 0.4, ease: "easeOut" }}
+                    className="relative w-full h-full flex items-center justify-center"
+                  >
+                    <LazyImage
+                      src={product.image}
+                      alt={product.name}
+                      className="w-full h-full object-contain drop-shadow-xl transition-all duration-500 group-hover:drop-shadow-2xl"
+                    />
+                  </motion.div>
+                </div>
               </div>
-              <div className="mt-3">
-                <h4 className="text-sm font-medium text-amber-900">{product.name}</h4>
-                <p className="text-amber-600">{formatPrice(product.price)}</p>
+
+              {/* Información del producto */}
+              <div className="p-6">
+                <div className="space-y-3">
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="flex-1">
+                      <h4 className="font-semibold text-[#2A1810] group-hover:text-amber-800 transition-colors duration-300 text-lg">
+                        {product.name}
+                      </h4>
+                      <p className="mt-1 text-sm text-amber-700/80">
+                        {product.notes?.slice(0, 2).join(" • ")}
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-baseline gap-2">
+                    <p className="text-2xl font-bold bg-gradient-to-r from-amber-800 to-amber-600 bg-clip-text text-transparent">
+                      {formatPrice(product.price)}
+                    </p>
+                    <span className="text-xs text-amber-600">COP</span>
+                  </div>
+                </div>
+
+                {/* Características rápidas */}
+                <div className="mt-3 flex items-center gap-3">
+                  {product.roastLevel && (
+                    <span className="inline-flex items-center text-xs text-gray-600">
+                      <Coffee className="w-3 h-3 mr-1" />
+                      {product.roastLevel}
+                    </span>
+                  )}
+                  {product.weight && (
+                    <span className="inline-flex items-center text-xs text-gray-600">
+                      <Scale className="w-3 h-3 mr-1" />
+                      {product.weight}
+                    </span>
+                  )}
+                </div>
               </div>
             </Link>
+
+            {/* Botón de agregar al carrito */}
+            <div className="p-6 pt-0">
               <Button
-              variant="secondary"
-              size="sm"
-              className="absolute bottom-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity"
-              onClick={() => cart.addToCart(prepareItemForCart(product))}
-            >
-              Agregar <ArrowRight className="ml-2 w-4 h-4" />
-            </Button>
+                variant="default"
+                className="w-full bg-gradient-to-r from-amber-700 to-amber-600 hover:from-amber-800 hover:to-amber-700 text-white shadow-lg group-hover:shadow-xl transition-all duration-300 transform group-hover:-translate-y-1"
+                onClick={() => handleAddToCart(product)}
+              >
+                Agregar al Carrito
+                <Plus className="ml-2 w-4 h-4" />
+              </Button>
+            </div>
+            
+            {/* Detalles flotantes */}
+            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-white/80 to-amber-50/80 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all duration-500 rounded-xl flex items-center justify-center">
+              <div className="text-center p-6 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                <h5 className="font-semibold text-amber-900 mb-2">Características</h5>
+                <ul className="space-y-2 text-sm text-amber-800">
+                  {product.processingMethod && (
+                    <li className="flex items-center justify-center gap-1">
+                      <Coffee className="w-4 h-4" />
+                      Proceso: {product.processingMethod}
+                    </li>
+                  )}
+                  {product.origin && (
+                    <li className="flex items-center justify-center gap-1">
+                      <Map className="w-4 h-4" />
+                      Origen: {product.origin}
+                    </li>
+                  )}
+                </ul>
+              </div>
+            </div>
           </motion.div>
         ))}
       </div>

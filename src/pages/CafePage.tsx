@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { coffeeProducts } from '@/lib/products';
+import { coffeeProducts, allProducts } from '@/lib/products';
 import { Coffee, Leaf, Mountain, ThermometerSun, Award, Scale, Heart, Droplet } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';

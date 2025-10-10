@@ -15,7 +15,9 @@ export const coffeeProducts: Product[] = [
     weight: '250g',
     capacity: '250g',
     processingMethod: 'Varios',  // Cambiado a 'Varios' ya que es una fermentación especial
-    altitude: '1,800 msnm'
+    altitude: '1,800 msnm',
+    isSpecialEdition: true,
+    type: 'product'
   },
   {
     id: '2',
@@ -31,7 +33,9 @@ export const coffeeProducts: Product[] = [
     weight: '250g',
     capacity: '250g',
     processingMethod: 'Lavado',
-    altitude: '1,800 msnm'
+    altitude: '1,800 msnm',
+    isSpecialEdition: true,
+    type: 'product'
   },
   {
     id: '3',
@@ -47,8 +51,64 @@ export const coffeeProducts: Product[] = [
     weight: '250g',
     capacity: '250g',
     processingMethod: 'Natural',  // Este se mantiene como Natural
-    altitude: '1,800 msnm'
+    altitude: '1,800 msnm',
+    isSpecialEdition: true,
+    type: 'product'
   }
 ];
 
-export const allProducts = coffeeProducts;
+export const backpackProducts: Product[] = [
+  {
+    id: 'bp1',
+    name: 'Mochila Aventurera',
+    description: 'Perfecta para tus aventuras al aire libre, con compartimentos especializados y resistente al agua.',
+    price: 180000,
+    image: '/images/Mochilas/mochila1.jpg',
+    category: 'backpack',
+    material: 'Lona resistente al agua',
+    capacity: '30L',
+    recommendedUse: 'Senderismo y camping',
+    dimensions: '50cm x 35cm x 20cm',
+    waterproof: true,
+    color: 'Verde militar',
+    inStock: true,
+    weight: '1.2kg',
+    type: 'product'
+  },
+  {
+    id: 'bp2',
+    name: 'Mochila Urbana',
+    description: 'Diseño moderno y funcional para tu día a día en la ciudad, con compartimento para laptop.',
+    price: 150000,
+    image: '/images/Mochilas/mochila2.jpg',
+    category: 'backpack',
+    material: 'Poliéster de alta densidad',
+    capacity: '20L',
+    recommendedUse: 'Uso diario y trabajo',
+    dimensions: '45cm x 30cm x 15cm',
+    waterproof: false,
+    color: 'Negro',
+    inStock: true,
+    weight: '0.8kg',
+    type: 'product'
+  },
+  {
+    id: 'bp3',
+    name: 'Mochila Viajera',
+    description: 'Espaciosa y versátil, ideal para viajes largos con múltiples compartimentos organizadores.',
+    price: 220000,
+    image: '/images/Mochilas/mochila3.jpg',
+    category: 'backpack',
+    material: 'Nylon balístico',
+    capacity: '40L',
+    recommendedUse: 'Viajes y excursiones',
+    dimensions: '55cm x 40cm x 25cm',
+    waterproof: true,
+    color: 'Azul marino',
+    inStock: true,
+    weight: '1.5kg',
+    type: 'product'
+  }
+];
+
+export const allProducts: Product[] = [...coffeeProducts, ...backpackProducts];

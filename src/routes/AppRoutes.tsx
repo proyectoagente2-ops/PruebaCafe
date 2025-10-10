@@ -11,6 +11,7 @@ const CafePage = React.lazy(() => import('@/pages/CafePage'));
 const ProductsPage = React.lazy(() => import('@/pages/ProductsPage'));
 const ProductDetailPage = React.lazy(() => import('@/pages/ProductDetailPage'));
 const ServiceDetailPage = React.lazy(() => import('@/pages/ServiceDetailPage'));
+const MochilasPage = React.lazy(() => import('@/pages/MochilasPage'));
 const Turismo = React.lazy(() => import('@/pages/Turismo'));
 const Nosotros = React.lazy(() => import('@/pages/Nosotros'));
 const Contacto = React.lazy(() => import('@/pages/Contacto'));
@@ -72,6 +73,14 @@ export default function AppRoutes() {
           element={
             <Suspense fallback={<PageLoader />}>
               <ServiceDetailPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/mochilas"
+          element={
+            <Suspense fallback={<PageLoader />}>
+              <MochilasPage />
             </Suspense>
           }
         />
