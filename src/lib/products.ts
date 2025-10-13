@@ -1,5 +1,47 @@
 import { Product } from './types';
 
+export const mochilaProducts: Product[] = [
+  {
+    id: 'mochila-tradicional-1',
+    name: 'Mochila Tradicional',
+    description: 'Mochila artesanal tejida a mano con patrones tradicionales.',
+    image: '/images/Mochilas/MOCHILAAZUL.png',
+    price: 150000,
+    category: 'backpack',
+    material: 'Lana natural',
+    capacity: 'Mediana',
+    recommendedUse: 'Uso diario',
+    type: 'product',
+    inStock: true
+  },
+  {
+    id: 'mochila-especial-1',
+    name: 'Mochila Especial',
+    description: 'Mochila con diseños exclusivos y acabados premium.',
+    image: '/images/Mochilas/MOCHILAVERDE.png',
+    price: 180000,
+    category: 'backpack',
+    material: 'Lana premium',
+    capacity: 'Grande',
+    recommendedUse: 'Ocasiones especiales',
+    type: 'product',
+    inStock: true
+  },
+  {
+    id: 'mochila-moderna-1',
+    name: 'Mochila Moderna',
+    description: 'Fusión de diseños contemporáneos con técnicas tradicionales.',
+    image: '/images/Mochilas/MOCHILAROJA.png',
+    price: 165000,
+    category: 'backpack',
+    material: 'Lana mixta',
+    capacity: 'Personalizada',
+    recommendedUse: 'Uso versátil',
+    type: 'product',
+    inStock: true
+  }
+];
+
 export const coffeeProducts: Product[] = [
   {
     id: '1',
@@ -111,4 +153,4 @@ export const backpackProducts: Product[] = [
   }
 ];
 
-export const allProducts: Product[] = [...coffeeProducts, ...backpackProducts];
+export const allProducts: Product[] = [...coffeeProducts, ...backpackProducts, ...mochilaProducts];

@@ -28,21 +28,39 @@ const mochilaProducts = [
     name: 'Mochila Tradicional',
     description: 'Mochila artesanal tejida a mano con patrones tradicionales.',
     image: '/images/Mochilas/MOCHILAAZUL.png',
-    features: ['Tejido tradicional', 'Diseños ancestrales', 'Tamaño mediano']
+    features: ['Tejido tradicional', 'Diseños ancestrales', 'Tamaño mediano'],
+    price: 150000,
+    category: 'backpack',
+    material: 'Lana natural',
+    capacity: 'Mediana',
+    recommendedUse: 'Uso diario',
+    type: 'product'
   },
   {
     id: 'mochila-especial-1',
     name: 'Mochila Especial',
     description: 'Mochila con diseños exclusivos y acabados premium.',
     image: '/images/Mochilas/MOCHILAVERDE.png',
-    features: ['Diseño exclusivo', 'Materiales premium', 'Tamaño grande']
+    features: ['Diseño exclusivo', 'Materiales premium', 'Tamaño grande'],
+    price: 180000,
+    category: 'backpack',
+    material: 'Lana premium',
+    capacity: 'Grande',
+    recommendedUse: 'Ocasiones especiales',
+    type: 'product'
   },
   {
     id: 'mochila-moderna-1',
     name: 'Mochila Moderna',
     description: 'Fusión de diseños contemporáneos con técnicas tradicionales.',
     image: '/images/Mochilas/MOCHILAROJA.png',
-    features: ['Estilo moderno', 'Colores vibrantes', 'Tamaño personalizado']
+    features: ['Estilo moderno', 'Colores vibrantes', 'Tamaño personalizado'],
+    price: 165000,
+    category: 'backpack',
+    material: 'Lana mixta',
+    capacity: 'Personalizada',
+    recommendedUse: 'Uso versátil',
+    type: 'product'
   },
   {
     id: 'mochila-tradicional-2',
@@ -262,13 +280,17 @@ export default function MochilasPage() {
                       </li>
                     ))}
                   </ul>
-                  <Button 
-                    onClick={handleWhatsAppClick}
-                    className="w-full bg-amber-100 text-amber-900 hover:bg-yellow-300"
+                  <Link
+                    to={`/mochilas/${mochila.id}`}
+                    className="w-full"
                   >
-                    Consultar
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
+                    <Button 
+                      className="w-full bg-[#C49B66] text-white hover:bg-[#B38A55]"
+                    >
+                      Consultar
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </Link>
                 </div>
               </Card>
             ))}

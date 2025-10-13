@@ -9,6 +9,7 @@
 6. [Integración con N8N](#integración-con-n8n)
 7. [Guías de Desarrollo](#guías-de-desarrollo)
 8. [Optimización y Performance](#optimización-y-performance)
+9. [Registro de Cambios](#registro-de-cambios)
 
 ## Descripción General
 
@@ -278,6 +279,33 @@ VITE_ENV=production
 - Usar el sistema de issues de GitHub
 - Proporcionar pasos de reproducción
 - Incluir capturas de pantalla si es posible
+
+## Registro de Cambios
+
+### Octubre 2025
+- Eliminación del componente WhatsAppButton
+- Preparación para la integración del nuevo chat con IA
+- Actualización de referencias en:
+  - CartSidebar.tsx
+  - CartSidebar.new.tsx
+  - Index.tsx.new
+  - ServicesPage.tsx.new
+- Limpieza de código y optimización
+- Documentación actualizada para reflejar los cambios
+
+### Próximos Pasos
+1. Implementar el nuevo componente de chat con IA
+2. Integrar el chat con el sistema de productos
+3. Actualizar la interfaz de usuario
+4. Realizar pruebas de integración
+5. Desplegar a producción
+
+---
+
+## Notas Adicionales
+- El chat con IA reemplazará completamente la funcionalidad de WhatsApp
+- Se mantiene la misma estructura de diseño pero con nueva funcionalidad
+- La transición será gradual para asegurar la estabilidad
 
 ## Licencia
 [Especificar la licencia del proyecto]

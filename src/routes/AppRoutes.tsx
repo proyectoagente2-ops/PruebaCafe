@@ -15,7 +15,7 @@ const MochilasPage = React.lazy(() => import('@/pages/MochilasPage'));
 const Turismo = React.lazy(() => import('@/pages/Turismo'));
 const Nosotros = React.lazy(() => import('@/pages/Nosotros'));
 const Contacto = React.lazy(() => import('@/pages/Contacto'));
-const NotFound = React.lazy(() => import('@/pages/NotFound'));
+const NotFound = React.lazy(() => import('@/pages/MochilasPage1'));
 
 // Loading fallback component
 const PageLoader = () => (
@@ -81,6 +81,14 @@ export default function AppRoutes() {
           element={
             <Suspense fallback={<PageLoader />}>
               <MochilasPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/mochilas/:id"
+          element={
+            <Suspense fallback={<PageLoader />}>
+              <ProductDetailPage />
             </Suspense>
           }
         />

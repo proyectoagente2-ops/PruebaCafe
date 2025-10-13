@@ -70,13 +70,13 @@ export default function MochilasPage() {
                       }).format(mochila.price)}
                     </p>
                     <Link
-                      to={`/producto/${mochila.id}`}
+                      to={`/mochilas/${mochila.id}`}
                       className="block w-full"
                     >
                       <button
                         className="w-full py-3 px-4 bg-gradient-to-r from-[#C49B66] to-[#DEB88C] text-white rounded-lg hover:from-[#B38A55] hover:to-[#CDA77B] transition-all duration-300 flex items-center justify-center gap-2 group font-medium"
                       >
-                        Ver Detalles
+                        Consultar
                         <svg 
                           className="w-5 h-5 transform transition-transform group-hover:translate-x-1"
                           fill="none" 
