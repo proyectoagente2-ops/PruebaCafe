@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import ProductCard from '@/components/ProductCard';
 import OptimizedImage from '@/components/OptimizedImage';
+import Footer from '@/components/Footer';
 
 const coffeeAttributes = [
   {
@@ -96,12 +97,39 @@ export default function CafePage() {
               Colección Premium
             </Badge>
             
-           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-10 tracking-tight">
-               <span className="text-white/95">El Arte del </span>
-               <span className="text-[#E6B980] font-serif italic">Café</span>{' '}
+           <motion.h1 
+               className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-10 tracking-tight"
+               initial={{ opacity: 0, y: 20 }}
+               animate={{ opacity: 1, y: 0 }}
+               transition={{ duration: 0.8, delay: 0.3 }}
+           >
+               <motion.span 
+                   className="text-white/95 inline-block"
+                   initial={{ opacity: 0, x: -20 }}
+                   animate={{ opacity: 1, x: 0 }}
+                   transition={{ duration: 0.6, delay: 0.5 }}
+               >
+                   El Arte del{' '}
+               </motion.span>
+               <motion.span 
+                   className="text-[#E6B980] font-serif italic inline-block"
+                   initial={{ opacity: 0, scale: 0.9 }}
+                   animate={{ opacity: 1, scale: 1 }}
+                   transition={{ duration: 0.8, delay: 0.7 }}
+                   whileHover={{ scale: 1.05, textShadow: "0 0 8px rgba(230,185,128,0.6)" }}
+               >
+                   Café
+               </motion.span>
                <br className="hidden md:block" />
-               <span className="text-white/95">de Origen</span>
-          </h1>
+               <motion.span 
+                   className="text-white/95 inline-block"
+                   initial={{ opacity: 0, x: 20 }}
+                   animate={{ opacity: 1, x: 0 }}
+                   transition={{ duration: 0.6, delay: 0.9 }}
+               >
+                   de Origen
+               </motion.span>
+           </motion.h1>
 
             
             <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto font-normal leading-relaxed mb-14 tracking-wide">
@@ -109,25 +137,54 @@ export default function CafePage() {
               sagradas de la Sierra Nevada. Una experiencia sensorial única.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-              <Button 
-                size="lg"
-                className="bg-white/95 text-[#1A0F0A] hover:bg-white px-10 py-7 text-base font-medium rounded-full transition-all duration-500 hover:shadow-lg tracking-wide"
-                onClick={() => {
-                  const productsSection = document.querySelector('#products-section');
-                  productsSection?.scrollIntoView({ behavior: 'smooth' });
-                }}
+            <motion.div 
+              className="flex flex-col sm:flex-row items-center justify-center gap-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.1 }}
+            >
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
-                Descubrir Colección
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="bg-transparent border border-white/30 text-white hover:bg-white/10 px-10 py-7 text-base font-normal rounded-full transition-all duration-500"
+                <Button 
+                  size="lg"
+                  className="bg-white/95 text-[#1A0F0A] hover:bg-white px-10 py-7 text-base font-medium rounded-full transition-all duration-500 hover:shadow-lg hover:shadow-white/20 tracking-wide relative overflow-hidden group"
+                  onClick={() => {
+                    const productsSection = document.querySelector('#products-section');
+                    productsSection?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                >
+                  <motion.span 
+                    className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/30 to-white/0"
+                    initial={{ x: "-100%" }}
+                    whileHover={{ x: "100%" }}
+                    transition={{ duration: 0.8 }}
+                  />
+                  Descubrir Colección
+                </Button>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
-                Proceso de Cultivo
-              </Button>
-            </div>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="bg-transparent border border-white/30 text-white hover:bg-white/10 px-10 py-7 text-base font-normal rounded-full transition-all duration-500 relative overflow-hidden group"
+                >
+                  <motion.span 
+                    className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0"
+                    initial={{ x: "-100%" }}
+                    whileHover={{ x: "100%" }}
+                    transition={{ duration: 0.8 }}
+                  />
+                  Proceso de Cultivo
+                </Button>
+              </motion.div>
+            </motion.div>
           </motion.div>
 
           {/* Scroll Indicator */}
@@ -164,13 +221,34 @@ export default function CafePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-            {coffeeProducts.map((product) => (
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            {coffeeProducts.map((product, index) => (
               <motion.div
                 key={product.id}
                 onHoverStart={() => setHoveredProduct(product.id)}
                 onHoverEnd={() => setHoveredProduct(null)}
                 className="h-full"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ 
+                  duration: 0.6,
+                  delay: index * 0.2,
+                  type: "spring",
+                  stiffness: 100
+                }}
+                whileHover={{ 
+                  scale: 1.03,
+                  rotateY: 5,
+                  translateZ: 20,
+                  boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.15)"
+                }}
               >
                 <ProductCard 
                   product={product}
@@ -178,7 +256,7 @@ export default function CafePage() {
                 />
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -329,6 +407,9 @@ export default function CafePage() {
           </div>
         </div>
       </section>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }
