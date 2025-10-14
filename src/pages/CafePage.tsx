@@ -2,13 +2,14 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { coffeeProducts, allProducts } from '@/lib/products';
-import { Coffee, Leaf, Mountain, ThermometerSun, Award, Scale, Heart, Droplet } from 'lucide-react';
+import { Coffee, Leaf, Mountain, ThermometerSun, Award, Scale, Heart, Droplet, Instagram, Facebook, MessageCircle as WhatsApp, Clock } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import ProductCard from '@/components/ProductCard';
 import OptimizedImage from '@/components/OptimizedImage';
-import Footer from '@/components/Footer';
+
 
 const coffeeAttributes = [
   {
@@ -408,8 +409,151 @@ export default function CafePage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <Footer />
+      {/* Footer Section */}
+      <footer className="bg-[#1A0F0A] text-white py-24">
+        <div className="container mx-auto px-4">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="mb-16 text-center"
+          >
+            <Link to="/" className="inline-block group">
+              <img
+                src="/images/LaFelicidA_transparente_ALPHA_2x.png"
+                alt="La Felicidá"
+                className="h-24 mb-6 mx-auto transform transition-transform duration-300 group-hover:scale-105"
+              />
+            </Link>
+            <p className="text-[#E4A429] max-w-2xl mx-auto text-lg font-medium">
+              Un espacio sagrado donde la tradición, la espiritualidad y la naturaleza 
+              convergen para crear experiencias únicas en la Sierra Nevada.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-24 mb-16">
+            {/* Enlaces Principales */}
+            <div>
+              <h3 className="text-xl font-bold mb-6 text-[#E4A429]">Explora</h3>
+              <ul className="space-y-3 text-amber-200/80">
+                <li>
+                  <Link to="/cafe" className="hover:text-amber-200 transition-colors duration-200">
+                    Nuestros Cafés
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/servicios" className="hover:text-amber-200 transition-colors duration-200">
+                    Servicios
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/nosotros" className="hover:text-amber-200 transition-colors duration-200">
+                    Sobre Nosotros
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/contacto" className="hover:text-amber-200 transition-colors duration-200">
+                    Contacto
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Redes Sociales */}
+            <div>
+              <h3 className="text-xl font-bold mb-6 text-[#E4A429]">Síguenos</h3>
+              <div className="space-y-3">
+                <a 
+                  href="https://instagram.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-amber-200/80 hover:text-amber-200 transition-colors duration-200 flex items-center gap-2"
+                >
+                  <Instagram className="w-4 h-4" />
+                  <span>Instagram</span>
+                </a>
+                <a 
+                  href="https://facebook.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-amber-200/80 hover:text-amber-200 transition-colors duration-200 flex items-center gap-2"
+                >
+                  <Facebook className="w-4 h-4" />
+                  <span>Facebook</span>
+                </a>
+                <a 
+                  href="https://wa.me/+573113678555" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-amber-200/80 hover:text-amber-200 transition-colors duration-200 flex items-center gap-2"
+                >
+                  <WhatsApp className="w-4 h-4" />
+                  <span>WhatsApp</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Horarios */}
+            <div>
+              <h3 className="text-xl font-bold mb-6 text-[#E4A429]">Horarios</h3>
+              <div className="space-y-3 text-amber-200/80">
+                <p className="flex justify-between">
+                  <span>Lunes - Viernes</span>
+                  <span>8:00 AM - 6:00 PM</span>
+                </p>
+                <p className="flex justify-between">
+                  <span>Sábado</span>
+                  <span>9:00 AM - 5:00 PM</span>
+                </p>
+                <p className="flex justify-between">
+                  <span>Domingo</span>
+                  <span>10:00 AM - 4:00 PM</span>
+                </p>
+                <div className="pt-3">
+                  <small>*Horarios sujetos a cambios en temporada alta</small>
+                </div>
+              </div>
+            </div>
+
+            {/* Ubicación */}
+            <div>
+              <h3 className="text-xl font-bold mb-6 text-[#E4A429]">Ubicación</h3>
+              <div className="space-y-4">
+                <p className="text-amber-200/80">
+                  Sierra Nevada de Santa Marta<br />
+                  Pueblo Bello, Cesar<br />
+                  Colombia
+                </p>
+                <div className="pt-2">
+                  <a 
+                    href="https://maps.google.com" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-amber-200/80 hover:text-amber-200 transition-colors duration-200 inline-block"
+                  >
+                    Ver en Google Maps
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Legal Links */}
+          <div className="text-center text-amber-200/60 text-sm">
+            <div className="space-x-3">
+              <a href="#" className="hover:text-amber-200 transition-colors duration-200">Política cultural</a>
+              <span>|</span>
+              <a href="#" className="hover:text-amber-200 transition-colors duration-200">Aviso legal</a>
+              <span>|</span>
+              <a href="#" className="hover:text-amber-200 transition-colors duration-200">Política de privacidad</a>
+            </div>
+            <div className="mt-4">
+              © {new Date().getFullYear()} La Felicidá. Todos los derechos reservados.
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
