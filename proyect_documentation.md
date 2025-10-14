@@ -84,6 +84,39 @@ La Felicidá es una plataforma web para una empresa cafetera que ofrece producto
   - Notificaciones
   - Preferencias de usuario
 
+### Componentes de Mejora UX
+- **LoadingBar**
+  - Barra de progreso global durante navegaciones
+  - Animaciones suaves con Framer Motion
+  - Feedback visual inmediato para el usuario
+  - Implementado en `RootLayout.tsx`
+
+- **ScrollToTop**
+  - Botón flotante para volver al inicio de la página
+  - Aparece después de 400px de scroll
+  - Animaciones suaves de entrada/salida
+  - Tooltip informativo en hover
+  - Implementado globalmente en `RootLayout.tsx`
+
+- **ReadingTime**
+  - Estimación del tiempo de lectura
+  - Cálculo basado en palabras por minuto (200 wpm)
+  - Implementado en páginas de detalle
+  - Ayuda a gestionar expectativas del usuario
+
+- **ShareButton**
+  - Compartir contenido en redes sociales
+  - Soporte para múltiples plataformas:
+    - Facebook
+    - Twitter
+    - WhatsApp
+    - LinkedIn
+    - Instagram
+    - Correo electrónico
+  - Animaciones de menú desplegable
+  - Notificaciones de éxito
+  - Copiar enlace al portapapeles
+
 ### Chat con IA
 - Integración con N8N
 - Interfaz de usuario intuitiva
@@ -92,12 +125,64 @@ La Felicidá es una plataforma web para una empresa cafetera que ofrece producto
 - URL del webhook: `https://tpn8n.sierrasoft.co/webhook/[ID]/chat`
 
 ### Carrito de Compras
-- Persistencia local
-- Actualización en tiempo real
-- Cross-selling de productos
+- Persistencia local con Zustand
+- Actualización en tiempo real de cantidades y precios
+- Cross-selling de productos relacionados
 - Notificaciones de cambios
+- Integración con WhatsApp para pedidos
+  - Mensajes formateados profesionalmente
+  - Uso de emojis para mejor legibilidad
+  - Desglose detallado de productos
+  - Cálculos automáticos de totales
+- Interfaz simplificada con dos acciones principales:
+  - Continuar comprando
+  - Finalizar pedido vía WhatsApp
+- Prevención de navegación a rutas inexistentes
 
 ## Componentes
+
+### Página de Café (`/src/pages/CafePage.tsx`)
+
+El componente CafePage es una página completa dedicada a mostrar y promocionar los productos de café. Está estructurada en varias secciones:
+
+#### Hero Section
+- Banner principal a pantalla completa con imagen de fondo
+- Animaciones con Framer Motion
+- Badges y llamados a la acción
+- Indicador de scroll animado
+
+#### Products Grid
+- Muestra la colección de cafés especiales
+- Grid responsive de 1-3 columnas
+- Tarjetas de producto interactivas
+- Animaciones en hover
+
+#### Atributos del Café
+Los atributos destacados incluyen:
+- Prestigio (Award)
+- Balance Perfecto (Scale)
+- Cultivo con Amor (Heart)
+- Perfil Único (Droplet)
+
+#### Proceso de Producción
+Sección que detalla el proceso en 4 pasos:
+1. Origen Sierra Nevada
+2. Cultivo Sostenible
+3. Tostado Artesanal
+4. Control de Calidad
+
+#### Quality Banner
+- Sección de compromiso con la calidad
+- Efectos de paralaje y superposición
+- Botones de llamada a la acción
+- Animaciones en scroll
+
+#### Características Técnicas
+- Uso extensivo de Framer Motion para animaciones
+- Componentes optimizados para rendimiento
+- Imágenes optimizadas con lazy loading
+- Diseño completamente responsive
+- Paleta de colores personalizada con énfasis en tonos café y dorados
 
 ### Componentes Principales
 
@@ -283,7 +368,17 @@ VITE_ENV=production
 ## Registro de Cambios
 
 ### Octubre 2025
-- Eliminación del componente WhatsAppButton
+
+#### Semana 2
+- Integración mejorada de WhatsApp en el carrito de compras:
+  - Mensaje formateado con emojis para mejor legibilidad
+  - Desglose detallado de productos con cantidades y precios
+  - Distinción visual entre productos (🎒) y cafés (☕)
+  - Resumen del pedido con subtotal y costos de envío
+  - Mensaje de cierre personalizado y profesional
+
+#### Semana 1
+- Eliminación del componente WhatsAppButton independiente
 - Preparación para la integración del nuevo chat con IA
 - Actualización de referencias en:
   - CartSidebar.tsx
@@ -293,12 +388,46 @@ VITE_ENV=production
 - Limpieza de código y optimización
 - Documentación actualizada para reflejar los cambios
 
+#### Mejoras en la Experiencia de Usuario
+1. Carrito de Compras:
+   - Simplificación de la interfaz con dos botones principales
+   - "Seguir Comprando" mantiene el contexto de navegación
+   - "Ir a pagar" ahora integra la funcionalidad de WhatsApp
+   - Prevención de navegación innecesaria a rutas inexistentes
+   - Mensajes de WhatsApp estructurados y profesionales
+
+2. Sistema de Mensajería:
+   - Formato mejorado para pedidos:
+     ```
+     ¡Hola! 🌟 Me gustaría realizar el siguiente pedido:
+     
+     🎒 [Producto] x[cantidad] - [precio]
+     ☕ [Café] x[cantidad] - [precio]
+     
+     📦 Resumen del pedido:
+     💰 Subtotal: [monto]
+     🚚 Envío: [monto]
+     
+     ✨ TOTAL: [monto total] ✨
+     
+     🙏 Me gustaría confirmar este pedido y coordinar el envío.
+     💝 ¡Gracias por su atención!
+     ```
+
 ### Próximos Pasos
-1. Implementar el nuevo componente de chat con IA
-2. Integrar el chat con el sistema de productos
-3. Actualizar la interfaz de usuario
-4. Realizar pruebas de integración
-5. Desplegar a producción
+1. Mejorar la experiencia post-compra
+   - Seguimiento de pedidos
+   - Confirmaciones automáticas
+   - Historial de compras
+2. Implementar el nuevo componente de chat con IA
+3. Integrar el chat con el sistema de productos
+4. Expandir la integración de WhatsApp
+   - Estados de pedido
+   - Notificaciones automáticas
+   - Recordatorios de carrito abandonado
+5. Actualizar la interfaz de usuario
+6. Realizar pruebas de integración
+7. Desplegar a producción
 
 ---
 
@@ -306,6 +435,35 @@ VITE_ENV=production
 - El chat con IA reemplazará completamente la funcionalidad de WhatsApp
 - Se mantiene la misma estructura de diseño pero con nueva funcionalidad
 - La transición será gradual para asegurar la estabilidad
+
+## Guía de Estilos
+
+### Paleta de Colores
+#### Página de Café
+- Fondo Oscuro: `#2A1810` (Marrón oscuro)
+- Dorado Acento: `#C49B66`
+- Dorado Hover: `#D4B68C`
+- Fondo Claro: `#F5E9E0`
+- Texto Claro: `#FAF7F4`
+- Texto Oscuro: `#5C4033`
+- Rojo Acento: `#7b2e2e`, `#a84040`
+
+### Tipografía
+- Títulos: Sistema de escala fluida desde text-4xl hasta text-7xl
+- Cuerpo: text-lg para contenido principal
+- Badges: text-sm con tracking-wider
+- Botones: text-base a text-lg con font-semibold
+
+### Espaciado
+- Secciones principales: py-24 a py-40
+- Elementos internos: gap-4 a gap-12
+- Márgenes de componentes: mb-6 a mb-20
+
+### Animaciones
+- Framer Motion para transiciones suaves
+- Hover: scale-105 con duration-300
+- Scroll: Fade y slide effects
+- Indicadores: Animaciones infinitas para atención
 
 ## Licencia
 [Especificar la licencia del proyecto]

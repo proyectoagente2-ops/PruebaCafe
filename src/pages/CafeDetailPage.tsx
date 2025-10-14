@@ -10,27 +10,53 @@ import { useCart } from '@/lib/store';
 import { Link } from 'react-router-dom';
 import CrossSelling from '@/components/CrossSelling';
 import { Coffee, Leaf, Mountain, Award, Scale } from 'lucide-react';
+import ReadingTime from '@/components/ReadingTime';
+import { ProductFeature, ProductInfo, CoffeeProduct, GuaranteeItem } from '@/types/product';
+import { useRouteError, isRouteErrorResponse } from 'react-router-dom';
 
-export default function ProductDetailPage() {
+function CafeErrorBoundary() {
+  const error = useRouteError();
+  console.error('Error en CafeDetailPage:', error);
+
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-[#FAF7F4]">
+      <div className="text-center">
+        <h1 className="text-3xl font-semibold mb-6 text-[#2A1810]">
+          {isRouteErrorResponse(error) ? 'Café no encontrado' : 'Ha ocurrido un error'}
+        </h1>
+        <Link 
+          to="/cafe"
+          className="text-[#C49B66] hover:text-[#2A1810] transition-all duration-300"
+        >
+          Volver a Café
+        </Link>
+      </div>
+    </div>
+  );
+}
+
+export default function CafeDetailPage() {
   const { id } = useParams();
   const { addToCart } = useCart();
   
   console.log('Buscando producto con ID:', id);
-  console.log('Productos disponibles:', allProducts.map(p => ({ id: p.id, name: p.name })));
   
-  // Buscar en coffeeProducts y mochilaProducts
+  if (!id) {
+    throw new Error('No se proporcionó un ID de producto');
+  }
+
   const product = allProducts.find(p => {
-    // Convertir ambos a string y comparar
     const productIdString = String(p.id).toLowerCase();
     const searchIdString = String(id).toLowerCase();
     
-    console.log('Comparando:', {
+    console.log('Comparando producto:', {
       productId: productIdString,
       searchId: searchIdString,
-      match: productIdString === searchIdString
+      match: productIdString === searchIdString,
+      category: p.category
     });
     
-    return productIdString === searchIdString;
+    return productIdString === searchIdString && p.category === 'coffee';
   });
   
   console.log('Producto encontrado:', product ? {
@@ -42,73 +68,59 @@ export default function ProductDetailPage() {
   if (!product) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#FAF7F4]">
-        <div className="text-center">
-          <h1 className="text-3xl font-semibold mb-6 text-[#2A1810]">Producto no encontrado</h1>
-          <div className="flex gap-4 justify-center">
+          <div className="text-center">
+            <h1 className="text-3xl font-semibold mb-6 text-[#2A1810]">Café no encontrado</h1>
             <Link 
               to="/cafe"
               className="text-[#C49B66] hover:text-[#2A1810] transition-all duration-300"
             >
               Volver a Café
             </Link>
-            <Link 
-              to="/mochilas"
-              className="text-[#C49B66] hover:text-[#2A1810] transition-all duration-300"
-            >
-              Volver a Mochilas
-            </Link>
           </div>
-        </div>
       </div>
     );
   }
 
-  // Determinar las características específicas según el tipo de producto
-  const getProductFeatures = () => {
-    if (product.category === 'coffee') {
-      return [
-        {
-          icon: Coffee,
-          title: "Perfil de Sabor",
-          description: product.notes?.join(", ") ?? ""
-        },
-        {
-          icon: Mountain,
-          title: "Altitud",
-          description: product.altitude ?? "1.500 - 1.800 msnm"
-        },
-        {
-          icon: Leaf,
-          title: "Variedad",
-          description: "Caturra, Colombia"
-        },
-        {
-          icon: Award,
-          title: "Proceso",
-          description: product.processingMethod ?? "Lavado"
-        }
-      ];
-    } else if (product.category === 'backpack') {
-      return [
-        {
-          icon: Scale,
-          title: "Capacidad",
-          description: product.capacity ?? "No especificada"
-        },
-        {
-          icon: Award,
-          title: "Material",
-          description: product.material ?? "No especificado"
-        },
-        {
-          icon: Mountain,
-          title: "Uso recomendado",
-          description: product.recommendedUse ?? "Uso diario"
-        }
-      ];
-    }
-    return [];
+  // Obtener las características del café
+  const getProductFeatures = (): ProductFeature[] => {
+    return [
+      {
+        icon: (props) => <Coffee {...props} />,
+        title: "Perfil de Sabor",
+        description: product.notes?.join(", ") ?? ""
+      },
+      {
+        icon: (props) => <Mountain {...props} />,
+        title: "Altitud",
+        description: product.altitude ?? "1.500 - 1.800 msnm"
+      },
+      {
+        icon: (props) => <Leaf {...props} />,
+        title: "Variedad",
+        description: "Caturra, Colombia"
+      },
+      {
+        icon: (props) => <Award {...props} />,
+        title: "Proceso",
+        description: product.processingMethod ?? "Lavado"
+      }
+    ];
   };
+
+  const productInfo: ProductInfo[] = [
+    {
+      icon: <Coffee className="w-4 h-4 mr-2 text-[#C49B66]" />,
+      text: "Tostado a pedido para garantizar máxima frescura"
+    },
+    {
+      icon: <Scale className="w-4 h-4 mr-2 text-[#C49B66]" />,
+      text: "Empaque con válvula de desgasificación"
+    },
+    {
+      icon: <Leaf className="w-4 h-4 mr-2 text-[#C49B66]" />,
+      text: "Producto 100% natural y artesanal"
+    }
+  ];
 
   const productFeatures = getProductFeatures();
 
@@ -121,9 +133,8 @@ export default function ProductDetailPage() {
   };
 
   const handleWhatsAppClick = () => {
-    const productType = product.category === 'backpack' ? 'la mochila' : 'el café';
     const message = encodeURIComponent(
-      `¡Hola! Me interesa ${productType} ${product.name}. ¿Podría darme más información?`
+      `¡Hola! Me interesa el café ${product.name}. ¿Podría darme más información?`
     );
     window.open(`https://wa.me/+573113678555?text=${message}`, '_blank');
   };
@@ -149,7 +160,7 @@ export default function ProductDetailPage() {
               initial={{ scale: 1.1 }}
               animate={{ scale: 1 }}
               transition={{ duration: 2 }}
-              src={product.category === 'backpack' ? '/images/mochilas-bg.jpg' : '/images/coffee-beans-bg.jpg'}
+              src="/images/coffee-beans-bg.jpg"
               alt="Background"
               className="w-full h-full object-cover object-center"
             />
@@ -193,10 +204,10 @@ export default function ProductDetailPage() {
             </Link>
             <span className="text-[#2A1810]/30">/</span>
             <Link 
-              to={product?.category === 'backpack' ? '/mochilas' : '/cafe#products-section'}
+              to="/cafe#products-section"
               className="text-sm sm:text-base text-[#C49B66] hover:text-[#2A1810] transition-colors duration-300"
             >
-              {product?.category === 'backpack' ? 'Mochilas' : 'Café'}
+              Café
             </Link>
             <span className="text-[#2A1810]/30">/</span>
             <span className="text-sm sm:text-base text-[#2A1810]/70 truncate max-w-[150px] sm:max-w-none">{product.name}</span>
@@ -296,6 +307,9 @@ export default function ProductDetailPage() {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="prose prose-coffee"
             >
+              <div className="mb-2">
+                <ReadingTime text={product.description} />
+              </div>
               <p className="text-[#2A1810]/80 leading-relaxed">{product.description}</p>
             </motion.div>
 
@@ -352,49 +366,29 @@ export default function ProductDetailPage() {
               className="border-t border-[#C49B66]/20 pt-8 mt-8"
             >
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                {(product.category === 'backpack' ? [
+                {/* Benefits grid items */}
+                {([
                   {
-                    icon: Award,
-                    title: "Calidad Premium",
-                    description: "Materiales de alta calidad"
-                  },
-                  {
-                    icon: Scale,
-                    title: "Durabilidad",
-                    description: "Diseño resistente y duradero"
-                  },
-                  {
-                    icon: Mountain,
-                    title: "Versatilidad",
-                    description: "Ideal para múltiples usos"
-                  },
-                  {
-                    icon: Leaf,
-                    title: "Comodidad",
-                    description: "Diseño ergonómico"
-                  }
-                ] : [
-                  {
-                    icon: Award,
+                    icon: (props: any) => <Award {...props} />,
                     title: "Calidad Premium",
                     description: "Café de especialidad seleccionado"
                   },
                   {
-                    icon: Leaf,
+                    icon: (props: any) => <Leaf {...props} />,
                     title: "100% Natural",
                     description: "Sin aditivos artificiales"
                   },
                   {
-                    icon: Scale,
-                    title: "Peso Exacto",
+                    icon: (props: any) => <Scale {...props} />,
+                    title: "Peso Exacto", 
                     description: "Empaque controlado"
                   },
                   {
-                    icon: Coffee,
+                    icon: (props: any) => <Coffee {...props} />,
                     title: "Tostado Artesanal",
                     description: "Proceso controlado"
                   }
-                ]).map((item, index) => (
+                ] as GuaranteeItem[]).map((item: GuaranteeItem, index: number) => (
                   <motion.div
                     key={item.title}
                     initial={{ opacity: 0, y: 20 }}
@@ -435,58 +429,6 @@ export default function ProductDetailPage() {
               </h3>
               
               <div className="space-y-4 text-sm">
-                {product.category === 'backpack' ? (
-                  <>
-                    <p className="flex items-center text-[#2A1810]/80">
-                      <svg
-                        className="w-4 h-4 mr-2 text-[#C49B66]"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-                      </svg>
-                      Material resistente y duradero
-                    </p>
-                    
-                    <p className="flex items-center text-[#2A1810]/80">
-                      <svg
-                        className="w-4 h-4 mr-2 text-[#C49B66]"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-                        <line x1="16" y1="2" x2="16" y2="6" />
-                        <line x1="8" y1="2" x2="8" y2="6" />
-                        <line x1="3" y1="10" x2="21" y2="10" />
-                      </svg>
-                      Diseño ergonómico y cómodo
-                    </p>
-
-                    <p className="flex items-center text-[#2A1810]/80">
-                      <svg
-                        className="w-4 h-4 mr-2 text-[#C49B66]"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <circle cx="12" cy="12" r="10" />
-                        <path d="M12 8v8M8 12h8" />
-                      </svg>
-                      Múltiples compartimentos y bolsillos
-                    </p>
-                  </>
-                ) : (
                   <>
                     <p className="flex items-center text-[#2A1810]/80">
                       <svg
@@ -537,7 +479,6 @@ export default function ProductDetailPage() {
                       Producto 100% natural y artesanal
                     </p>
                   </>
-                )}
               </div>
             </motion.div>
           </motion.div>

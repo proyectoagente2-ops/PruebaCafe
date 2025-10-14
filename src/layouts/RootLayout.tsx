@@ -7,12 +7,15 @@ import { NotificationContainer } from '../components/Notification';
 import { Toaster } from '@/components/ui/sonner';
 import { useState } from 'react';
 import { Chat } from '@/components/Chat';
+import ScrollToTop from '@/components/ScrollToTop';
+import LoadingBar from '@/components/LoadingBar';
 
 export default function RootLayout() {
   const [isCartOpen, setIsCartOpen] = useState(false);
 
   return (
     <>
+      <LoadingBar />
       <Header />
       <main>
         <Outlet />
@@ -32,6 +35,9 @@ export default function RootLayout() {
       <div className="z-50">
         <Chat />
       </div>
+
+      {/* Botón de volver arriba */}
+      <ScrollToTop />
     </>
   );
 }

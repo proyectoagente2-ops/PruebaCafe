@@ -157,6 +157,35 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
     );
   }
 
+    const handleWhatsAppCheckout = () => {
+    // Crear el mensaje del pedido
+    let message = "¡Hola! 🌟 Me gustaría realizar el siguiente pedido:\n\n";
+    
+    // Agregar productos con emojis según el tipo
+    cart.items.forEach(item => {
+      const emoji = item.type === 'product' ? '🎒' : '☕';
+      message += `${emoji} ${item.name} x${item.quantity} - ${formatPrice(item.price * item.quantity)}\n`;
+    });
+
+    // Agregar totales con emojis
+    message += "\n📦 Resumen del pedido:";
+    message += `\n💰 Subtotal: ${formatPrice(cart.subtotal)}`;
+    message += `\n🚚 Envío: ${formatPrice(cart.shippingCost)}`;
+    
+    // Agregar total con decoración
+    message += `\n\n✨ TOTAL: ${formatPrice(cart.total)} ✨`;
+    
+    // Mensaje adicional personalizado
+    message += "\n\n🙏 Me gustaría confirmar este pedido y coordinar el envío.";
+    message += "\n💝 ¡Gracias por su atención!";
+
+    // Abrir WhatsApp con el mensaje
+    window.open(
+      `https://api.whatsapp.com/send?phone=573113678555&text=${encodeURIComponent(message)}`,
+      '_blank'
+    );
+  };
+
   return (
     <Sheet open={isOpen} onOpenChange={onClose}>
       <SheetContent className="w-[400px] sm:w-[540px] bg-gradient-to-b from-amber-50 to-white">
@@ -296,27 +325,37 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
             </AnimatePresence>
           </motion.div>
 
-          <div className="flex gap-4">
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="flex-1"
-            >
-              <Button
-                onClick={onClose}
-                variant="outline"
-                className="w-full border-amber-200 text-amber-800"
+          <div className="flex flex-col gap-4">
+            <div className="flex gap-4">
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="flex-1"
               >
-                Seguir Comprando
-              </Button>
-            </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="flex-1"
-            >
-              {/* Chat AI will be added here */}
-            </motion.div>
+                <Button
+                  onClick={onClose}
+                  variant="outline"
+                  className="w-full border-amber-200 text-amber-800"
+                >
+                  Seguir Comprando
+                </Button>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="flex-1"
+              >
+                <Button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleWhatsAppCheckout();
+                  }}
+                  className="w-full bg-amber-600 hover:bg-amber-700 text-white"
+                >
+                  Ir a pagar
+                </Button>
+              </motion.div>
+            </div>
           </div>
         </div>
       </SheetContent>

@@ -6,9 +6,11 @@ import Turismo from '@/pages/Turismo';
 import Nosotros from '@/pages/Nosotros';
 import Contacto from '@/pages/Contacto';
 import NotFound from '@/pages/NotFound';
-import ProductDetailPage from '@/pages/ProductDetailPage';
+import ProductDetailPage from '@/pages/CafeDetailPage';
 import ServicesPage from '@/pages/ServicesPage';
 import ServiceDetailPage from '@/pages/ServiceDetailPage';
+import MochilasPage from '@/pages/MochilasPage';
+import MochilaDetailPage from '@/pages/MochilaDetailPage';
 
 // Mapeo de hashes antiguos a nuevas rutas
 const HASH_REDIRECTS: { [key: string]: string } = {
@@ -37,7 +39,16 @@ const routes: RouteObject[] = [
       },
       {
         path: 'cafe',
-        element: <CafePage />
+        children: [
+          {
+            index: true,
+            element: <CafePage />
+          },
+          {
+            path: ':id',
+            element: <ProductDetailPage />
+          }
+        ]
       },
       {
         path: 'turismo',
@@ -51,10 +62,7 @@ const routes: RouteObject[] = [
         path: 'contacto',
         element: <Contacto />
       },
-      {
-        path: 'productos/:productId',
-        element: <ProductDetailPage />
-      },
+      // Eliminada la ruta duplicada de productos
       {
         path: 'servicios',
         children: [
@@ -65,6 +73,19 @@ const routes: RouteObject[] = [
           {
             path: ':id',
             element: <ServiceDetailPage />
+          }
+        ]
+      },
+      {
+        path: 'mochilas',
+        children: [
+          {
+            index: true,
+            element: <MochilasPage />
+          },
+          {
+            path: ':id',
+            element: <MochilaDetailPage />
           }
         ]
       },

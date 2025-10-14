@@ -11,8 +11,12 @@ export const mochilaProducts: Product[] = [
     material: 'Lana natural',
     capacity: 'Mediana',
     recommendedUse: 'Uso diario',
+    dimensions: '45cm x 30cm x 15cm',
+    waterproof: false,
+    color: 'Azul',
     type: 'product',
-    inStock: true
+    inStock: true,
+    weight: '0.8kg'
   },
   {
     id: 'mochila-especial-1',
@@ -24,8 +28,12 @@ export const mochilaProducts: Product[] = [
     material: 'Lana premium',
     capacity: 'Grande',
     recommendedUse: 'Ocasiones especiales',
+    dimensions: '50cm x 35cm x 20cm',
+    waterproof: true,
+    color: 'Verde',
     type: 'product',
-    inStock: true
+    inStock: true,
+    weight: '1kg'
   },
   {
     id: 'mochila-moderna-1',
@@ -37,14 +45,18 @@ export const mochilaProducts: Product[] = [
     material: 'Lana mixta',
     capacity: 'Personalizada',
     recommendedUse: 'Uso versátil',
+    dimensions: '48cm x 33cm x 18cm',
+    waterproof: true,
+    color: 'Rojo',
     type: 'product',
-    inStock: true
+    inStock: true,
+    weight: '0.9kg'
   }
 ];
 
 export const coffeeProducts: Product[] = [
   {
-    id: '1',
+    id: 'cafe-ayu-especial',
     name: 'Café con Ayu (Edición especial)',
     description: 'Café especial con fermentación única que produce un aroma envolvente.',
     price: 25000,
@@ -62,7 +74,7 @@ export const coffeeProducts: Product[] = [
     type: 'product'
   },
   {
-    id: '2',
+    id: 'cafe-lavado-especial',
     name: 'Café Lavado (Edición especial)',
     description: 'Perfil limpio y equilibrado que ofrece una claridad excepcional en taza.',
     price: 25000,
@@ -80,7 +92,7 @@ export const coffeeProducts: Product[] = [
     type: 'product'
   },
   {
-    id: '3',
+    id: 'cafe-tradicional-especial',
     name: 'Café Tradicional (Edición especial)',
     description: 'Nuestro café clásico y balanceado, perfecto para el día a día.',
     price: 25000,
@@ -99,58 +111,4 @@ export const coffeeProducts: Product[] = [
   }
 ];
 
-export const backpackProducts: Product[] = [
-  {
-    id: 'bp1',
-    name: 'Mochila Aventurera',
-    description: 'Perfecta para tus aventuras al aire libre, con compartimentos especializados y resistente al agua.',
-    price: 180000,
-    image: '/images/Mochilas/mochila1.jpg',
-    category: 'backpack',
-    material: 'Lona resistente al agua',
-    capacity: '30L',
-    recommendedUse: 'Senderismo y camping',
-    dimensions: '50cm x 35cm x 20cm',
-    waterproof: true,
-    color: 'Verde militar',
-    inStock: true,
-    weight: '1.2kg',
-    type: 'product'
-  },
-  {
-    id: 'bp2',
-    name: 'Mochila Urbana',
-    description: 'Diseño moderno y funcional para tu día a día en la ciudad, con compartimento para laptop.',
-    price: 150000,
-    image: '/images/Mochilas/mochila2.jpg',
-    category: 'backpack',
-    material: 'Poliéster de alta densidad',
-    capacity: '20L',
-    recommendedUse: 'Uso diario y trabajo',
-    dimensions: '45cm x 30cm x 15cm',
-    waterproof: false,
-    color: 'Negro',
-    inStock: true,
-    weight: '0.8kg',
-    type: 'product'
-  },
-  {
-    id: 'bp3',
-    name: 'Mochila Viajera',
-    description: 'Espaciosa y versátil, ideal para viajes largos con múltiples compartimentos organizadores.',
-    price: 220000,
-    image: '/images/Mochilas/mochila3.jpg',
-    category: 'backpack',
-    material: 'Nylon balístico',
-    capacity: '40L',
-    recommendedUse: 'Viajes y excursiones',
-    dimensions: '55cm x 40cm x 25cm',
-    waterproof: true,
-    color: 'Azul marino',
-    inStock: true,
-    weight: '1.5kg',
-    type: 'product'
-  }
-];
-
-export const allProducts: Product[] = [...coffeeProducts, ...backpackProducts, ...mochilaProducts];
+export const allProducts: Product[] = [...coffeeProducts, ...mochilaProducts];

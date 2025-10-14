@@ -24,7 +24,7 @@ export default function ProductCard({ product, isHovered = false }: ProductCardP
 
   return (
     <Link 
-      to={`/productos/${product.id}`}
+      to={`/${product.category === 'coffee' ? 'cafe' : 'mochilas'}/${product.id}`}
       className="block group"
       onClick={() => console.log('Navigating to product:', product.id)}>
       <Card className={`overflow-hidden h-full flex flex-col bg-white border-0 shadow-sm transition-all duration-300 ${isHovered ? 'shadow-lg' : 'shadow-sm'}`}>
