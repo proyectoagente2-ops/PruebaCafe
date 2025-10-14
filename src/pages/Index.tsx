@@ -17,16 +17,26 @@ export default function HomePage() {
     <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white">
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0">
+        <motion.div 
+          className="absolute inset-0"
+          initial={{ scale: 1.1, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
+        >
           <OptimizedImage
             src="/images/Inicio/nano-banana-2025-09-16T02-58-06.png"
             alt="Fondo de la Sierra Nevada"
-            className="w-full h-full object-cover object-center "
+            className="w-full h-full object-cover object-center"
             priority
           />
-        </div>
+        </motion.div>
 
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-transparent"></div>
+        <motion.div 
+          className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-transparent"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.2, delay: 0.5 }}
+        ></motion.div>
         
         <div className="relative z-20 text-center max-w-[750px] mx-auto px-8 animate-fadeIn flex flex-col items-center justify-center">
           <h1 className="font-playfair text-[clamp(2.5rem,6vw,4.5rem)] font-bold text-[#FEFBF6] mb-6 leading-none flex items-center justify-center gap-2 whitespace-nowrap animate-slideUp delay-300 shadow-text">
@@ -89,30 +99,81 @@ export default function HomePage() {
       <section className="py-24 bg-cream overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8">
-              <h2 className="text-4xl font-bold text-amber-900 leading-tight">
-                Un espacio de conexión con la naturaleza y el espíritu
-              </h2>
-              <div className="prose prose-lg text-coffee-dark">
-                <p className="!text-[#3B2F2F] !opacity-100 leading-relaxed">
-                  En La Felicidá, fusionamos las tradiciones ancestrales con la espiritualidad de la Sierra Nevada. 
-                  Cada visita es una oportunidad para reconectarte con la naturaleza, mientras descubres los secretos de 
-                  nuestra sabiduría ancestral y el encanto de nuestra tierra.
-                </p>
-                <p className="!text-[#3B2F2F] !opacity-100 leading-relaxed">
-                  Nuestro espacio es más que una finca; es un santuario donde la paz de las montañas se 
-                  encuentra con la energía de la naturaleza, creando una experiencia única de bienestar y conexión.
-                </p>
-              </div>
-            </div>
-            <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-xl">
-              <OptimizedImage
-                src="/images/Inicio/FINCAPRESENTACION.png"
-                alt="Montañas de la Sierra Nevada"
-                className="absolute inset-0 w-full h-full object-cover"
-                blur={false}
+            <motion.div 
+              className="space-y-8"
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={{
+                  hidden: {},
+                  visible: {
+                    transition: {
+                      staggerChildren: 0.1,
+                    },
+                  },
+                }}
+              >
+                <motion.h2 
+                  className="text-4xl font-bold text-amber-900 leading-tight"
+                  variants={{
+                    hidden: { opacity: 0, y: 20 },
+                    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+                  }}
+                >
+                  Un espacio de conexión con la naturaleza y el espíritu
+                </motion.h2>
+                <motion.div 
+                  className="prose prose-lg text-coffee-dark mt-8"
+                  variants={{
+                    hidden: { opacity: 0, y: 20 },
+                    visible: { opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.2 } },
+                  }}
+                >
+                  <p className="!text-[#3B2F2F] !opacity-100 leading-relaxed">
+                    En La Felicidá, fusionamos las tradiciones ancestrales con la espiritualidad de la Sierra Nevada. 
+                    Cada visita es una oportunidad para reconectarte con la naturaleza, mientras descubres los secretos de 
+                    nuestra sabiduría ancestral y el encanto de nuestra tierra.
+                  </p>
+                  <p className="!text-[#3B2F2F] !opacity-100 leading-relaxed">
+                    Nuestro espacio es más que una finca; es un santuario donde la paz de las montañas se 
+                    encuentra con la energía de la naturaleza, creando una experiencia única de bienestar y conexión.
+                  </p>
+                </motion.div>
+              </motion.div>
+            </motion.div>
+            <motion.div 
+              className="relative h-[500px] rounded-2xl overflow-hidden shadow-xl"
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              whileHover={{ scale: 1.02 }}
+            >
+              <motion.div
+                className="absolute inset-0"
+                whileHover={{ scale: 1.1 }}
+                transition={{ duration: 1.5 }}
+              >
+                <OptimizedImage
+                  src="/images/Inicio/FINCAPRESENTACION.png"
+                  alt="Montañas de la Sierra Nevada"
+                  className="absolute inset-0 w-full h-full object-cover"
+                  blur={false}
+                />
+              </motion.div>
+              <motion.div 
+                className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 0.5, duration: 0.8 }}
               />
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -120,9 +181,34 @@ export default function HomePage() {
       {/* Servicios Destacados */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-amber-900 mb-16">
-            Experiencias que transforman
-          </h2>
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <motion.h2 
+              className="text-3xl md:text-4xl font-bold text-center text-amber-900 mb-16"
+              whileHover={{ scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 200 }}
+            >
+              <motion.span
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              >
+                Experiencias que{' '}
+              </motion.span>
+              <motion.span
+                className="text-[#E4A429]"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+              >
+                transforman
+              </motion.span>
+            </motion.h2>
+          </motion.div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
@@ -147,28 +233,41 @@ export default function HomePage() {
                 icon: Users,
               },
             ].map((service, idx) => (
-              <Card key={idx} className="relative group shadow-md hover:scale-105 hover:shadow-lg outline-4 transition-all duration-300 border-0">
-
-                <CardHeader>
-                  <div className="h-12 w-12 rounded-lg bg-amber-100 flex items-center justify-center mb-4">
-                    <service.icon className="h-6 w-6 text-amber-700" />
-                  </div>
-                  <CardTitle className="text-xl font-bold text-amber-900">{service.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  {/* >>> PÁRRAFO FORZADO A SER VISIBLE <<< */}
-                  <p className="mb-6 leading-relaxed !text-[#3B2F2F] !opacity-100">
-                    {service.description}
-                  </p>
-                  <Button 
-                    variant="ghost" 
-                    className="text-amber-700 hover:text-amber-900 p-0 h-auto font-medium"
-                  >
-                    <MessageCircle className="h-4 w-4 mr-2" />
-                    Consultar
-                  </Button>
-                </CardContent>
-              </Card>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: idx * 0.2 }}
+              >
+                <Card 
+                  key={idx} 
+                  className="relative group shadow-md hover:scale-105 hover:shadow-lg outline-4 transition-all duration-300 border-0 hover:shadow-amber-200/20"
+                >
+                  <CardHeader>
+                    <motion.div 
+                      className="h-12 w-12 rounded-lg bg-amber-100 flex items-center justify-center mb-4 group-hover:bg-amber-200 transition-colors duration-300"
+                      whileHover={{ rotate: 5, scale: 1.1 }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                    >
+                      <service.icon className="h-6 w-6 text-amber-700 group-hover:text-amber-800 transition-colors duration-300" />
+                    </motion.div>
+                    <CardTitle className="text-xl font-bold text-amber-900">{service.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    {/* >>> PÁRRAFO FORZADO A SER VISIBLE <<< */}
+                    <p className="mb-6 leading-relaxed !text-[#3B2F2F] !opacity-100">
+                      {service.description}
+                    </p>
+                    <Button 
+                      variant="ghost" 
+                      className="text-amber-700 hover:text-amber-900 p-0 h-auto font-medium"
+                    >
+                      <MessageCircle className="h-4 w-4 mr-2" />
+                      Consultar
+                    </Button>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -240,28 +339,63 @@ export default function HomePage() {
 />
 
             </div>
-            <div className="space-y-8 order-1 lg:order-2">
-              <h2 className="text-4xl font-bold text-amber-900 leading-tight">
+            <motion.div 
+              className="space-y-8 order-1 lg:order-2"
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <motion.h2 
+                className="text-4xl font-bold text-amber-900 leading-tight"
+                whileHover={{ scale: 1.02, x: 10 }}
+                transition={{ type: "spring", stiffness: 200 }}
+              >
                 Mochilas con pensamiento
-              </h2>
-              <div className="prose prose-lg text-coffee-dark">
+              </motion.h2>
+              <motion.div 
+                className="prose prose-lg text-coffee-dark"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
                 <p className="!text-[#3B2F2F] !opacity-100 leading-relaxed">
                   Cada mochila es una obra de arte que lleva consigo la sabiduría ancestral de nuestros artesanos.
                   Tejidas con dedicación y amor, estas piezas únicas representan la conexión entre la tradición
                   y la modernidad.
                 </p>
-              </div>
-              {/* >>> un poco más de separación con el botón <<< */}
-              <Link to="/mochilas" className="mt-3 inline-block">
-                <Button
-                  size="lg"
-                  className="bg-amber-900 text-white hover:bg-amber-800 flex items-center"
-                >
-                  Encargar mochila
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
-            </div>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
+                <Link to="/mochilas" className="mt-3 inline-block">
+                  <motion.div
+                    whileHover={{ scale: 1.05, x: 10 }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ type: "spring", stiffness: 400 }}
+                  >
+                    <Button
+                      size="lg"
+                      className="bg-amber-900 text-white hover:bg-amber-800 flex items-center group"
+                    >
+                      <span>Encargar mochila</span>
+                      <motion.div
+                        className="ml-2"
+                        initial={{ x: 0 }}
+                        whileHover={{ x: 5 }}
+                        transition={{ type: "spring", stiffness: 400 }}
+                      >
+                        <ArrowRight className="h-4 w-4 group-hover:transform group-hover:translate-x-1 transition-transform" />
+                      </motion.div>
+                    </Button>
+                  </motion.div>
+                </Link>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -286,23 +420,78 @@ export default function HomePage() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-8 text-white">
-              Vive la experiencia completa en La Felicidá
-            </h2>
-            <p className="text-xl text-amber-100 mb-12 max-w-2xl mx-auto">
+            <motion.h2 
+              className="text-4xl md:text-5xl font-bold mb-8 text-white"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <motion.span
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              >
+                Vive la experiencia
+              </motion.span>{' '}
+              <motion.span
+                className="text-[#E4A429]"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+              >
+                completa
+              </motion.span>{' '}
+              <motion.span
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.6 }}
+              >
+                en La Felicidá
+              </motion.span>
+            </motion.h2>
+            <motion.p 
+              className="text-xl text-amber-100 mb-12 max-w-2xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
               Descubre un espacio donde la tradición se une con la espiritualidad
               y la conexión con la naturaleza.
-            </p>
-            <Button 
-              size="lg"
-              className="bg-white text-amber-900 hover:bg-amber-50 hover:scale-105 transform transition-all duration-300"
-              asChild
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <Link to="/servicios">
-                Explorar servicios
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
+              <Button 
+                size="lg"
+                className="bg-white text-amber-900 hover:bg-amber-50 transform transition-all duration-300 group"
+                asChild
+              >
+                <Link to="/servicios">
+                  <motion.span
+                    initial={{ x: 0 }}
+                    whileHover={{ x: -5 }}
+                    transition={{ type: "spring", stiffness: 400 }}
+                  >
+                    Explorar servicios
+                  </motion.span>
+                  <motion.div
+                    className="ml-2 inline-block"
+                    initial={{ x: 0 }}
+                    whileHover={{ x: 5 }}
+                    transition={{ type: "spring", stiffness: 400 }}
+                  >
+                    <ArrowRight className="h-4 w-4 group-hover:transform group-hover:translate-x-1 transition-transform" />
+                  </motion.div>
+                </Link>
+              </Button>
+            </motion.div>
           </motion.div>
         </div>
       </section>

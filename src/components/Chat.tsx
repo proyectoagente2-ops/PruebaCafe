@@ -173,21 +173,57 @@ export function Chat() {
   return (
     <>
       <AnimatePresence>
-        {/* Botón flotante para abrir el chat */}
+        {/* Botón flotante para abrir el chat con movimiento sutil */}
         <motion.button
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={{ 
+            opacity: 1, 
+            y: [0, -3, 0],
+          }}
+          transition={{
+            y: {
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }
+          }}
           exit={{ opacity: 0, y: 20 }}
           onClick={() => setIsOpen(true)}
           className="fixed bottom-6 right-6 p-4 bg-gradient-to-br from-amber-700 to-amber-900 text-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 z-50 group flex items-center gap-3"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+          whileHover={{ 
+            scale: 1.03,
+            y: 0,
+            transition: { duration: 0.2 }
+          }}
+          whileTap={{ scale: 0.98 }}
         >
-          <div className="relative">
+          <motion.div 
+            className="relative"
+            animate={{
+              rotate: [-2, 2, -2]
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          >
             <ChatBubbleLeftIcon className="h-6 w-6" />
-            <span className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-white"></span>
-          </div>
-          <span className="text-sm font-medium pr-1">¿Necesitas ayuda?</span>
+            <motion.span 
+              className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-white"
+              animate={{
+                opacity: [1, 0.6, 1]
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            />
+          </motion.div>
+          <span className="text-sm font-medium pr-1">
+            ¿Necesitas ayuda?
+          </span>
         </motion.button>
 
         {/* Ventana de chat */}

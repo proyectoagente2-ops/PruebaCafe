@@ -183,53 +183,116 @@ function ServicesPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-            {services.map((service) => (
-              <Link
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8"
+          >
+            {services.map((service, idx) => (
+              <motion.div
                 key={service.id}
-                to={`/servicios/${service.id}`}
-                className="group"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
               >
-                <Card className="overflow-hidden bg-white transition-all duration-300 hover:shadow-xl hover:shadow-amber-100/50 hover:-translate-y-1">
-                  {/* Contenedor de imagen con altura fija */}
-                  <div className="relative h-48 sm:h-56 lg:h-64 overflow-hidden">
-                    <OptimizedImage
-                      src={service.image}
-                      alt={service.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                  </div>
-                  {/* Contenido debajo de la imagen */}
-                  <div className="p-6">
-                    <div className="flex items-center gap-2 mb-3">
-                      <div className="p-2 bg-amber-50 rounded-full">
-                        {serviceIcons[service.id as keyof typeof serviceIcons]}
-                      </div>
-                      <span className="text-amber-700 text-sm font-medium uppercase tracking-wider">
-                        {service.id}
-                      </span>
-                    </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-amber-600 transition-colors">
-                      {service.title}
-                    </h3>
-                    <p className="text-gray-600 text-sm line-clamp-3">
-                      {service.description}
-                    </p>
-                    {/* Botón fantasma que aparece en hover */}
-                    <div className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <Button 
-                        variant="ghost" 
-                        className="w-full justify-center text-amber-600 hover:text-amber-700 hover:bg-amber-50"
+                <Link
+                  to={`/servicios/${service.id}`}
+                  className="group block"
+                >
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                  >
+                    <Card className="overflow-hidden bg-white transition-all duration-300 hover:shadow-xl hover:shadow-amber-100/50">
+                      {/* Contenedor de imagen con altura fija */}
+                      <motion.div 
+                        className="relative h-48 sm:h-56 lg:h-64 overflow-hidden"
+                        whileHover={{ scale: 1.05 }}
+                        transition={{ duration: 0.6 }}
                       >
-                        Ver más detalles
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                      </Button>
-                    </div>
-                  </div>
-                </Card>
-              </Link>
+                        <OptimizedImage
+                          src={service.image}
+                          alt={service.title}
+                          className="w-full h-full object-cover"
+                        />
+                        <motion.div
+                          className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                          initial={{ opacity: 0 }}
+                          whileHover={{ opacity: 1 }}
+                          transition={{ duration: 0.3 }}
+                        />
+                      </motion.div>
+                      {/* Contenido debajo de la imagen */}
+                      <motion.div 
+                        className="p-6"
+                        initial={{ y: 0 }}
+                        whileHover={{ y: -5 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <motion.div 
+                          className="flex items-center gap-2 mb-3"
+                          whileHover={{ scale: 1.05 }}
+                          transition={{ type: "spring", stiffness: 400 }}
+                        >
+                          <motion.div 
+                            className="p-2 bg-amber-50 rounded-full"
+                            whileHover={{ rotate: [0, -10, 10, -10, 0] }}
+                            transition={{ duration: 0.5 }}
+                          >
+                            {serviceIcons[service.id as keyof typeof serviceIcons]}
+                          </motion.div>
+                          <span className="text-amber-700 text-sm font-medium uppercase tracking-wider">
+                            {service.id}
+                          </span>
+                        </motion.div>
+                        <motion.h3 
+                          className="text-xl font-bold text-gray-900 mb-3 group-hover:text-amber-600 transition-colors"
+                          whileHover={{ x: 5 }}
+                          transition={{ type: "spring", stiffness: 300 }}
+                        >
+                          {service.title}
+                        </motion.h3>
+                        <p className="text-gray-600 text-sm line-clamp-3">
+                          {service.description}
+                        </p>
+                        {/* Botón fantasma que aparece en hover */}
+                        <motion.div 
+                          className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity"
+                          initial={{ y: 10, opacity: 0 }}
+                          whileHover={{ y: 0, opacity: 1 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <Button 
+                            variant="ghost" 
+                            className="w-full justify-center text-amber-600 hover:text-amber-700 hover:bg-amber-50 group/button"
+                          >
+                            <motion.span
+                              initial={{ x: 0 }}
+                              whileHover={{ x: -5 }}
+                              transition={{ type: "spring", stiffness: 400 }}
+                            >
+                              Ver más detalles
+                            </motion.span>
+                            <motion.div
+                              className="ml-2"
+                              initial={{ x: 0 }}
+                              whileHover={{ x: 5 }}
+                              transition={{ type: "spring", stiffness: 400 }}
+                            >
+                              <ArrowRight className="h-4 w-4" />
+                            </motion.div>
+                          </Button>
+                        </motion.div>
+                      </motion.div>
+                    </Card>
+                  </motion.div>
+                </Link>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -246,21 +309,74 @@ function ServicesPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          >
             {bookingSteps.map((step, index) => (
-              <Card key={index} className="p-6 text-center">
-                <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-amber-600 font-bold text-xl">
-                    {index + 1}
-                  </span>
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">
-                  {step.title}
-                </h3>
-                <p className="text-gray-600">{step.description}</p>
-              </Card>
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ 
+                  duration: 0.5,
+                  delay: index * 0.2,
+                  type: "spring",
+                  stiffness: 100
+                }}
+              >
+                <motion.div
+                  whileHover={{ y: -5 }}
+                  transition={{ type: "spring", stiffness: 400 }}
+                >
+                  <Card className="p-6 text-center relative overflow-hidden">
+                    <motion.div
+                      className="absolute inset-0 bg-amber-100/20 opacity-0"
+                      whileHover={{ opacity: 1 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                    <motion.div 
+                      className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4 relative"
+                      whileHover={{ scale: 1.1, rotate: 360 }}
+                      transition={{ duration: 0.8, type: "spring" }}
+                    >
+                      <motion.span 
+                        className="text-amber-600 font-bold text-xl"
+                        animate={{ 
+                          scale: [1, 1.2, 1],
+                        }}
+                        transition={{ 
+                          duration: 2,
+                          repeat: Infinity,
+                          repeatType: "reverse"
+                        }}
+                      >
+                        {index + 1}
+                      </motion.span>
+                    </motion.div>
+                    <motion.h3 
+                      className="text-xl font-bold text-gray-900 mb-2"
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ type: "spring", stiffness: 400 }}
+                    >
+                      {step.title}
+                    </motion.h3>
+                    <motion.p 
+                      className="text-gray-600"
+                      initial={{ opacity: 0.8 }}
+                      whileHover={{ opacity: 1 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      {step.description}
+                    </motion.p>
+                  </Card>
+                </motion.div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
           <div className="text-center mt-12">
             <Button
@@ -279,7 +395,7 @@ function ServicesPage() {
         {/* Imagen de fondo con overlay */}
         <div className="absolute inset-0">
           <OptimizedImage
-            src="/images/CAFÉS/CAFE_FONDO.png"
+            src="/images/CAFÉS/CAFEFONDO1.png"
             alt="Café La Felicidá"
             className="w-full h-full object-cover"
           />

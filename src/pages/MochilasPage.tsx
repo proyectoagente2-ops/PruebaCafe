@@ -259,46 +259,134 @@ export default function MochilasPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {mochilaProducts.map((mochila) => (
-              <Link
-                to={`/mochilas/${mochila.id}`}
-                className="block group"
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
+            {mochilaProducts.map((mochila, idx) => (
+              <motion.div
                 key={mochila.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ 
+                  duration: 0.5,
+                  delay: idx * 0.1,
+                  type: "spring",
+                  stiffness: 100
+                }}
               >
-                <Card className="h-full hover:shadow-xl transition-all duration-300 border-none transform hover:-translate-y-1">
-                  <div className="aspect-square relative overflow-hidden rounded-t-lg">
-                    <OptimizedImage
-                      src={mochila.image}
-                      alt={mochila.name}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-amber-600 transition-colors">
-                      {mochila.name}
-                    </h3>
-                    <p className="text-gray-600 mb-4">{mochila.description}</p>
-                    <ul className="space-y-2 mb-6">
-                      {mochila.features.map((feature, index) => (
-                        <li key={index} className="flex items-center text-gray-600">
-                          <Star className="h-4 w-4 text-amber-500 mr-2" />
-                          <span>{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    <div className="mt-auto">
-                      <div className="bg-[#C49B66] text-white py-2 px-4 rounded-md flex items-center justify-center group-hover:bg-[#B38A55] transition-colors">
-                        <span>Ver detalles</span>
-                        <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
-                      </div>
-                    </div>
-                  </div>
-                </Card>
-              </Link>
+                <Link
+                  to={`/mochilas/${mochila.id}`}
+                  className="block group"
+                >
+                  <motion.div
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                  >
+                    <Card className="h-full border-none relative bg-white">
+                      <motion.div 
+                        className="aspect-square relative overflow-hidden rounded-t-lg"
+                        whileHover={{ scale: 1.05 }}
+                        transition={{ duration: 0.6 }}
+                      >
+                        <OptimizedImage
+                          src={mochila.image}
+                          alt={mochila.name}
+                          className="w-full h-full object-cover"
+                        />
+                        <motion.div
+                          className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0"
+                          initial={{ opacity: 0 }}
+                          whileHover={{ opacity: 1 }}
+                          transition={{ duration: 0.3 }}
+                        />
+                      </motion.div>
+                      <motion.div 
+                        className="p-6"
+                        initial={{ y: 0 }}
+                        whileHover={{ y: -5 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <motion.h3 
+                          className="text-xl font-bold text-gray-900 mb-2"
+                          whileHover={{ scale: 1.02, x: 5, color: "#C49B66" }}
+                          transition={{ type: "spring", stiffness: 300 }}
+                        >
+                          {mochila.name}
+                        </motion.h3>
+                        <motion.p 
+                          className="text-gray-600 mb-4"
+                          initial={{ opacity: 0.8 }}
+                          whileHover={{ opacity: 1 }}
+                        >
+                          {mochila.description}
+                        </motion.p>
+                        <motion.ul 
+                          className="space-y-2 mb-6"
+                          variants={{
+                            hover: {
+                              transition: {
+                                staggerChildren: 0.1
+                              }
+                            }
+                          }}
+                        >
+                          {mochila.features.map((feature, index) => (
+                            <motion.li 
+                              key={index} 
+                              className="flex items-center text-gray-600"
+                              whileHover={{ x: 5, color: "#C49B66" }}
+                              transition={{ type: "spring", stiffness: 300 }}
+                            >
+                              <motion.div
+                                whileHover={{ rotate: 360, scale: 1.2 }}
+                                transition={{ duration: 0.3 }}
+                              >
+                                <Star className="h-4 w-4 text-amber-500 mr-2" />
+                              </motion.div>
+                              <span>{feature}</span>
+                            </motion.li>
+                          ))}
+                        </motion.ul>
+                        <motion.div 
+                          className="mt-auto"
+                          whileHover={{ scale: 1.05 }}
+                          transition={{ type: "spring", stiffness: 400 }}
+                        >
+                          <motion.div 
+                            className="bg-[#C49B66] text-white py-2 px-4 rounded-md flex items-center justify-center relative overflow-hidden group"
+                            whileHover={{ 
+                              backgroundColor: "#B38A55",
+                            }}
+                          >
+                            <motion.span
+                              initial={{ x: 0 }}
+                              whileHover={{ x: -5 }}
+                              transition={{ type: "spring", stiffness: 400 }}
+                            >
+                              Ver detalles
+                            </motion.span>
+                            <motion.div
+                              className="ml-2"
+                              initial={{ x: 0 }}
+                              whileHover={{ x: 5 }}
+                              transition={{ type: "spring", stiffness: 400 }}
+                            >
+                              <ArrowRight className="h-4 w-4" />
+                            </motion.div>
+                          </motion.div>
+                        </motion.div>
+                      </motion.div>
+                    </Card>
+                  </motion.div>
+                </Link>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -315,17 +403,86 @@ export default function MochilasPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 ">
-              {artesanalFeatures.map((feature, index) => (
-              <Card key={index} className="text-center p-8 border-none hover:bg-yellow-300 hover:scale-105 shadow-lg hover:shadow-amber-400/25  hover:shadow-xl transition-all duration-300 bg-yellow-100">
-                <div className="w-16 h-16 mx-auto mb-6 bg-amber-100 rounded-full flex items-center justify-center">
-                  <feature.icon className="h-8 w-8 text-amber-700" />
-                </div>
-                <h3 className="text-xl font-bold text-amber-900 mb-4">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
-              </Card>
+          <motion.div 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          >
+            {artesanalFeatures.map((feature, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.5,
+                  delay: index * 0.2,
+                  type: "spring",
+                  stiffness: 100
+                }}
+              >
+                <motion.div
+                  whileHover={{ 
+                    scale: 1.05,
+                    rotateY: 10,
+                    boxShadow: "0 20px 25px -5px rgba(251, 191, 36, 0.25), 0 10px 10px -5px rgba(251, 191, 36, 0.1)"
+                  }}
+                  transition={{ type: "spring", stiffness: 400 }}
+                >
+                  <Card className="text-center p-8 border-none bg-gradient-to-br from-yellow-100 to-amber-50 relative overflow-hidden">
+                    <motion.div
+                      className="absolute inset-0 bg-yellow-300 opacity-0"
+                      whileHover={{ opacity: 0.1 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                    <motion.div
+                      className="w-16 h-16 mx-auto mb-6 bg-amber-100 rounded-full flex items-center justify-center relative"
+                      whileHover={{ 
+                        scale: 1.2,
+                        rotate: 360,
+                        backgroundColor: "#FCD34D"
+                      }}
+                      transition={{ 
+                        duration: 0.8,
+                        type: "spring",
+                        stiffness: 200
+                      }}
+                    >
+                      <motion.div
+                        animate={{ 
+                          scale: [1, 1.2, 1],
+                          rotate: [0, 10, -10, 0]
+                        }}
+                        transition={{ 
+                          duration: 3,
+                          repeat: Infinity,
+                          repeatType: "reverse"
+                        }}
+                      >
+                        <feature.icon className="h-8 w-8 text-amber-700" />
+                      </motion.div>
+                    </motion.div>
+                    <motion.h3 
+                      className="text-xl font-bold text-amber-900 mb-4"
+                      whileHover={{ scale: 1.05, color: "#92400E" }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                    >
+                      {feature.title}
+                    </motion.h3>
+                    <motion.p 
+                      className="text-gray-600"
+                      initial={{ opacity: 0.8 }}
+                      whileHover={{ opacity: 1 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      {feature.description}
+                    </motion.p>
+                  </Card>
+                </motion.div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
