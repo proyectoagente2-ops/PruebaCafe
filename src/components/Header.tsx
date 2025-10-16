@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, ShoppingCart, X, Home, Coffee, Backpack, Phone, Sparkles, Heart } from 'lucide-react';
+import { Menu, ShoppingCart, X, Heart } from 'lucide-react';
 import OptimizedImage from './OptimizedImage';
 import { useCart } from '@/lib/store';
 import type { CartItem } from '@/lib/store';
@@ -15,15 +15,15 @@ import '@/styles/header.css';
 type NavigationItem = {
   name: string;
   href: string;
-  icon: React.ReactNode;
+  icon?: React.ReactNode;
 };
 
 const navigation: NavigationItem[] = [
-  { name: "Inicio", href: ROUTES.HOME, icon: <Home className="w-4 h-4 mr-2" /> },
-  { name: "Servicios", href: ROUTES.SERVICIOS, icon: <Sparkles className="w-4 h-4 mr-2" /> },
-  { name: "Café", href: ROUTES.CAFE, icon: <Coffee className="w-4 h-4 mr-2" /> },
-  { name: "Mochilas", href: ROUTES.MOCHILAS, icon: <Backpack className="w-4 h-4 mr-2" /> },
-  { name: "Contacto", href: ROUTES.CONTACTO, icon: <Phone className="w-4 h-4 mr-2" /> },
+  { name: "Inicio", href: ROUTES.HOME, icon: null },
+  { name: "Servicios", href: ROUTES.SERVICIOS, icon: null },
+  { name: "Café", href: ROUTES.CAFE, icon: null },
+  { name: "Mochilas", href: ROUTES.MOCHILAS, icon: null },
+  { name: "Contacto", href: ROUTES.CONTACTO, icon: null },
 ];
 
 export default function Header() {
@@ -53,37 +53,39 @@ export default function Header() {
       <div className={`absolute inset-0 ${isServiceDetailPage ? 'bg-[#fffcef] shadow-md' : 'bg-[#fffcef] shadow-sm'}`} />
 
       <nav className="container relative mx-auto">
-        <div className="flex items-center justify-between h-20 px-6 lg:px-8">
+        <div className="flex items-center justify-between h-20 px-8 lg:px-12">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link to={ROUTES.HOME} className="block transition-opacity hover:opacity-90">
+            <Link to={ROUTES.HOME} className="block transition-transform duration-200 hover:scale-105">
               <OptimizedImage 
                 src="/images/LaFelicidA_transparente_ALPHA_2x.png"
                 alt="LA FELICIDÁ" 
-                className="h-24 w-auto object-contain py-1"
+                className="h-16 w-auto object-contain"
                 priority
               />
             </Link>
           </div>
 
           {/* Navegación Desktop */}
-          <div className="hidden md:flex flex-1 justify-center max-w-3xl mx-auto">
-            <nav className="flex items-center justify-center">
+          <div className="hidden md:flex flex-1 justify-center max-w-4xl ml-12">
+            <nav className="flex items-center justify-center space-x-2">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   to={item.href}
-                  className={`relative px-5 py-2 mx-2 text-[15px] font-medium transition-all duration-300
+                  className={`relative px-6 py-2.5 text-[15px] font-medium transition-all duration-300 rounded-full hover:bg-amber-50
                     ${location.pathname === item.href 
-                      ? 'text-[#FFD65A]' 
-                      : 'text-[#5C3B28] hover:text-[#FFD65A]'
+                      ? 'text-amber-600' 
+                      : 'text-[#5C3B28] hover:text-amber-600'
                     }`}
                 >
-                  {item.name}
+                  <span className="flex items-center">
+                    {item.name}
+                  </span>
                   {location.pathname === item.href && (
                     <motion.div 
                       layoutId="underline"
-                      className="absolute left-3 right-3 -bottom-1 h-0.5 bg-[#FFD65A]"
+                      className="absolute left-3 right-3 -bottom-1 h-0.5 bg-amber-600"
                       initial={false}
                     />
                   )}
@@ -117,10 +119,9 @@ export default function Header() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="relative w-10 h-10 text-[#5C3B28] hover:text-[#FFD65A] transition-colors shadow-none"
+                  className="relative w-12 h-12 text-[#5C3B28] hover:text-amber-600 transition-all duration-300 hover:scale-110"
                 >
-                  
-                  <ShoppingCart className="h-5 w-5" />
+                  <ShoppingCart className="h-6 w-6" />
                   <AnimatePresence>
                     {cart.items.length > 0 && (
                       <motion.div
@@ -129,10 +130,9 @@ export default function Header() {
                         exit={{ scale: 1 }}
                         className="absolute -top-2 -right-2"
                       >
-                        
                         <Badge 
                           variant="default" 
-                          className="px-2 py-1 rounded-full bg-amber-500 text-[10px] whitespace-nowrap"
+                          className="px-2 py-1 rounded-full bg-amber-500 hover:bg-amber-600 text-[11px] font-semibold whitespace-nowrap"
                         >
                           {cart.items.filter((item: CartItem) => item.type === 'product').length > 0 && 
                             `${cart.items.filter((item: CartItem) => item.type === 'product').length}P`}

@@ -1,35 +1,11 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { MapPin, Phone, Mail, MessageCircle, Send, Check } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import OptimizedImage from '@/components/OptimizedImage';
-
-const testimonios = [
-  {
-    id: 1,
-    nombre: "María González",
-    cargo: "Amante del Café",
-    mensaje: "Un espacio acogedor con el mejor café de la región. ¡Increíble experiencia!",
-    imagen: "/images/testimonios/maria.jpg"
-  },
-  {
-    id: 2,
-    nombre: "Carlos Ramírez",
-    cargo: "Cliente Frecuente",
-    mensaje: "La calidad y el servicio son excepcionales. Me siento como en casa.",
-    imagen: "/images/testimonios/carlos.jpg"
-  },
-  {
-    id: 3,
-    nombre: "Ana Valencia",
-    cargo: "Barista Profesional",
-    mensaje: "Un lugar que respeta y entiende la verdadera cultura del café.",
-    imagen: "/images/testimonios/ana.jpg"
-  }
-];
 
 export default function ContactoPage() {
   const [formState, setFormState] = useState({
@@ -69,14 +45,14 @@ export default function ContactoPage() {
   };
 
   return (
-        <main className="min-h-screen bg-[#1A0F0A] text-white pt-20 overflow-hidden">
+        <main className="min-h-screen bg-[#FBF7F0] text-[#3A2D1A] pt-20 overflow-hidden">
       {/* Hero Section con Efecto Parallax Mejorado */}
-      <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[100vh] w-full flex items-center justify-center overflow-hidden">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.2 }}
-          className="absolute inset-0 bg-gradient-to-br from-[#1A0F0A]/95 via-transparent to-[#1A0F0A]/90 backdrop-blur-sm z-10"
+          className="absolute inset-0 bg-gradient-to-br from-amber-950/40 via-transparent to-amber-950/40 backdrop-blur-sm z-10"
         />
         <motion.div 
           initial={{ scale: 1.1, y: 0 }}
@@ -85,12 +61,22 @@ export default function ContactoPage() {
             scale: { duration: 2, ease: "easeOut" },
             y: { duration: 20, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }
           }}
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: 'url(/images/Inicio/cafe-granos-tostados.jpg)',
-            backgroundSize: 'cover',
-            filter: 'brightness(0.4) contrast(1.2) saturate(1.1)'
-          }}
+          className="absolute inset-0"
+        >
+          <OptimizedImage
+            src="/images/contactos/Contactos fondo.jpg"
+            alt="Finca La Felicidá - Contacto"
+            className="w-full h-full object-cover brightness-[0.7] contrast-110 saturate-120"
+            width={1920}
+            height={1080}
+            priority
+          />
+        </motion.div>
+        <motion.div 
+          initial={{ opacity: 0, scale: 1.1 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.5, delay: 0.2 }}
+          className="absolute inset-0 bg-[url('/images/Inicio/texture-overlay.png')] opacity-20 z-[5] mix-blend-soft-light"
         />
         
         <motion.div 
@@ -103,15 +89,134 @@ export default function ContactoPage() {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6 }}
-            className="text-6xl md:text-7xl font-bold mb-6 tracking-tight drop-shadow-lg bg-clip-text text-transparent bg-gradient-to-r from-amber-100 to-amber-50"
+            className="text-6xl md:text-7xl font-bold mb-6 tracking-tight drop-shadow-lg text-amber-50"
           >
-            Contáctanos
+            Nuestra Historia
           </motion.h1>
-          <p className="text-xl md:text-2xl text-white/95 mb-8 leading-relaxed max-w-2xl mx-auto drop-shadow">
-            Estamos aquí para responder tus preguntas y ayudarte a descubrir
-            La Felicidá, tu experiencia artesanal en Colombia.
+          <p className="text-xl md:text-2xl text-amber-50/95 mb-8 leading-relaxed max-w-2xl mx-auto drop-shadow">
+            Descubre la magia de La Felicidá, donde cada taza de café cuenta una historia
+            y cada visita se convierte en una experiencia inolvidable.
           </p>
         </motion.div>
+      </section>
+
+      {/* Sección Sobre la Finca */}
+      <section className="py-24 bg-gradient-to-b from-amber-50/50 to-amber-100/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
+          >
+            <div className="space-y-6">
+              <motion.h2 
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="text-4xl font-bold text-amber-900 mb-6"
+              >
+                Sobre La Felicidá
+              </motion.h2>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                viewport={{ once: true }}
+                className="prose prose-lg prose-amber"
+              >
+                <p className="text-lg text-amber-800 leading-relaxed">
+                  Enclavada en las majestuosas montañas de Pueblo Bello, Cesar, La Felicidá es más que una 
+                  finca cafetera: es un santuario donde la tradición y la innovación se encuentran para crear 
+                  experiencias únicas.
+                </p>
+                <p className="text-lg text-amber-800 leading-relaxed">
+                  Desde hace generaciones, nuestra familia ha cultivado no solo café de alta calidad, sino 
+                  también un profundo respeto por la cultura local y el medio ambiente. Cada grano de café 
+                  que producimos cuenta la historia de nuestra tierra y nuestra gente.
+                </p>
+                <p className="text-lg text-amber-800 leading-relaxed">
+                  En La Felicidá, nos dedicamos a preservar y compartir la rica herencia cultural de 
+                  nuestra región, ofreciendo a nuestros visitantes una experiencia auténtica y enriquecedora 
+                  que combina la tradición cafetera con la hospitalidad colombiana.
+                </p>
+              </motion.div>
+            </div>
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="relative h-[600px] rounded-2xl overflow-hidden shadow-2xl"
+            >
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="absolute inset-0 w-full h-full object-cover"
+              >
+                <source src="/videos/finca-video.mp4" type="video/mp4" />
+              </video>
+              <div className="absolute inset-0 bg-gradient-to-t from-amber-950/30 to-transparent" />
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Galería de Fotos */}
+      <section className="py-24 bg-amber-50/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl font-bold text-amber-900 mb-6">Experiencias en La Felicidá</h2>
+            <p className="text-lg text-amber-700 max-w-2xl mx-auto">
+              Momentos inolvidables capturados en nuestra finca, donde cada visita se convierte en un 
+              recuerdo para toda la vida.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
+            {[
+              '/images/experiences/exp1.jpg',
+              '/images/experiences/exp2.jpg',
+              '/images/experiences/exp3.jpg',
+              '/images/experiences/exp4.jpg',
+              '/images/experiences/exp5.jpg',
+              '/images/experiences/exp6.jpg',
+            ].map((image, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -10 }}
+                className="group relative aspect-square rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
+              >
+                <OptimizedImage
+                  src={image}
+                  alt={`Experiencia ${index + 1}`}
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-amber-950/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
       </section>
 
       {/* Contact Info Cards con Animaciones */}
@@ -198,12 +303,7 @@ export default function ContactoPage() {
             viewport={{ once: true }}
             className="mt-20 max-w-3xl mx-auto"
           >
-            <Card className="backdrop-blur-md bg-white/95 border-2 border-amber-100/50 hover:border-amber-200 shadow-xl hover:shadow-2xl hover:shadow-amber-100/20 transition-all duration-300 rounded-xl">
-              <CardHeader className="space-y-2">
-                <CardTitle className="text-3xl text-center text-amber-900 font-bold">Envíanos un Mensaje</CardTitle>
-                <p className="text-amber-600 text-center">Nos pondremos en contacto contigo pronto</p>
-              </CardHeader>
-              <CardContent>
+            <div className="backdrop-blur-md bg-white/95 p-8 rounded-xl">
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <motion.div
@@ -212,16 +312,13 @@ export default function ContactoPage() {
                       transition={{ type: "spring", stiffness: 400 }}
                       className="relative"
                     >
-                      <label className="block text-sm font-medium text-amber-700 mb-2">
-                        Nombre
-                      </label>
                       <input
                         type="text"
                         required
                         value={formState.nombre}
                         onChange={(e) => setFormState({...formState, nombre: e.target.value})}
                         className="w-full px-4 py-3 rounded-lg border-2 border-amber-200 focus:ring-4 focus:ring-amber-500/20 focus:border-amber-500 transition-all bg-white/80 placeholder-amber-300"
-                        placeholder="Tu nombre"
+                        placeholder=""
                       />
                     </motion.div>
                     <motion.div
@@ -230,16 +327,13 @@ export default function ContactoPage() {
                       transition={{ type: "spring", stiffness: 400 }}
                       className="relative"
                     >
-                      <label className="block text-sm font-medium text-amber-700 mb-2">
-                        Email
-                      </label>
                       <input
                         type="email"
                         required
                         value={formState.email}
                         onChange={(e) => setFormState({...formState, email: e.target.value})}
                         className="w-full px-4 py-3 rounded-lg border-2 border-amber-200 focus:ring-4 focus:ring-amber-500/20 focus:border-amber-500 transition-all bg-white/80 placeholder-amber-300"
-                        placeholder="tu@email.com"
+                        placeholder=""
                       />
                     </motion.div>
                   </div>
@@ -249,15 +343,12 @@ export default function ContactoPage() {
                     transition={{ type: "spring", stiffness: 400 }}
                     className="relative"
                   >
-                    <label className="block text-sm font-medium text-amber-700 mb-2">
-                      Teléfono
-                    </label>
                     <input
                       type="tel"
                       value={formState.telefono}
                       onChange={(e) => setFormState({...formState, telefono: e.target.value})}
                       className="w-full px-4 py-3 rounded-lg border-2 border-amber-200 focus:ring-4 focus:ring-amber-500/20 focus:border-amber-500 transition-all bg-white/80 placeholder-amber-300"
-                      placeholder="Tu teléfono (opcional)"
+                      placeholder=""
                     />
                   </motion.div>
                   <motion.div
@@ -266,16 +357,13 @@ export default function ContactoPage() {
                     transition={{ type: "spring", stiffness: 400 }}
                     className="relative"
                   >
-                    <label className="block text-sm font-medium text-amber-700 mb-2">
-                      Mensaje
-                    </label>
                     <textarea
                       required
                       value={formState.mensaje}
                       onChange={(e) => setFormState({...formState, mensaje: e.target.value})}
                       rows={4}
                       className="w-full px-4 py-3 rounded-lg border-2 border-amber-200 focus:ring-4 focus:ring-amber-500/20 focus:border-amber-500 transition-all bg-white/80 placeholder-amber-300 resize-none"
-                      placeholder="¿En qué podemos ayudarte?"
+                      placeholder=""
                     />
                   </motion.div>
                   <motion.button
@@ -315,73 +403,13 @@ export default function ContactoPage() {
                     ) : (
                       <>
                         <Send className="h-5 w-5" />
-                        <span>Enviar Mensaje</span>
+                        <span>Enviar</span>
                       </>
                     )}
                   </motion.button>
                 </form>
-              </CardContent>
-            </Card>
+            </div>
           </motion.div>
-          
-        </div>
-      </section>
-
-      {/* Testimonios Section */}
-      <section className="py-20 bg-gradient-to-b from-white to-amber-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-bold text-amber-900 mb-4">Lo que Dicen Nuestros Clientes</h2>
-            <p className="text-lg text-amber-700 max-w-2xl mx-auto">
-              Descubre por qué nuestros visitantes aman La Felicidá
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonios.map((testimonio, index) => (
-              <motion.div
-                key={testimonio.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.03 }}
-                className="relative"
-              >
-                <Card className="h-full bg-white/90 backdrop-blur-md border-2 border-amber-100/50 hover:border-amber-200 hover:shadow-2xl hover:shadow-amber-100/20 transition-all duration-300 rounded-xl overflow-hidden">
-                  <CardContent className="pt-12 px-6">
-                    <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
-                      <motion.div
-                        whileHover={{ scale: 1.1, rotateZ: 5 }}
-                        transition={{ type: "spring", stiffness: 300 }}
-                        className="w-16 h-16 rounded-full overflow-hidden ring-4 ring-amber-500 ring-offset-4 ring-offset-white shadow-xl"
-                      >
-                        <OptimizedImage
-                          src={testimonio.imagen}
-                          alt={testimonio.nombre}
-                          className="w-full h-full object-cover"
-                          blur={false}
-                        />
-                      </motion.div>
-                    </div>
-                    <div className="text-center space-y-4">
-                      <p className="text-lg text-amber-700 italic mb-4 leading-relaxed">"{testimonio.mensaje}"</p>
-                      <div className="space-y-1">
-                        <h4 className="font-bold text-lg text-amber-900">{testimonio.nombre}</h4>
-                        <p className="text-sm font-medium text-amber-600">{testimonio.cargo}</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
         </div>
       </section>
 

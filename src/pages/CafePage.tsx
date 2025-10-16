@@ -99,7 +99,7 @@ export default function CafePage() {
             </Badge>
             
            <motion.h1 
-               className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-10 tracking-tight"
+               className="text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-12 tracking-tight leading-tight"
                initial={{ opacity: 0, y: 20 }}
                animate={{ opacity: 1, y: 0 }}
                transition={{ duration: 0.8, delay: 0.3 }}
@@ -133,7 +133,7 @@ export default function CafePage() {
            </motion.h1>
 
             
-            <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto font-normal leading-relaxed mb-14 tracking-wide">
+            <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto font-light leading-relaxed mb-16 tracking-wide">
               Descubre la exquisitez de nuestros cafés cultivados en las alturas 
               sagradas de la Sierra Nevada. Una experiencia sensorial única.
             </p>
@@ -151,7 +151,7 @@ export default function CafePage() {
               >
                 <Button 
                   size="lg"
-                  className="bg-white/95 text-[#1A0F0A] hover:bg-white px-10 py-7 text-base font-medium rounded-full transition-all duration-500 hover:shadow-lg hover:shadow-white/20 tracking-wide relative overflow-hidden group"
+                  className="bg-white/95 text-[#1A0F0A] hover:bg-white px-12 py-8 text-lg font-medium rounded-full transition-all duration-500 hover:shadow-lg hover:shadow-white/20 tracking-wide relative overflow-hidden group"
                   onClick={() => {
                     const productsSection = document.querySelector('#products-section');
                     productsSection?.scrollIntoView({ behavior: 'smooth' });
@@ -174,7 +174,7 @@ export default function CafePage() {
                 <Button
                   variant="outline"
                   size="lg"
-                  className="bg-transparent border border-white/30 text-white hover:bg-white/10 px-10 py-7 text-base font-normal rounded-full transition-all duration-500 relative overflow-hidden group"
+                  className="bg-transparent border border-white/30 text-white hover:bg-white/10 px-12 py-8 text-lg font-normal rounded-full transition-all duration-500 relative overflow-hidden group"
                 >
                   <motion.span 
                     className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0"
@@ -188,42 +188,27 @@ export default function CafePage() {
             </motion.div>
           </motion.div>
 
-          {/* Scroll Indicator */}
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1 }}
-            className="absolute bottom-16 left-1/2 transform -translate-x-1/2"
-          >
-            <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center items-start p-2">
-              <motion.div
-                animate={{ y: [0, 8, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-                className="w-1 h-1 bg-white rounded-full"
-              />
-            </div>
-          </motion.div>
         </div>
       </section>
 
       {/* Products Grid */}
-      <section id="products-section" className="py-40 bg-[#F8F8F8]">
+      <section id="products-section" className="py-48 bg-[#F8F8F8]">
         <div className="container mx-auto px-4 max-w-7xl">
-          <div className="text-center mb-24">
-            <Badge className="bg-[#1A0F0A] text-white mb-8 px-6 py-2 text-sm uppercase tracking-wider font-normal hover:bg-black/90 transition-colors duration-300">
+          <div className="text-center mb-32">
+            <Badge className="bg-[#1A0F0A] text-white mb-10 px-8 py-2.5 text-sm uppercase tracking-wider font-medium hover:bg-black/90 transition-colors duration-300">
               Nuestros Cafés
             </Badge>
-            <h2 className="text-4xl md:text-5xl font-bold text-[#1A0F0A] mb-10">
-            Ediciones <span className="font-serif italic text-[#8B4513]">Especiales</span>
+            <h2 className="text-5xl md:text-6xl font-bold text-[#1A0F0A] mb-12 tracking-tight">
+              Ediciones <span className="font-serif italic text-[#8B4513]">Especiales</span>
             </h2>
-            <p className="text-xl text-[#1A0F0A]/70 max-w-2xl mx-auto leading-relaxed font-light">
+            <p className="text-2xl text-[#1A0F0A]/70 max-w-3xl mx-auto leading-relaxed font-light tracking-wide">
               Descubre nuestra selección de cafés especiales, cada uno con su 
               propia personalidad y carácter único.
             </p>
           </div>
 
           <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 xl:gap-20"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -262,9 +247,9 @@ export default function CafePage() {
       </section>
 
       {/* Attributes Section */}
-      <section className="py-32 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16">
+      <section className="py-40 bg-white">
+        <div className="container mx-auto px-4 max-w-7xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-20">
             {coffeeAttributes.map((attribute, index) => (
               <motion.div
                 key={attribute.title}
