@@ -394,6 +394,27 @@ VITE_ENV=production
 
 ## Registro de Cambios
 
+### Última Actualización (18 de Octubre, 2025)
+1. Mejoras en el Carrusel de Productos
+   - Implementación de auto-scroll más fluido (1.8 segundos entre slides)
+   - Optimización de las transiciones (300ms duration)
+   - Ajuste de tiempos de animación
+   - Mejora en la respuesta a interacciones del usuario
+   - Configuración optimizada para un movimiento más constante
+   - Transiciones lineales para mejor fluidez
+
+2. Sistema de Internacionalización
+   - Implementación de componentes NonTranslatable
+   - Configuración inicial del sistema de traducción
+   - Documentación del plan de internacionalización
+   - Protección de términos específicos de la marca
+
+3. Optimizaciones Generales
+   - Mejoras en la fluidez de las animaciones
+   - Ajustes en la experiencia de usuario
+   - Correcciones de diseño responsivo
+   - Actualización de dependencias
+
 ### Octubre 2025
 - **Mejoras en CafePage**
   - Optimización de la imagen de fondo principal
