@@ -3,7 +3,7 @@ import { persist } from 'zustand/middleware';
 
 type Message = {
   id: string;
-  text: string;
+  text: string | JSX.Element;
   sender: 'user' | 'bot';
   timestamp: Date;
 };

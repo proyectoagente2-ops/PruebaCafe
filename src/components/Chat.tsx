@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { Dialog } from '@headlessui/react';
+import { NonTranslatable } from '@/components/shared/NonTranslatable';
 import { ChatBubbleLeftIcon, XMarkIcon, PaperAirplaneIcon, UserIcon } from '@heroicons/react/24/outline';
 import { useChatStore } from '@/lib/chatStore';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -52,7 +53,7 @@ export function Chat() {
     if (isOpen && currentSession && messages.length === 0) {
       addMessage({
         id: 'welcome',
-        text: '¡Hola! Soy el asistente virtual de La Felicidá. ¿En qué puedo ayudarte hoy? 😊',
+        text: <>¡Hola! Soy el asistente virtual de <NonTranslatable>La Felicidá</NonTranslatable>. ¿En qué puedo ayudarte hoy? 😊</>,
         sender: 'bot',
         timestamp: new Date(),
       });
@@ -124,9 +125,16 @@ export function Chat() {
         botResponseText = 'Lo siento, no pude procesar tu mensaje. ¿Podrías intentarlo de nuevo?';
       }
 
+      // Analizamos si el texto contiene "La Felicidá" y lo envolvemos con NonTranslatable si es necesario
       const botMessage = {
         id: (Date.now() + 1).toString(),
-        text: botResponseText,
+        text: typeof botResponseText === 'string' && botResponseText.includes('La Felicidá')
+          ? <>{botResponseText.split('La Felicidá').map((part, i, arr) => 
+              i === arr.length - 1 
+                ? part 
+                : <>{part}<NonTranslatable>La Felicidá</NonTranslatable></>
+            )}</>
+          : botResponseText,
         sender: 'bot' as const,
         timestamp: new Date(),
       };
@@ -265,7 +273,7 @@ export function Chat() {
                         <ChatBubbleLeftIcon className="h-full w-full text-white" />
                       </div>
                       <div>
-                        <h2 className="font-medium text-white">Asistente de La Felicidá</h2>
+                        <h2 className="font-medium text-white">Asistente de&nbsp;<NonTranslatable>La Felicidá</NonTranslatable></h2>
                         <div className="flex items-center gap-1.5 mt-0.5">
                           <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                           <p className="text-xs text-amber-100">En línea</p>
@@ -308,7 +316,9 @@ export function Chat() {
                               : 'bg-white border border-amber-100'
                           )}
                         >
-                          <p className="text-sm leading-relaxed">{message.text}</p>
+                          <div className="text-sm leading-relaxed">
+                            {typeof message.text === 'string' ? <p>{message.text}</p> : message.text}
+                          </div>
                           <span className="text-[10px] mt-1.5 block opacity-70">
                             {new Date(message.timestamp).toLocaleTimeString([], { 
                               hour: '2-digit', 

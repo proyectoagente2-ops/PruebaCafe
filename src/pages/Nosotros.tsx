@@ -30,7 +30,7 @@ export default function NosotrosPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 2 }}
-            className="absolute inset-0 bg-[#2C1810]"
+            className="absolute inset-0 bg-gradient-to-br from-[#1A1208] via-[#251912] to-[#32281E]"
           >
             {/* Partículas flotantes */}
             {[...Array(20)].map((_, i) => (
@@ -85,11 +85,11 @@ export default function NosotrosPage() {
               className="inline-block relative px-8 py-3"
               whileHover={{ scale: 1.05 }}
             >
-              <span className="relative z-10 text-sm tracking-[0.2em] uppercase text-[#FFD65A] font-medium">
+              <span className="relative z-10 text-sm tracking-[0.2em] uppercase text-amber-300 font-medium">
                 Tradición Cafetera
               </span>
               <motion.div
-                className="absolute inset-0 bg-[#2C1810]/40 rounded-full border border-[#FFD65A]/30 backdrop-blur-sm"
+                className="absolute inset-0 bg-gradient-to-r from-[#2C1810]/60 to-[#3A2518]/40 rounded-full border border-amber-400/30 backdrop-blur-sm"
                 whileHover={{
                   scale: 1.05,
                   borderColor: "rgba(255, 214, 90, 0.5)",
@@ -105,7 +105,7 @@ export default function NosotrosPage() {
             transition={{ duration: 1, delay: 0.3 }}
             className="text-6xl md:text-8xl font-bold mb-8"
           >
-            <span className="bg-gradient-to-r from-[#FFD65A] via-amber-300 to-[#FFD65A] text-transparent bg-clip-text filter drop-shadow-lg">
+              <span className="bg-gradient-to-r from-[#FFB840] via-[#FFD449] to-[#FFCD28] text-transparent bg-clip-text filter drop-shadow-lg">
               Nuestra Historia
             </span>
           </motion.h1>
@@ -183,11 +183,11 @@ export default function NosotrosPage() {
       </section>
 
       {/* Historia Section with Visual Appeal */}
-      <section className="py-32 relative overflow-hidden bg-gradient-to-b from-white via-[#FFF8E7] to-[#FFF3D0]">
+      <section className="py-32 relative overflow-hidden bg-gradient-to-b from-[#FFF9EA] via-[#FFF6DD] to-[#FFEDC0]">
         {/* Fondo Parallax */}
   <CoffeeParallaxBackground
     src="/images/CAFÉS/E.jpg"
-    opacity={0.9}
+    opacity={0.85}
     sensitivity={90}
   />
 
@@ -379,7 +379,7 @@ export default function NosotrosPage() {
               transition={{ duration: 0.6 }}
               className="inline-block"
             >
-              <h2 className="text-5xl font-bold text-[#5C3B28] mb-6">
+              <h2 className="text-5xl font-bold mb-6 bg-gradient-to-br from-[#4A2F1C] to-[#6B452A] text-transparent bg-clip-text">
                 Nuestros Valores
               </h2>
             </motion.div>
@@ -387,7 +387,7 @@ export default function NosotrosPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-xl text-[#5C3B28]/80 max-w-2xl mx-auto font-medium"
+              className="text-xl text-[#5C3B28]/90 max-w-2xl mx-auto font-medium"
             >
               Principios que guían cada taza de café que producimos
             </motion.p>
@@ -399,19 +399,19 @@ export default function NosotrosPage() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <Card className="text-center border-none hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500 bg-[#fffcef]">
+              <Card className="text-center border-none hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500 bg-gradient-to-br from-[#FFF9EA] to-[#FFF6DD]">
                 <CardHeader>
                   <motion.div
                     whileHover={{ rotate: 360 }}
                     transition={{ duration: 0.8 }}
-                    className="w-20 h-20 mx-auto mb-6 rounded-full bg-[#FFD65A]/20 flex items-center justify-center shadow-lg"
+                    className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-[#FFB840]/20 to-[#FFD449]/20 flex items-center justify-center shadow-lg"
                   >
-                    <Award className="h-10 w-10 text-[#5C3B28]" />
+                    <Award className="h-10 w-10 text-[#4A2F1C]" />
                   </motion.div>
-                  <CardTitle className="text-2xl font-bold text-[#5C3B28]">Excelencia</CardTitle>
+                  <CardTitle className="text-2xl font-bold bg-gradient-to-r from-[#4A2F1C] to-[#6B452A] text-transparent bg-clip-text">Excelencia</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-[#5C3B28]/80 font-medium">Compromiso inquebrantable con la calidad en cada paso del proceso.</p>
+                  <p className="text-[#5C3B28]/90 font-medium">Compromiso inquebrantable con la calidad en cada paso del proceso.</p>
                 </CardContent>
               </Card>
             </motion.div>
@@ -421,19 +421,19 @@ export default function NosotrosPage() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              <Card className="text-center border-none hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500 bg-[#fffcef]">
+              <Card className="text-center border-none hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500 bg-gradient-to-br from-[#FFF9EA] to-[#FFF6DD]">
                 <CardHeader>
                   <motion.div
                     whileHover={{ rotate: 360 }}
                     transition={{ duration: 0.8 }}
-                    className="w-20 h-20 mx-auto mb-6 rounded-full bg-[#FFD65A]/20 flex items-center justify-center shadow-lg"
+                    className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-[#FFB840]/20 to-[#FFD449]/20 flex items-center justify-center shadow-lg"
                   >
-                    <Leaf className="h-10 w-10 text-[#5C3B28]" />
+                    <Leaf className="h-10 w-10 text-[#4A2F1C]" />
                   </motion.div>
-                  <CardTitle className="text-2xl font-bold text-[#5C3B28]">Sostenibilidad</CardTitle>
+                  <CardTitle className="text-2xl font-bold bg-gradient-to-r from-[#4A2F1C] to-[#6B452A] text-transparent bg-clip-text">Sostenibilidad</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-[#5C3B28]/80 font-medium">Prácticas responsables que protegen nuestro entorno y comunidad.</p>
+                  <p className="text-[#5C3B28]/90 font-medium">Prácticas responsables que protegen nuestro entorno y comunidad.</p>
                 </CardContent>
               </Card>
             </motion.div>
@@ -443,19 +443,19 @@ export default function NosotrosPage() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
             >
-              <Card className="text-center border-none hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500 bg-[#fffcef]">
+              <Card className="text-center border-none hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500 bg-gradient-to-br from-[#FFF9EA] to-[#FFF6DD]">
                 <CardHeader>
                   <motion.div
                     whileHover={{ rotate: 360 }}
                     transition={{ duration: 0.8 }}
-                    className="w-20 h-20 mx-auto mb-6 rounded-full bg-[#FFD65A]/20 flex items-center justify-center shadow-lg"
+                    className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-[#FFB840]/20 to-[#FFD449]/20 flex items-center justify-center shadow-lg"
                   >
-                    <Heart className="h-10 w-10 text-[#5C3B28]" />
+                    <Heart className="h-10 w-10 text-[#4A2F1C]" />
                   </motion.div>
-                  <CardTitle className="text-2xl font-bold text-[#5C3B28]">Tradición</CardTitle>
+                  <CardTitle className="text-2xl font-bold bg-gradient-to-r from-[#4A2F1C] to-[#6B452A] text-transparent bg-clip-text">Tradición</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-[#5C3B28]/80 font-medium">Preservando el legado familiar y la artesanía del café.</p>
+                  <p className="text-[#5C3B28]/90 font-medium">Preservando el legado familiar y la artesanía del café.</p>
                 </CardContent>
               </Card>
             </motion.div>
@@ -468,10 +468,10 @@ export default function NosotrosPage() {
         className="relative min-h-screen flex items-center justify-center bg-fixed bg-center bg-cover"
         style={{ backgroundImage: 'url("/images/CAFÉS/CAFE_FONDO.png")' }}
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-[#2C1810]/90 to-[#7A4B2A]/80 backdrop-blur-[2px]"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-[#1E1810]/95 via-[#2C1810]/90 to-[#3A2518]/85 backdrop-blur-[3px]"></div>
         
         <div className="relative z-10 text-center max-w-4xl mx-auto px-6">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">
+          <h2 className="text-4xl font-bold mb-8 bg-gradient-to-r from-amber-200 via-yellow-100 to-amber-200 text-transparent bg-clip-text">
             El Origen de la Felicidá
           </h2>
           <p className="text-xl text-white/90 mb-12 italic max-w-3xl mx-auto">
@@ -481,7 +481,7 @@ export default function NosotrosPage() {
           <Button
             variant="secondary"
             size="lg"
-            className="bg-amber-400 text-[#4B3C32] hover:bg-amber-500 px-8 py-6 text-lg font-medium rounded-full transition-all duration-300 transform hover:scale-105"
+            className="bg-gradient-to-r from-[#FFB840] to-[#FFD449] text-[#2C1810] hover:from-[#FFC040] hover:to-[#FFE449] px-8 py-6 text-lg font-medium rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg"
           >
             Descubre Nuestro Café
           </Button>

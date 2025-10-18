@@ -25,6 +25,16 @@
     --accent-orange: #D2691E;
   }
 
+  /* Estilos para elementos no traducibles */
+  .notranslate {
+    unicode-bidi: isolate;
+    white-space: nowrap;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  }
+
   /* Estilos globales */
   body {
     font-family: 'Inter', sans-serif;

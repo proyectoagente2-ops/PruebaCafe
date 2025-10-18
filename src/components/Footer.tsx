@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Instagram, Facebook, Twitter } from 'lucide-react';
+import { NonTranslatable } from '@/components/shared/NonTranslatable';
 
 export default function Footer() {
   return (
@@ -14,6 +15,7 @@ export default function Footer() {
                 src="/images/logo.png"
                 alt="La Felicidá"
                 className="h-12 w-auto"
+                data-no-translate="true"
               />
             </Link>
             <p className="text-sm text-white/70 leading-relaxed">
@@ -54,8 +56,8 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-6">Contacto</h3>
             <ul className="space-y-4">
               <li className="text-white/70">
-                <span className="block">Sierra Nevada de Santa Marta</span>
-                <span className="block">Colombia</span>
+                <NonTranslatable as="span" className="block">Sierra Nevada de Santa Marta</NonTranslatable>
+                <NonTranslatable as="span" className="block">Colombia</NonTranslatable>
               </li>
               <li>
                 <a 

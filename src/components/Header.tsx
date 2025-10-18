@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { NonTranslatable } from '@/components/shared/NonTranslatable';
 import { Menu, ShoppingCart, X, Home, Coffee, Backpack, Phone, Sparkles, Heart } from 'lucide-react';
 import OptimizedImage from './OptimizedImage';
 import { useCart } from '@/lib/store';
@@ -16,13 +17,14 @@ type NavigationItem = {
   name: string;
   href: string;
   icon: React.ReactNode;
+  nonTranslatable?: boolean;
 };
 
 const navigation: NavigationItem[] = [
   { name: "Inicio", href: ROUTES.HOME, icon: <Home className="w-4 h-4 mr-2" /> },
   { name: "Servicios", href: ROUTES.SERVICIOS, icon: <Sparkles className="w-4 h-4 mr-2" /> },
   { name: "Café", href: ROUTES.CAFE, icon: <Coffee className="w-4 h-4 mr-2" /> },
-  { name: "Mochilas", href: ROUTES.MOCHILAS, icon: <Backpack className="w-4 h-4 mr-2" /> },
+  { name: "Mochilas", href: ROUTES.MOCHILAS, icon: <Backpack className="w-4 h-4 mr-2" />, nonTranslatable: true },
   { name: "Sobre Nosotros", href: "/nosotros", icon: <Heart className="w-4 h-4 mr-2" /> },
 ];
 
@@ -79,7 +81,11 @@ export default function Header() {
                       : 'text-[#5C3B28] hover:text-[#FFD65A]'
                     }`}
                 >
-                  {item.name}
+                  {item.nonTranslatable ? (
+                    <NonTranslatable>{item.name}</NonTranslatable>
+                  ) : (
+                    item.name
+                  )}
                   {location.pathname === item.href && (
                     <motion.div 
                       layoutId="underline"
@@ -104,7 +110,11 @@ export default function Header() {
                     : 'text-[#5C3B28] hover:text-[#FFD65A]'
                   }`}
               >
-                {item.name}
+                {item.nonTranslatable ? (
+                  <NonTranslatable>{item.name}</NonTranslatable>
+                ) : (
+                  item.name
+                )}
               </Link>
             ))}
           </div>
@@ -177,8 +187,9 @@ export default function Header() {
                  <div className="flex justify-center mb-6">
                   <img
                     src="/images/LaFelicidA_transparente_ALPHA_2x.png"
-                    alt="Logo La FelicidA"
+                    alt="Logo La Felicidá"
                     className="h-24 w-auto"
+                    data-no-translate="true"
                   />
                 </div>
                 {extraLinks.map((item, index) => (
@@ -200,7 +211,11 @@ export default function Header() {
                           }`}
                       >
                         {item.icon}
-                        {item.name}
+                        {item.nonTranslatable ? (
+                          <NonTranslatable>{item.name}</NonTranslatable>
+                        ) : (
+                          item.name
+                        )}
                       </Link>
                     </motion.div>
                   ))}

@@ -1,9 +1,19 @@
 'use client';
 
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
+import { NonTranslatable } from '@/components/shared/NonTranslatable';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  type CarouselApi,
+} from "@/components/ui/carousel";
 import { Badge } from '@/components/ui/badge';
 import { Coffee, MapPin, Users, Leaf, Heart, Star, ArrowRight, MessageCircle } from 'lucide-react';
 import { coffeeProducts } from '@/lib/products';
@@ -12,6 +22,36 @@ import OptimizedImage from '@/components/OptimizedImage';
 
 export default function HomePage() {
   const featuredCoffees = coffeeProducts.slice(0, 3);
+  const [api, setApi] = useState<CarouselApi>();
+
+  useEffect(() => {
+    if (!api) return;
+
+    let autoplayInterval: NodeJS.Timeout;
+
+    const startAutoplay = () => {
+      autoplayInterval = setInterval(() => {
+        api.scrollNext();
+      }, 1800); // Movimiento más constante cada 1.8 segundos
+    };
+
+    // Iniciar el autoplay
+    startAutoplay();
+
+    // Detener el autoplay cuando el usuario interactúa
+    api.on("pointerDown", () => {
+      clearInterval(autoplayInterval);
+    });
+
+    // Reanudar el autoplay cuando el usuario deja de interactuar
+    api.on("pointerUp", () => {
+      startAutoplay();
+    });
+
+    return () => {
+      clearInterval(autoplayInterval);
+    };
+  }, [api]);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white">
@@ -40,11 +80,13 @@ export default function HomePage() {
         
         <div className="relative z-20 text-center max-w-[750px] mx-auto px-8 animate-fadeIn flex flex-col items-center justify-center">
           <h1 className="font-playfair text-[clamp(2.5rem,6vw,4.5rem)] font-bold text-[#FEFBF6] mb-6 leading-none flex items-center justify-center gap-2 whitespace-nowrap animate-slideUp delay-300 shadow-text">
-            <span>LA</span>
-            <span className="text-[#E4A429] relative highlight">
-              FELICIDÁ
-              <span className="absolute bottom-[-4px] left-0 right-0 h-[3px] bg-gradient-to-r from-transparent via-[#E4A429] to-transparent opacity-60 rounded"></span>
-            </span>
+            <NonTranslatable>
+              <span>LA</span>
+              <span className="text-[#E4A429] relative highlight">
+                FELICIDÁ
+                <span className="absolute bottom-[-4px] left-0 right-0 h-[3px] bg-gradient-to-r from-transparent via-[#E4A429] to-transparent opacity-60 rounded"></span>
+              </span>
+            </NonTranslatable>
           </h1>
 
           <p className="text-[1.4rem] text-[#EDE5DA] mb-8 leading-[1.7] max-w-[580px] mx-auto animate-slideUp delay-500 shadow-text-sm">
@@ -136,7 +178,7 @@ export default function HomePage() {
                   }}
                 >
                   <p className="!text-[#3B2F2F] !opacity-100 leading-relaxed">
-                    En La Felicidá, fusionamos las tradiciones ancestrales con la espiritualidad de la Sierra Nevada. 
+                    En <NonTranslatable>La Felicidá</NonTranslatable>, fusionamos las tradiciones ancestrales con la espiritualidad de la Sierra Nevada. 
                     Cada visita es una oportunidad para reconectarte con la naturaleza, mientras descubres los secretos de 
                     nuestra sabiduría ancestral y el encanto de nuestra tierra.
                   </p>
@@ -280,30 +322,64 @@ export default function HomePage() {
             <h2 className="text-3xl md:text-4xl font-bold text-amber-900 mb-4">
               Nuestros Productos
             </h2>
-           <p className="text-lg max-w-2xl mx-auto !text-[#3B2F2F] !opacity-100 leading-relaxed">
-  Descubre nuestra selección de productos artesanales, elaborados con amor y dedicación.
-</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-            {featuredCoffees.map((coffee) => (
-              <Card key={coffee.id} className="relative group shadow-md hover:scale-105 hover:shadow-lg outline-4 transition-all duration-300 border-0">
-
-                <CardContent className="p-6">
-                  <div className="aspect-square rounded-lg overflow-hidden mb-6">
-                    <img
-                      src={coffee.image}
-                      alt={coffee.name}
-                      className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
-                    />
-                  </div>
-                  <h3 className="text-xl font-bold text-amber-900 mb-2">{coffee.name}</h3>
-                  <Badge variant="secondary" className="bg-amber-100 text-amber-700 mb-4">
-                    ${coffee.price.toLocaleString()}
-                  </Badge>
-                </CardContent>
-              </Card>
-            ))}
+          <div className="relative max-w-5xl mx-auto">
+            <Carousel
+              opts={{
+                align: "center",
+                loop: true,
+                dragFree: false,
+                containScroll: "keepSnaps",
+                skipSnaps: false,
+                slidesToScroll: 1
+              }}
+              className="w-full cursor-grab active:cursor-grabbing transition-all duration-300 ease-linear"
+              setApi={setApi}
+            >
+              <CarouselContent>
+                {[
+                  {
+                    src: "/images/CAFÉS/CAFES JUNTOS.jpg",
+                    alt: "Colección de cafés especiales"
+                  },
+                  {
+                    src: "/images/Inicio/CAFES INICIO.jpg",
+                    alt: "Cafés especiales"
+                  },
+                  {
+                    src: "/images/CAFÉS/Café con Ayu (Edición especial).jpg",
+                    alt: "Café con Ayu - Edición especial"
+                  },
+                  {
+                    src: "/images/CAFÉS/Café Lavado (Edición especial).jpg",
+                    alt: "Café Lavado - Edición especial"
+                  },
+                  {
+                    src: "/images/CAFÉS/Café Tradicional (Edición especial).jpg",
+                    alt: "Café Tradicional - Edición especial"
+                  }
+                ].map((image, index) => (
+                  <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                    <div className="p-1">
+                      <Card className="overflow-hidden">
+                        <CardContent className="p-0">
+                          <div className="aspect-square relative overflow-hidden rounded-lg">
+                            <OptimizedImage
+                              src={image.src}
+                              alt={image.alt}
+                              className="object-cover w-full h-full transform transition-transform duration-500 hover:scale-110"
+                            />
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="hidden md:flex" />
+              <CarouselNext className="hidden md:flex" />
+            </Carousel>
           </div>
 
           <div className="text-center">
@@ -447,7 +523,7 @@ export default function HomePage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.6 }}
               >
-                en La Felicidá
+                en <NonTranslatable>La Felicidá</NonTranslatable>
               </motion.span>
             </motion.h2>
             <motion.p 
@@ -526,6 +602,7 @@ export default function HomePage() {
                 src="/images/LaFelicidA_transparente_ALPHA_2x.png"
                 alt="La Felicidá"
                 className="h-24 mb-6 mx-auto transform transition-transform duration-300 group-hover:scale-105"
+                data-no-translate="true"
               />
             </Link>
             <p className="text-[#E4A429] max-w-2xl mx-auto text-lg font-medium">
@@ -677,7 +754,7 @@ export default function HomePage() {
                 </Link>
               </div>
               <p className="text-sm text-amber-200/60">
-                &copy; {new Date().getFullYear()} La Felicidá. Todos los derechos reservados.
+                &copy; {new Date().getFullYear()} <NonTranslatable>La Felicidá</NonTranslatable>. Todos los derechos reservados.
               </p>
             </div>
           </div>
