@@ -12,8 +12,18 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product, isHovered = false }: ProductCardProps) {
-  console.log('ProductCard - product:', product);
-  
+  if (!product) {
+    console.error('ProductCard received null or undefined product');
+    return null;
+  }
+
+  const { id, category, name, image, price } = product;
+
+  if (!id || !category || !name || !image) {
+    console.error('ProductCard missing required properties:', { id, category, name, image });
+    return null;
+  }
+
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('es-CO', {
       style: 'currency',
@@ -22,21 +32,25 @@ export default function ProductCard({ product, isHovered = false }: ProductCardP
     }).format(price);
   };
 
-  if (!product || !product.id || !product.category || !product.name || !product.image) {
-    return null;
-  }
-
   return (
     <Link 
-      to={`/${product.category === 'coffee' ? 'cafe' : 'mochilas'}/${product.id}`}
+      to={`/${category === 'coffee' ? 'cafe' : 'mochilas'}/${id}`}
       className="block group"
-      onClick={() => console.log('Navigating to product:', product.id)}>
+      onClick={(e) => {
+        e.preventDefault();
+        console.log('Navigating to product:', { id, category, name });
+        window.location.href = `/${category === 'coffee' ? 'cafe' : 'mochilas'}/${id}`;
+      }}>
       <Card className={`overflow-hidden h-full flex flex-col bg-white border-0 shadow-sm transition-all duration-300 ${isHovered ? 'shadow-lg' : 'shadow-sm'}`}>
         <div className="relative aspect-square overflow-hidden bg-[#f8f8f8]">
           <div className={`absolute inset-0 transition-colors duration-300 ${isHovered ? 'bg-black/0' : 'bg-black/5'}`} />
           <img
-            src={product.image}
-            alt={product.name}
+            src={image}
+            alt={name}
+            onError={(e) => {
+              console.error('Image failed to load:', image);
+              e.currentTarget.src = '/images/placeholder.jpg';
+            }}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
         </div>
