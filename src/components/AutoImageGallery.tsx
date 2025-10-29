@@ -68,9 +68,9 @@ export function AutoImageGallery() {
   }, [isPaused]);
 
   return (
-    <section className="relative py-12 bg-gradient-to-br from-[#2C1810]/10 via-[#4A2F1C]/15 to-[#6B452A]/10">
+    <section className="relative py-16 bg-gradient-to-br from-amber-50 via-orange-50/50 to-amber-50">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold mb-8 text-center bg-gradient-to-r from-[#4A2F1C] via-[#6B452A] to-[#4A2F1C] text-transparent bg-clip-text">
+        <h2 className="text-4xl md:text-5xl font-bold mb-10 text-center bg-gradient-to-r from-amber-800 via-amber-600 to-orange-700 text-transparent bg-clip-text">
           Nuestra Finca y Café
         </h2>
         
@@ -81,10 +81,10 @@ export function AutoImageGallery() {
           <Button
             variant="ghost"
             size="icon"
-            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-gradient-to-br from-[#FFF9EA] to-[#FFF6DD] hover:from-[#FFF6DD] hover:to-[#FFEDC0] shadow-lg hover:shadow-xl rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300"
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white border-2 border-amber-200 hover:border-amber-300 shadow-lg hover:shadow-xl rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300"
             onClick={() => scroll('left')}
           >
-            <ChevronLeft className="h-6 w-6 text-[#4A2F1C]" />
+            <ChevronLeft className="h-6 w-6 text-amber-700" />
           </Button>
 
           {/* Contenedor de imágenes */}
@@ -104,7 +104,7 @@ export function AutoImageGallery() {
                 <img
                   src={image.src}
                   alt={image.alt}
-                  className="w-72 h-48 object-cover rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] border-2 border-[#FFF9EA]/20"
+                  className="w-72 h-48 object-cover rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-[1.03] border-2 border-amber-200/40 hover:border-amber-300/60"
                   loading="lazy"
                 />
               </motion.div>
@@ -115,10 +115,10 @@ export function AutoImageGallery() {
           <Button
             variant="ghost"
             size="icon"
-            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-gradient-to-br from-[#FFF9EA] to-[#FFF6DD] hover:from-[#FFF6DD] hover:to-[#FFEDC0] shadow-lg hover:shadow-xl rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300"
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white border-2 border-amber-200 hover:border-amber-300 shadow-lg hover:shadow-xl rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300"
             onClick={() => scroll('right')}
           >
-            <ChevronRight className="h-6 w-6 text-[#4A2F1C]" />
+            <ChevronRight className="h-6 w-6 text-amber-700" />
           </Button>
         </div>
       </div>
