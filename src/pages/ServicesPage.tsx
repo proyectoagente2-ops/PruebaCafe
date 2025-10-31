@@ -2,8 +2,10 @@
 
 import React, { useCallback, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Card } from '@/components/ui/card';
+import { useLazyLoad } from '@/hooks/useLazyLoad';
+import ProductCardSkeleton from '@/components/ProductCardSkeleton';
 import { 
   ArrowRight, 
   Calendar, 
@@ -51,6 +53,13 @@ function ServicesPage() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  // Implementar lazy loading con carga por lotes
+  const { visibleItems, isLoading, containerRef } = useLazyLoad(services, {
+    batchSize: 2,
+    delayBetweenBatches: 200,
+    threshold: 0.1
+  });
 
   // Memoize handlers to prevent re-renders
   const handleWhatsAppClick = useCallback(() => {
@@ -183,13 +192,12 @@ function ServicesPage() {
             </p>
           </div>
 
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
+          <div 
+            ref={containerRef}
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8"
           >
-            {services.map((service, idx) => (
+            <AnimatePresence mode="sync">
+              {visibleItems.map((service, idx) => (
               <motion.div
                 key={service.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -292,7 +300,17 @@ function ServicesPage() {
                 </Link>
               </motion.div>
             ))}
-          </motion.div>
+            
+            {/* Mostrar skeletons mientras carga */}
+            {isLoading && (
+              <>
+                {Array.from({ length: 2 }).map((_, idx) => (
+                  <ProductCardSkeleton key={`skeleton-${idx}`} />
+                ))}
+              </>
+            )}
+            </AnimatePresence>
+          </div>
         </div>
       </section>
 
