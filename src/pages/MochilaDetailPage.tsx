@@ -230,189 +230,248 @@ export default function MochilaDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white pt-28 pb-16">
+    <div className="min-h-screen bg-gradient-to-b from-amber-50/50 via-white to-amber-50/30 pt-28 pb-16">
       <div className="container mx-auto px-4">
-        {/* Botón de volver y breadcrumbs */}
-        <div className="mb-8">
-          <nav className="flex items-center space-x-2 text-sm">
-            <Link to="/" className="text-amber-600 hover:text-amber-700">
+        {/* Breadcrumbs mejorados */}
+        <motion.div 
+          className="mb-10"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <nav className="flex items-center space-x-2 text-sm mb-6 bg-white/60 backdrop-blur-sm rounded-full px-5 py-3 inline-flex shadow-sm border border-amber-100">
+            <Link to="/" className="text-amber-700 hover:text-amber-800 font-medium transition-colors">
               Inicio
             </Link>
-            <span className="text-gray-400">/</span>
-            <Link to="/mochilas" className="text-amber-600 hover:text-amber-700">
+            <span className="text-amber-300">/</span>
+            <Link to="/mochilas" className="text-amber-700 hover:text-amber-800 font-medium transition-colors">
               Mochilas
             </Link>
-            <span className="text-gray-400">/</span>
-            <span className="text-gray-600">{mochila.name}</span>
+            <span className="text-amber-300">/</span>
+            <span className="text-amber-900 font-semibold">{mochila.name}</span>
           </nav>
+          
           <Link 
             to="/mochilas" 
-            className="inline-flex items-center text-amber-600 hover:text-amber-700 mt-4 group"
+            className="inline-flex items-center text-amber-700 hover:text-amber-800 font-medium group transition-all"
           >
-            <ArrowLeft className="w-4 h-4 mr-2 transition-transform group-hover:-translate-x-1" />
+            <div className="h-8 w-8 rounded-full bg-amber-100 group-hover:bg-amber-200 flex items-center justify-center mr-2 transition-all">
+              <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-0.5" />
+            </div>
             Volver a mochilas
           </Link>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {/* Imagen de la mochila */}
-          <div className="relative">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+          {/* Imagen de la mochila mejorada */}
+          <motion.div 
+            className="relative"
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+          >
             <div className="sticky top-24 space-y-4">
-              <div className="aspect-square rounded-2xl overflow-hidden bg-white shadow-xl hover:shadow-2xl transition-all duration-300">
-                <OptimizedImage
+              <div className="relative aspect-square rounded-3xl overflow-hidden bg-gradient-to-br from-amber-50 to-white shadow-2xl hover:shadow-3xl transition-all duration-500 group border-4 border-white">
+                {/* Badge flotante */}
+                <div className="absolute top-6 left-6 z-10">
+                  <div className="bg-gradient-to-r from-amber-500 to-amber-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-xl backdrop-blur-sm">
+                    100% Artesanal
+                  </div>
+                </div>                <OptimizedImage
                   src={mochila.image}
                   alt={mochila.name}
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   priority
                 />
-              </div>
-            </div>
-          </div>
-
-          {/* Información de la mochila */}
-          <div className="space-y-8">
-            <div>
-              {/* Etiqueta de producto artesanal */}
-              <div className="inline-block px-3 py-1 bg-amber-100 text-amber-800 rounded-full text-sm font-medium mb-4">
-                Producto Artesanal
+                
+                {/* Overlay sutil en hover */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </div>
               
-              <h1 className="text-4xl font-bold text-amber-900 mb-4">
+              {/* Info rápida debajo de la imagen */}
+              <div className="grid grid-cols-3 gap-3">
+                <div className="bg-white rounded-2xl p-4 text-center shadow-md border border-amber-100">
+                  <Truck className="h-6 w-6 text-amber-600 mx-auto mb-2" />
+                  <p className="text-xs font-semibold text-gray-700">Envío gratis</p>
+                  <p className="text-xs text-gray-500">+$100k</p>
+                </div>
+                <div className="bg-white rounded-2xl p-4 text-center shadow-md border border-amber-100">
+                  <Shield className="h-6 w-6 text-amber-600 mx-auto mb-2" />
+                  <p className="text-xs font-semibold text-gray-700">Garantía</p>
+                  <p className="text-xs text-gray-500">Artesanal</p>
+                </div>
+                <div className="bg-white rounded-2xl p-4 text-center shadow-md border border-amber-100">
+                  <Clock className="h-6 w-6 text-amber-600 mx-auto mb-2" />
+                  <p className="text-xs font-semibold text-gray-700">Elaboración</p>
+                  <p className="text-xs text-gray-500">{mochila.specifications.timeToMake}</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Información de la mochila mejorada */}
+          <motion.div 
+            className="space-y-8"
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <div>
+              {/* Badge premium */}
+              <motion.div 
+                className="inline-block px-5 py-2 bg-gradient-to-r from-amber-100 to-amber-50 text-amber-800 rounded-full text-sm font-bold mb-6 shadow-md border-2 border-amber-200"
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ delay: 0.4 }}
+              >
+                Producto Artesanal Premium
+              </motion.div>
+              
+              <h1 className="font-playfair text-5xl font-bold text-amber-900 mb-6 leading-tight">
                 {mochila.name}
               </h1>
 
-              {/* Calificación */}
-              <div className="flex items-center gap-2 mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 fill-amber-400 text-amber-400" />
-                ))}
-                <span className="text-gray-600">(12 reseñas)</span>
+              {/* Calificación mejorada */}
+              <div className="flex items-center gap-3 mb-6 bg-amber-50/50 rounded-xl p-4 border border-amber-100">
+                <div className="flex items-center gap-1">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-5 h-5 fill-amber-400 text-amber-400" />
+                  ))}
+                </div>
+                <span className="text-gray-700 font-medium">5.0</span>
+                <span className="text-gray-500">|</span>
+                <span className="text-gray-600">12 reseñas verificadas</span>
               </div>
 
-              {/* Precio */}
-              <div className="flex items-baseline gap-4 mb-6">
-                <p className="text-3xl text-amber-600 font-bold">
-                  ${mochila.price.toLocaleString('es-CO')} COP
-                </p>
-                <span className="text-sm text-gray-500">
+              {/* Precio destacado */}
+              <div className="bg-gradient-to-br from-amber-50 to-white rounded-2xl p-6 mb-8 border-2 border-amber-200 shadow-lg">
+                <p className="text-sm text-gray-600 mb-2 font-medium">Precio especial</p>
+                <div className="flex items-baseline gap-4">
+                  <p className="text-5xl text-amber-700 font-bold">
+                    ${mochila.price.toLocaleString('es-CO')}
+                  </p>
+                  <span className="text-lg text-gray-600 font-medium">COP</span>
+                </div>
+                <p className="text-sm text-gray-500 mt-2">
                   Envío calculado al finalizar la compra
-                </span>
+                </p>
               </div>
 
-              {/* Beneficios */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 bg-amber-50 rounded-lg mb-6">
-                <div className="flex items-center gap-3">
-                  <Truck className="w-5 h-5 text-amber-600" />
-                  <span className="text-sm">Envío gratis en compras +$100k</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Shield className="w-5 h-5 text-amber-600" />
-                  <span className="text-sm">Garantía artesanal</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Clock className="w-5 h-5 text-amber-600" />
-                  <span className="text-sm">Elaboración: {mochila.specifications.timeToMake}</span>
-                </div>
+              {/* Descripción mejorada */}
+              <div className="bg-white rounded-2xl p-6 shadow-md border border-amber-100">
+                <h3 className="text-xl font-bold text-amber-900 mb-4 flex items-center gap-2">
+                  <div className="h-1 w-8 bg-gradient-to-r from-amber-500 to-amber-600 rounded-full"></div>
+                  Descripción
+                </h3>
+                <p className="text-gray-700 text-base leading-relaxed">{mochila.detailedDescription}</p>
               </div>
 
-              {/* Descripción */}
-              <div className="prose prose-amber max-w-none">
-                <p className="text-gray-600 text-lg">{mochila.detailedDescription}</p>
-              </div>
-
-            {/* Selector de cantidad y botón de agregar al carrito */}
-            <div className="border rounded-lg p-6 space-y-6 bg-white shadow-sm">
-              <div className="flex items-center justify-between">
-                <span className="text-gray-700 font-medium">Cantidad:</span>
+              {/* Selector de cantidad y botones mejorados */}
+            <div className="bg-gradient-to-br from-white to-amber-50/30 rounded-2xl p-8 space-y-6 shadow-xl border-2 border-amber-100">
+              <div className="flex items-center justify-between bg-white rounded-xl p-4 border border-amber-100">
+                <span className="text-gray-800 font-bold text-lg">Cantidad:</span>
                 <div className="flex items-center gap-4">
                   <button 
                     onClick={() => handleQuantityChange(quantity - 1)}
-                    className="text-amber-600 hover:text-amber-700"
+                    className="h-10 w-10 rounded-full bg-amber-100 hover:bg-amber-200 text-amber-700 flex items-center justify-center transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                     disabled={quantity <= 1}
                   >
-                    <MinusCircle className="w-6 h-6" />
+                    <MinusCircle className="w-5 h-5" />
                   </button>
-                  <span className="text-xl font-semibold w-8 text-center">{quantity}</span>
+                  <span className="text-2xl font-bold w-12 text-center text-amber-900">{quantity}</span>
                   <button 
                     onClick={() => handleQuantityChange(quantity + 1)}
-                    className="text-amber-600 hover:text-amber-700"
+                    className="h-10 w-10 rounded-full bg-amber-100 hover:bg-amber-200 text-amber-700 flex items-center justify-center transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                     disabled={quantity >= 5}
                   >
-                    <PlusCircle className="w-6 h-6" />
+                    <PlusCircle className="w-5 h-5" />
                   </button>
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-3">
                 <Button
                   onClick={handleAddToCart}
-                  className="w-full bg-amber-600 hover:bg-amber-700 text-white py-6 text-lg"
+                  className="w-full bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white py-7 text-lg font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
                 >
-                  <ShoppingCart className="mr-2 h-5 w-5" />
+                  <ShoppingCart className="mr-2 h-6 w-6" />
                   Agregar al carrito
                 </Button>
                 <Button
                   onClick={handleWhatsAppClick}
-                  className="w-full bg-green-600 hover:bg-green-700 text-white py-6 text-lg"
+                  className="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white py-7 text-lg font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
                 >
-                  <MessageCircle className="mr-2 h-5 w-5" />
+                  <MessageCircle className="mr-2 h-6 w-6" />
                   Consultar por WhatsApp
                 </Button>
               </div>
-            </div>
-
-            {/* Características y especificaciones en pestañas */}
-            <div className="space-y-8 border-t pt-8">
-              <div>
-                <h3 className="text-xl font-semibold text-amber-900 mb-4">Características</h3>
-                <ul className="space-y-3">
+            </div>            {/* Características y especificaciones mejoradas */}
+            <div className="space-y-6">
+              <div className="bg-white rounded-2xl p-6 shadow-md border border-amber-100">
+                <h3 className="text-2xl font-bold text-amber-900 mb-6 flex items-center gap-2">
+                  <div className="h-1 w-8 bg-gradient-to-r from-amber-500 to-amber-600 rounded-full"></div>
+                  Características
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {mochila.features.map((feature, index) => (
-                    <li key={index} className="flex items-center text-gray-600">
-                      <span className="w-2 h-2 bg-amber-400 rounded-full mr-3"></span>
-                      {feature}
-                    </li>
+                    <div key={index} className="flex items-center gap-3 bg-amber-50/50 rounded-xl p-4 border border-amber-100">
+                      <div className="h-8 w-8 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center flex-shrink-0">
+                        <Star className="h-4 w-4 text-white fill-white" />
+                      </div>
+                      <span className="text-gray-700 font-medium">{feature}</span>
+                    </div>
                   ))}
-                </ul>
+                </div>
               </div>
 
-              <div>
-                <h3 className="text-xl font-semibold text-amber-900 mb-4">Especificaciones</h3>
-                <div className="grid grid-cols-2 gap-6 bg-gray-50 p-6 rounded-lg">
-                  <div>
-                    <p className="text-gray-500">Dimensiones</p>
-                    <p className="font-medium">{mochila.specifications.dimensions}</p>
+              <div className="bg-white rounded-2xl p-6 shadow-md border border-amber-100">
+                <h3 className="text-2xl font-bold text-amber-900 mb-6 flex items-center gap-2">
+                  <div className="h-1 w-8 bg-gradient-to-r from-amber-500 to-amber-600 rounded-full"></div>
+                  Especificaciones Técnicas
+                </h3>
+                <div className="grid grid-cols-2 gap-6">
+                  <div className="bg-gradient-to-br from-amber-50 to-white p-5 rounded-xl border border-amber-100">
+                    <p className="text-gray-500 text-sm font-medium mb-2">Dimensiones</p>
+                    <p className="font-bold text-amber-900 text-lg">{mochila.specifications.dimensions}</p>
                   </div>
-                  <div>
-                    <p className="text-gray-500">Peso</p>
-                    <p className="font-medium">{mochila.specifications.weight}</p>
+                  <div className="bg-gradient-to-br from-amber-50 to-white p-5 rounded-xl border border-amber-100">
+                    <p className="text-gray-500 text-sm font-medium mb-2">Peso</p>
+                    <p className="font-bold text-amber-900 text-lg">{mochila.specifications.weight}</p>
                   </div>
-                  <div>
-                    <p className="text-gray-500">Material</p>
-                    <p className="font-medium">{mochila.material}</p>
+                  <div className="bg-gradient-to-br from-amber-50 to-white p-5 rounded-xl border border-amber-100">
+                    <p className="text-gray-500 text-sm font-medium mb-2">Material</p>
+                    <p className="font-bold text-amber-900 text-lg">{mochila.material}</p>
                   </div>
-                  <div>
-                    <p className="text-gray-500">Tiempo de elaboración</p>
-                    <p className="font-medium">{mochila.specifications.timeToMake}</p>
+                  <div className="bg-gradient-to-br from-amber-50 to-white p-5 rounded-xl border border-amber-100">
+                    <p className="text-gray-500 text-sm font-medium mb-2">Elaboración</p>
+                    <p className="font-bold text-amber-900 text-lg">{mochila.specifications.timeToMake}</p>
                   </div>
                 </div>
               </div>
             </div>
 
-                {/* Nota importante */}
-                <div className="bg-amber-50 rounded-lg p-6 border border-amber-200">
-                  <h4 className="text-amber-900 font-semibold mb-2">Nota importante</h4>
-                  <p className="text-amber-700 text-sm">
-                    Cada mochila es única y hecha a mano. Los colores y patrones pueden 
-                    variar ligeramente. El tiempo de elaboración es aproximado y puede 
-                    variar según la disponibilidad.
-                  </p>
+                {/* Nota importante mejorada */}
+                <div className="bg-gradient-to-br from-amber-50 to-amber-100/50 rounded-2xl p-6 border-2 border-amber-200 shadow-md">
+                  <div className="flex items-start gap-3">
+                    <div className="h-10 w-10 rounded-full bg-amber-500 flex items-center justify-center flex-shrink-0">
+                      <span className="text-white text-xl font-bold">i</span>
+                    </div>
+                    <div>
+                      <h4 className="text-amber-900 font-bold text-lg mb-2">Nota importante</h4>
+                      <p className="text-amber-800 text-sm leading-relaxed">
+                        Cada mochila es única y hecha a mano. Los colores y patrones pueden 
+                        variar ligeramente. El tiempo de elaboración es aproximado y puede 
+                        variar según la disponibilidad.
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
+          </div>
 
-            {/* Mochilas Recomendadas */}
-            <section className="mt-24 border-t pt-16">
-              <div className="container mx-auto px-4">
+        {/* Mochilas Recomendadas */}
+        <section className="mt-24 border-t pt-16">
                 <div className="text-center max-w-3xl mx-auto mb-12">
                   <motion.h2 
                     className="text-3xl font-bold text-amber-900 mb-4"
@@ -440,8 +499,8 @@ export default function MochilaDetailPage() {
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
                   >
-                    {useMemo(() => 
-                      mochilaProducts
+                    {useMemo(() => {
+                      return mochilaProducts
                         .filter(m => m.id !== id)
                         .slice(0, 3)
                         .map((mochila, index) => (
@@ -495,12 +554,12 @@ export default function MochilaDetailPage() {
                                     transition={{ duration: 0.3 }}
                                   />
                                 </div>
-                              <motion.div 
-                                className="p-6 text-center"
-                                initial={{ y: 0 }}
-                                whileHover={{ y: -5 }}
-                                transition={{ duration: 0.2 }}
-                              >
+                                <motion.div 
+                                  className="p-6 text-center"
+                                  initial={{ y: 0 }}
+                                  whileHover={{ y: -5 }}
+                                  transition={{ duration: 0.2 }}
+                                >
                                   <motion.h3 
                                     className="text-lg font-semibold text-amber-900 mb-2"
                                     whileHover={{ color: "#C49B66" }}
@@ -527,14 +586,11 @@ export default function MochilaDetailPage() {
                               </motion.div>
                             </Link>
                           </motion.div>
-                        )), 
-                      [id]
-                    )}
+                        ));
+                    }, [id])}
                   </motion.div>
                 </AnimatePresence>
-              </div>
             </section>
-          </div>
         </div>
       </div>
     );
