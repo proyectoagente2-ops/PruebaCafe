@@ -63,7 +63,7 @@ export default function CafePage() {
   return (
     <div className="min-h-screen bg-[#FAFAFA]">
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden bg-[#1A0F0A]">
+      <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-[#1A0F0A]">
         <motion.div
           initial={{ opacity: 0, scale: 1 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -73,7 +73,7 @@ export default function CafePage() {
           <img
             src="/images/CAFÉS/CAFEFONDO1.png"
             alt="Granos de café premium"
-            className="w-full h-full object-cover object-center scale-105 brightness-[0.85]"
+            className="w-full h-full object-cover object-center brightness-75"
             style={{
               objectPosition: "50% 30%"
             }}
@@ -83,132 +83,100 @@ export default function CafePage() {
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1.2, delay: 0.2 }}
-          className="absolute inset-0 bg-gradient-to-t from-[#1A0F0A]/60 via-[#1A0F0A]/30 to-transparent backdrop-blur-[1px]"
+          transition={{ duration: 1 }}
+          className="absolute inset-0 bg-gradient-to-t from-[#1A0F0A]/70 via-[#1A0F0A]/40 to-[#1A0F0A]/20"
         />
         
-        <div className="relative container mx-auto px-4 text-center text-[#FAF7F4]">
+        <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-5xl mx-auto"
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="max-w-4xl mx-auto"
           >
-            <Badge className="bg-white/90 text-[#1A0F0A] border-none mb-8 px-6 py-2 text-sm uppercase tracking-wider font-medium hover:bg-white transition-colors duration-300">
+            <Badge className="bg-white text-[#1A0F0A] border-none mb-6 px-5 py-1.5 text-xs uppercase tracking-wide font-semibold shadow-sm">
               Colección Premium
             </Badge>
             
            <motion.h1 
-               className="text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-12 tracking-tight leading-tight"
+               className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-5 leading-tight"
                initial={{ opacity: 0, y: 20 }}
                animate={{ opacity: 1, y: 0 }}
-               transition={{ duration: 0.8, delay: 0.3 }}
+               transition={{ duration: 0.7, delay: 0.2 }}
            >
-               <motion.span 
-                   className="text-white/95 inline-block"
-                   initial={{ opacity: 0, x: -20 }}
-                   animate={{ opacity: 1, x: 0 }}
-                   transition={{ duration: 0.6, delay: 0.5 }}
-               >
-                   El Arte del{' '}
-               </motion.span>
-               <motion.span 
-                   className="text-[#E6B980] font-serif italic inline-block"
-                   initial={{ opacity: 0, scale: 0.9 }}
-                   animate={{ opacity: 1, scale: 1 }}
-                   transition={{ duration: 0.8, delay: 0.7 }}
-                   whileHover={{ scale: 1.05, textShadow: "0 0 8px rgba(230,185,128,0.6)" }}
-               >
-                   Café
-               </motion.span>
-               <br className="hidden md:block" />
-               <motion.span 
-                   className="text-white/95 inline-block"
-                   initial={{ opacity: 0, x: 20 }}
-                   animate={{ opacity: 1, x: 0 }}
-                   transition={{ duration: 0.6, delay: 0.9 }}
-               >
+               <span className="text-white block">
+                   El Arte del <span className="text-[#C49B66] font-serif italic">Café</span>
+               </span>
+               <span className="text-white block">
                    de Origen
-               </motion.span>
+               </span>
            </motion.h1>
 
-            
-            <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto font-light leading-relaxed mb-16 tracking-wide">
+            <motion.p 
+              className="text-sm sm:text-base md:text-lg text-white/90 max-w-2xl mx-auto leading-relaxed mb-7"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.7, delay: 0.4 }}
+            >
               Descubre la exquisitez de nuestros cafés cultivados en las alturas 
               sagradas de la Sierra Nevada. Una experiencia sensorial única.
-            </p>
+            </motion.p>
 
             <motion.div 
-              className="flex flex-col sm:flex-row items-center justify-center gap-6"
+              className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.1 }}
+              transition={{ duration: 0.7, delay: 0.6 }}
             >
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              <Button 
+                size="lg"
+                className="bg-[#D97706] text-white hover:bg-[#C2410C] px-6 sm:px-8 py-2.5 sm:py-3 text-sm font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl"
+                onClick={() => {
+                  const productsSection = document.querySelector('#products-section');
+                  productsSection?.scrollIntoView({ behavior: 'smooth' });
+                }}
               >
-                <Button 
-                  size="lg"
-                  className="bg-white/95 text-[#1A0F0A] hover:bg-white px-12 py-8 text-lg font-medium rounded-full transition-all duration-500 hover:shadow-lg hover:shadow-white/20 tracking-wide relative overflow-hidden group"
-                  onClick={() => {
-                    const productsSection = document.querySelector('#products-section');
-                    productsSection?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                >
-                  <motion.span 
-                    className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/30 to-white/0"
-                    initial={{ x: "-100%" }}
-                    whileHover={{ x: "100%" }}
-                    transition={{ duration: 0.8 }}
-                  />
-                  Descubrir Colección
-                </Button>
-              </motion.div>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                Descubrir Colección
+              </Button>
+              <Button
+                variant="outline"
+                size="lg"
+                className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-[#1A0F0A] px-6 sm:px-8 py-2.5 sm:py-3 text-sm font-semibold rounded-lg transition-all duration-300"
+                onClick={() => {
+                  const processSection = document.querySelector('section:has(h2:contains("Del cafetal"))');
+                  if (processSection) {
+                    processSection.scrollIntoView({ behavior: 'smooth' });
+                  } else {
+                    // Fallback: scroll to process section by class or id
+                    window.scrollTo({ top: window.innerHeight * 2, behavior: 'smooth' });
+                  }
+                }}
               >
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="bg-transparent border border-white/30 text-white hover:bg-white/10 px-12 py-8 text-lg font-normal rounded-full transition-all duration-500 relative overflow-hidden group"
-                >
-                  <motion.span 
-                    className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0"
-                    initial={{ x: "-100%" }}
-                    whileHover={{ x: "100%" }}
-                    transition={{ duration: 0.8 }}
-                  />
-                  Proceso de Cultivo
-                </Button>
-              </motion.div>
+                Proceso de Cultivo
+              </Button>
             </motion.div>
           </motion.div>
-
         </div>
       </section>
 
       {/* Products Grid */}
-      <section id="products-section" className="py-48 bg-[#F8F8F8]">
+      <section id="products-section" className="py-32 bg-[#F8F8F8]">
         <div className="container mx-auto px-4 max-w-7xl">
-          <div className="text-center mb-32">
-            <Badge className="bg-[#1A0F0A] text-white mb-10 px-8 py-2.5 text-sm uppercase tracking-wider font-medium hover:bg-black/90 transition-colors duration-300">
+          <div className="text-center mb-20">
+            <Badge className="bg-[#1A0F0A] text-white mb-6 px-6 py-2 text-xs uppercase tracking-wide font-semibold hover:bg-black/90 transition-colors duration-300">
               Nuestros Cafés
             </Badge>
-            <h2 className="text-5xl md:text-6xl font-bold text-[#1A0F0A] mb-12 tracking-tight">
-              Ediciones <span className="font-serif italic text-[#8B4513]">Especiales</span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#1A0F0A] mb-6 tracking-tight">
+              Ediciones <span className="font-serif italic text-[#D97706]">Especiales</span>
             </h2>
-            <p className="text-2xl text-[#1A0F0A]/70 max-w-3xl mx-auto leading-relaxed font-light tracking-wide">
+            <p className="text-base md:text-lg text-[#1A0F0A]/70 max-w-2xl mx-auto leading-relaxed">
               Descubre nuestra selección de cafés especiales, cada uno con su 
               propia personalidad y carácter único.
             </p>
           </div>
 
           <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 xl:gap-20"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 lg:gap-12"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -247,9 +215,9 @@ export default function CafePage() {
       </section>
 
       {/* Attributes Section */}
-      <section className="py-40 bg-white">
+      <section className="py-24 bg-white">
         <div className="container mx-auto px-4 max-w-7xl">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
             {coffeeAttributes.map((attribute, index) => (
               <motion.div
                 key={attribute.title}
@@ -258,14 +226,14 @@ export default function CafePage() {
                 transition={{ duration: 0.7, delay: index * 0.15 }}
                 className="text-center group"
               >
-                <div className="w-20 h-20 mx-auto mb-8 rounded-2xl bg-[#F8F8F8] flex items-center justify-center transform transition-all duration-500 group-hover:rotate-6 group-hover:shadow-lg">
+                <div className="w-16 h-16 mx-auto mb-6 rounded-xl bg-[#F8F8F8] flex items-center justify-center transform transition-all duration-500 group-hover:rotate-6 group-hover:shadow-lg">
                   {React.createElement(attribute.icon, {
-                    size: 32,
-                    className: "text-[#8B4513] transform transition-transform duration-500 group-hover:scale-110"
+                    size: 28,
+                    className: "text-[#D97706] transform transition-transform duration-500 group-hover:scale-110"
                   })}
                 </div>
-                <h3 className="text-xl font-semibold text-[#1A0F0A] mb-4">{attribute.title}</h3>
-                <p className="text-[#1A0F0A]/60 font-light leading-relaxed">{attribute.description}</p>
+                <h3 className="text-lg font-semibold text-[#1A0F0A] mb-3">{attribute.title}</h3>
+                <p className="text-sm text-[#1A0F0A]/60 leading-relaxed">{attribute.description}</p>
               </motion.div>
             ))}
           </div>
@@ -273,7 +241,7 @@ export default function CafePage() {
       </section>
 
       {/* Process Section */}
-      <section className="py-40 bg-[#1A0F0A] relative overflow-hidden">
+      <section className="py-24 bg-[#1A0F0A] relative overflow-hidden">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 0.03 }}
@@ -287,40 +255,40 @@ export default function CafePage() {
           />
         </motion.div>
         <div className="container mx-auto px-4 max-w-7xl">
-          <div className="text-center mb-28">
-            <Badge className="bg-white/95 text-[#1A0F0A] border-none mb-8 px-6 py-2 text-sm uppercase tracking-wider font-normal">
+          <div className="text-center mb-16">
+            <Badge className="bg-white text-[#1A0F0A] border-none mb-6 px-5 py-1.5 text-xs uppercase tracking-wide font-semibold shadow-sm">
               Nuestro Proceso
             </Badge>
-            <h2 className="text-5xl md:text-6xl font-bold text-white mb-10 tracking-tight">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 tracking-tight">
               Del cafetal a{' '}
-              <span className="font-serif italic text-[#E6B980]">tu taza</span>
+              <span className="font-serif italic text-[#D97706]">tu taza</span>
             </h2>
-            <p className="text-xl text-white/80 max-w-3xl mx-auto leading-relaxed tracking-wide font-light">
+            <p className="text-base md:text-lg text-white/85 max-w-2xl mx-auto leading-relaxed">
               Cada etapa de nuestro proceso artesanal está meticulosamente diseñada 
               para preservar y realzar los sabores únicos de nuestro café de origen.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {processSteps.map((step, index) => (
               <motion.div
                 key={step.title}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: index * 0.15 }}
-                className="bg-white/[0.02] backdrop-blur-sm p-12 rounded-2xl text-center group hover:bg-white/[0.04] transition-all duration-500"
+                className="bg-white/[0.02] backdrop-blur-sm p-8 rounded-xl text-center group hover:bg-white/[0.04] transition-all duration-500"
               >
                 <div className="relative">
-                  <div className="w-24 h-24 mx-auto mb-8 rounded-xl bg-[#E6B980]/90 flex items-center justify-center transform transition-all duration-500 group-hover:rotate-6">
+                  <div className="w-20 h-20 mx-auto mb-6 rounded-lg bg-[#D97706]/90 flex items-center justify-center transform transition-all duration-500 group-hover:rotate-6">
                     {React.createElement(step.icon, {
-                      size: 36,
-                      className: "text-[#1A0F0A] transition-transform duration-500 group-hover:scale-110"
+                      size: 32,
+                      className: "text-white transition-transform duration-500 group-hover:scale-110"
                     })}
                   </div>
-                  <div className="absolute -inset-1 bg-[#E6B980]/10 rounded-xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                  <div className="absolute -inset-1 bg-[#D97706]/10 rounded-xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                 </div>
-                <h3 className="text-2xl font-medium text-white mb-4">{step.title}</h3>
-                <p className="text-white/70 leading-relaxed tracking-wide font-light">{step.description}</p>
+                <h3 className="text-lg font-semibold text-white mb-3">{step.title}</h3>
+                <p className="text-sm text-white/75 leading-relaxed">{step.description}</p>
               </motion.div>
             ))}
           </div>
@@ -329,11 +297,11 @@ export default function CafePage() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.6 }}
-            className="mt-20 text-center"
+            className="mt-12 text-center"
           >
             <Button
               size="lg"
-              className="bg-white/95 text-[#1A0F0A] hover:bg-white px-12 py-7 text-base font-normal rounded-full transition-all duration-500 hover:shadow-lg"
+              className="bg-white text-[#1A0F0A] hover:bg-white/90 px-8 py-3 text-sm font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl"
             >
               Conoce Más del Proceso
             </Button>
@@ -342,7 +310,7 @@ export default function CafePage() {
       </section>
 
       {/* Quality Banner */}
-      <section className="bg-gradient-to-b from-[#F8F8F8] to-white py-48 relative overflow-hidden">
+      <section className="bg-gradient-to-b from-[#F8F8F8] to-white py-24 relative overflow-hidden">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 0.02 }}
@@ -362,29 +330,29 @@ export default function CafePage() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <Badge className="bg-[#1A0F0A] text-white border-none mb-8 px-6 py-2 text-sm uppercase tracking-wider font-normal hover:bg-black/90 transition-colors duration-300">
+              <Badge className="bg-[#1A0F0A] text-white border-none mb-6 px-5 py-1.5 text-xs uppercase tracking-wide font-semibold hover:bg-black/90 transition-colors duration-300">
                 Nuestro Compromiso
               </Badge>
-              <h2 className="text-5xl md:text-6xl font-bold text-[#1A0F0A] mb-12 leading-tight tracking-tight">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#1A0F0A] mb-6 leading-tight tracking-tight">
                 La Excelencia en{' '}
-                <span className="font-serif italic text-[#8B4513]">Cada Detalle</span>
+                <span className="font-serif italic text-[#D97706]">Cada Detalle</span>
               </h2>
-              <p className="text-xl text-[#1A0F0A]/70 mb-16 leading-relaxed max-w-3xl mx-auto tracking-wide font-light">
+              <p className="text-base md:text-lg text-[#1A0F0A]/70 mb-10 leading-relaxed max-w-2xl mx-auto">
                 Desde la selección de los mejores granos hasta el proceso final de tostado, 
                 cada paso está impregnado de nuestra pasión por la excelencia. Un compromiso 
                 que se refleja en cada taza de nuestro café.
               </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-8">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Button 
                   size="lg"
-                  className="bg-[#1A0F0A] text-white hover:bg-black px-12 py-7 text-base font-normal rounded-full transition-all duration-500 hover:shadow-lg"
+                  className="bg-[#D97706] text-white hover:bg-[#C2410C] px-8 py-3 text-sm font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl"
                 >
                   Descubre Nuestra Historia
                 </Button>
                 <Button 
                   variant="outline"
                   size="lg"
-                  className="border border-[#1A0F0A]/30 text-[#1A0F0A] hover:bg-[#1A0F0A]/5 px-12 py-7 text-base font-normal rounded-full transition-all duration-500"
+                  className="border-2 border-[#D97706] text-[#D97706] hover:bg-[#D97706]/10 px-8 py-3 text-sm font-semibold rounded-lg transition-all duration-300"
                 >
                   Ver Certificaciones
                 </Button>

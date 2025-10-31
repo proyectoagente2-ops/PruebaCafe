@@ -67,16 +67,16 @@ export default function CafeDetailPage() {
   
   if (!product) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#FAF7F4]">
-          <div className="text-center">
-            <h1 className="text-3xl font-semibold mb-6 text-[#2A1810]">Café no encontrado</h1>
-            <Link 
-              to="/cafe"
-              className="text-[#C49B66] hover:text-[#2A1810] transition-all duration-300"
-            >
-              Volver a Café
-            </Link>
-          </div>
+      <div className="min-h-screen flex items-center justify-center bg-[#FFFBF5]">
+        <div className="text-center">
+          <h1 className="text-3xl font-semibold mb-6 text-[#3E2723]">Café no encontrado</h1>
+          <Link 
+            to="/cafe"
+            className="text-[#D97706] hover:text-[#C2410C] transition-all duration-300 font-medium"
+          >
+            Volver a Café
+          </Link>
+        </div>
       </div>
     );
   }
@@ -142,80 +142,35 @@ export default function CafeDetailPage() {
   // Encontrar productos relacionados (excluyendo el actual)
 
   return (
-    <div className="min-h-screen bg-[#FAF7F4]">
-      {/* Hero Section */}
-      <div className="relative bg-[#F5EDE4] h-[50vh] overflow-hidden">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1.5 }}
-          className="absolute inset-0"
-        >
-          {/* Capa base con tonos cálidos y suaves */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#E6D5C3] via-[#DEC8B5]/95 to-[#C49B66] opacity-80" />
-          
-          {/* Imagen de fondo con mezcla suave */}
-          <div className="absolute inset-0 mix-blend-soft-light">
-            <motion.img
-              initial={{ scale: 1.1 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 2 }}
-              src="/images/coffee-beans-bg.jpg"
-              alt="Background"
-              className="w-full h-full object-cover object-center"
-            />
-          </div>
-          
-          {/* Overlay con textura y efecto dorado suave */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[#E6D5C3]/30 to-transparent mix-blend-soft-light" />
-        </motion.div>
-        
-        {/* Gradientes superpuestos para profundidad */}
-        <div className="absolute inset-0">
-          {/* Gradiente superior para dar profundidad */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#DEC8B5]/50 via-transparent to-transparent" />
-          
-          {/* Gradiente lateral para dimensión */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#E6D5C3]/30 via-transparent to-[#E6D5C3]/30" />
-          
-          {/* Gradiente de transición al contenido */}
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#C49B66]/40 to-[#FAF7F4]" />
-        </div>
-        
-        {/* Vignette effect */}
-        <div className="absolute inset-0 bg-radial-gradient from-transparent to-[#1A0F0A]/30" />
-      </div>
-
-      {/* Nueva sección principal con diseño mejorado */}
-      <div className="max-w-8xl mx-auto px-2 sm:px-4 lg:px-8 -mt-32 relative z-10">
-        {/* Breadcrumb con mejor espaciado y diseño */}
-        <nav className="flex items-center space-x-2 mb-4 sm:mb-8 px-2 sm:px-4 overflow-x-auto whitespace-nowrap scrollbar-hide">
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="flex items-center space-x-2 min-w-max"
-          >
+    <div className="min-h-screen bg-white">
+      {/* Breadcrumb - Clean and Professional */}
+      <div className="bg-gradient-to-b from-gray-50 to-white border-b border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <nav className="flex items-center space-x-2 text-sm">
             <Link 
               to="/" 
-              className="text-sm sm:text-base text-[#C49B66] hover:text-[#2A1810] transition-colors duration-300"
+              className="text-gray-600 hover:text-[#D97706] transition-colors duration-200"
             >
               Inicio
             </Link>
-            <span className="text-[#2A1810]/30">/</span>
+            <span className="text-gray-400">/</span>
             <Link 
-              to="/cafe#products-section"
-              className="text-sm sm:text-base text-[#C49B66] hover:text-[#2A1810] transition-colors duration-300"
+              to="/cafe"
+              className="text-gray-600 hover:text-[#D97706] transition-colors duration-200"
             >
               Café
             </Link>
-            <span className="text-[#2A1810]/30">/</span>
-            <span className="text-sm sm:text-base text-[#2A1810]/70 truncate max-w-[150px] sm:max-w-none">{product.name}</span>
-          </motion.div>
-        </nav>
+            <span className="text-gray-400">/</span>
+            <span className="text-gray-900 font-medium truncate">{product.name}</span>
+          </nav>
+        </div>
+      </div>
 
-        {/* Nueva grid con mejor distribución */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8 lg:gap-x-16 gap-y-8 lg:gap-y-12 bg-gradient-to-br from-[#FDF8F3] via-white to-[#FDF8F3] backdrop-blur-sm rounded-xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 shadow-xl shadow-[#2A1810]/10">
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+
+        {/* Product grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Columna de imagen mejorada */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -223,44 +178,16 @@ export default function CafeDetailPage() {
             transition={{ duration: 0.8 }}
             className="lg:sticky lg:top-8"
           >
-            <div className="aspect-[4/5] sm:aspect-[3/4] lg:aspect-[4/5] bg-gradient-to-br from-[#FFFBF7] to-[#F5EDE4] rounded-xl sm:rounded-2xl overflow-hidden shadow-xl sm:shadow-2xl shadow-[#2A1810]/10 group">
-              <div className="relative h-full overflow-hidden p-6 sm:p-8 lg:p-12">
-                {/* Efectos de fondo */}
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#C49B66]/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                <div className="absolute inset-0 bg-[linear-gradient(45deg,_var(--tw-gradient-stops))] from-white/50 via-transparent to-white/50 rotate-180 transform opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                
-                {/* Imagen principal con efectos */}
-                <motion.div
-                  initial={{ scale: 1.1, rotate: -5 }}
-                  animate={{ scale: 1, rotate: 0 }}
-                  transition={{ duration: 1, ease: "easeOut" }}
-                  className="relative h-full flex items-center justify-center"
-                >
-                  <motion.img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-full object-contain transition-all duration-700 group-hover:scale-105 group-hover:rotate-2 drop-shadow-2xl"
-                    style={{ transformOrigin: 'center center' }}
-                  />
-                </motion.div>
-
-                {/* Insignias o sellos de calidad */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
+            <div className="aspect-square bg-gradient-to-br from-[#FAF6F0] to-[#F5EFE7] rounded-xl overflow-hidden shadow-sm border border-gray-200 group transition-all duration-300 hover:shadow-md">
+              <div className="relative h-full overflow-hidden p-8">
+                <motion.img
+                  src={product.image}
+                  alt={product.name}
+                  initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.5, duration: 0.5 }}
-                  className="absolute bottom-4 sm:bottom-6 right-4 sm:right-6 flex items-center gap-4"
-                >
-                  <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white rounded-full shadow-lg flex items-center justify-center p-2 sm:p-3 transform hover:rotate-12 transition-transform duration-300">
-                    {product.category === 'backpack' ? null : (
-                      <img
-                        src="/images/CAFÉS/CAFE.jpg"
-                        alt="Sello de calidad"
-                        className="w-full h-full object-contain opacity-80"
-                      />
-                    )}
-                  </div>
-                </motion.div>
+                  transition={{ duration: 0.6 }}
+                  className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105"
+                />
               </div>
             </div>
           </motion.div>
@@ -272,100 +199,80 @@ export default function CafeDetailPage() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="space-y-8"
           >
-            {/* Título y Badges */}
+            {/* Título y Precio */}
             <div>
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="flex items-start gap-4"
-              >
+              <div className="flex items-start justify-between gap-6 mb-4">
                 <div className="flex-1">
-                  <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-[#2A1810] to-[#734832] bg-clip-text text-transparent mb-3">{product.name}</h1>
+                  <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 leading-tight">{product.name}</h1>
                   <div className="flex flex-wrap items-center gap-2">
-                    <Badge variant="outline" className="text-xs sm:text-sm bg-gradient-to-r from-[#C49B66]/10 to-[#DEB88C]/10 text-[#8B7355] border-[#C49B66]/20">
-                      {product.category}
+                    <Badge className="bg-[#D97706]/10 text-[#D97706] border-[#D97706]/20 text-xs font-medium px-3 py-1">
+                      {product.category === 'coffee' ? 'coffee' : product.category}
                     </Badge>
                     {product.isSpecialEdition && (
-                      <Badge variant="outline" className="text-xs sm:text-sm bg-gradient-to-r from-amber-100 to-amber-200 text-amber-800 border-amber-300 shadow-sm">
+                      <Badge className="bg-[#D97706] text-white text-xs font-semibold px-3 py-1">
                         Edición Especial
                       </Badge>
                     )}
                   </div>
                 </div>
                 <div className="text-right">
-                  <p className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#2A1810]">{formatPrice(product.price)}</p>
-                  <p className="text-xs sm:text-sm text-[#8B7355]">IVA incluido</p>
+                  <p className="text-3xl font-bold text-gray-900">{formatPrice(product.price)}</p>
+                  <p className="text-xs text-gray-500 mt-1">IVA incluido</p>
                 </div>
-              </motion.div>
+              </div>
             </div>
 
             {/* Descripción */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="prose prose-coffee"
-            >
-              <div className="mb-2">
-                <ReadingTime text={product.description} />
-              </div>
-              <p className="text-[#2A1810]/80 leading-relaxed">{product.description}</p>
-            </motion.div>
+            <div className="space-y-2">
+              <ReadingTime text={product.description} />
+              <p className="text-gray-600 leading-relaxed text-sm">{product.description}</p>
+            </div>
 
             {/* Características */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6"
-            >
+            <div className="grid grid-cols-2 gap-4">
               {productFeatures.map((feature, index) => (
                 <div 
                   key={feature.title}
-                  className="bg-white/50 rounded-lg sm:rounded-xl p-3 sm:p-4 shadow-sm"
+                  className="bg-gray-50 rounded-lg p-4 border border-gray-200 hover:border-[#D97706]/30 transition-colors duration-200"
                 >
                   <div className="flex items-start gap-3">
-                    <feature.icon className="w-4 h-4 sm:w-5 sm:h-5 text-[#C49B66] mt-1" />
-                    <div>
-                      <h3 className="font-medium text-[#2A1810] text-sm">{feature.title}</h3>
-                      <p className="text-[#8B7355] text-xs sm:text-sm">{feature.description}</p>
+                    <div className="p-2 rounded-md bg-[#D97706]/10">
+                      <feature.icon className="w-4 h-4 text-[#D97706]" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-semibold text-gray-900 text-sm mb-1">{feature.title}</h3>
+                      <p className="text-gray-600 text-xs leading-relaxed">{feature.description}</p>
                     </div>
                   </div>
                 </div>
               ))}
-            </motion.div>
+            </div>
 
             {/* Acciones */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-4"
-            >
+            <div className="flex flex-col sm:flex-row gap-3 pt-2">
               <Button
-              onClick={() => addToCart({ ...product, type: 'product' as const })}
-              className="flex-1 h-12 sm:h-auto bg-gradient-to-r from-[#C49B66] to-[#DEB88C] text-white hover:from-[#B38A55] hover:to-[#CDA77B] transition-all duration-300 text-sm sm:text-base shadow-md"
+                onClick={() => addToCart({ ...product, type: 'product' as const })}
+                className="flex-1 h-11 bg-[#D97706] text-white hover:bg-[#C2410C] transition-colors duration-200 text-sm font-semibold shadow-sm hover:shadow-md"
               >
                 Agregar al carrito
               </Button>
               <Button
                 onClick={handleWhatsAppClick}
                 variant="outline"
-                className="flex-1 h-12 sm:h-auto border-[#DEB88C] text-[#B38A55] hover:bg-gradient-to-r hover:from-[#F5EDE4] hover:to-[#E6D5C3] transition-all duration-300 text-sm sm:text-base"
+                className="flex-1 h-11 border-2 border-[#D97706] text-[#D97706] hover:bg-[#D97706]/5 transition-colors duration-200 text-sm font-semibold"
               >
                 Consultar por WhatsApp
               </Button>
-            </motion.div>
+            </div>
 
             {/* Garantías y Certificaciones */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.6 }}
-              className="border-t border-[#C49B66]/20 pt-8 mt-8"
+              className="border-t border-[#E8DDD0] pt-8 mt-8"
             >
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
                 {/* Benefits grid items */}
                 {([
                   {
@@ -396,11 +303,11 @@ export default function CafeDetailPage() {
                     transition={{ duration: 0.5, delay: 0.7 + index * 0.1 }}
                     className="text-center"
                   >
-                    <div className="mb-3 inline-flex p-3 rounded-full bg-[#C49B66]/10">
-                      <item.icon className="w-6 h-6 text-[#8B7355]" />
+                    <div className="mb-3 inline-flex p-3 rounded-full bg-gradient-to-br from-[#D97706]/20 to-[#D97706]/10 border border-[#D97706]/20">
+                      <item.icon className="w-6 h-6 text-[#D97706]" />
                     </div>
-                    <h4 className="font-medium text-[#2A1810] text-sm mb-1">{item.title}</h4>
-                    <p className="text-[#8B7355] text-xs">{item.description}</p>
+                    <h4 className="font-semibold text-[#3E2723] text-sm mb-1">{item.title}</h4>
+                    <p className="text-[#6D4C41] text-xs">{item.description}</p>
                   </motion.div>
                 ))}
               </div>
@@ -411,9 +318,9 @@ export default function CafeDetailPage() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.8 }}
-              className="bg-[#F5EDE4]/50 rounded-xl p-6 mt-8 shadow-sm"
+              className="bg-gradient-to-br from-[#FAF6F0] to-[#FFF8F0] rounded-xl p-6 mt-8 border border-[#E8DDD0]"
             >
-              <h3 className="text-lg font-semibold text-[#2A1810] mb-4 flex items-center">
+              <h3 className="text-lg font-bold text-[#3E2723] mb-5 flex items-center">
                 <svg
                   className="w-5 h-5 mr-2"
                   viewBox="0 0 24 24"
@@ -430,9 +337,9 @@ export default function CafeDetailPage() {
               
               <div className="space-y-4 text-sm">
                   <>
-                    <p className="flex items-center text-[#2A1810]/80">
+                    <p className="flex items-center text-[#6D4C41]">
                       <svg
-                        className="w-4 h-4 mr-2 text-[#C49B66]"
+                        className="w-4 h-4 mr-2 text-[#D97706]"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
@@ -445,9 +352,9 @@ export default function CafeDetailPage() {
                       Tostado a pedido para garantizar máxima frescura
                     </p>
                     
-                    <p className="flex items-center text-[#2A1810]/80">
+                    <p className="flex items-center text-[#6D4C41]">
                       <svg
-                        className="w-4 h-4 mr-2 text-[#C49B66]"
+                        className="w-4 h-4 mr-2 text-[#D97706]"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
@@ -463,9 +370,9 @@ export default function CafeDetailPage() {
                       Empaque con válvula de desgasificación
                     </p>
 
-                    <p className="flex items-center text-[#2A1810]/80">
+                    <p className="flex items-center text-[#6D4C41]">
                       <svg
-                        className="w-4 h-4 mr-2 text-[#C49B66]"
+                        className="w-4 h-4 mr-2 text-[#D97706]"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
@@ -489,7 +396,7 @@ export default function CafeDetailPage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.7 }}
-          className="bg-gradient-to-br from-[#F5EDE4] to-[#E6D5C3] py-8 sm:py-12 lg:py-16 mt-8 sm:mt-12 lg:mt-16"
+          className="bg-gradient-to-br from-[#FAF6F0] to-[#F5EFE7] py-12 sm:py-16 lg:py-20 mt-12 sm:mt-16 lg:mt-20 rounded-2xl"
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -520,21 +427,21 @@ export default function CafeDetailPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
-                  className="text-center p-6 rounded-2xl bg-white/50 backdrop-blur-sm hover:bg-white/60 transition-colors duration-300 shadow-md"
+                  className="text-center p-6 sm:p-8 rounded-2xl bg-white border border-[#FFC499]/50 hover:border-[#FF9900]/50 transition-all duration-300 shadow-sm hover:shadow-md"
                 >
-                  <div className="inline-flex p-3 rounded-full bg-gradient-to-br from-[#C49B66] to-[#DEB88C] mb-4">
-                    <div className="text-[#2A1810]">{benefit.icon}</div>
+                  <div className="inline-flex p-4 rounded-xl bg-gradient-to-br from-[#FF9900] to-[#FF6600] mb-4 shadow-md">
+                    <div className="text-white">{benefit.icon}</div>
                   </div>
-                  <h3 className="text-xl font-semibold mb-2 text-[#2A1810]">{benefit.title}</h3>
-                  <p className="text-[#8B7355]">{benefit.description}</p>
+                  <h3 className="text-xl font-bold mb-2 text-[#3E2723]">{benefit.title}</h3>
+                  <p className="text-[#6D4C41]">{benefit.description}</p>
                 </motion.div>
               ))}
             </div>
           </div>
         </motion.section>
 
-        {/* Sección de Productos Relacionados y Recomendaciones */}
-        <div className="mt-16 sm:mt-24 lg:mt-32 bg-gradient-to-b from-[#FAF7F4] to-white">
+        {/* Related Products Section */}
+        <div className="mt-16 sm:mt-24 lg:mt-32">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -542,27 +449,27 @@ export default function CafeDetailPage() {
               transition={{ duration: 0.8 }}
               className="text-center mb-8 sm:mb-12"
             >
-              <span className="text-sm font-medium text-[#C49B66] uppercase tracking-wider mb-2 block">
+              <span className="text-sm font-bold text-[#D97706] uppercase tracking-wider mb-2 block">
                 Explora Más
               </span>
-              <h2 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-[#2A1810] to-[#734832] inline-block text-transparent bg-clip-text mb-4">
+              <h2 className="text-3xl sm:text-4xl font-bold text-[#3E2723] mb-4">
                 Productos Recomendados para Ti
               </h2>
-              <p className="text-[#8B7355] text-sm sm:text-base max-w-2xl mx-auto">
+              <p className="text-[#6D4C41] text-base sm:text-lg max-w-2xl mx-auto">
                 Basado en tus preferencias y nuestras mejores selecciones
               </p>
             </motion.div>
             
-            <div className="relative overflow-hidden rounded-2xl bg-white shadow-xl">
-              <div className="absolute inset-0 bg-gradient-to-br from-[#F5EDE4]/50 to-transparent opacity-50"></div>
-              <div className="relative p-6 sm:p-8">
+            <div className="relative overflow-hidden rounded-2xl bg-white shadow-md border border-[#E8DDD0]">
+              <div className="absolute inset-0 bg-gradient-to-br from-[#FAF6F0]/50 to-transparent opacity-50"></div>
+              <div className="relative p-6 sm:p-8 lg:p-10">
                 {product && (
                   <div className="space-y-6">
-                    <div className="text-center space-y-2">
-                      <h3 className="text-xl font-semibold text-amber-900">
+                    <div className="text-center space-y-2 mb-6">
+                      <h3 className="text-2xl font-bold text-[#3E2723]">
                         También te puede interesar
                       </h3>
-                      <p className="text-amber-700/80">
+                      <p className="text-[#6D4C41]">
                         {product.category === 'backpack' 
                           ? 'Descubre más de nuestra colección de mochilas'
                           : 'Descubre más de nuestra colección de cafés especiales'

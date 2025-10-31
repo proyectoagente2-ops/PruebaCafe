@@ -73,7 +73,18 @@ const CrossSelling = ({ currentProduct, currentType, compact = false }: CrossSel
             transition={{ delay: index * 0.1 }}
             className="group relative bg-gradient-to-b from-white to-amber-50/30 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-amber-100/50"
           >
-            <Link to={`/productos/${product.id}`} className="block">
+            <Link
+              to={
+                product.category === 'coffee'
+                  ? `/cafe/${product.id}`
+                  : product.category === 'backpack'
+                  ? `/mochilas/${product.id}`
+                  : product.category === 'experience'
+                  ? `/servicios/${product.id}`
+                  : `/productos/${product.id}`
+              }
+              className="block"
+            >
               <div className="relative">
                 {/* Badge de recomendación */}
                 <div className="absolute top-2 left-2 z-10">

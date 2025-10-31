@@ -45,9 +45,9 @@ export default function ProductCard({ product, isHovered = false }: ProductCardP
   };
 
   const productPath = `/${category === 'coffee' ? 'cafe' : 'mochilas'}/${id}`;
-  const cardClasses = `overflow-hidden h-full flex flex-col bg-white border-0 shadow-sm transition-all duration-300 ${isHovered ? 'shadow-lg' : 'shadow-sm'}`;
-  const imageOverlayClasses = `absolute inset-0 transition-colors duration-300 ${isHovered ? 'bg-black/0' : 'bg-black/5'}`;
-  const imageClasses = "w-full h-full object-cover transition-transform duration-500 group-hover:scale-105";
+  const cardClasses = `overflow-hidden h-full flex flex-col bg-white rounded-xl border border-gray-100 transition-all duration-300 ${isHovered ? 'shadow-xl border-[#D97706]/20' : 'shadow-md hover:shadow-lg'}`;
+  const imageOverlayClasses = `absolute inset-0 transition-all duration-300 ${isHovered ? 'bg-gradient-to-t from-black/20 to-transparent' : 'bg-gradient-to-t from-black/10 to-transparent'}`;
+  const imageClasses = "w-full h-full object-cover transition-transform duration-700 group-hover:scale-110";
 
   return (
     <Link 
@@ -59,7 +59,7 @@ export default function ProductCard({ product, isHovered = false }: ProductCardP
         window.location.href = productPath;
       }}>
       <Card className={cardClasses}>
-        <div className="relative aspect-square overflow-hidden bg-[#f8f8f8]">
+        <div className="relative aspect-[3/4] overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
           <div className={imageOverlayClasses} />
           <img
             src={image}
@@ -70,17 +70,21 @@ export default function ProductCard({ product, isHovered = false }: ProductCardP
             }}
             className={imageClasses}
           />
+          {product.isSpecialEdition && (
+            <div className="absolute top-3 right-3 bg-[#D97706] text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+              Especial
+            </div>
+          )}
         </div>
-        <CardContent className="p-6">
-          <h3 className="text-lg font-medium text-gray-900 mb-2 tracking-tight group-hover:text-amber-800 transition-colors duration-300">
+        <CardContent className="p-5 flex flex-col flex-grow">
+          <h3 className="text-base font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-[#D97706] transition-colors duration-300">
             {name || 'Producto'}
           </h3>
-          <p className="text-lg font-semibold mb-4 tracking-tight text-amber-700">
+          <p className="text-xl font-bold mb-4 text-[#D97706]">
             {formatPrice(price)}
           </p>
           <Button 
-            className="w-full bg-transparent border-amber-800/20 text-amber-900 hover:bg-[#7b2e2e] hover:text-white hover:border-[#7b2e2e] transition-all duration-300"
-            variant="outline"
+            className="w-full bg-[#D97706] text-white hover:bg-[#C2410C] border-0 transition-all duration-300 font-semibold text-sm py-2.5 shadow-md hover:shadow-lg mt-auto"
             type="button"
           >
             Ver detalles
