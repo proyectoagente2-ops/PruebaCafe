@@ -111,11 +111,11 @@ export default function MochilasPage() {
     window.scrollTo(0, 0);
   }, []);
 
-  // Implementar lazy loading con carga por lotes
+  // Implementar lazy loading con carga por lotes - optimizado para carga rápida
   const { visibleItems, isLoading, containerRef } = useLazyLoad(mochilaProducts, {
-    batchSize: 2,
-    delayBetweenBatches: 200,
-    threshold: 0.1
+    batchSize: 3,
+    delayBetweenBatches: 100,
+    threshold: 0.2
   });
 
   const handleWhatsAppClick = useCallback(() => {
@@ -311,11 +311,13 @@ export default function MochilasPage() {
                       {/* Borde decorativo con gradiente */}
                       <div className="absolute inset-0 bg-gradient-to-br from-amber-400/20 via-amber-300/10 to-transparent rounded-3xl opacity-0 group-hover/card:opacity-100 transition-opacity duration-500"></div>
                       
-                      <div className="aspect-square relative overflow-hidden">
+                      <div className="aspect-square relative overflow-hidden bg-amber-100">
                         <OptimizedImage
                           src={mochila.image}
                           alt={mochila.name}
                           className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
+                          loading={idx === 0 ? "eager" : "lazy"}
+                          fetchpriority={idx === 0 ? "high" : "auto"}
                         />
                         {/* Overlay gradiente */}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>

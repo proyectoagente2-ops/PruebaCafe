@@ -452,30 +452,9 @@ export default function HomePage() {
                 {[
                   {
                     src: "/images/CAFÉS/CAFES JUNTOS.jpg",
-                    alt: "Colección de cafés especiales",
-                    badge: "Colección Completa"
-                  },
-                  {
-                    src: "/images/Inicio/CAFES INICIO.jpg",
-                    alt: "Cafés especiales",
-                    badge: "Especiales"
-                  },
-                  {
-                    src: "/images/CAFÉS/Café con Ayu (Edición especial).jpg",
-                    alt: "Café con Ayu - Edición especial",
-                    badge: "Con Ayu"
-                  },
-                  {
-                    src: "/images/CAFÉS/Café Lavado (Edición especial).jpg",
-                    alt: "Café Lavado - Edición especial",
-                    badge: "Lavado"
-                  },
-                  {
-                    src: "/images/CAFÉS/Café Tradicional (Edición especial).jpg",
-                    alt: "Café Tradicional - Edición especial",
-                    badge: "Tradicional"
+                    alt: "Colección de cafés especiales"
                   }
-                ].map((image, index) => (
+                ].map((item, index) => (
                   <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 pl-4">
                     <motion.div 
                       className="p-2"
@@ -486,8 +465,8 @@ export default function HomePage() {
                         <CardContent className="p-0 relative">
                           <div className="aspect-square relative overflow-hidden">
                             <OptimizedImage
-                              src={image.src}
-                              alt={image.alt}
+                              src={item.src}
+                              alt={item.alt}
                               className="object-cover w-full h-full transform transition-transform duration-700 group-hover:scale-110"
                             />
                             {/* Overlay con gradiente */}
@@ -496,7 +475,7 @@ export default function HomePage() {
                             {/* Badge flotante */}
                             <div className="absolute top-4 left-4 z-10">
                               <Badge className="bg-gradient-to-r from-amber-700 to-amber-800 text-white px-3 py-1 text-xs font-bold shadow-lg backdrop-blur-sm">
-                                {image.badge}
+                                Especial
                               </Badge>
                             </div>
                             
