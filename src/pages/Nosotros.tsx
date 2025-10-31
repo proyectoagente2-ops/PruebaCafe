@@ -117,11 +117,19 @@ export default function NosotrosPage() {
             initial={{ scale: 1.2, opacity: 0 }}
             animate={{ scale: 1, opacity: 0.25 }}
             transition={{ duration: 2 }}
-            className="absolute inset-0 bg-[url('/images/CAFÉS/CAFEFONDO1.png')] bg-cover bg-center"
+            className="absolute inset-0"
             style={{
               filter: 'blur(2px)',
             }}
-          />
+          >
+            <OptimizedImage
+              src="/images/CAFÉS/CAFEFONDO1.png"
+              alt="Fondo de café"
+              className="w-full h-full object-cover"
+              priority
+              fetchpriority="high"
+            />
+          </motion.div>
           <div className="absolute inset-0 bg-gradient-to-br from-[#2C1810]/95 via-[#5C3B28]/85 to-[#8B4513]/75 backdrop-blur-sm"></div>
         </motion.div>
 
@@ -636,9 +644,16 @@ export default function NosotrosPage() {
 
       {/* El Origen Section with Enhanced CTA */}
       <section 
-        className="relative min-h-screen flex items-center justify-center bg-fixed bg-center bg-cover overflow-hidden"
-        style={{ backgroundImage: 'url("/images/CAFÉS/CAFE_FONDO.png")' }}
+        className="relative min-h-screen flex items-center justify-center overflow-hidden"
       >
+        <div className="absolute inset-0">
+          <OptimizedImage
+            src="/images/CAFÉS/CAFE_FONDO.png"
+            alt="Origen del café"
+            className="w-full h-full object-cover"
+            loading="lazy"
+          />
+        </div>
         <div className="absolute inset-0 bg-gradient-to-br from-[#1E1810]/95 via-[#2C1810]/90 to-[#3A2518]/85 backdrop-blur-[3px]"></div>
         
         {/* Partículas flotantes decorativas */}
