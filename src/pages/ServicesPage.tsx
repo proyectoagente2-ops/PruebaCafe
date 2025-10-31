@@ -384,7 +384,7 @@ function ServicesPage() {
               className="bg-amber-400 text-[#4B3C32] hover:bg-amber-500 px-8 py-6 text-lg font-medium rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-amber-400/25"
             >
               <MessageCircle className="mr-2 h-5 w-5" />
-              Reservar ahora
+              Consultar
             </Button>
           </div>
         </div>

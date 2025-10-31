@@ -3,7 +3,7 @@
 import { useCallback, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Card } from '@/components/ui/card';
 import { 
   ArrowRight, 
@@ -19,6 +19,8 @@ import {
   MapPin
 } from 'lucide-react';
 import OptimizedImage from '@/components/OptimizedImage';
+import { useLazyLoad } from '@/hooks/useLazyLoad';
+import ProductCardSkeleton from '@/components/ProductCardSkeleton';
 
 
 // Datos de muestra para las mochilas
@@ -108,6 +110,13 @@ export default function MochilasPage() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  // Implementar lazy loading con carga por lotes
+  const { visibleItems, isLoading, containerRef } = useLazyLoad(mochilaProducts, {
+    batchSize: 2,
+    delayBetweenBatches: 200,
+    threshold: 0.1
+  });
 
   const handleWhatsAppClick = useCallback(() => {
     const message = "¡Hola! Me gustaría obtener más información sobre las mochilas artesanales.";
@@ -272,13 +281,12 @@ export default function MochilasPage() {
             </p>
           </motion.div>
 
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
+          <div 
+            ref={containerRef}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
-            {mochilaProducts.map((mochila, idx) => (
+            <AnimatePresence mode="sync">
+              {visibleItems.map((mochila, idx) => (
               <motion.div
                 key={mochila.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -366,7 +374,17 @@ export default function MochilasPage() {
                 </Link>
               </motion.div>
             ))}
-          </motion.div>
+            
+            {/* Mostrar skeletons mientras carga */}
+            {isLoading && (
+              <>
+                {Array.from({ length: 2 }).map((_, idx) => (
+                  <ProductCardSkeleton key={`skeleton-${idx}`} />
+                ))}
+              </>
+            )}
+            </AnimatePresence>
+          </div>
         </div>
       </section>
 

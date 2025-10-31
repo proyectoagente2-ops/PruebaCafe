@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { coffeeProducts, allProducts } from '@/lib/products';
 import { Coffee, Leaf, Mountain, ThermometerSun, Award, Scale, Heart, Droplet, Instagram, Facebook, MessageCircle as WhatsApp, Clock } from 'lucide-react';
@@ -9,6 +9,8 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import ProductCard from '@/components/ProductCard';
 import OptimizedImage from '@/components/OptimizedImage';
+import { useLazyLoad } from '@/hooks/useLazyLoad';
+import ProductCardSkeleton from '@/components/ProductCardSkeleton';
 
 
 const coffeeAttributes = [
@@ -59,6 +61,13 @@ const processSteps = [
 
 export default function CafePage() {
   const [hoveredProduct, setHoveredProduct] = useState<string | null>(null);
+  
+  // Implementar lazy loading con carga por lotes
+  const { visibleItems, isLoading, containerRef } = useLazyLoad(coffeeProducts, {
+    batchSize: 2,
+    delayBetweenBatches: 200,
+    threshold: 0.1
+  });
 
   return (
     <div className="min-h-screen bg-[#FAFAFA]">
@@ -175,14 +184,12 @@ export default function CafePage() {
             </p>
           </div>
 
-          <motion.div 
+          <div 
+            ref={containerRef}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 lg:gap-12"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
           >
-            {coffeeProducts.map((product, index) => (
+            <AnimatePresence mode="sync">
+              {visibleItems.map((product, index) => (
               <motion.div
                 key={product.id}
                 onHoverStart={() => setHoveredProduct(product.id)}
@@ -210,7 +217,17 @@ export default function CafePage() {
                 />
               </motion.div>
             ))}
-          </motion.div>
+            
+            {/* Mostrar skeletons mientras carga */}
+            {isLoading && (
+              <>
+                {Array.from({ length: 2 }).map((_, idx) => (
+                  <ProductCardSkeleton key={`skeleton-${idx}`} />
+                ))}
+              </>
+            )}
+            </AnimatePresence>
+          </div>
         </div>
       </section>
 

@@ -1,5 +1,5 @@
 // Service Worker para La Felicidá
-const CACHE_NAME = 'cafe-felicida-cache-v1';
+const CACHE_NAME = 'cafe-felicida-cache-v2';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
@@ -73,6 +73,16 @@ const getStrategy = (request) => {
 
 // Manejo de peticiones
 self.addEventListener('fetch', (event) => {
+  // Ignorar peticiones que no sean HTTP/HTTPS (como chrome-extension://)
+  if (!event.request.url.startsWith('http')) {
+    return;
+  }
+  
+  // Ignorar peticiones a extensiones del navegador
+  if (event.request.url.includes('chrome-extension://')) {
+    return;
+  }
+  
   const strategy = getStrategy(event.request);
   
   switch (strategy) {
@@ -82,11 +92,19 @@ self.addEventListener('fetch', (event) => {
           .then((response) => {
             return response || fetch(event.request)
               .then((fetchResponse) => {
-                return caches.open(CACHE_NAME)
-                  .then((cache) => {
-                    cache.put(event.request, fetchResponse.clone());
-                    return fetchResponse;
-                  });
+                // Solo cachear respuestas exitosas
+                if (fetchResponse && fetchResponse.status === 200) {
+                  return caches.open(CACHE_NAME)
+                    .then((cache) => {
+                      cache.put(event.request, fetchResponse.clone());
+                      return fetchResponse;
+                    });
+                }
+                return fetchResponse;
+              })
+              .catch((error) => {
+                console.log('Fetch failed for:', event.request.url);
+                return caches.match(event.request);
               });
           })
       );
@@ -96,11 +114,15 @@ self.addEventListener('fetch', (event) => {
       event.respondWith(
         fetch(event.request)
           .then((response) => {
-            return caches.open(CACHE_NAME)
-              .then((cache) => {
-                cache.put(event.request, response.clone());
-                return response;
-              });
+            // Solo cachear respuestas exitosas
+            if (response && response.status === 200) {
+              return caches.open(CACHE_NAME)
+                .then((cache) => {
+                  cache.put(event.request, response.clone());
+                  return response;
+                });
+            }
+            return response;
           })
           .catch(() => {
             return caches.match(event.request);

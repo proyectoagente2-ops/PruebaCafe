@@ -379,10 +379,18 @@ export default function HomePage() {
                       <Button 
                         variant="ghost" 
                         className="text-amber-700 hover:text-amber-900 hover:bg-amber-100/50 p-0 h-auto font-semibold group/btn transition-all duration-300"
+                        asChild
                       >
-                        <MessageCircle className="h-4 w-4 mr-2 group-hover/btn:scale-110 transition-transform" />
-                        Consultar
-                        <ArrowRight className="h-4 w-4 ml-1 opacity-0 group-hover/btn:opacity-100 group-hover/btn:translate-x-1 transition-all duration-300" />
+                        <Link to={
+                          service.title === "Bienestar & Espiritualidad" ? "/servicios/spiritual" :
+                          service.title === "Turismo Consciente" ? "/servicios/day-visits" :
+                          service.title === "Glamping & Estadía" ? "/servicios/glamping" :
+                          "/servicios/groups"
+                        }>
+                          <MessageCircle className="h-4 w-4 mr-2 group-hover/btn:scale-110 transition-transform" />
+                          Consultar
+                          <ArrowRight className="h-4 w-4 ml-1 opacity-0 group-hover/btn:opacity-100 group-hover/btn:translate-x-1 transition-all duration-300" />
+                        </Link>
                       </Button>
                     </motion.div>
                   </CardContent>
