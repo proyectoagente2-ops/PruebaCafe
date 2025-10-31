@@ -54,11 +54,11 @@ function ServicesPage() {
     window.scrollTo(0, 0);
   }, []);
 
-  // Implementar lazy loading con carga por lotes
+  // Implementar lazy loading con carga por lotes - optimizado para carga rápida
   const { visibleItems, isLoading, containerRef } = useLazyLoad(services, {
     batchSize: 2,
-    delayBetweenBatches: 200,
-    threshold: 0.1
+    delayBetweenBatches: 100,
+    threshold: 0.2
   });
 
   // Memoize handlers to prevent re-renders
@@ -94,6 +94,7 @@ function ServicesPage() {
             alt="Fondo de servicios"
             className="w-full h-full object-cover object-center"
             priority
+            fetchpriority="high"
           />
         </div>
         
@@ -225,6 +226,7 @@ function ServicesPage() {
                           src={service.image}
                           alt={service.title}
                           className="w-full h-full object-cover"
+                          loading={idx === 0 ? "eager" : "lazy"}
                         />
                         <motion.div
                           className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
@@ -416,6 +418,7 @@ function ServicesPage() {
             src="/images/CAFÉS/CAFEFONDO1.png"
             alt="Café La Felicidá"
             className="w-full h-full object-cover"
+            loading="lazy"
           />
           <div className="absolute inset-0 bg-gradient-to-br from-[#2A1810]/50 via-[#C49B66]/40 to-[#1A0F0A]/50"></div>
         </div>

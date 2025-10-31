@@ -259,6 +259,7 @@ export default function HomePage() {
                 src="/images/Inicio/FINCAPRESENTACION.png"
                 alt="Montañas de la Sierra Nevada"
                 className="w-full h-full object-cover"
+                loading="lazy"
                 blur={false}
               />
               {/* Overlay con gradiente sofisticado */}
@@ -451,8 +452,19 @@ export default function HomePage() {
               <CarouselContent className="-ml-4">
                 {[
                   {
-                    src: "/images/CAFÉS/CAFES JUNTOS.jpg",
-                    alt: "Colección de cafés especiales"
+                    src: "/images/CAFÉS/Café con Ayu (Edición especial).jpg",
+                    alt: "Café con Ayu - Edición especial",
+                    badge: "Con Ayu"
+                  },
+                  {
+                    src: "/images/CAFÉS/Café Lavado (Edición especial).jpg",
+                    alt: "Café Lavado - Edición especial",
+                    badge: "Lavado"
+                  },
+                  {
+                    src: "/images/CAFÉS/Café Tradicional (Edición especial).jpg",
+                    alt: "Café Tradicional - Edición especial",
+                    badge: "Tradicional"
                   }
                 ].map((item, index) => (
                   <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 pl-4">
@@ -468,6 +480,7 @@ export default function HomePage() {
                               src={item.src}
                               alt={item.alt}
                               className="object-cover w-full h-full transform transition-transform duration-700 group-hover:scale-110"
+                              loading="lazy"
                             />
                             {/* Overlay con gradiente */}
                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -475,7 +488,7 @@ export default function HomePage() {
                             {/* Badge flotante */}
                             <div className="absolute top-4 left-4 z-10">
                               <Badge className="bg-gradient-to-r from-amber-700 to-amber-800 text-white px-3 py-1 text-xs font-bold shadow-lg backdrop-blur-sm">
-                                Especial
+                                {item.badge}
                               </Badge>
                             </div>
                             
@@ -540,7 +553,7 @@ export default function HomePage() {
                 src="/images/Mochilas/MOCHILASJUNTAS.png"
                 alt="Mochilas artesanales"
                 className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
-                blur={false}
+                loading="lazy"
               />
               {/* Overlay con gradiente sofisticado */}
               <div className="absolute inset-0 bg-gradient-to-t from-amber-900/50 via-transparent to-transparent"></div>
@@ -661,6 +674,7 @@ export default function HomePage() {
             src="/images/Inicio/finca_banana.png"
             alt="Finca La Felicidá"
             className="w-full h-full object-cover"
+            loading="lazy"
           />
           {/* Múltiples capas de overlay para profundidad */}
           <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-amber-950/60 to-black/80"></div>
