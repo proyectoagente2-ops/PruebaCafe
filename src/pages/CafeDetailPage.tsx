@@ -237,7 +237,7 @@ export default function CafeDetailPage() {
                 >
                   <div className="flex items-start gap-3">
                     <div className="p-2 rounded-md bg-[#D97706]/10">
-                      <feature.icon className="w-4 h-4 text-[#D97706]" />
+                      {React.createElement(feature.icon, { className: "w-4 h-4 text-[#D97706]" })}
                     </div>
                     <div className="flex-1 min-w-0">
                       <h3 className="font-semibold text-gray-900 text-sm mb-1">{feature.title}</h3>

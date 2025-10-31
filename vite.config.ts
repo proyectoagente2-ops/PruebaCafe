@@ -40,6 +40,7 @@ export default defineConfig(({ mode }) => ({
       cache: false
     })
   ],
+  publicDir: 'public',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
