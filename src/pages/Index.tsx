@@ -350,13 +350,13 @@ export default function HomePage() {
               },
             ].map((service, idx) => (
               <motion.div
+                key={idx}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.7, delay: idx * 0.15, ease: [0.22, 1, 0.36, 1] }}
               >
                 <Card 
-                  key={idx} 
                   className="relative group h-full bg-gradient-to-br from-white via-amber-50/30 to-white backdrop-blur-sm border-2 border-amber-200/30 hover:border-amber-300/50 shadow-lg hover:shadow-2xl hover:shadow-amber-200/30 transition-all duration-500 overflow-hidden"
                 >
                   {/* Efecto de brillo animado */}
@@ -452,19 +452,29 @@ export default function HomePage() {
               <CarouselContent className="-ml-4">
                 {[
                   {
-                    src: "/images/services/cafe-con-ayu.png",
+                    src: "/images/CAFÉS/Café con Ayu (Edición especial).jpg",
                     alt: "Café con Ayu - Edición Especial",
                     badge: "Con Ayu"
                   },
                   {
-                    src: "/images/services/cafe-lavado.png",
+                    src: "/images/CAFÉS/Café Lavado (Edición especial).jpg",
                     alt: "Café Lavado - Edición Especial",
                     badge: "Lavado"
                   },
                   {
-                    src: "/images/services/cafe-tradicional.png",
+                    src: "/images/CAFÉS/Café Tradicional (Edición especial).jpg",
                     alt: "Café Tradicional - Edición Especial",
                     badge: "Tradicional"
+                  },
+                  {
+                    src: "/images/CAFÉS/CAFES JUNTOS.jpg",
+                    alt: "Colección Completa de Cafés",
+                    badge: "Colección"
+                  },
+                  {
+                    src: "images/Inicio/CAFES INICIO.jpg",
+                    alt: "Café Premium La Felicidá",
+                    badge: "Premium"
                   }
                 ].map((item, index) => (
                   <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 pl-4">

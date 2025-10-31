@@ -24,7 +24,7 @@ const navigation: NavigationItem[] = [
   { name: "Inicio", href: ROUTES.HOME, icon: <Home className="w-4 h-4 mr-2" /> },
   { name: "Servicios", href: ROUTES.SERVICIOS, icon: <Sparkles className="w-4 h-4 mr-2" /> },
   { name: "Café", href: ROUTES.CAFE, icon: <Coffee className="w-4 h-4 mr-2" /> },
-  { name: "Mochilas", href: ROUTES.MOCHILAS, icon: <Backpack className="w-4 h-4 mr-2" />, nonTranslatable: true },
+  { name: "Mochilas", href: ROUTES.MOCHILAS, icon: <Backpack className="w-4 h-4 mr-2" /> },
   { name: "Sobre Nosotros", href: "/nosotros", icon: <Heart className="w-4 h-4 mr-2" /> },
 ];
 

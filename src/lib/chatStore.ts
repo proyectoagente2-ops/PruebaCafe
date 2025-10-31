@@ -3,7 +3,7 @@ import { persist } from 'zustand/middleware';
 
 type Message = {
   id: string;
-  text: string | JSX.Element;
+  text: string;
   sender: 'user' | 'bot';
   timestamp: Date;
 };
@@ -76,7 +76,18 @@ export const useChatStore = create<ChatStore>()(
     }),
     {
       name: 'chat-storage',
-      version: 1,
+      version: 2, // Incrementado para limpiar datos antiguos
+      migrate: (persistedState: any, version: number) => {
+        // Si es versión anterior, limpiar mensajes con formato incorrecto
+        if (version < 2) {
+          return {
+            ...persistedState,
+            messages: [], // Limpiar mensajes antiguos
+            currentSession: null, // Resetear sesión
+          };
+        }
+        return persistedState;
+      },
     }
   )
 );

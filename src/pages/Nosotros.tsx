@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-
+import { Link, useNavigate } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Leaf, Heart, Award, ArrowRight, Coffee, Users, Mountain, Sparkles } from 'lucide-react';
@@ -722,28 +722,30 @@ export default function NosotrosPage() {
             className="flex flex-col sm:flex-row gap-6 justify-center items-center"
           >
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button
-                variant="secondary"
-                size="lg"
-                className="relative overflow-hidden bg-gradient-to-r from-[#FFB840] to-[#FFD449] text-[#2C1810] hover:from-[#FFC040] hover:to-[#FFE449] px-10 py-7 text-xl font-bold rounded-full transition-all duration-300 shadow-2xl group border-2 border-[#FFD65A]"
-              >
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/30 to-white/0"
-                  animate={{
-                    x: ['-200%', '200%'],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "linear",
-                  }}
-                />
-                <span className="relative z-10 flex items-center gap-3">
-                  <Coffee className="h-6 w-6" />
-                  Descubre Nuestro Café
-                  <ArrowRight className="h-6 w-6 group-hover:translate-x-1 transition-transform" />
-                </span>
-              </Button>
+              <Link to="/cafe#products-section">
+                <Button
+                  variant="secondary"
+                  size="lg"
+                  className="relative overflow-hidden bg-gradient-to-r from-[#FFB840] to-[#FFD449] text-[#2C1810] hover:from-[#FFC040] hover:to-[#FFE449] px-10 py-7 text-xl font-bold rounded-full transition-all duration-300 shadow-2xl group border-2 border-[#FFD65A]"
+                >
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/30 to-white/0"
+                    animate={{
+                      x: ['-200%', '200%'],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
+                  />
+                  <span className="relative z-10 flex items-center gap-3">
+                    <Coffee className="h-6 w-6" />
+                    Descubre Nuestro Café
+                    <ArrowRight className="h-6 w-6 group-hover:translate-x-1 transition-transform" />
+                  </span>
+                </Button>
+              </Link>
             </motion.div>
           </motion.div>
 

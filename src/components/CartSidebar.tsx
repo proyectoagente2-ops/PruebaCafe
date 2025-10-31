@@ -404,14 +404,14 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
             <span className="text-amber-900 font-medium">Subtotal</span>
             <AnimatePresence mode="wait">
               <motion.span
-                key={cart.total}
+                key={cart.subtotal}
                 initial={{ opacity: 0, scale: 0.8, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.8, y: -20 }}
                 transition={{ duration: 0.2, ease: "easeOut" }}
                 className="text-lg font-bold text-amber-900"
               >
-                {formatPrice(cart.total)}
+                {formatPrice(cart.subtotal)}
               </motion.span>
             </AnimatePresence>
           </motion.div>

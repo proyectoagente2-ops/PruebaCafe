@@ -15,7 +15,6 @@ export const NON_TRANSLATABLE_TERMS = {
   ],
   culturalTerms: [
     'Mamos',
-    'Mochilas',
   ],
   products: {
     coffee: [
