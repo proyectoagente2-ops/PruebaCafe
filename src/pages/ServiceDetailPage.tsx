@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Calendar, CheckCircle2, Clock, Leaf, MapPin, MessageCircle, Star, Users } from 'lucide-react';
+import { ArrowLeft, Calendar, CheckCircle2, Clock, Leaf, MapPin, MessageCircle, Star, Users, ShoppingCart } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -12,6 +12,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import { services } from '@/lib/services';
+import { useCart } from '@/lib/store';
 
 export default function ServiceDetailPage() {
   const params = useParams();
@@ -19,6 +20,17 @@ export default function ServiceDetailPage() {
   console.log('Service ID:', id); // Para debugging
   const service = services.find(s => s.id === id);
   const [selectedImage, setSelectedImage] = useState(0);
+  const { addToCart } = useCart();
+  
+  // Precios por servicio
+  const servicePrices: Record<string, number> = {
+    'glamping': 250000,
+    'day-visits': 150000,
+    'spiritual': 200000,
+    'groups': 180000
+  };
+  
+  const servicePrice = service ? servicePrices[service.id] || 150000 : 150000;
   
   // Debugging
   console.log('Available services:', services);
@@ -301,23 +313,48 @@ export default function ServiceDetailPage() {
                   <div className="space-y-4 mb-6">
                     <div className="flex items-center justify-between pb-2 border-b border-gray-100">
                       <span className="text-gray-600">Desde</span>
-                      <span className="text-xl font-bold text-[#4B3C32]">$150.000</span>
+                      <span className="text-xl font-bold text-[#4B3C32]">
+                        {new Intl.NumberFormat('es-CO', {
+                          style: 'currency',
+                          currency: 'COP',
+                          minimumFractionDigits: 0,
+                        }).format(servicePrice)}
+                      </span>
                     </div>
                     <div className="flex items-center justify-between text-sm text-gray-500">
                       <span>Por persona</span>
                       <span>Grupos de 2-12 personas</span>
                     </div>
                   </div>
-                  <Button 
-                    className="w-full bg-amber-400 text-[#4B3C32] hover:bg-amber-500 mb-4"
-                    onClick={() => {
-                      window.open(`https://wa.me/+573113678555?text=${encodeURIComponent(`¡Hola! Me interesa reservar el servicio de ${service.title} en La Felicidá.`)}`, '_blank');
-                    }}
-                  >
-                    <MessageCircle className="mr-2 h-4 w-4" />
-                    Reservar por WhatsApp
-                  </Button>
-                  <p className="text-sm text-gray-500 text-center">
+                  <div className="space-y-3">
+                    <Button 
+                      className="w-full bg-[#D97706] text-white hover:bg-[#C2410C] transition-colors duration-200"
+                      onClick={() => {
+                        addToCart({
+                          id: service.id,
+                          name: service.title,
+                          price: servicePrice,
+                          image: service.image,
+                          category: 'experience',
+                          type: 'service' as const
+                        });
+                      }}
+                    >
+                      <ShoppingCart className="mr-2 h-4 w-4" />
+                      Agregar al carrito
+                    </Button>
+                    <Button 
+                      variant="outline"
+                      className="w-full border-2 border-[#D97706] text-[#D97706] hover:bg-[#D97706]/5"
+                      onClick={() => {
+                        window.open(`https://wa.me/+573113678555?text=${encodeURIComponent(`¡Hola! Me interesa reservar el servicio de ${service.title} en La Felicidá.`)}`, '_blank');
+                      }}
+                    >
+                      <MessageCircle className="mr-2 h-4 w-4" />
+                      Consultar por WhatsApp
+                    </Button>
+                  </div>
+                  <p className="text-sm text-gray-500 text-center mt-4">
                     Sin compromiso - Respuesta en menos de 24h
                   </p>
                 </Card>

@@ -37,6 +37,7 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
   
   // Agrupar items por tipo
   const products = cart.items.filter((item: CartItem) => item.type === 'product');
+  const services = cart.items.filter((item: CartItem) => item.type === 'service');
 
   if (cart.items.length === 0) {
     return (
@@ -220,9 +221,99 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
           {/* Productos */}
           {products.length > 0 && (
             <div>
-              <h3 className="font-medium text-amber-800 mb-4">Productos</h3>
+              <h3 className="font-medium text-amber-800 mb-4 flex items-center gap-2">
+                <Coffee className="h-4 w-4" />
+                Productos
+              </h3>
               <AnimatePresence mode="sync" initial={false}>
                 {products.map((item, index) => (
+                  <motion.div
+                    key={item.id}
+                    layout
+                    initial={{ opacity: 0, x: -20, scale: 0.8 }}
+                    animate={{ opacity: 1, x: 0, scale: 1 }}
+                    exit={{ opacity: 0, x: 20, scale: 0.8 }}
+                    transition={{ 
+                      duration: 0.3,
+                      delay: index * 0.05,
+                      ease: "easeOut"
+                    }}
+                    className="flex gap-4 mb-4"
+              >
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  className="relative aspect-square h-24 overflow-hidden rounded-lg"
+                >
+                  <OptimizedImage src={item.image} alt={item.name} className="object-cover w-full h-full" blur={false} />
+                </motion.div>
+                
+                <div className="flex flex-col flex-1">
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: index * 0.1 + 0.2 }}
+                  >
+                    <h3 className="font-medium text-amber-900">{item.name}</h3>
+                    <div className="text-amber-900 font-semibold mt-1">
+                      {formatPrice(item.price * item.quantity)}
+                    </div>
+                  </motion.div>
+                  
+                  <div className="flex items-center justify-between mt-2">
+                    <motion.div className="flex items-center gap-2">
+                      <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+                        <Button
+                          size="icon"
+                          variant="outline"
+                          className="h-8 w-8 border-amber-200"
+                          onClick={() => cart.updateQuantity(item.id, Math.max(1, item.quantity - 1))}
+                        >
+                          <Minus className="h-4 w-4 text-amber-600" />
+                        </Button>
+                      </motion.div>
+                      <span className="w-8 text-center text-amber-900">{item.quantity}</span>
+                      <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+                        <Button
+                          size="icon"
+                          variant="outline"
+                          className="h-8 w-8 border-amber-200"
+                          onClick={() => cart.updateQuantity(item.id, item.quantity + 1)}
+                        >
+                          <Plus className="h-4 w-4 text-amber-600" />
+                        </Button>
+                      </motion.div>
+                    </motion.div>
+                    
+                    <motion.div
+                      whileHover={{ scale: 1.1, rotate: 10 }}
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      <Button
+                        size="icon"
+                        variant="outline"
+                        className="h-8 w-8 border-red-200"
+                        onClick={() => cart.removeFromCart(item.id)}
+                      >
+                        <Trash2 className="h-4 w-4 text-red-600" />
+                      </Button>
+                    </motion.div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </div>
+        )}
+        
+          {/* Servicios */}
+          {services.length > 0 && (
+            <div>
+              <h3 className="font-medium text-amber-800 mb-4 flex items-center gap-2">
+                <Compass className="h-4 w-4" />
+                Servicios
+              </h3>
+              <AnimatePresence mode="sync" initial={false}>
+                {services.map((item, index) => (
                   <motion.div
                     key={item.id}
                     layout
