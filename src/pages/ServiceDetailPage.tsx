@@ -210,7 +210,15 @@ export default function ServiceDetailPage() {
                   }}
                 >
                   <MessageCircle className="mr-2 h-5 w-5" />
-                  Consultar
+                  Reservar ahora
+                </Button>
+                <Button 
+                  size="lg"
+                  variant="outline"
+                  className="border-2 border-white/30 text-white hover:bg-white/10 px-8 py-6 text-lg backdrop-blur-sm rounded-full transition-all duration-300"
+                >
+                  <Calendar className="mr-2 h-5 w-5" />
+                  Ver disponibilidad
                 </Button>
               </div>
             </motion.div>
@@ -327,7 +335,6 @@ export default function ServiceDetailPage() {
                           name: service.title,
                           price: servicePrice,
                           image: service.image,
-                          category: 'experience',
                           type: 'service' as const
                         });
                       }}

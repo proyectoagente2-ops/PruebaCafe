@@ -39,7 +39,6 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
 
   // Determine loading strategy
   const imageLoading = priority ? 'eager' : loading;
-  const imageFetchPriority = priority ? 'high' : fetchpriority;
 
   return (
     <div className={`relative ${className}`}>
@@ -56,7 +55,6 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
           isLoaded ? 'opacity-100' : 'opacity-0'
         }`}
         loading={imageLoading}
-        fetchPriority={imageFetchPriority}
         onLoad={handleLoad}
         onError={handleError}
       />

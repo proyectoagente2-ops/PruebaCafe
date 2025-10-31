@@ -152,16 +152,11 @@ export default function CafePage() {
                 size="lg"
                 className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-[#1A0F0A] px-6 sm:px-8 py-2.5 sm:py-3 text-sm font-semibold rounded-lg transition-all duration-300"
                 onClick={() => {
-                  const processSection = document.querySelector('section:has(h2:contains("Del cafetal"))');
-                  if (processSection) {
-                    processSection.scrollIntoView({ behavior: 'smooth' });
-                  } else {
-                    // Fallback: scroll to process section by class or id
-                    window.scrollTo({ top: window.innerHeight * 2, behavior: 'smooth' });
-                  }
+                  const processSection = document.querySelector('#process-section');
+                  processSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }}
               >
-                Proceso de Cultivo
+                Ver Nuestro Proceso
               </Button>
             </motion.div>
           </motion.div>
@@ -258,7 +253,7 @@ export default function CafePage() {
       </section>
 
       {/* Process Section */}
-      <section className="py-24 bg-[#1A0F0A] relative overflow-hidden">
+      <section id="process-section" className="py-24 bg-[#1A0F0A] relative overflow-hidden">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 0.03 }}
@@ -316,12 +311,14 @@ export default function CafePage() {
             transition={{ duration: 0.7, delay: 0.6 }}
             className="mt-12 text-center"
           >
-            <Button
-              size="lg"
-              className="bg-white text-[#1A0F0A] hover:bg-white/90 px-8 py-3 text-sm font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl"
-            >
-              Conoce Más del Proceso
-            </Button>
+            <Link to="/nosotros">
+              <Button
+                size="lg"
+                className="bg-white text-[#1A0F0A] hover:bg-white/90 px-8 py-3 text-sm font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl"
+              >
+                Conoce Nuestra Historia
+              </Button>
+            </Link>
           </motion.div>
         </div>
       </section>
@@ -360,19 +357,23 @@ export default function CafePage() {
                 que se refleja en cada taza de nuestro café.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Button 
-                  size="lg"
-                  className="bg-[#D97706] text-white hover:bg-[#C2410C] px-8 py-3 text-sm font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl"
-                >
-                  Descubre Nuestra Historia
-                </Button>
-                <Button 
-                  variant="outline"
-                  size="lg"
-                  className="border-2 border-[#D97706] text-[#D97706] hover:bg-[#D97706]/10 px-8 py-3 text-sm font-semibold rounded-lg transition-all duration-300"
-                >
-                  Ver Certificaciones
-                </Button>
+                <Link to="/nosotros">
+                  <Button 
+                    size="lg"
+                    className="bg-[#D97706] text-white hover:bg-[#C2410C] px-8 py-3 text-sm font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl"
+                  >
+                    Descubre Nuestra Historia
+                  </Button>
+                </Link>
+                <Link to="/contacto">
+                  <Button 
+                    variant="outline"
+                    size="lg"
+                    className="border-2 border-[#D97706] text-[#D97706] hover:bg-[#D97706]/10 px-8 py-3 text-sm font-semibold rounded-lg transition-all duration-300"
+                  >
+                    Contáctanos
+                  </Button>
+                </Link>
               </div>
             </motion.div>
           </div>

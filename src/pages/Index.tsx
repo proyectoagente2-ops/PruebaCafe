@@ -24,34 +24,43 @@ export default function HomePage() {
   const featuredCoffees = coffeeProducts.slice(0, 3);
   const [api, setApi] = useState<CarouselApi>();
 
+  const [isPaused, setIsPaused] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
   useEffect(() => {
     if (!api) return;
 
     let autoplayInterval: NodeJS.Timeout;
 
     const startAutoplay = () => {
+      if (isPaused) return;
+      
       autoplayInterval = setInterval(() => {
         api.scrollNext();
-      }, 1800); // Movimiento más constante cada 1.8 segundos
+      }, 3000); // Tiempo suficiente para apreciar cada imagen
     };
 
     // Iniciar el autoplay
     startAutoplay();
 
-    // Detener el autoplay cuando el usuario interactúa
+    // Eventos de interacción
     api.on("pointerDown", () => {
       clearInterval(autoplayInterval);
     });
 
-    // Reanudar el autoplay cuando el usuario deja de interactuar
     api.on("pointerUp", () => {
       startAutoplay();
+    });
+
+    // Actualizar el índice actual
+    api.on("select", () => {
+      setCurrentSlide(api.selectedScrollSnap());
     });
 
     return () => {
       clearInterval(autoplayInterval);
     };
-  }, [api]);
+  }, [api, isPaused]);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white">
@@ -259,7 +268,6 @@ export default function HomePage() {
                 src="/images/Inicio/FINCAPRESENTACION.png"
                 alt="Montañas de la Sierra Nevada"
                 className="w-full h-full object-cover"
-                loading="lazy"
                 blur={false}
               />
               {/* Overlay con gradiente sofisticado */}
@@ -380,18 +388,10 @@ export default function HomePage() {
                       <Button 
                         variant="ghost" 
                         className="text-amber-700 hover:text-amber-900 hover:bg-amber-100/50 p-0 h-auto font-semibold group/btn transition-all duration-300"
-                        asChild
                       >
-                        <Link to={
-                          service.title === "Bienestar & Espiritualidad" ? "/servicios/spiritual" :
-                          service.title === "Turismo Consciente" ? "/servicios/day-visits" :
-                          service.title === "Glamping & Estadía" ? "/servicios/glamping" :
-                          "/servicios/groups"
-                        }>
-                          <MessageCircle className="h-4 w-4 mr-2 group-hover/btn:scale-110 transition-transform" />
-                          Consultar
-                          <ArrowRight className="h-4 w-4 ml-1 opacity-0 group-hover/btn:opacity-100 group-hover/btn:translate-x-1 transition-all duration-300" />
-                        </Link>
+                        <MessageCircle className="h-4 w-4 mr-2 group-hover/btn:scale-110 transition-transform" />
+                        Consultar
+                        <ArrowRight className="h-4 w-4 ml-1 opacity-0 group-hover/btn:opacity-100 group-hover/btn:translate-x-1 transition-all duration-300" />
                       </Button>
                     </motion.div>
                   </CardContent>
@@ -452,18 +452,18 @@ export default function HomePage() {
               <CarouselContent className="-ml-4">
                 {[
                   {
-                    src: "/images/CAFÉS/Café con Ayu (Edición especial).jpg",
-                    alt: "Café con Ayu - Edición especial",
+                    src: "/images/services/cafe-con-ayu.png",
+                    alt: "Café con Ayu - Edición Especial",
                     badge: "Con Ayu"
                   },
                   {
-                    src: "/images/CAFÉS/Café Lavado (Edición especial).jpg",
-                    alt: "Café Lavado - Edición especial",
+                    src: "/images/services/cafe-lavado.png",
+                    alt: "Café Lavado - Edición Especial",
                     badge: "Lavado"
                   },
                   {
-                    src: "/images/CAFÉS/Café Tradicional (Edición especial).jpg",
-                    alt: "Café Tradicional - Edición especial",
+                    src: "/images/services/cafe-tradicional.png",
+                    alt: "Café Tradicional - Edición Especial",
                     badge: "Tradicional"
                   }
                 ].map((item, index) => (
@@ -480,7 +480,6 @@ export default function HomePage() {
                               src={item.src}
                               alt={item.alt}
                               className="object-cover w-full h-full transform transition-transform duration-700 group-hover:scale-110"
-                              loading="lazy"
                             />
                             {/* Overlay con gradiente */}
                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -501,8 +500,32 @@ export default function HomePage() {
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <CarouselPrevious className="hidden md:flex -left-12 h-12 w-12 border-2 border-amber-300 bg-white/90 hover:bg-amber-50 shadow-lg" />
-              <CarouselNext className="hidden md:flex -right-12 h-12 w-12 border-2 border-amber-300 bg-white/90 hover:bg-amber-50 shadow-lg" />
+              <CarouselPrevious 
+                className="hidden md:flex -left-12 h-12 w-12 border-2 border-amber-300 bg-white/90 hover:bg-amber-50 shadow-lg"
+                onClick={() => setIsPaused(true)}
+              />
+              <CarouselNext 
+                className="hidden md:flex -right-12 h-12 w-12 border-2 border-amber-300 bg-white/90 hover:bg-amber-50 shadow-lg"
+                onClick={() => setIsPaused(true)}
+              />
+
+              {/* Indicadores de navegación */}
+              <div className="absolute -bottom-12 left-0 right-0 flex justify-center gap-2">
+                {[...Array(3)].map((_, index) => (
+                  <button
+                    key={index}
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      currentSlide === index 
+                        ? 'bg-amber-600 w-4' 
+                        : 'bg-amber-300'
+                    }`}
+                    onClick={() => {
+                      setIsPaused(true);
+                      api?.scrollTo(index);
+                    }}
+                  />
+                ))}
+              </div>
             </Carousel>
           </motion.div>
 
@@ -553,7 +576,7 @@ export default function HomePage() {
                 src="/images/Mochilas/MOCHILASJUNTAS.png"
                 alt="Mochilas artesanales"
                 className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
-                loading="lazy"
+                blur={false}
               />
               {/* Overlay con gradiente sofisticado */}
               <div className="absolute inset-0 bg-gradient-to-t from-amber-900/50 via-transparent to-transparent"></div>
@@ -674,7 +697,6 @@ export default function HomePage() {
             src="/images/Inicio/finca_banana.png"
             alt="Finca La Felicidá"
             className="w-full h-full object-cover"
-            loading="lazy"
           />
           {/* Múltiples capas de overlay para profundidad */}
           <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-amber-950/60 to-black/80"></div>

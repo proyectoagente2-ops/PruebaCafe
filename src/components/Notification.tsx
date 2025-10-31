@@ -25,15 +25,15 @@ export const NotificationContainer = () => {
   }, [notifications, removeNotification]);
 
   return (
-    <div className="fixed bottom-4 right-4 z-50">
+    <div className="fixed top-20 right-4 z-[100]">
       <AnimatePresenceWrapper>
         {notifications.map((notification) => (
           <motion.div
             key={notification.id}
-            initial={{ opacity: 0, y: 50, scale: 0.3 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.5, transition: { duration: 0.2 } }}
-            className="bg-white rounded-lg shadow-xl p-4 mb-2 border-l-4 border-green-500 flex items-center gap-3 cursor-pointer hover:bg-green-50 transition-colors min-w-[300px]"
+            initial={{ opacity: 0, x: 100, scale: 0.8 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
+            exit={{ opacity: 0, x: 100, scale: 0.8, transition: { duration: 0.3 } }}
+            className="bg-white rounded-lg shadow-2xl p-4 mb-3 border-l-4 border-green-500 flex items-center gap-3 cursor-pointer hover:bg-green-50 transition-all duration-200 min-w-[320px] max-w-[400px] backdrop-blur-sm"
             onClick={() => removeNotification(notification.id)}
           >
             {notification.image && (
