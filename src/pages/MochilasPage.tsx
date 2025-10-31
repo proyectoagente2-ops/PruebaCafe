@@ -125,64 +125,72 @@ export default function MochilasPage() {
       {/* Hero Section */}
 
 
-      <section className="relative h-screen flex items-center justify-center overflow-hidden ">
-        <div className="absolute inset-0">
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+        <motion.div 
+          className="absolute inset-0"
+          initial={{ scale: 1.1 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
+        >
           <OptimizedImage
             src="/images/Mochilas/MOCHILASJUNTAS7.png"
             alt="Mochilas artesanales"
             className="w-full h-full object-cover object-center"
             priority
           />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+        </motion.div>
 
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-transparent"></div>
-        </div>
-
-        <div className="relative z-20 text-center max-w-[750px] mx-auto px-8 animate-fadeIn">
+        <div className="relative z-20 text-center max-w-[850px] mx-auto px-8">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-block mb-8"
-
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="inline-block mb-6"
           >
-
-            <span className="px-6 py-2 rounded-full border border-amber-400/30 text-amber-300 text-sm tracking-wider uppercase bg-black/20 backdrop-blur-sm">
+            <span className="px-6 py-2 rounded-full border-2 border-amber-400/40 text-amber-200 text-sm tracking-widest uppercase bg-amber-900/30 backdrop-blur-md font-semibold shadow-lg">
               Artesanía Ancestral
             </span>
           </motion.div>
 
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-4xl md:text-6xl font-bold text-white mb-6"
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="font-playfair text-5xl md:text-7xl font-bold text-white mb-8 leading-tight drop-shadow-[0_4px_20px_rgba(0,0,0,0.8)]"
           >
-            Mochilas con Pensamiento
+            Mochilas con <span className="text-[#E4A429]">Pensamiento</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="text-lg md:text-xl text-white/80 mb-12 max-w-2xl mx-auto"
+            transition={{ duration: 0.8, delay: 0.7 }}
+            className="text-xl md:text-2xl text-white/90 mb-14 max-w-3xl mx-auto leading-relaxed font-light drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]"
           >
-            Descubre la belleza de nuestras mochilas artesanales, 
-            donde cada puntada cuenta una historia y cada diseño 
-            lleva consigo la sabiduría ancestral.
+            Descubre la belleza de nuestras mochilas artesanales, donde cada puntada cuenta una historia y cada diseño lleva consigo la <span className="text-amber-200 font-medium">sabiduría ancestral</span>.
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-6 justify-center items-center"
+            transition={{ duration: 0.8, delay: 0.9 }}
           >
-            <Button
-              onClick={handleWhatsAppClick}
-              className="bg-amber-400 text-[#4B3C32] hover:bg-amber-500 px-8 py-6 text-lg font-medium rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-amber-400/25"
+            <motion.div
+              whileHover={{ scale: 1.05, y: -3 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
-              <MessageCircle className="mr-2 h-5 w-5" />
-              Consultar disponibilidad
-            </Button>
+              <Button
+                onClick={handleWhatsAppClick}
+                size="lg"
+                className="bg-gradient-to-r from-[#E4A429] to-[#C9881A] hover:from-[#FFD700] hover:to-[#E4A429] text-white px-10 py-7 text-lg font-bold rounded-2xl shadow-[0_10px_40px_rgba(228,164,41,0.4)] hover:shadow-[0_15px_50px_rgba(228,164,41,0.6)] transition-all duration-300"
+              >
+                <MessageCircle className="mr-2 h-6 w-6" />
+                Consultar disponibilidad
+              </Button>
+            </motion.div>
           </motion.div>
         </div>
 
@@ -244,20 +252,25 @@ export default function MochilasPage() {
 
 
       {/* Nuestras Mochilas Section */}
-      <section className="py-24 bg-white">
+      <section className="py-32 bg-gradient-to-b from-white via-amber-50/30 to-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <span className="inline-block px-4 py-1.5 bg-amber-50 rounded-full text-amber-600 text-sm font-medium tracking-wide mb-4">
-              Artesanía Ancestral
+          <motion.div 
+            className="text-center mb-20"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <span className="inline-block px-5 py-2 bg-gradient-to-r from-amber-100 to-amber-50 rounded-full text-amber-800 text-sm font-semibold tracking-wide mb-6 shadow-md border border-amber-200">
+              ARTESANÍA ANCESTRAL
             </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-              Nuestras Mochilas
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-amber-900 mb-6 leading-tight">
+              Nuestras <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-amber-800">Mochilas</span>
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Cada mochila es una obra de arte única, tejida a mano con técnicas ancestrales
-              y materiales cuidadosamente seleccionados.
+            <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+              Cada mochila es una <span className="font-semibold text-amber-800">obra de arte única</span>, tejida a mano con técnicas ancestrales y materiales cuidadosamente seleccionados.
             </p>
-          </div>
+          </motion.div>
 
           <motion.div 
             initial={{ opacity: 0 }}
@@ -283,104 +296,71 @@ export default function MochilasPage() {
                   className="block group"
                 >
                   <motion.div
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.98 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                    whileHover={{ y: -12 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
                   >
-                    <Card className="h-full border-none relative bg-white">
-                      <motion.div 
-                        className="aspect-square relative overflow-hidden rounded-t-lg"
-                        whileHover={{ scale: 1.05 }}
-                        transition={{ duration: 0.6 }}
-                      >
+                    <Card className="h-full border-none relative bg-white shadow-xl hover:shadow-2xl hover:shadow-amber-300/40 transition-all duration-500 rounded-3xl overflow-hidden group/card">
+                      {/* Borde decorativo con gradiente */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-amber-400/20 via-amber-300/10 to-transparent rounded-3xl opacity-0 group-hover/card:opacity-100 transition-opacity duration-500"></div>
+                      
+                      <div className="aspect-square relative overflow-hidden">
                         <OptimizedImage
                           src={mochila.image}
                           alt={mochila.name}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
                         />
-                        <motion.div
-                          className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0"
-                          initial={{ opacity: 0 }}
-                          whileHover={{ opacity: 1 }}
-                          transition={{ duration: 0.3 }}
-                        />
-                      </motion.div>
-                      <motion.div 
-                        className="p-6"
-                        initial={{ y: 0 }}
-                        whileHover={{ y: -5 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <motion.h3 
-                          className="text-xl font-bold text-gray-900 mb-2"
-                          whileHover={{ scale: 1.02, x: 5, color: "#C49B66" }}
-                          transition={{ type: "spring", stiffness: 300 }}
-                        >
+                        {/* Overlay gradiente */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        
+                        {/* Badge flotante */}
+                        <div className="absolute top-4 right-4 z-10">
+                          <div className="bg-gradient-to-r from-amber-500 to-amber-600 text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-lg backdrop-blur-sm">
+                            Artesanal
+                          </div>
+                        </div>
+                        
+                        {/* Efecto de brillo */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out"></div>
+                      </div>
+                      <div className="p-7 bg-gradient-to-b from-white to-amber-50/30">
+                        {/* Categoría */}
+                        <div className="flex items-center gap-2 mb-3">
+                          <div className="h-1 w-8 bg-gradient-to-r from-amber-500 to-amber-600 rounded-full"></div>
+                          <span className="text-xs font-semibold text-amber-700 uppercase tracking-wider">Tradicional</span>
+                        </div>
+                        
+                        <h3 className="text-2xl font-bold text-amber-900 mb-3 group-hover:text-amber-700 transition-colors duration-300">
                           {mochila.name}
-                        </motion.h3>
-                        <motion.p 
-                          className="text-gray-600 mb-4"
-                          initial={{ opacity: 0.8 }}
-                          whileHover={{ opacity: 1 }}
-                        >
+                        </h3>
+                        
+                        <p className="text-gray-600 mb-6 leading-relaxed text-sm">
                           {mochila.description}
-                        </motion.p>
-                        <motion.ul 
-                          className="space-y-2 mb-6"
-                          variants={{
-                            hover: {
-                              transition: {
-                                staggerChildren: 0.1
-                              }
-                            }
-                          }}
-                        >
+                        </p>
+                        
+                        {/* Características con iconos mejorados */}
+                        <div className="space-y-3 mb-6 bg-white/60 rounded-xl p-4 border border-amber-100">
                           {mochila.features.map((feature, index) => (
-                            <motion.li 
+                            <div 
                               key={index} 
-                              className="flex items-center text-gray-600"
-                              whileHover={{ x: 5, color: "#C49B66" }}
-                              transition={{ type: "spring", stiffness: 300 }}
+                              className="flex items-center gap-3 text-gray-700"
                             >
-                              <motion.div
-                                whileHover={{ rotate: 360, scale: 1.2 }}
-                                transition={{ duration: 0.3 }}
-                              >
-                                <Star className="h-4 w-4 text-amber-500 mr-2" />
-                              </motion.div>
-                              <span>{feature}</span>
-                            </motion.li>
+                              <div className="flex-shrink-0 h-6 w-6 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center shadow-sm">
+                                <Star className="h-3 w-3 text-white fill-white" />
+                              </div>
+                              <span className="text-sm font-medium">{feature}</span>
+                            </div>
                           ))}
-                        </motion.ul>
-                        <motion.div 
-                          className="mt-auto"
-                          whileHover={{ scale: 1.05 }}
-                          transition={{ type: "spring", stiffness: 400 }}
-                        >
-                          <motion.div 
-                            className="bg-[#C49B66] text-white py-2 px-4 rounded-md flex items-center justify-center relative overflow-hidden group"
-                            whileHover={{ 
-                              backgroundColor: "#B38A55",
-                            }}
-                          >
-                            <motion.span
-                              initial={{ x: 0 }}
-                              whileHover={{ x: -5 }}
-                              transition={{ type: "spring", stiffness: 400 }}
-                            >
-                              Ver detalles
-                            </motion.span>
-                            <motion.div
-                              className="ml-2"
-                              initial={{ x: 0 }}
-                              whileHover={{ x: 5 }}
-                              transition={{ type: "spring", stiffness: 400 }}
-                            >
-                              <ArrowRight className="h-4 w-4" />
-                            </motion.div>
-                          </motion.div>
-                        </motion.div>
-                      </motion.div>
+                        </div>
+                        
+                        {/* Botón mejorado */}
+                        <div className="relative">
+                          <div className="bg-gradient-to-r from-amber-700 to-amber-800 text-white py-3.5 px-6 rounded-2xl flex items-center justify-center font-bold group-hover/card:from-amber-600 group-hover/card:to-amber-700 transition-all duration-300 shadow-lg group-hover/card:shadow-xl relative overflow-hidden">
+                            <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover/card:translate-x-full transition-transform duration-700"></span>
+                            <span className="relative z-10">Ver detalles</span>
+                            <ArrowRight className="ml-2 h-5 w-5 relative z-10 group-hover/card:translate-x-1 transition-transform" />
+                          </div>
+                        </div>
+                      </div>
                     </Card>
                   </motion.div>
                 </Link>
